@@ -1,0 +1,93 @@
+node_modules
+.DS_Store
+dist
+.turbo
+dist-ssr
+coverage
+*.local
+storybook-static
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and files
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.cursor
+.trae
+.qoder
+.gitnexus
+
+*storybook.log
+*.tsbuildinfo
+.env.local
+**/mock/index.*
+
+packages/new-form-create/
+packages/lowcode-create/types
+
+# 本地调试npm包
+.yalc
+yalc.lock
+
+# 图标库（iconfont.cn 导出）中构建不使用、仅供本地查阅的产物：
+# iconfont.css 及其 @font-face 引用的字体文件已入库，以下文件零引用，不入库以省体积。
+# demo_index.html 可本地打开浏览全部图标，iconfont.js 为 SVG symbol 变体。
+apps/web/src/assets/icons/demo_index.html
+apps/web/src/assets/icons/demo.css
+apps/web/src/assets/icons/iconfont.js
+apps/web/src/assets/icons/iconfont.json
+apps/web/src/assets/icons/iconfont.woff2
+AGENTS.md
+GEMINI.md
+CLAUDE.md
+CONTEXT.md
+.serena/
+.spec-workflow
+.claude/
+.gu-shared/
+.gu-agents/
+.mcp.json
+apps/lcdp/vite.config.ts
+.vscode/settings.json
+
+
+# Playwright
+__snapshots__
+test-results
+playwright-report
+playwright-report.zip
+playwright-report.html
+playwright-e2e-storage-state.json
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# claw
+.openclaw
+HEARTBEAT.md
+IDENTITY.md
+SOUL.md
+USER.md
+TOOLS.md
+uno.config.d.ts
+vitest.config.d.ts
+vite.config.d.ts
+
+.e2e_assistant.json
+.local-config
+PRD

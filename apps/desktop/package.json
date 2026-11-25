@@ -1,0 +1,11 @@
+{
+  "name": "@authine-e2e-agent/desktop",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Desktop app shell reserved for future Electron/Tauri migration",
+  "scripts": {
+    "dev": "echo 'Desktop app is not implemented yet'",
+    "build": "echo 'Desktop app is not implemented yet'"
+  }
+}

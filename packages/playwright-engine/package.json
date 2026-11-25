@@ -1,0 +1,41 @@
+{
+  "name": "@authine-e2e-agent/playwright-engine",
+  "version": "0.1.3",
+  "private": false,
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm && tsc --ignoreConfig src/index.ts --declaration --emitDeclarationOnly --outDir dist --module ESNext --target ES2022 --moduleResolution Bundler --ignoreDeprecations 6.0 --skipLibCheck --types node",
+    "dev": "tsup src/index.ts --format esm --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --testTimeout=15000",
+    "test:unit": "vitest run --testTimeout=15000",
+    "prepack": "pnpm run build"
+  },
+  "dependencies": {
+    "@authine-e2e-agent/types": "workspace:^",
+    "playwright": "1.64.0",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.0",
+    "tsup": "^8.5.1",
+    "vitest": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

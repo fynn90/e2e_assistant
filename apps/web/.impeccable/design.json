@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-17T13:03:11Z",
+  "title": "Design System: e2e_assistant Web Workbench",
+  "extensions": {
+    "colorMeta": {
+      "action-green": {
+        "role": "primary",
+        "displayName": "Action Green",
+        "canonical": "#18a058",
+        "tonalRamp": ["oklch(15% 0.05 150)", "oklch(27% 0.08 150)", "oklch(39% 0.11 150)", "oklch(52% 0.14 150)", "oklch(64% 0.13 150)", "oklch(76% 0.10 150)", "oklch(87% 0.06 150)", "oklch(95% 0.025 150)"]
+      },
+      "review-blue": {
+        "role": "secondary",
+        "displayName": "Review Blue",
+        "canonical": "#3b82f6",
+        "tonalRamp": ["oklch(15% 0.06 255)", "oklch(27% 0.10 255)", "oklch(39% 0.15 255)", "oklch(52% 0.20 255)", "oklch(64% 0.19 255)", "oklch(76% 0.14 255)", "oklch(87% 0.08 255)", "oklch(95% 0.03 255)"]
+      },
+      "ink-deep": {
+        "role": "neutral",
+        "displayName": "Deep Workbench Ink",
+        "canonical": "#0f172a",
+        "tonalRamp": ["oklch(15% 0.025 260)", "oklch(27% 0.025 260)", "oklch(39% 0.022 260)", "oklch(52% 0.018 260)", "oklch(64% 0.014 260)", "oklch(76% 0.010 260)", "oklch(87% 0.007 260)", "oklch(95% 0.004 260)"]
+      },
+      "ink-body": {
+        "role": "neutral",
+        "displayName": "Body Slate",
+        "canonical": "#334155",
+        "tonalRamp": ["oklch(15% 0.025 255)", "oklch(27% 0.026 255)", "oklch(39% 0.026 255)", "oklch(52% 0.022 255)", "oklch(64% 0.017 255)", "oklch(76% 0.012 255)", "oklch(87% 0.008 255)", "oklch(95% 0.004 255)"]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Muted Slate",
+        "canonical": "#64748b",
+        "tonalRamp": ["oklch(15% 0.022 255)", "oklch(27% 0.023 255)", "oklch(39% 0.023 255)", "oklch(52% 0.021 255)", "oklch(64% 0.017 255)", "oklch(76% 0.012 255)", "oklch(87% 0.008 255)", "oklch(95% 0.004 255)"]
+      },
+      "canvas-cool": {
+        "role": "neutral",
+        "displayName": "Cool Canvas",
+        "canonical": "#f8fafc",
+        "tonalRamp": ["oklch(15% 0.012 250)", "oklch(27% 0.012 250)", "oklch(39% 0.011 250)", "oklch(52% 0.010 250)", "oklch(64% 0.009 250)", "oklch(76% 0.008 250)", "oklch(87% 0.006 250)", "oklch(95% 0.004 250)"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Surface",
+        "canonical": "#ffffff",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(52% 0 0)", "oklch(64% 0 0)", "oklch(76% 0 0)", "oklch(87% 0 0)", "oklch(100% 0 0)"]
+      },
+      "surface-subtle": {
+        "role": "neutral",
+        "displayName": "Workbench Well",
+        "canonical": "#f1f5f9",
+        "tonalRamp": ["oklch(15% 0.014 250)", "oklch(27% 0.014 250)", "oklch(39% 0.013 250)", "oklch(52% 0.012 250)", "oklch(64% 0.010 250)", "oklch(76% 0.008 250)", "oklch(87% 0.006 250)", "oklch(95% 0.004 250)"]
+      },
+      "border-cool": {
+        "role": "neutral",
+        "displayName": "Cool Border",
+        "canonical": "#e2e8f0",
+        "tonalRamp": ["oklch(15% 0.016 250)", "oklch(27% 0.016 250)", "oklch(39% 0.015 250)", "oklch(52% 0.013 250)", "oklch(64% 0.011 250)", "oklch(76% 0.009 250)", "oklch(87% 0.007 250)", "oklch(95% 0.004 250)"]
+      },
+      "warning": {
+        "role": "tertiary",
+        "displayName": "Warning Amber",
+        "canonical": "#f0a020",
+        "tonalRamp": ["oklch(15% 0.05 75)", "oklch(27% 0.08 75)", "oklch(39% 0.11 75)", "oklch(52% 0.14 75)", "oklch(64% 0.15 75)", "oklch(76% 0.12 75)", "oklch(87% 0.07 75)", "oklch(95% 0.03 75)"]
+      },
+      "danger": {
+        "role": "tertiary",
+        "displayName": "Validation Red",
+        "canonical": "#d03050",
+        "tonalRamp": ["oklch(15% 0.06 20)", "oklch(27% 0.10 20)", "oklch(39% 0.15 20)", "oklch(52% 0.19 20)", "oklch(64% 0.17 20)", "oklch(76% 0.12 20)", "oklch(87% 0.07 20)", "oklch(95% 0.03 20)"]
+      },
+      "code-shell": {
+        "role": "neutral",
+        "displayName": "Code Shell",
+        "canonical": "#0b1120",
+        "tonalRamp": ["oklch(15% 0.025 260)", "oklch(27% 0.025 260)", "oklch(39% 0.023 260)", "oklch(52% 0.019 260)", "oklch(64% 0.015 260)", "oklch(76% 0.011 260)", "oklch(87% 0.007 260)", "oklch(95% 0.004 260)"]
+      }
+    },
+    "typographyMeta": {
+      "headline": {"displayName": "Headline", "purpose": "Initialization titles and rare first-run states."},
+      "title": {"displayName": "Title", "purpose": "Page, card, and editor-section titles."},
+      "body": {"displayName": "Body", "purpose": "Controls, descriptions, menus, form content, and messages."},
+      "label": {"displayName": "Label", "purpose": "Metadata, status, helper copy, and compact field labels."},
+      "code": {"displayName": "Code", "purpose": "Playwright source, paths, identifiers, and machine-readable values."}
+    },
+    "shadows": [
+      {"name": "sidebar-separation", "value": "2px 0 8px rgba(29, 35, 41, 0.05)", "purpose": "Separate persistent navigation from the work area."},
+      {"name": "header-separation", "value": "0 1px 4px rgba(0, 21, 41, 0.08)", "purpose": "Define fixed workbench chrome without making it float."},
+      {"name": "interactive-card-lift", "value": "0 10px 24px rgba(59, 130, 246, 0.12)", "purpose": "Hover and focus-visible response for actionable Skill cards."},
+      {"name": "composer-rest", "value": "0 8px 28px rgba(15, 23, 42, 0.08)", "purpose": "Separate the composer from scrolling messages."},
+      {"name": "composer-focus", "value": "0 0 0 3px rgba(59, 130, 246, 0.12), 0 8px 28px rgba(15, 23, 42, 0.08)", "purpose": "Explicit Review Blue focus treatment for the chat composer."},
+      {"name": "editor-card", "value": "0 3px 10px rgb(15 23 42 / 4%)", "purpose": "Minimal separation for structured E2E sections."},
+      {"name": "floating-control", "value": "0 4px 16px rgba(15, 23, 42, 0.12)", "purpose": "Controls floating above scrollable content."}
+    ],
+    "motion": [
+      {"name": "focus-fast", "value": "120ms ease", "purpose": "Chat composer border and shadow feedback."},
+      {"name": "interactive-standard", "value": "200ms ease", "purpose": "Actionable card border, lift, and shadow feedback."},
+      {"name": "control-standard", "value": "300ms cubic-bezier(.4, 0, .2, 1)", "purpose": "Naive UI button, input, menu, card, and tag state changes."},
+      {"name": "overlay-enter", "value": "250ms cubic-bezier(0, 0, .2, 1)", "purpose": "Dialog mask and surface entry."},
+      {"name": "overlay-leave", "value": "250ms cubic-bezier(.4, 0, 1, 1)", "purpose": "Dialog mask and surface exit."}
+    ],
+    "breakpoints": [
+      {"name": "test-data-stack", "value": "620px"},
+      {"name": "compact-workbench", "value": "640px"},
+      {"name": "editor-toolbar-stack", "value": "720px"},
+      {"name": "skill-workspace-mobile", "value": "760px"},
+      {"name": "basic-form-stack", "value": "800px"},
+      {"name": "test-step-stack", "value": "980px"},
+      {"name": "chat-compact-container", "value": "520px"},
+      {"name": "chat-wide-container", "value": "780px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Commits the current step or confirms a valid action.",
+      "html": "<button class=\"ds-btn-primary\">生成脚本</button>",
+      "css": ".ds-btn-primary { height: 34px; padding: 0 14px; border: 1px solid #18a058; border-radius: 3px; background: #18a058; color: #fff; font: 400 14px/1 Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; transition: background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease; } .ds-btn-primary:hover { background: #36ad6a; border-color: #36ad6a; } .ds-btn-primary:active { background: #0c7a43; border-color: #0c7a43; } .ds-btn-primary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(24,160,88,.2); } .ds-btn-primary:disabled { cursor: not-allowed; opacity: .5; }"
+    },
+    {
+      "name": "Secondary Action Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Supports the primary flow without competing with the committed action.",
+      "html": "<button class=\"ds-btn-secondary\">新增前置条件</button>",
+      "css": ".ds-btn-secondary { height: 34px; padding: 0 14px; border: 0; border-radius: 3px; background: rgba(24,160,88,.16); color: #18a058; font: 400 14px/1 Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; transition: background-color 200ms ease, box-shadow 200ms ease; } .ds-btn-secondary:hover { background: rgba(24,160,88,.22); } .ds-btn-secondary:active { background: rgba(24,160,88,.28); } .ds-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(24,160,88,.2); }"
+    },
+    {
+      "name": "Standard Text Field",
+      "kind": "input",
+      "refersTo": "input-standard",
+      "description": "Default field for structured test-case content and configuration.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">目标 URL</span><input class=\"ds-input\" value=\"https://example.com/login\" /></label>",
+      "css": ".ds-field { display: grid; gap: 6px; color: #334155; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-field-label { font-size: 12px; font-weight: 600; line-height: 1.5; } .ds-input { width: 100%; height: 34px; padding: 0 12px; border: 1px solid #e0e0e6; border-radius: 3px; background: #fff; color: #334155; font: 400 14px/1.5 Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; transition: border-color 200ms ease, box-shadow 200ms ease; } .ds-input::placeholder { color: #64748b; } .ds-input:hover { border-color: #36ad6a; } .ds-input:focus { border-color: #18a058; outline: none; box-shadow: 0 0 0 2px rgba(24,160,88,.2); } .ds-input:disabled { background: #fafafc; color: #64748b; }"
+    },
+    {
+      "name": "Workbench Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Compact persistent navigation with a clear active work area.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-item ds-nav-item-active\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z\"/></svg><span>Skill</span></a><a class=\"ds-nav-item\" href=\"#\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 8.4a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2z\"/></svg><span>配置</span></a></nav>",
+      "css": ".ds-nav { display: grid; gap: 6px; width: 208px; padding: 8px; background: #fff; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-nav-item { display: flex; align-items: center; gap: 12px; height: 42px; padding: 0 18px 0 24px; border-radius: 3px; color: #333639; font-size: 14px; text-decoration: none; transition: background-color 200ms ease, color 200ms ease; } .ds-nav-item svg { width: 20px; height: 20px; fill: currentColor; } .ds-nav-item:hover, .ds-nav-item:focus-visible { background: #f3f3f5; outline: none; } .ds-nav-item-active { background: rgba(24,160,88,.1); color: #18a058; }"
+    },
+    {
+      "name": "Skill Card",
+      "kind": "card",
+      "refersTo": "skill-card",
+      "description": "The primary actionable object for opening and reviewing a local E2E Skill.",
+      "html": "<article class=\"ds-skill-card\" tabindex=\"0\"><div><h3>登录流程验证</h3><p class=\"ds-skill-id\">skill/login-flow</p></div><p class=\"ds-skill-description\">验证有效账号登录后进入工作台，并展示用户信息。</p><div class=\"ds-skill-meta\"><span>结构化用例</span><strong>6 个步骤</strong></div></article>",
+      "css": ".ds-skill-card { display: grid; gap: 14px; padding: 18px; border: 1px solid #e2e8f0; border-radius: 20px; background: #fff; color: #334155; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; cursor: pointer; transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; } .ds-skill-card h3 { margin: 0; color: #0f172a; font-size: 18px; line-height: 1.4; } .ds-skill-id { margin: 4px 0 0; color: #64748b; font-size: 13px; } .ds-skill-description { margin: 0; line-height: 1.7; } .ds-skill-meta { display: flex; justify-content: space-between; gap: 12px; padding: 14px; border-radius: 16px; background: #eef2ff; color: #6366f1; font-size: 12px; } .ds-skill-card:hover, .ds-skill-card:focus-visible { border-color: #3b82f6; box-shadow: 0 10px 24px rgba(59,130,246,.12); outline: none; transform: translateY(-1px); }"
+    },
+    {
+      "name": "Status Tags",
+      "kind": "chip",
+      "refersTo": "status-tags",
+      "description": "Semantic status vocabulary that combines hue, border, and text.",
+      "html": "<div class=\"ds-tags\"><span class=\"ds-tag ds-tag-success\">已保存</span><span class=\"ds-tag ds-tag-warning\">需要确认</span><span class=\"ds-tag ds-tag-error\">校验失败</span></div>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 8px; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-tag { display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border: 1px solid; border-radius: 2px; font-size: 12px; line-height: 1; } .ds-tag-success { border-color: rgba(24,160,88,.3); background: rgba(24,160,88,.1); color: #18a058; } .ds-tag-warning { border-color: rgba(240,160,32,.35); background: rgba(240,160,32,.12); color: #9a6500; } .ds-tag-error { border-color: rgba(208,48,80,.23); background: rgba(208,48,80,.08); color: #d03050; }"
+    },
+    {
+      "name": "Chat Composer",
+      "kind": "custom",
+      "refersTo": "chat-composer",
+      "description": "Focused Agent collaboration control with review-blue focus treatment.",
+      "html": "<div class=\"ds-composer\"><textarea placeholder=\"描述你想调整的测试步骤…\"></textarea><div class=\"ds-composer-footer\"><span>支持引用当前 Skill 文件</span><button>发送</button></div></div>",
+      "css": ".ds-composer { width: 100%; padding: 8px 10px 8px 14px; border: 1px solid #cbd5e1; border-radius: 18px; background: #fff; box-shadow: 0 8px 28px rgba(15,23,42,.08); color: #334155; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; transition: border-color 120ms ease, box-shadow 120ms ease; } .ds-composer:focus-within { border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12), 0 8px 28px rgba(15,23,42,.08); } .ds-composer textarea { box-sizing: border-box; width: 100%; min-height: 58px; padding: 4px 0; resize: vertical; border: 0; outline: 0; color: #334155; font: 400 14px/1.6 Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-composer textarea::placeholder { color: #64748b; } .ds-composer-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 36px; padding-top: 4px; color: #64748b; font-size: 12px; } .ds-composer button { min-width: 64px; height: 38px; border: 0; border-radius: 12px; background: #18a058; color: #fff; cursor: pointer; } .ds-composer button:hover { background: #36ad6a; } .ds-composer button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(24,160,88,.2); }"
+    },
+    {
+      "name": "Structured Editor Card",
+      "kind": "card",
+      "refersTo": "editor-card",
+      "description": "A focused section for test metadata, preconditions, or ordered steps.",
+      "html": "<section class=\"ds-editor-card\"><div class=\"ds-editor-heading\"><h3>前置条件</h3><button>新增</button></div><div class=\"ds-editor-row\"><span class=\"ds-drag\">⋮⋮</span><span>用户已进入登录页面</span></div></section>",
+      "css": ".ds-editor-card { display: grid; gap: 16px; padding: 18px; border: 1px solid #dbe3ee; border-radius: 12px; background: #fff; box-shadow: 0 3px 10px rgb(15 23 42 / 4%); color: #334155; font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; } .ds-editor-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; } .ds-editor-heading h3 { margin: 0; color: #0f172a; font-size: 18px; line-height: 1.4; } .ds-editor-heading button { height: 34px; padding: 0 14px; border: 0; border-radius: 3px; background: rgba(24,160,88,.16); color: #18a058; cursor: pointer; } .ds-editor-heading button:hover { background: rgba(24,160,88,.22); } .ds-editor-heading button:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(24,160,88,.2); } .ds-editor-row { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid #dbe3ee; border-radius: 10px; background: #f8fafc; font-size: 14px; } .ds-drag { color: #64748b; letter-spacing: -2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Verification Bench",
+    "overview": "e2e_assistant is a calibrated workbench for turning structured test intent into an inspectable technical artifact. The interface is precise, calm, and capable: dense enough for real E2E work, approachable enough for test engineers, and explicit about every consequential state. Visual hierarchy comes from alignment, tonal surfaces, typography, and state clarity rather than decoration.\n\nThe system follows a restrained product strategy. Familiar controls and compact spacing keep attention on the case-to-code workflow. Chinese interface copy leads, while established technical terms such as Skill, API, Agent, and Playwright remain untranslated when they are clearer. The Agent behaves like a capable collaborator inside the workbench, never like a mascot or the visual centerpiece.\n\nThe system explicitly rejects generic SaaS dashboards, playful AI chatbot styling, and flashy cyber aesthetics. It must never resemble a sales dashboard, a novelty chat product, or a neon hacker console.",
+    "keyCharacteristics": [
+      "Compact and dependable controls with explicit hover, focus, active, disabled, loading, and error states.",
+      "Cool slate surfaces with one committed action signal and one review/focus signal.",
+      "Structural layouts that move from workbench navigation to dense editor panels without changing visual vocabulary.",
+      "Progressive technical depth: structured fields first, code and diagnostics available when needed.",
+      "Responsive behavior that changes layout structure rather than shrinking typography."
+    ],
+    "rules": [
+      {"name": "The Two Signal Rule", "body": "Action Green commits or confirms; Review Blue focuses, selects, or inspects. Never place competing green and blue primary actions in the same decision group.", "section": "colors"},
+      {"name": "The Ten Percent Rule", "body": "Saturated accents occupy no more than roughly 10% of a screen. Their rarity preserves meaning.", "section": "colors"},
+      {"name": "The Readable Muted Rule", "body": "Body-sized muted text on white never becomes lighter than Muted Slate (#64748b). Placeholder and disabled text must still meet the applicable WCAG 2.2 AA contrast requirement.", "section": "colors"},
+      {"name": "The One Sans Rule", "body": "Do not introduce a display font into workbench labels, buttons, data, or page titles. Hierarchy comes from weight, size, spacing, and position.", "section": "typography"},
+      {"name": "The Stable Scale Rule", "body": "Product typography uses fixed sizes. Responsive layouts reflow panels and controls; headings do not use fluid clamp() scaling.", "section": "typography"},
+      {"name": "The Structural-at-Rest Rule", "body": "Cards and panels are flat at rest unless they sit above scrolling content. If every container casts a shadow, the hierarchy has failed.", "section": "elevation"},
+      {"name": "The State Earns Elevation Rule", "body": "Hover, keyboard focus, overlays, and floating controls may lift; static information does not.", "section": "elevation"}
+    ],
+    "dos": [
+      "Do make structured test intent the clearest object on every authoring screen.",
+      "Do use Action Green for committed actions and Review Blue for focus, selection, and inspection.",
+      "Do preserve visible keyboard focus for cards, navigation, inputs, editor controls, dialogs, and chat actions.",
+      "Do use Cool Canvas, Workbench Well, white surfaces, and 1px borders as the default layering vocabulary.",
+      "Do keep body text at 14px with Body Slate or darker; cap long prose at 70ch.",
+      "Do teach the next useful action in empty states instead of showing a generic “nothing here” message.",
+      "Do implement prefers-reduced-motion alternatives for authored transitions and override nonessential library motion where possible.",
+      "Do keep Chinese interface copy primary while preserving established technical terms such as Skill, API, Agent, and Playwright."
+    ],
+    "donts": [
+      "Don't create a generic SaaS dashboard with decorative metrics, oversized empty space, or sales-oriented card layouts.",
+      "Don't use playful AI chatbot styling, mascots, bubbly decoration, or novelty-first assistant interactions.",
+      "Don't use flashy cyber aesthetics, neon gradients, glowing panels, or dark hacker-tool clichés.",
+      "Don't make the Agent the visual centerpiece; it is a collaborator inside the workflow.",
+      "Don't use Review Blue as a competing primary action color beside Action Green.",
+      "Don't nest cards or give every workbench region the same radius and shadow.",
+      "Don't use gradient text, decorative glassmorphism, colored side-stripe borders, or arbitrary z-index values.",
+      "Don't accept low-contrast placeholder or muted text simply because it is a component-library default.",
+      "Don't animate page arrival or decorative movement; product motion communicates state in 120–250ms and has a reduced-motion alternative."
+    ]
+  }
+}

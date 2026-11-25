@@ -1,0 +1,56 @@
+{
+  "name": "authine-e2e-agent-platform",
+  "version": "0.0.0",
+  "private": true,
+  "description": "E2E Testing Agent Platform Monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "setup": "pnpm install --prefer-offline",
+    "build": "turbo run build",
+    "build:web": "pnpm --filter @authine-e2e-agent/web build",
+    "build:cli": "pnpm --filter @authine-e2e-agent/cli build",
+    "dev": "pnpm run dev:workbench",
+    "dev:web": "pnpm --filter @authine-e2e-agent/web dev -- --host 127.0.0.1",
+    "dev:cli": "pnpm --filter @authine-e2e-agent/cli dev",
+    "dev:service": "pnpm --filter @authine-e2e-agent/service dev",
+    "dev:web-host": "pnpm --filter @authine-e2e-agent/web-host dev",
+    "dev:config": "pnpm --filter @authine-e2e-agent/config dev",
+    "dev:types": "pnpm --filter @authine-e2e-agent/types dev",
+    "dev:skill-manager": "pnpm --filter @authine-e2e-agent/skill-manager dev",
+    "dev:agent": "pnpm --filter @authine-e2e-agent/agent dev",
+    "dev:playwright-engine": "pnpm --filter @authine-e2e-agent/playwright-engine dev",
+    "dev:workbench": "node scripts/check-dev-ports.mjs && concurrently -n web,cli,service,web-host,config,types,skill,agent,engine -c blue,green,yellow,white,gray,red,magenta,cyan,blueBright \"pnpm run dev:web\" \"pnpm run dev:cli\" \"pnpm run dev:service\" \"pnpm run dev:web-host\" \"pnpm run dev:config\" \"pnpm run dev:types\" \"pnpm run dev:skill-manager\" \"pnpm run dev:agent\" \"pnpm run dev:playwright-engine\"",
+    "test:dev-ports": "node --test scripts/check-dev-ports.test.mjs",
+    "test:scripts": "node --test scripts/*.test.mjs",
+    "db:reset": "node scripts/reset-dev-database.mjs",
+    "test": "turbo run test",
+    "test:unit": "turbo run test",
+    "test:e2e": "pnpm build && playwright test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "release:check": "node ./scripts/release-precheck.mjs",
+    "release:check:strict": "node ./scripts/release-precheck.mjs --require-changeset",
+    "release:build": "pnpm -r --if-present build",
+    "release:version": "changeset version",
+    "release:publish": "changeset publish",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "changeset": "changeset"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@playwright/test": "^1.61.1",
+    "concurrently": "^9.2.1",
+    "prettier": "^3.9.5",
+    "turbo": "^2.10.5"
+  },
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "packageManager": "pnpm@10.13.1",
+  "volta": {
+    "node": "22.19.0"
+  }
+}
