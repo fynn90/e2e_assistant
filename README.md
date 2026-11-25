@@ -590,4 +590,4 @@ pnpm format
 
 ---
 
-**License**：仓库当前未声明开源许可证，使用前请与作者确认。
+**License**：本项目基于 [MIT License](LICENSE) 开源，Copyright (c) 2026 Fan。

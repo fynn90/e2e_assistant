@@ -2,6 +2,7 @@
   "name": "@charlie_deng/e2e-assistant-service",
   "version": "0.2.3",
   "private": false,
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -2,6 +2,7 @@
   "name": "authine-e2e-agent-platform",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "description": "E2E Testing Agent Platform Monorepo",
   "workspaces": [
     "apps/*",
