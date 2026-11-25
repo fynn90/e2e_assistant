@@ -2,7 +2,7 @@
  * 定义 Skill manifest 的持久化模型、兼容解析和 API 投影。
  * manifest 字段与列表 API DTO 分离，避免新增持久化元数据时被旧校验器截断。
  */
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 
 export interface IGeneratedSkillMetadata {
   path: 'SKILL.md'

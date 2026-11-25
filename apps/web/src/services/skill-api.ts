@@ -13,7 +13,7 @@ import type {
   IListSkillsResponse,
   IUpdateSkillFileRequest,
   IUpdateSkillFileResponse,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { requestJson } from './http-client'
 
 export function fetchSkills (

@@ -9,7 +9,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import { isSensitiveTestDataEntry } from '@fynn90-e2e_assistant/types'
+import { isSensitiveTestDataEntry } from '@charlie_deng/e2e-assistant-types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** browser_fill 工具接受的参数 Schema。 */

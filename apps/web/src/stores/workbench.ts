@@ -1,7 +1,7 @@
 // Workbench 状态：管理 Skill 列表请求生命周期、刷新反馈与错误恢复。
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 import { fetchSkills } from '../services/skill-api'
 import { ApiClientError } from '../services/http-client'
 

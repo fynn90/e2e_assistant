@@ -1,8 +1,8 @@
-<!-- 本文档说明 @fynn90-e2e_assistant/playwright-engine SDK 的实际接入方式、能力边界、生命周期和安全注意事项。 -->
+<!-- 本文档说明 @charlie_deng/e2e-assistant-playwright-engine SDK 的实际接入方式、能力边界、生命周期和安全注意事项。 -->
 
-# `@fynn90-e2e_assistant/playwright-engine` SDK 接入文档
+# `@charlie_deng/e2e-assistant-playwright-engine` SDK 接入文档
 
-- 包名：`@fynn90-e2e_assistant/playwright-engine`
+- 包名：`@charlie_deng/e2e-assistant-playwright-engine`
 - 当前包版本：`0.0.0`
 - 文档适用范围：阶段 0（契约与兼容层）和阶段 1（浏览器基础能力）
 - 文档状态：接入说明
@@ -68,7 +68,7 @@ Playwright Engine 是一个运行在 Node.js 侧的基础能力 SDK。它负责�
 宿主应用 / CLI / Agent / CI
               │
               ▼
-@fynn90-e2e_assistant/playwright-engine
+@charlie_deng/e2e-assistant-playwright-engine
               │
               ├── playwright
               ├── typescript
@@ -82,7 +82,7 @@ import {
   createPlaywrightEngine,
   createDefaultRedactor,
   isPlaywrightEngineError,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 ```
 
 不要让业务代码依赖 `src/` 下的深层路径；深层路径主要用于测试替身和包自身维护。
@@ -96,13 +96,13 @@ import {
 发布环境可以使用项目实际配置的 npm registry 安装：
 
 ```bash
-pnpm add @fynn90-e2e_assistant/playwright-engine
+pnpm add @charlie_deng/e2e-assistant-playwright-engine
 ```
 
 或：
 
 ```bash
-npm install @fynn90-e2e_assistant/playwright-engine
+npm install @charlie_deng/e2e-assistant-playwright-engine
 ```
 
 当前包是 ESM 包，使用 `import` 导入。它不是浏览器端 UI 包，应从 CLI、Node.js 服务、桌面应用主进程或 CI 任务中调用。
@@ -137,7 +137,7 @@ pnpm --dir packages/playwright-engine build
 import {
   createPlaywrightEngine,
   isPlaywrightEngineError,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 
 const engine = createPlaywrightEngine()
 const controller = new AbortController()
@@ -497,7 +497,7 @@ try {
 import {
   SameOriginNetworkPolicy,
   createBrowserSessionFactory,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 
 const networkPolicy = new SameOriginNetworkPolicy('https://example.test', {
   allowSubresources: true,
@@ -561,7 +561,7 @@ const testCase = {
 ### 8.2 校验示例
 
 ```ts
-import { PlaywrightScriptValidator } from '@fynn90-e2e_assistant/playwright-engine'
+import { PlaywrightScriptValidator } from '@charlie_deng/e2e-assistant-playwright-engine'
 
 const candidateCode = `
 import { test, expect } from '@playwright/test'
@@ -641,7 +641,7 @@ import {
   createDefaultRedactor,
   sanitizeUrl,
   type IEngineEventSink,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 
 const redactor = createDefaultRedactor({
   secrets: [process.env.E2E_PASSWORD ?? ''],
@@ -690,7 +690,7 @@ const eventSink: IEngineEventSink = {
 ### 9.3 错误处理示例
 
 ```ts
-import { isPlaywrightEngineError } from '@fynn90-e2e_assistant/playwright-engine'
+import { isPlaywrightEngineError } from '@charlie_deng/e2e-assistant-playwright-engine'
 
 function getPublicFailure(error) {
   if (isPlaywrightEngineError(error)) {
@@ -924,7 +924,7 @@ import {
   PlaywrightEngineError,
   isPlaywrightEngineError,
   createDefaultRedactor,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 ```
 
 接口契约包括：

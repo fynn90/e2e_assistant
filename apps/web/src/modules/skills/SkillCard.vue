@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { NTag } from 'naive-ui'
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 
 const props = defineProps<{
   skill: ISkillSummary

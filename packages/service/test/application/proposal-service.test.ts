@@ -16,7 +16,7 @@ import type { IAgentWorkRuntime } from '../../src/agent-runtime/agent-work-runti
 import type { IGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
 import { createProposalService } from '../../src/application/agent-workbench/proposal-service'
 import { createSkillLifecycleService } from '../../src/application/agent-workbench/skill-lifecycle-service'
-import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
+import { createSkill } from '@charlie_deng/e2e-assistant-skill-manager'
 import type { IUpdateE2ETestCase } from '../../src/application/agent-workbench/proposal-types'
 
 /** 采集发布出去的提案卡片载荷。 */

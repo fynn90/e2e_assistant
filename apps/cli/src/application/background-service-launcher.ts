@@ -45,7 +45,7 @@ import {
   ensureHiddenLaunchScript,
   getHiddenLaunchScriptPath,
 } from '../infrastructure/process/hidden-console-launch'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@charlie_deng/e2e-assistant-types'
 
 /** 等待后台服务就绪的总时长上限（§4.2 第 4 步）。 */
 const READY_TIMEOUT_MS = 30_000

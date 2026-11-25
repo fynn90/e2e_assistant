@@ -1,7 +1,7 @@
 /**
  * 解析原始 e2e_schema.json 文本，并提供包含行列信息的可恢复错误。
  */
-import { parseE2ETestCase, type IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import { parseE2ETestCase, type IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 
 export class RawE2ETestCaseParseError extends Error {
   constructor(message: string, options?: ErrorOptions) {

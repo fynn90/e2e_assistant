@@ -2,11 +2,11 @@
  * 定义宿主可注入的敏感信息脱敏契约：运行期秘密登记能力。
  *
  * 基础脱敏接口 ISensitiveDataRedactor 属于 agent / 引擎共享契约，
- * 已迁移至 @fynn90-e2e_assistant/types；此处再导出以保持引擎公共 API 不变。
+ * 已迁移至 @charlie_deng/e2e-assistant-types；此处再导出以保持引擎公共 API 不变。
  */
-import type { ISensitiveDataRedactor } from '@fynn90-e2e_assistant/types'
+import type { ISensitiveDataRedactor } from '@charlie_deng/e2e-assistant-types'
 
-export type { ISensitiveDataRedactor } from '@fynn90-e2e_assistant/types'
+export type { ISensitiveDataRedactor } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 可登记运行期秘密值的脱敏器（v20 凭据代理）。

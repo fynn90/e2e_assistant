@@ -17,7 +17,7 @@ import {
   watch,
   type Ref,
 } from 'vue'
-import type { TAgentActivity } from '@fynn90-e2e_assistant/types'
+import type { TAgentActivity } from '@charlie_deng/e2e-assistant-types'
 import {
   getAgentWorkBlocks,
   subscribeAgentWorkStream,

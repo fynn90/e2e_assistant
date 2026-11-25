@@ -18,7 +18,7 @@ import {
   SENSITIVE_ROW_UNSELECTED_VALUE,
   SUGGESTIVE_SENSITIVE_KEY_PATTERN,
   type IE2ETestStep,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   fieldErrorsForPrefix,
   type TFieldErrorMap,

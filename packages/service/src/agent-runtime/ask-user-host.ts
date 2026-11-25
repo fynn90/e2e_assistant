@@ -27,13 +27,13 @@ import {
   INTERACTION_OTHER_OPTION_VALUE,
   type IAgentInteraction,
   type IAgentInteractionQuestion,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type {
   AskUserQuestionDetails,
   IAskUserHost,
   IAskUserAnswer,
   IAskUserQuestionItem,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 import type { IAgentWorkRuntime } from './agent-work-runtime'
 
 /** 缺省卡片标题（Agent 未传 title 时使用；标题不含任何领域语义）。 */

@@ -8,7 +8,7 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import net from 'node:net'
 import { startLocalServer, type IStartedLocalServer } from '../../src/index'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@charlie_deng/e2e-assistant-types'
 
 let startedServer: IStartedLocalServer | null = null
 

@@ -30,13 +30,13 @@
  */
 
 import { randomUUID } from 'node:crypto'
-import { toCapabilityViewPayload } from '@fynn90-e2e_assistant/agent'
+import { toCapabilityViewPayload } from '@charlie_deng/e2e-assistant-agent'
 import type {
   IReadinessViewPayload,
   ISkillListViewPayload,
   TAgentWorkbenchAction,
   TWorkbenchRenderParams,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IAgentWorkRuntime } from '../../agent-runtime/agent-work-runtime'
 import type { ISkillCatalog } from './skill-catalog'
 import type { IReadinessService } from './execution-readiness'

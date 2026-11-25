@@ -21,13 +21,13 @@ import {
   SKILL_ENV_FILE_NAME,
   listSkills,
   resolveSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { ISkillStorageOptions } from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   parseEnvFileContent,
   type IAgentSkillCandidate,
-} from '@fynn90-e2e_assistant/types'
-import type { TReadSkillDocumentHostResult } from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-types'
+import type { TReadSkillDocumentHostResult } from '@charlie_deng/e2e-assistant-agent'
 import {
   buildSkillDetailPayload,
   hasPlaywrightScript,

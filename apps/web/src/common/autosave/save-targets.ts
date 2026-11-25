@@ -14,7 +14,7 @@ import {
   PLAYWRIGHT_SCRIPT_FILE_NAME,
   SKILL_DOCUMENT_FILE_NAME,
   type IEnvFileIssue,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { saveSkillDocument } from '../../modules/e2e-test-case/services/skill-document-api'
 import { savePlaywrightScript } from '../../modules/e2e-test-case/services/e2e-test-case-api'
 import { updateSkillFile } from '../../services/skill-api'

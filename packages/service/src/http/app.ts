@@ -5,7 +5,7 @@ import {
   LOCAL_SERVICE_PROTOCOL_VERSION,
   type ILocalServiceHealthResponse,
   type IApiErrorResponse,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { createE2ETestCaseApplicationServices } from '../application/e2e-test-case/create-services'
 import type { IE2ETestCaseApplicationServices } from '../application/e2e-test-case/application-types'
 import { createSkillMarkdownGenerator } from '../application/e2e-test-case/skill-markdown-generator'
@@ -58,7 +58,7 @@ import {
   type IGenerationBrowserHost,
   type IGenerationTaskRegistry,
 } from '../generation-runtime/index'
-import { createPlaywrightEngine } from '@fynn90-e2e_assistant/playwright-engine'
+import { createPlaywrightEngine } from '@charlie_deng/e2e-assistant-playwright-engine'
 import {
   createExecutionEventBus,
   type IExecutionEventBus,

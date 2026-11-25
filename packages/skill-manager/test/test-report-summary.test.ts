@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest'
 import { mkdtemp, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import type { IExecutionRunSummary } from '@fynn90-e2e_assistant/types'
+import type { IExecutionRunSummary } from '@charlie_deng/e2e-assistant-types'
 import {
   deleteTestReportRun,
   listTestReportRuns,

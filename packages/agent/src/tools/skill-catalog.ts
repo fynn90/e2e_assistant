@@ -23,7 +23,7 @@ import type {
   IRunHistoryViewPayload,
   ISkillDetailViewPayload,
   IWorkbenchSkillRow,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /** SKILL 唯一 ID 的形状：9 位 [a-z0-9]（与 skill-manager 的判定一致）。 */
 const SKILL_ID_PATTERN = /^[a-z0-9]{9}$/

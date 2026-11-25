@@ -34,7 +34,7 @@ import {
 } from '../tools'
 import { createSessionAskTools } from '../tools/ask-user-question'
 import { browserSessionRegistry } from '../tools/browser/browser-session-registry'
-import { SKILL_ENV_FILE_NAME } from '@fynn90-e2e_assistant/types'
+import { SKILL_ENV_FILE_NAME } from '@charlie_deng/e2e-assistant-types'
 import type { IAgentBaseConfig } from './types'
 
 // 加载系统技能并格式化为模型可见的技能区块，避免在每次创建配置时重复处理静态资源。

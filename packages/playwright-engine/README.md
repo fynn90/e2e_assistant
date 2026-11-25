@@ -1,6 +1,6 @@
 <!-- 本文档面向首次接触本包的开发者，介绍 SDK 的用途、能力、边界、安装方式和开发入口。 -->
 
-# `@fynn90-e2e_assistant/playwright-engine`
+# `@charlie_deng/e2e-assistant-playwright-engine`
 
 一个独立、可复用、默认安全的 Playwright 能力 SDK，为 Node.js 应用提供浏览器会话、Chromium 管理、页面核对、候选脚本静态校验和受控试运行能力。
 
@@ -24,8 +24,8 @@
 
 Playwright Engine 将这些**确定性、与业务无关的基础能力**封装为可组合 SDK。在当前平台中，它被两个包调用：
 
-- `@fynn90-e2e_assistant/agent`：通过注入的浏览器会话端口使用页面能力，为生成 Agent 提供 `browser_navigate`、`browser_snapshot`、`browser_query` 与 `browser_click`、`browser_select`、`browser_fill`、`browser_waitFor`、`browser_screenshot` 工具（页面元素核对与视觉确认）。其中 `browser_fill` 支持 `${ENV:KEY}` 凭据引用（v20 凭据代理）：引擎经宿主注入的 `ICredentialResolver` 在填入前换取真值，并立即登记进会话脱敏器（`ISecretRegistrableRedactor`），使填入后的快照与元素查询都无法回读该值。同时使用静态校验完成候选脚本的质量门禁。
-- `@fynn90-e2e_assistant/cli`：在生成任务开始前完成 Chromium 检测与自动安装（就绪检查），并按 `browserVisualization` 以有头或无头模式创建浏览器会话、注入给生成 Agent，任务终态负责释放。
+- `@charlie_deng/e2e-assistant-agent`：通过注入的浏览器会话端口使用页面能力，为生成 Agent 提供 `browser_navigate`、`browser_snapshot`、`browser_query` 与 `browser_click`、`browser_select`、`browser_fill`、`browser_waitFor`、`browser_screenshot` 工具（页面元素核对与视觉确认）。其中 `browser_fill` 支持 `${ENV:KEY}` 凭据引用（v20 凭据代理）：引擎经宿主注入的 `ICredentialResolver` 在填入前换取真值，并立即登记进会话脱敏器（`ISecretRegistrableRedactor`），使填入后的快照与元素查询都无法回读该值。同时使用静态校验完成候选脚本的质量门禁。
+- `@charlie_deng/e2e-assistant-cli`：在生成任务开始前完成 Chromium 检测与自动安装（就绪检查），并按 `browserVisualization` 以有头或无头模式创建浏览器会话、注入给生成 Agent，任务终态负责释放。
 
 它也可以被其他 CLI、桌面应用、CI 工具或不同的 Agent 框架单独使用。
 
@@ -74,7 +74,7 @@ Playwright Engine 将这些**确定性、与业务无关的基础能力**封装�
   - 快照上限默认 240_000 字符（v12-pre 起，此前实为 8192——脱敏器的默认 maxLength 会先于快照切片生效）；
 - `src/network-policy/`：主动导航同源限制、跨源文档阻断和可配置子资源例外；
 - `src/observability/`：默认敏感信息脱敏器和统一事件契约；
-- `src/validation/`：统一使用本包的 `IValidationTestCase`，不再依赖 `@fynn90-e2e_assistant/types`；
+- `src/validation/`：统一使用本包的 `IValidationTestCase`，不再依赖 `@charlie_deng/e2e-assistant-types`；
 - `src/validation/playwright-script-validator.ts`：统一编排校验器；
 - `src/validation/playwright-structure-validator.ts`：校验 `test`、`page`、`expect`、`page.goto`、标题和定位器；
 - `src/validation/step-coverage-validator.ts`：校验 `test.step(stepId)` 的步骤覆盖；
@@ -111,13 +111,13 @@ Playwright Engine 将这些**确定性、与业务无关的基础能力**封装�
 ### 5.1 在已发布环境中安装
 
 ```bash
-pnpm add @fynn90-e2e_assistant/playwright-engine
+pnpm add @charlie_deng/e2e-assistant-playwright-engine
 ```
 
 或：
 
 ```bash
-npm install @fynn90-e2e_assistant/playwright-engine
+npm install @charlie_deng/e2e-assistant-playwright-engine
 ```
 
 该包运行在 Node.js 环境，不是浏览器端 UI 包。使用 Chromium、试运行器或子进程能力时，应从服务端、CLI、桌面应用主进程或 CI 任务中调用。
@@ -126,9 +126,9 @@ npm install @fynn90-e2e_assistant/playwright-engine
 
 ```bash
 pnpm install
-pnpm --filter @fynn90-e2e_assistant/playwright-engine build
-pnpm --filter @fynn90-e2e_assistant/playwright-engine test
-pnpm --filter @fynn90-e2e_assistant/playwright-engine typecheck
+pnpm --filter @charlie_deng/e2e-assistant-playwright-engine build
+pnpm --filter @charlie_deng/e2e-assistant-playwright-engine test
+pnpm --filter @charlie_deng/e2e-assistant-playwright-engine typecheck
 ```
 
 构建和测试脚本定义在 [package.json](./package.json)。
@@ -169,7 +169,7 @@ playwright install chromium
 当前可用的核心入口是脚本静态校验器：
 
 ```ts
-import { PlaywrightScriptValidator } from '@fynn90-e2e_assistant/playwright-engine'
+import { PlaywrightScriptValidator } from '@charlie_deng/e2e-assistant-playwright-engine'
 
 const validator = new PlaywrightScriptValidator()
 const result = validator.validate(candidateCode, {
@@ -214,7 +214,7 @@ test('用户登录成功', async ({ page }) => {
 - 每个启用步骤应有且只有一个对应 `test.step('<step-id>')`；
 - 每个步骤至少包含一个 Playwright 操作和一个断言；
 - 只允许用例声明的环境变量（v10 起：用例侧 `${ENV:KEY}` 引用的提取正则下沉至
-  `@fynn90-e2e_assistant/types` 的 `collectEnvReferences` 统一维护，本包转发调用，
+  `@charlie_deng/e2e-assistant-types` 的 `collectEnvReferences` 统一维护，本包转发调用，
   Web 与 CLI 共用同一份规则；比对行为不变——缺失报错、多余报错）；
 - 禁止 `eval`、`Function`、`child_process`、文件写入和进程控制等危险调用；
 - XPath、深层 CSS、动态选择器和 `waitForTimeout()` 默认产生警告而不是静默忽略。
@@ -385,16 +385,16 @@ src/
 ### 依赖方向
 
 ```text
-@fynn90-e2e_assistant/agent（主要调用方：浏览器会话、静态校验、受控试运行）
-@fynn90-e2e_assistant/cli（仅 Chromium 检测/安装，Playwright 就绪检查）
+@charlie_deng/e2e-assistant-agent（主要调用方：浏览器会话、静态校验、受控试运行）
+@charlie_deng/e2e-assistant-cli（仅 Chromium 检测/安装，Playwright 就绪检查）
 桌面应用、CI 工具、其他 Agent 框架
                          ↓
-@fynn90-e2e_assistant/playwright-engine
+@charlie_deng/e2e-assistant-playwright-engine
                          ↓
 Playwright / TypeScript / Node.js
 ```
 
-Engine 不应反向依赖 `apps/cli`、`packages/agent` 或 `packages/skill-manager`。SDK 的全部类型都在本包内定义，不依赖 `@fynn90-e2e_assistant/types`；平台用例数据若需要传入，应由宿主通过最小数据适配器转换，而不是把平台领域模型扩散到 SDK 公共 API。
+Engine 不应反向依赖 `apps/cli`、`packages/agent` 或 `packages/skill-manager`。SDK 的全部类型都在本包内定义，不依赖 `@charlie_deng/e2e-assistant-types`；平台用例数据若需要传入，应由宿主通过最小数据适配器转换，而不是把平台领域模型扩散到 SDK 公共 API。
 
 ## 11. 资源生命周期
 

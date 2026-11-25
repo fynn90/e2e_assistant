@@ -1,5 +1,5 @@
 {
-  "name": "@fynn90-e2e_assistant/service",
+  "name": "@charlie_deng/e2e-assistant-service",
   "version": "0.2.3",
   "private": false,
   "type": "module",
@@ -15,7 +15,7 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm && tsc --ignoreConfig src/index.ts --declaration --emitDeclarationOnly --outDir dist --module ESNext --target ES2022 --moduleResolution Bundler --ignoreDeprecations 6.0 --skipLibCheck --types node",
@@ -26,11 +26,11 @@
     "prepack": "pnpm run build"
   },
   "dependencies": {
-    "@fynn90-e2e_assistant/agent": "workspace:^",
-    "@fynn90-e2e_assistant/config": "workspace:^",
-    "@fynn90-e2e_assistant/playwright-engine": "workspace:^",
-    "@fynn90-e2e_assistant/skill-manager": "workspace:^",
-    "@fynn90-e2e_assistant/types": "workspace:^",
+    "@charlie_deng/e2e-assistant-agent": "workspace:^",
+    "@charlie_deng/e2e-assistant-config": "workspace:^",
+    "@charlie_deng/e2e-assistant-playwright-engine": "workspace:^",
+    "@charlie_deng/e2e-assistant-skill-manager": "workspace:^",
+    "@charlie_deng/e2e-assistant-types": "workspace:^",
     "@hono/node-server": "^2.0.4",
     "better-sqlite3": "^13.0.3",
     "hono": "^4.12.23",

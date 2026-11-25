@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import type { TSkillChatEvent } from '@fynn90-e2e_assistant/types'
+import type { TSkillChatEvent } from '@charlie_deng/e2e-assistant-types'
 import { consumeSseFrames } from '../src/services/chat-api'
 
 describe('SSE parser', () => {

@@ -4,7 +4,7 @@
 import { constants as fsConstants } from 'node:fs'
 import { access, lstat, readFile, realpath } from 'node:fs/promises'
 import path from 'node:path'
-import type { ISkillDetail } from '@fynn90-e2e_assistant/types'
+import type { ISkillDetail } from '@charlie_deng/e2e-assistant-types'
 import { SKILL_MANIFEST_FILE_NAME } from './constants'
 import { ensureEnvFile } from './env-file'
 import {

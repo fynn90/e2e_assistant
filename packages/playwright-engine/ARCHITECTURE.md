@@ -1,6 +1,6 @@
-<!-- 本文档说明 @fynn90-e2e_assistant/playwright-engine 的独立 SDK 架构、职责边界、模块设计和集成方式。 -->
+<!-- 本文档说明 @charlie_deng/e2e-assistant-playwright-engine 的独立 SDK 架构、职责边界、模块设计和集成方式。 -->
 
-# `@fynn90-e2e_assistant/playwright-engine` 独立 SDK 架构设计方案
+# `@charlie_deng/e2e-assistant-playwright-engine` 独立 SDK 架构设计方案
 
 - 方案版本：v1（对应平台 Version 7.0）
 - 编写日期：2026-09-09
@@ -13,7 +13,7 @@
 
 ## 1. 设计结论
 
-`@fynn90-e2e_assistant/playwright-engine` 是一个**与 Agent、Web 工作台和 Skill 存储解耦的 Playwright 能力 SDK**。它为上层应用提供浏览器自动化所需的最小、可组合且可测试的能力：
+`@charlie_deng/e2e-assistant-playwright-engine` 是一个**与 Agent、Web 工作台和 Skill 存储解耦的 Playwright 能力 SDK**。它为上层应用提供浏览器自动化所需的最小、可组合且可测试的能力：
 
 1. 检测本机 Playwright 浏览器运行时，并在缺失时通过 npm 包自身依赖完成 Chromium 安装；
 2. 创建受生命周期控制的 Playwright 浏览器会话，支持有头观察模式和无头模式；
@@ -122,7 +122,7 @@ Chromium 准备
               └──────────────┬───────────────┘
                              ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ @fynn90-e2e_assistant/playwright-engine                         │
+│ @charlie_deng/e2e-assistant-playwright-engine                         │
 │ 浏览器、Chromium、网络策略、静态校验、受控试运行、运行事件    │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -510,7 +510,7 @@ export interface IPlaywrightScriptValidator {
 
 #### 6.5.4 类型自包含，不依赖平台类型包
 
-SDK 的全部公共类型（校验输入、校验结果、事件、错误码和各能力契约）都在本包内定义，**不依赖 `@fynn90-e2e_assistant/types`**。校验输入使用 SDK 自己的最小 `IValidationTestCase`：
+SDK 的全部公共类型（校验输入、校验结果、事件、错误码和各能力契约）都在本包内定义，**不依赖 `@charlie_deng/e2e-assistant-types`**。校验输入使用 SDK 自己的最小 `IValidationTestCase`：
 
 ```ts
 export interface IValidationTestCase {
@@ -525,7 +525,7 @@ export interface IValidationTestCase {
 }
 ```
 
-宿主（如 `packages/agent`、`apps/cli`）持有的平台侧用例数据，应在宿主侧通过纯数据适配器转换为 `IValidationTestCase` 后再传入 SDK，转换函数由平台提供。`playwright-engine` 不应依赖 `@fynn90-e2e_assistant/types`、Skill、应用服务或平台数据库类型。
+宿主（如 `packages/agent`、`apps/cli`）持有的平台侧用例数据，应在宿主侧通过纯数据适配器转换为 `IValidationTestCase` 后再传入 SDK，转换函数由平台提供。`playwright-engine` 不应依赖 `@charlie_deng/e2e-assistant-types`、Skill、应用服务或平台数据库类型。
 
 #### 6.5.5 门禁结果规则
 
@@ -1061,7 +1061,7 @@ Engine 的责任测试与 CLI/Web 的业务测试分开：
 - `typescript`：AST 解析、语义检查和格式化；
 - Node.js 内置模块：`fs/promises`、`child_process`、`url`、`module` 等。
 
-SDK 的全部类型都在本包内定义，不依赖 `@fynn90-e2e_assistant/types` 等平台类型包。平台侧用例数据由宿主在调用前转换为 SDK 的最小输入契约（如 `IValidationTestCase`），转换函数由平台提供，不进入 Engine 的运行时依赖。
+SDK 的全部类型都在本包内定义，不依赖 `@charlie_deng/e2e-assistant-types` 等平台类型包。平台侧用例数据由宿主在调用前转换为 SDK 的最小输入契约（如 `IValidationTestCase`），转换函数由平台提供，不进入 Engine 的运行时依赖。
 
 ### 12.2 导出策略
 
@@ -1105,15 +1105,15 @@ export * from './validation/...'
 ### 12.4 平台与独立 SDK 的发布关系
 
 ```text
-@fynn90-e2e_assistant/agent
-        └── 主要调用 @fynn90-e2e_assistant/playwright-engine
+@charlie_deng/e2e-assistant-agent
+        └── 主要调用 @charlie_deng/e2e-assistant-playwright-engine
             （浏览器会话、静态校验、受控试运行）
 
-@fynn90-e2e_assistant/cli
+@charlie_deng/e2e-assistant-cli
         └── 仅调用 Chromium 检测/安装（Playwright 就绪检查）
 
 其他 CLI / Desktop / CI tool
-        └── can independently depend on @fynn90-e2e_assistant/playwright-engine
+        └── can independently depend on @charlie_deng/e2e-assistant-playwright-engine
 ```
 
 Engine 不应为了当前 CLI 的接口形式添加 HTTP 或 Chat 专用字段。平台版本迭代可以扩展适配器，而无需迫使其他 SDK 使用者安装 Agent、Web 或 Skill Manager。
@@ -1130,7 +1130,7 @@ Engine 不应为了当前 CLI 的接口形式添加 HTTP 或 Chat 专用字段�
 - [x] 保持现有 `PlaywrightScriptValidator` 测试通过；
 - [x] 在根入口导出稳定契约。
 
-交付文件包括 `src/contracts/`、`src/observability/redaction.ts` 和校验器适配；本包不再依赖 `@fynn90-e2e_assistant/types`。历史 `runner.ts`、`recorder.ts` 和 `interceptor.ts` 继续保留兼容导出，不代表 dry-run 或正式执行已完成。
+交付文件包括 `src/contracts/`、`src/observability/redaction.ts` 和校验器适配；本包不再依赖 `@charlie_deng/e2e-assistant-types`。历史 `runner.ts`、`recorder.ts` 和 `interceptor.ts` 继续保留兼容导出，不代表 dry-run 或正式执行已完成。
 
 ### 阶段 1：浏览器基础能力（已落地）
 
@@ -1231,7 +1231,7 @@ Engine 不应为了当前 CLI 的接口形式添加 HTTP 或 Chat 专用字段�
 当以下条件全部满足时，认为 `playwright-engine` 达到 v7 架构交付要求：
 
 - [ ] 根入口提供独立、稳定、可替换的 Chromium、浏览器、网络、校验和 dry-run API；
-- [ ] Engine 不依赖 Agent、CLI、Web、Skill Manager 或 `@fynn90-e2e_assistant/types`，公共类型全部在本包定义；
+- [ ] Engine 不依赖 Agent、CLI、Web、Skill Manager 或 `@charlie_deng/e2e-assistant-types`，公共类型全部在本包定义；
 - [ ] Chromium 检测和安装不依赖全局 `playwright` 命令；
 - [ ] headed/headless 语义与 `browserVisualization` 对齐，试运行始终不打开调试页面；
 - [ ] 浏览器会话、安装进程和试运行进程均支持取消、超时和幂等释放；
@@ -1254,7 +1254,7 @@ Engine 不应为了当前 CLI 的接口形式添加 HTTP 或 Chat 专用字段�
 | `src/formatting/*`              | `formatting/`                                        | 保持无副作用格式化能力                                                                                                                       |
 | `src/validation/*`              | `validation/`                                        | 保持现有规则，增加独立最小输入契约适配                                                                                                       |
 | `src/index.ts`                  | 根公共入口                                           | 从“文件导出集合”升级为稳定 SDK API 与契约导出                                                                                                |
-| `@fynn90-e2e_assistant/types` 导入 | 本包自有类型                                         | 校验输入收敛为本包 `IValidationTestCase`，平台用例数据由宿主转换后传入                                                                       |
-| `package.json`                  | 运行时依赖声明                                       | 阶段 0/1 已移除 `@fynn90-e2e_assistant/types` 依赖；`@playwright/test` 运行时依赖留到阶段 2 的 dry-run 实现时再增加，并在发布前验证包内解析路径 |
+| `@charlie_deng/e2e-assistant-types` 导入 | 本包自有类型                                         | 校验输入收敛为本包 `IValidationTestCase`，平台用例数据由宿主转换后传入                                                                       |
+| `package.json`                  | 运行时依赖声明                                       | 阶段 0/1 已移除 `@charlie_deng/e2e-assistant-types` 依赖；`@playwright/test` 运行时依赖留到阶段 2 的 dry-run 实现时再增加，并在发布前验证包内解析路径 |
 
 该迁移不要求一次性重写所有校验器。优先稳定公共契约和安全边界，再逐步替换占位实现，能够降低对现有 v5/v6 流程的回归影响。

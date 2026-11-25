@@ -5,7 +5,7 @@
  * 原始工具参数、完整命令输出或私有 details。
  */
 
-import type { IToolCallView } from '@fynn90-e2e_assistant/types'
+import type { IToolCallView } from '@charlie_deng/e2e-assistant-types'
 import { toSafePreview } from './safe-value'
 import type { IToolCallRecord } from './types'
 

@@ -26,16 +26,16 @@ import {
   readFixedUtf8File,
   readTestReportSummary,
   resolveSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
-import { DefaultSensitiveDataRedactor } from '@fynn90-e2e_assistant/playwright-engine'
-import { parseEnvFileContent } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { ISkillStorageOptions } from '@charlie_deng/e2e-assistant-skill-manager'
+import { DefaultSensitiveDataRedactor } from '@charlie_deng/e2e-assistant-playwright-engine'
+import { parseEnvFileContent } from '@charlie_deng/e2e-assistant-types'
 import type { IRepairContext } from '../e2e-test-case/playwright-script-generator'
 import type {
   IAgentSkillCandidate,
   IAgentWorkbenchTaskSummary,
   TAgentWorkbenchAction,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type {
   IBatchRunnerHost,
   IExecuteTestIssue,
@@ -47,7 +47,7 @@ import type {
   IWorkbenchActionHost,
   TExecuteTestHostResult,
   TReadSkillDocumentHostResult,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import type { ITestExecutionService } from '../test-execution/execution-service'
 import type { IExecutionEventBus } from '../test-execution/execution-event-bus'

@@ -5,7 +5,7 @@
  * 业务差异（写到哪、怎么校验、冲突码是什么）全部由各适配器吸收，
  * 使同一套编排逻辑可被产物卡片与文件树任意文本文件复用（依赖倒转）。
  */
-import type { IFileSaveDiagnostic } from '@fynn90-e2e_assistant/types'
+import type { IFileSaveDiagnostic } from '@charlie_deng/e2e-assistant-types'
 
 /** 保存目标返回结果。 */
 export interface ISaveTargetResult {

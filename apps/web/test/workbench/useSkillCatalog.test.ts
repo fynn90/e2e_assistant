@@ -1,6 +1,6 @@
 // Skill 目录查询模型测试：覆盖检索、排序、分页与响应式输入。
 import { nextTick, ref } from 'vue'
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 import { describe, expect, it } from 'vitest'
 import { useSkillCatalog } from '../../src/modules/skills/useSkillCatalog'
 

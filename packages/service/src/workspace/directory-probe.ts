@@ -4,7 +4,7 @@
 import { constants as fsConstants } from 'node:fs'
 import { access, opendir, stat } from 'node:fs/promises'
 import path from 'node:path'
-import type { IDirectoryEntry } from '@fynn90-e2e_assistant/types'
+import type { IDirectoryEntry } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 判定目录是否为空时需要忽略的系统文件。

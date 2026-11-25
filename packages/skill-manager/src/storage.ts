@@ -18,8 +18,8 @@ import writeFileAtomic from 'write-file-atomic'
 import {
   createDefaultE2ETestCase,
   type ISkillSummary,
-} from '@fynn90-e2e_assistant/types'
-import { DEFAULT_ENV_FILE_CONTENT } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
+import { DEFAULT_ENV_FILE_CONTENT } from '@charlie_deng/e2e-assistant-types'
 import {
   E2E_SCHEMA_FILE_NAME,
   SKILL_ENV_FILE_NAME,

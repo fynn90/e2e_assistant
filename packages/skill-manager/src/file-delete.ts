@@ -23,7 +23,7 @@
  */
 
 import { rm } from 'node:fs/promises'
-import { isProtectedSkillRootEntry } from '@fynn90-e2e_assistant/types'
+import { isProtectedSkillRootEntry } from '@charlie_deng/e2e-assistant-types'
 import { USER_WORKSPACE_DIRECTORY_NAME } from './constants'
 import { resolveSkill } from './detail'
 import {

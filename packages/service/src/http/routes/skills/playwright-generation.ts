@@ -15,7 +15,7 @@ import { streamSSE } from 'hono/streaming'
 import type {
   IGeneratePlaywrightResponse,
   TPlaywrightGenerationEvent,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type {
   IGenerationBrowserHost,

@@ -31,7 +31,7 @@ import type {
   TAgentSessionKind,
   TAgentWorkBlockKind,
   TAgentWorkBlockStatus,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /** 会话标题的最大字符数（首条用户消息截断生成）。 */
 const MAX_TITLE_CHARACTERS = 80

@@ -1,5 +1,5 @@
 {
-  "name": "@fynn90-e2e_assistant/playwright-engine",
+  "name": "@charlie_deng/e2e-assistant-playwright-engine",
   "version": "0.1.3",
   "private": false,
   "type": "module",
@@ -15,7 +15,7 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm && tsc --ignoreConfig src/index.ts --declaration --emitDeclarationOnly --outDir dist --module ESNext --target ES2022 --moduleResolution Bundler --ignoreDeprecations 6.0 --skipLibCheck --types node",
@@ -26,7 +26,7 @@
     "prepack": "pnpm run build"
   },
   "dependencies": {
-    "@fynn90-e2e_assistant/types": "workspace:^",
+    "@charlie_deng/e2e-assistant-types": "workspace:^",
     "playwright": "1.64.0",
     "typescript": "^6.0.3"
   },

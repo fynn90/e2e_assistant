@@ -55,7 +55,7 @@ export type TStatusPanelInput =
      */
     version: number
     /**
-     * 本 CLI 包（`@fynn90-e2e_assistant/cli`）的版本号，**不含 `v` 前缀**。
+     * 本 CLI 包（`@charlie_deng/e2e-assistant-cli`）的版本号，**不含 `v` 前缀**。
      *
      * 与上面的 `version` 是两个不同的概念，故两行并存：
      * 本字段是「我装的 CLI 是哪个版本」，`version` 是「跑着的服务说哪种协议」。

@@ -28,7 +28,7 @@ import {
   toToolCallView,
   type IToolCallRecord,
 } from '../tool-trace'
-import type { IToolCallView } from '@fynn90-e2e_assistant/types'
+import type { IToolCallView } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * Agent 主循环事件监听器。

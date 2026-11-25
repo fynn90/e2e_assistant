@@ -6,9 +6,9 @@
  * 会话种类、标题、守卫的透传，取消传播，以及无论成败都释放会话。
  */
 import { describe, expect, it, vi } from 'vitest'
-import type { IAgentTaskHandle } from '@fynn90-e2e_assistant/agent'
-import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
-import type { TAgentSessionKind } from '@fynn90-e2e_assistant/types'
+import type { IAgentTaskHandle } from '@charlie_deng/e2e-assistant-agent'
+import type { IToolGuard } from '@charlie_deng/e2e-assistant-agent'
+import type { TAgentSessionKind } from '@charlie_deng/e2e-assistant-types'
 import {
   createSkillGenerationSessionRunner,
   type IAgentWorkRuntime,

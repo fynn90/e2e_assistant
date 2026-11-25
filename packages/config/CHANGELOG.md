@@ -1,4 +1,4 @@
-# @fynn90-e2e_assistant/config
+# @charlie_deng/e2e-assistant-config
 
 ## 0.0.6
 

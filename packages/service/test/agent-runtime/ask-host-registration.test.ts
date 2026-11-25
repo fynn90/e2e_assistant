@@ -47,9 +47,9 @@ const harness = vi.hoisted(() => ({
   chatThrows: false,
 }))
 
-vi.mock('@fynn90-e2e_assistant/agent', async (importOriginal) => {
+vi.mock('@charlie_deng/e2e-assistant-agent', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@fynn90-e2e_assistant/agent')>()
+    await importOriginal<typeof import('@charlie_deng/e2e-assistant-agent')>()
 
   /** AgentService 的最小替身：只实现工作运行时用到的四个成员。 */
   class FakeAgentService {
@@ -106,7 +106,7 @@ vi.mock('@fynn90-e2e_assistant/agent', async (importOriginal) => {
 
 // mock 之后再 import：此时 runtime 模块拿到的 AgentService 已是替身，
 // 而 askUserRegistry 仍是真实单例（上面用 ...actual 保留了原导出）。
-const { askUserRegistry } = await import('@fynn90-e2e_assistant/agent')
+const { askUserRegistry } = await import('@charlie_deng/e2e-assistant-agent')
 const { createAgentWorkRuntime } =
   await import('../../src/agent-runtime/agent-work-runtime')
 

@@ -31,7 +31,7 @@ import {
   createReadTestCaseTool,
   createRenderViewTool,
   getWorkbenchPromptSection,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 import { createAgentWorkbenchGuard } from './workbench-tool-guard'
 import type { IAgentWorkbenchService } from './workbench-service'
 import type {

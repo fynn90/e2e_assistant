@@ -10,8 +10,8 @@
  * 自身）；「确认在运行之后怎么结束它」的决策表在 service-stop.ts。
  */
 import process from 'node:process'
-import { registerWebStaticRoutes } from '@fynn90-e2e_assistant/web-host'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
+import { registerWebStaticRoutes } from '@charlie_deng/e2e-assistant-web-host'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@charlie_deng/e2e-assistant-types'
 import {
   readServiceModeFromEnv,
   type TServiceMode,

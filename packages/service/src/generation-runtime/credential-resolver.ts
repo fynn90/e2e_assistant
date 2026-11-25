@@ -14,12 +14,12 @@
 import {
   readSkillFile,
   SKILL_ENV_FILE_NAME,
-} from '@fynn90-e2e_assistant/skill-manager'
-import { parseEnvFileContent } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import { parseEnvFileContent } from '@charlie_deng/e2e-assistant-types'
 import type {
   ICredentialResolution,
   ICredentialResolver,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 
 /**
  * 创建绑定某个 Skill 的凭据解析器。

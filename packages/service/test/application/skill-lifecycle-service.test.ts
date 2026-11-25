@@ -11,7 +11,7 @@ import { describe, expect, it } from 'vitest'
 import { access, mkdtemp, mkdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
+import { createSkill } from '@charlie_deng/e2e-assistant-skill-manager'
 import { createSkillLifecycleService } from '../../src/application/agent-workbench/skill-lifecycle-service'
 import type { IGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
 
@@ -42,7 +42,7 @@ describe('deleteCase（L2c）', () => {
     })
 
     // 索引里已找不到 → resolveSkill 失败即「已删除」。
-    const { resolveSkill } = await import('@fynn90-e2e_assistant/skill-manager')
+    const { resolveSkill } = await import('@charlie_deng/e2e-assistant-skill-manager')
     await expect(resolveSkill({ rootDir }, skillId)).rejects.toThrow()
   })
 
@@ -61,7 +61,7 @@ describe('deleteCase（L2c）', () => {
     ).rejects.toThrow(/正在执行/)
 
     // 用例仍在（拒绝发生在任何写操作之前）。
-    const { resolveSkill } = await import('@fynn90-e2e_assistant/skill-manager')
+    const { resolveSkill } = await import('@charlie_deng/e2e-assistant-skill-manager')
     await expect(resolveSkill({ rootDir }, skillId)).resolves.toBeTruthy()
   })
 

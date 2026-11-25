@@ -7,7 +7,7 @@
 import type {
   IFileSaveDiagnostic,
   IPlaywrightStepCoverage,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IUseAgentWorkTimeline } from '../agent-work/timeline'
 import type { TAutoSaveState } from '../../common/autosave/types'
 

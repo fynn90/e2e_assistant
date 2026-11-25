@@ -6,7 +6,7 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import process from 'node:process'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@charlie_deng/e2e-assistant-types'
 import { createHttpApp } from '../../src/http/app'
 import { ChatConcurrencyGate } from '../../src/http/chat-concurrency'
 

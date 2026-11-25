@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import type { IWorkspaceFilesResponse } from '@fynn90-e2e_assistant/types'
+import type { IWorkspaceFilesResponse } from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../app-types'
 import { listProjectFiles } from '../../workspace/project-files'
 import { requirePlatformConfig } from './route-utils'

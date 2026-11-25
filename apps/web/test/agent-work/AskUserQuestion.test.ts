@@ -17,7 +17,7 @@
 
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { INTERACTION_CANCEL_ANSWER } from '@fynn90-e2e_assistant/types'
+import { INTERACTION_CANCEL_ANSWER } from '@charlie_deng/e2e-assistant-types'
 import AskUserQuestion from '../../src/modules/agent-work/components/AskUserQuestion.vue'
 import type { IInteractionTimelineItem } from '../../src/modules/agent-work/timeline'
 

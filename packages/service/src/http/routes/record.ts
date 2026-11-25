@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import type { IRecordStartResponse } from '@fynn90-e2e_assistant/types'
+import type { IRecordStartResponse } from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../app-types'
 
 export function createRecordRoutes (): Hono<IAppEnv> {

@@ -13,7 +13,7 @@ import type {
   ISkillDocumentGenerationResult,
   IUpdateE2ETestCaseData,
   IUpdateE2ETestCaseRequest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IAuthinePlatformConfig } from '../../config/config-store'
 
 export interface IE2ETestCaseApplicationServices {

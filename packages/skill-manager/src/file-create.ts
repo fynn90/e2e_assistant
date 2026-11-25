@@ -20,7 +20,7 @@
 
 import { lstat, mkdir, open } from 'node:fs/promises'
 import path from 'node:path'
-import { normalizeUserWorkspaceRelativePath } from '@fynn90-e2e_assistant/types'
+import { normalizeUserWorkspaceRelativePath } from '@charlie_deng/e2e-assistant-types'
 import {
   KNOWN_BINARY_EXTENSIONS,
   MAX_SKILL_FILE_BYTES,

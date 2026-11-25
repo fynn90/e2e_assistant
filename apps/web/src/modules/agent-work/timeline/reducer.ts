@@ -14,7 +14,7 @@ import type {
   IAgentWorkBlock,
   TAgentActivity,
   TAgentClientEvent,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   blockToTimelineItem,
   createCommandItem,

@@ -26,7 +26,7 @@ import type { AgentTool } from '@earendil-works/pi-agent-core'
 import type {
   TAgentWorkbenchViewKind,
   TWorkbenchRenderParams,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 视图渲染宿主端口：由 CLI 组合根注入。

@@ -1,4 +1,4 @@
-import type { TApiErrorCode } from '@fynn90-e2e_assistant/types'
+import type { TApiErrorCode } from '@charlie_deng/e2e-assistant-types'
 
 export interface IHttpRequestLogEntry {
   requestId: string

@@ -15,8 +15,8 @@ import { describe, expect, it } from 'vitest'
 import type {
   TAgentClientEventDraft,
   TAgentInteractionAnswer,
-} from '@fynn90-e2e_assistant/types'
-import type { IAskUserHost } from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-types'
+import type { IAskUserHost } from '@charlie_deng/e2e-assistant-agent'
 import type { IAgentWorkRuntime } from '../../src/agent-runtime'
 import { createAskUserHost } from '../../src/agent-runtime/ask-user-host'
 

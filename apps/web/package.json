@@ -1,5 +1,5 @@
 {
-  "name": "@fynn90-e2e_assistant/web",
+  "name": "@charlie_deng/e2e-assistant-web",
   "version": "0.0.6",
   "private": false,
   "type": "module",
@@ -11,7 +11,7 @@
     "./dist/*": "./dist/*"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "dev": "vite",
@@ -23,7 +23,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fynn90-e2e_assistant/types": "workspace:^",
+    "@charlie_deng/e2e-assistant-types": "workspace:^",
     "dompurify": "^3.4.12",
     "highlight.js": "^11.11.1",
     "markdown-it": "^14.3.0",

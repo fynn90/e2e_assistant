@@ -21,7 +21,7 @@ import {
   type ComputedRef,
   type Ref,
 } from 'vue'
-import type { IEnvFileIssue } from '@fynn90-e2e_assistant/types'
+import type { IEnvFileIssue } from '@charlie_deng/e2e-assistant-types'
 import { ApiClientError } from '../../services/http-client'
 import type { ISaveTarget, ISaveTargetResult, TAutoSaveState } from './types'
 import { isBlockedError, isConflictError } from './types'
@@ -65,7 +65,7 @@ export interface IUseAutoSave {
   state: Ref<TAutoSaveState>
   /** 最近一次校验诊断。 */
   diagnostics: Ref<
-    readonly import('@fynn90-e2e_assistant/types').IFileSaveDiagnostic[]
+    readonly import('@charlie_deng/e2e-assistant-types').IFileSaveDiagnostic[]
   >
   /**
    * 最近一次校验阻断的问题明细（blocked 态专属，v10 PRD 5.3）。
@@ -120,7 +120,7 @@ export interface IUseAutoSave {
 export function useAutoSave (options: IUseAutoSaveOptions): IUseAutoSave {
   const state = ref<TAutoSaveState>('saved')
   const diagnostics = ref<
-    readonly import('@fynn90-e2e_assistant/types').IFileSaveDiagnostic[]
+    readonly import('@charlie_deng/e2e-assistant-types').IFileSaveDiagnostic[]
   >([])
   const blockedIssues = ref<IEnvFileIssue[]>([])
   const errorMessage = ref('')

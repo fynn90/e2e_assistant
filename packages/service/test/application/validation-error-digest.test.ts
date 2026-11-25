@@ -2,7 +2,7 @@
  * 验证生成失败提示的组织逻辑：位置、类别、修复方向与条数上限。
  */
 import { describe, expect, it } from 'vitest'
-import type { IPlaywrightValidationIssue } from '@fynn90-e2e_assistant/playwright-engine'
+import type { IPlaywrightValidationIssue } from '@charlie_deng/e2e-assistant-playwright-engine'
 import { buildValidationFailureDigest } from '../../src/application/e2e-test-case/validation-error-digest'
 
 /** 构造一条校验问题，未给出的字段用合理默认值填充。 */

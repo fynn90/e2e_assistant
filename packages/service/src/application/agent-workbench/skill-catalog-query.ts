@@ -25,12 +25,12 @@ import {
   listTestReportRuns,
   readTestReportSummary,
   resolveSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { ISkillStorageOptions } from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   collectEnvReferences,
   findMissingEnvReferences,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type {
   IE2ETestCase,
   IRunHistoryViewPayload,

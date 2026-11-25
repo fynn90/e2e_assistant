@@ -17,18 +17,18 @@ import {
   type IBrowserSessionHost,
   type IScreenshotArchive,
   type IVisualBaselineArchive,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 import {
   writeExplorationScreenshot,
   writeVisualBaseline,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   ChromiumInstaller,
   PlaywrightBrowserSessionFactory,
   type IBrowserSession,
   type IChromiumInstaller,
   type IChromiumStatus,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 import { ApiError } from '../shared/errors/api-error'
 import { createSkillCredentialResolver } from './credential-resolver'
 

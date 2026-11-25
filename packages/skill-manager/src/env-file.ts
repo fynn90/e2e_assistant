@@ -9,7 +9,7 @@
 import { access } from 'node:fs/promises'
 import path from 'node:path'
 import writeFileAtomic from 'write-file-atomic'
-import { DEFAULT_ENV_FILE_CONTENT } from '@fynn90-e2e_assistant/types'
+import { DEFAULT_ENV_FILE_CONTENT } from '@charlie_deng/e2e-assistant-types'
 import { SKILL_ENV_FILE_NAME } from './constants'
 import { resolveSkill } from './detail'
 import { isFileSystemMissingError } from './errors'

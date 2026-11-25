@@ -10,7 +10,7 @@ import { randomUUID } from 'node:crypto'
 import {
   startLocalServer,
   type TStartLocalServer,
-} from '@fynn90-e2e_assistant/service'
+} from '@charlie_deng/e2e-assistant-service'
 import { probeBashShell, resolveBashShellPath } from './bash-shell-check'
 import { ensurePlatformConfigStorage } from './platform-config-storage'
 import {

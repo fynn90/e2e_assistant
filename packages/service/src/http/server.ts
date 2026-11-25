@@ -11,7 +11,7 @@
  */
 import type { ServerType } from '@hono/node-server'
 import { serve } from '@hono/node-server'
-import { createSkillChatRuntime } from '@fynn90-e2e_assistant/agent'
+import { createSkillChatRuntime } from '@charlie_deng/e2e-assistant-agent'
 import type { Hono } from 'hono'
 import { createHttpApp } from './app'
 import type { IAppEnv } from './app-types'

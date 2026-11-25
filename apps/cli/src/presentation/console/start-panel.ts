@@ -58,7 +58,7 @@ export interface IStartPanelInput {
    */
   logRotationFailureReason?: string
   /**
-   * 本 CLI 包（`@fynn90-e2e_assistant/cli`）的版本号，**不含 `v` 前缀**。
+   * 本 CLI 包（`@charlie_deng/e2e-assistant-cli`）的版本号，**不含 `v` 前缀**。
    *
    * 由命令层从 `infrastructure/cli-package-version` 解析后注入：presentation
    * 层不做 I/O，面板只负责呈现。不可得时为 `null`，此时不渲染该行——与 PID、

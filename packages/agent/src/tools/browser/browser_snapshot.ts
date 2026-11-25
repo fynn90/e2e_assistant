@@ -10,7 +10,7 @@ import type { AgentTool } from '@earendil-works/pi-agent-core'
 import type {
   ICandidateLocator,
   IPageSnapshot,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** browser_snapshot 工具接受的参数 Schema。 */

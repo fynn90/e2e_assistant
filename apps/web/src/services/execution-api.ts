@@ -7,7 +7,7 @@
 import type {
   IExecutionSnapshot,
   IStartExecutionResponse,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { requestJson } from './http-client'
 import { consumeSseResponse, type ISseFrame } from './sse'
 

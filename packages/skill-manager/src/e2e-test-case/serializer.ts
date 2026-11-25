@@ -1,7 +1,7 @@
 /**
  * 提供 E2E 测试用例的确定性序列化和 canonical 对象生成。
  */
-import { parseE2ETestCase, type IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import { parseE2ETestCase, type IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 按领域字段顺序标准化 E2E 用例，避免对象插入顺序影响 sourceHash。

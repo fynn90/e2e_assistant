@@ -13,15 +13,15 @@ import {
   resolveSkill,
   restoreFixedUtf8File,
   collectSkillDocumentDiagnostics,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import type {
   IGenerateSkillDocumentRequest,
   ISkillDocumentGenerationResult,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   isBlockingDiagnostic,
   validateE2ETestCaseForGeneration,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { ApiError } from '../../shared/errors/api-error'
 import type { IAuthinePlatformConfig } from '../../config/config-store'
 import {

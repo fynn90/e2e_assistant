@@ -17,7 +17,7 @@ import type { AgentTool } from '@earendil-works/pi-agent-core'
 import type {
   IAgentToolImageRef,
   IPageScreenshot,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /**

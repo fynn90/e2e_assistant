@@ -19,12 +19,12 @@ import type { ITestExecutionService } from '../../src/application/test-execution
 import type { IExecutionEventBus } from '../../src/application/test-execution/execution-event-bus'
 import type { IGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
 import type { IReadinessService } from '../../src/application/agent-workbench/execution-readiness'
-import type { IReadinessViewPayload } from '@fynn90-e2e_assistant/types'
+import type { IReadinessViewPayload } from '@charlie_deng/e2e-assistant-types'
 import {
   BATCH_MAX_ITEMS,
   createBatchExecutionService,
 } from '../../src/application/agent-workbench/batch-execution-service'
-import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
+import { createSkill } from '@charlie_deng/e2e-assistant-skill-manager'
 
 /** 采集批次卡片的发布。 */
 function createRuntimeSpy (): {

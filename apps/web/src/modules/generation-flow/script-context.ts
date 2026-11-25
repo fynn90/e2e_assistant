@@ -16,7 +16,7 @@ import { computed, ref, type Ref } from 'vue'
 import type {
   IE2ETestCase,
   IPlaywrightScriptState,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { fetchE2ETestCase } from '../e2e-test-case/services/e2e-test-case-api'
 import { getDraftGenerationIssues } from '../e2e-test-case/validation/test-case-form-validator'
 import type { IScriptStageOptions } from './script-stage'

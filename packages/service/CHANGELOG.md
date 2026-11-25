@@ -1,4 +1,4 @@
-# @fynn90-e2e_assistant/service
+# @charlie_deng/e2e-assistant-service
 
 ## 0.2.3
 
@@ -6,11 +6,11 @@
 
 - 优化架构
 - Updated dependencies
-  - @fynn90-e2e_assistant/agent@0.1.3
-  - @fynn90-e2e_assistant/config@0.0.6
-  - @fynn90-e2e_assistant/playwright-engine@0.1.3
-  - @fynn90-e2e_assistant/skill-manager@0.0.6
-  - @fynn90-e2e_assistant/types@0.1.3
+  - @charlie_deng/e2e-assistant-agent@0.1.3
+  - @charlie_deng/e2e-assistant-config@0.0.6
+  - @charlie_deng/e2e-assistant-playwright-engine@0.1.3
+  - @charlie_deng/e2e-assistant-skill-manager@0.0.6
+  - @charlie_deng/e2e-assistant-types@0.1.3
 
 ## 0.2.2
 
@@ -19,11 +19,11 @@
 - 9466e14: 修复工作台工具守卫漏放行 v17 工具的问题：`render_view`、`read_test_case`、`read_run_history`、`check_readiness`、全部提案工具与 `execute_batch` 不再被误拦截并终止对话。回归测试改为直接读取实际装配的工具清单，防止后续新增工具再次漏放行。
 - 更新 CLI
 - Updated dependencies
-  - @fynn90-e2e_assistant/agent@0.1.2
-  - @fynn90-e2e_assistant/config@0.0.5
-  - @fynn90-e2e_assistant/playwright-engine@0.1.2
-  - @fynn90-e2e_assistant/skill-manager@0.0.5
-  - @fynn90-e2e_assistant/types@0.1.2
+  - @charlie_deng/e2e-assistant-agent@0.1.2
+  - @charlie_deng/e2e-assistant-config@0.0.5
+  - @charlie_deng/e2e-assistant-playwright-engine@0.1.2
+  - @charlie_deng/e2e-assistant-skill-manager@0.0.5
+  - @charlie_deng/e2e-assistant-types@0.1.2
 
 ## 0.2.1
 
@@ -31,11 +31,11 @@
 
 - 优化 playwright engine
 - Updated dependencies
-  - @fynn90-e2e_assistant/playwright-engine@0.1.1
-  - @fynn90-e2e_assistant/agent@0.1.1
-  - @fynn90-e2e_assistant/config@0.0.4
-  - @fynn90-e2e_assistant/skill-manager@0.0.4
-  - @fynn90-e2e_assistant/types@0.1.1
+  - @charlie_deng/e2e-assistant-playwright-engine@0.1.1
+  - @charlie_deng/e2e-assistant-agent@0.1.1
+  - @charlie_deng/e2e-assistant-config@0.0.4
+  - @charlie_deng/e2e-assistant-skill-manager@0.0.4
+  - @charlie_deng/e2e-assistant-types@0.1.1
 
 ## 0.2.0
 
@@ -93,11 +93,11 @@
 - Updated dependencies
 - Updated dependencies [30cce7f]
 - Updated dependencies [8c4aa8d]
-  - @fynn90-e2e_assistant/agent@0.1.0
-  - @fynn90-e2e_assistant/config@0.0.3
-  - @fynn90-e2e_assistant/playwright-engine@0.1.0
-  - @fynn90-e2e_assistant/skill-manager@0.0.3
-  - @fynn90-e2e_assistant/types@0.1.0
+  - @charlie_deng/e2e-assistant-agent@0.1.0
+  - @charlie_deng/e2e-assistant-config@0.0.3
+  - @charlie_deng/e2e-assistant-playwright-engine@0.1.0
+  - @charlie_deng/e2e-assistant-skill-manager@0.0.3
+  - @charlie_deng/e2e-assistant-types@0.1.0
 
 ## 0.1.0
 
@@ -111,8 +111,8 @@
 
 - 优化 cli运行
 - Updated dependencies
-  - @fynn90-e2e_assistant/agent@0.0.2
-  - @fynn90-e2e_assistant/config@0.0.2
-  - @fynn90-e2e_assistant/playwright-engine@0.0.2
-  - @fynn90-e2e_assistant/skill-manager@0.0.2
-  - @fynn90-e2e_assistant/types@0.0.2
+  - @charlie_deng/e2e-assistant-agent@0.0.2
+  - @charlie_deng/e2e-assistant-config@0.0.2
+  - @charlie_deng/e2e-assistant-playwright-engine@0.0.2
+  - @charlie_deng/e2e-assistant-skill-manager@0.0.2
+  - @charlie_deng/e2e-assistant-types@0.0.2

@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest'
 import {
   createDefaultE2ETestCase,
   type IE2ETestCase,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { useE2ETestCaseReadiness } from '../../src/modules/e2e-test-case/composables/useE2ETestCaseReadiness'
 import {
   getDraftGenerationIssues,

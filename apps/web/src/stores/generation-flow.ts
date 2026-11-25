@@ -23,7 +23,7 @@ import type {
   IFileSaveDiagnostic,
   IGeneratePlaywrightData,
   ISkillDocumentGenerationResult,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { useGlobalChatStore, type IWorkbenchSubject } from './global-chat'
 import { useAutoSave, type IUseAutoSave } from '../common/autosave/useAutoSave'
 import {

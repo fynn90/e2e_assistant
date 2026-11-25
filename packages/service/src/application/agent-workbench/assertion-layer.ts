@@ -28,7 +28,7 @@
  * `propose_case_repair` → `agent-analysis`），模型无从传（R15）。
  */
 
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 
 /** 触碰断言层的单条记录。 */
 export interface IAssertionLayerViolation {

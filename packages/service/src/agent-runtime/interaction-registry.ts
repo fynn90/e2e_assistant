@@ -13,7 +13,7 @@
  * 进程重启后由路由层恢复 pending 卡片并允许用户重新回答。
  */
 
-import type { TAgentInteractionAnswer } from '@fynn90-e2e_assistant/types'
+import type { TAgentInteractionAnswer } from '@charlie_deng/e2e-assistant-types'
 
 /** 等待中的交互句柄。 */
 interface IPendingInteraction {

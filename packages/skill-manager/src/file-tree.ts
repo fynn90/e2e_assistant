@@ -4,7 +4,7 @@ import path from 'node:path'
 import type {
   ISkillDirectoryTreeNode,
   ISkillFileTreeNode,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   KNOWN_BINARY_EXTENSIONS,
   KNOWN_TEXT_EXTENSIONS,

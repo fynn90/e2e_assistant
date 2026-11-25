@@ -14,7 +14,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import type { IWaitCondition } from '@fynn90-e2e_assistant/types'
+import type { IWaitCondition } from '@charlie_deng/e2e-assistant-types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** 等待条件的类型标识取值。 */

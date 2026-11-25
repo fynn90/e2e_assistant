@@ -11,7 +11,7 @@
  * 因此没有 blockStore 物化步骤。
  */
 
-import type { TExecutionEvent } from '@fynn90-e2e_assistant/types'
+import type { TExecutionEvent } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 分布式 Omit：对联合类型逐成员剔除字段。

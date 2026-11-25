@@ -23,14 +23,14 @@ import {
   createSkill,
   E2E_SCHEMA_FILE_NAME,
   USER_WORKSPACE_DIRECTORY_NAME,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import type {
   IChromiumInstaller,
   IChromiumStatus,
   ITestRunRequest,
   ITestRunner,
   ITestRunResult,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 import { createTestExecutionService } from '../../src/application/test-execution/execution-service'
 import { createGenerationTaskRegistry } from '../../src/generation-runtime'
 

@@ -9,7 +9,7 @@ import {
   SKILL_ENV_FILE_NAME,
   type IE2ETestCase,
   type IE2EValidationIssue,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import E2ETestCaseBasicForm from './E2ETestCaseBasicForm.vue'
 import E2ETestCaseReadinessPanel from './E2ETestCaseReadinessPanel.vue'
 import PreconditionEditor from './PreconditionEditor.vue'

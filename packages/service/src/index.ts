@@ -1,5 +1,5 @@
 /**
- * @fynn90-e2e_assistant/service 对外出口。
+ * @charlie_deng/e2e-assistant-service 对外出口。
  *
  * 本地服务层：承载 Web 工作台的全部后端能力（HTTP API、Agent 工作通道运行时、
  * 生成与执行编排、平台配置、Skill 存储）。

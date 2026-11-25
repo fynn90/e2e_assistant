@@ -1,6 +1,6 @@
 import type { Hono } from 'hono'
-import { getSkillDetail } from '@fynn90-e2e_assistant/skill-manager'
-import type { IGetSkillResponse } from '@fynn90-e2e_assistant/types'
+import { getSkillDetail } from '@charlie_deng/e2e-assistant-skill-manager'
+import type { IGetSkillResponse } from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { requirePlatformConfig } from '../route-utils'

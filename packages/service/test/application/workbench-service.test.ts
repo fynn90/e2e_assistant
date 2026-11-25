@@ -20,7 +20,7 @@ import { createExecutionEventBus } from '../../src/application/test-execution/ex
 import { createAgentWorkbenchService } from '../../src/application/agent-workbench/workbench-service'
 import { createGenerationOrchestrator } from '../../src/application/agent-workbench/generation-orchestrator'
 import { createGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
-import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
+import { createSkill } from '@charlie_deng/e2e-assistant-skill-manager'
 import type { IE2ETestCaseApplicationServices } from '../../src/application/e2e-test-case/application-types'
 import type { ITestExecutionService } from '../../src/application/test-execution/execution-service'
 

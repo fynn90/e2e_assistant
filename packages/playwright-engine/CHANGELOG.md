@@ -1,4 +1,4 @@
-# @fynn90-e2e_assistant/playwright-engine
+# @charlie_deng/e2e-assistant-playwright-engine
 
 ## 0.1.3
 
@@ -6,7 +6,7 @@
 
 - 优化架构
 - Updated dependencies
-  - @fynn90-e2e_assistant/types@0.1.3
+  - @charlie_deng/e2e-assistant-types@0.1.3
 
 ## 0.1.2
 
@@ -14,7 +14,7 @@
 
 - 更新 CLI
 - Updated dependencies
-  - @fynn90-e2e_assistant/types@0.1.2
+  - @charlie_deng/e2e-assistant-types@0.1.2
 
 ## 0.1.1
 
@@ -22,7 +22,7 @@
 
 - 优化 playwright engine
 - Updated dependencies
-  - @fynn90-e2e_assistant/types@0.1.1
+  - @charlie_deng/e2e-assistant-types@0.1.1
 
 ## 0.1.0
 
@@ -87,7 +87,7 @@
 - 支持 iframe
 - Updated dependencies
 - Updated dependencies [30cce7f]
-  - @fynn90-e2e_assistant/types@0.1.0
+  - @charlie_deng/e2e-assistant-types@0.1.0
 
 ## 0.0.2
 
@@ -95,4 +95,4 @@
 
 - 优化 cli运行
 - Updated dependencies
-  - @fynn90-e2e_assistant/types@0.0.2
+  - @charlie_deng/e2e-assistant-types@0.0.2

@@ -9,7 +9,7 @@ import {
   readSkillImageFile,
   resolveSkill,
   writeSkillFile,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import type {
   ICreateSkillDirectoryResponse,
   ICreateSkillFileResponse,
@@ -17,7 +17,7 @@ import type {
   IGetSkillFileResponse,
   IListSkillFilesResponse,
   IUpdateSkillFileResponse,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { parseJsonBody } from '../../request-validation'

@@ -30,9 +30,9 @@ import type { IAgentWorkRuntime } from '../../agent-runtime/agent-work-runtime'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import type { ITestExecutionService } from '../test-execution/execution-service'
 import type { IExecutionEventBus } from '../test-execution/execution-event-bus'
-import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
-import { resolveSkill } from '@fynn90-e2e_assistant/skill-manager'
-import type { IBatchItem, TBatchStatus } from '@fynn90-e2e_assistant/types'
+import type { ISkillStorageOptions } from '@charlie_deng/e2e-assistant-skill-manager'
+import { resolveSkill } from '@charlie_deng/e2e-assistant-skill-manager'
+import type { IBatchItem, TBatchStatus } from '@charlie_deng/e2e-assistant-types'
 import type { IReadinessService } from './execution-readiness'
 
 /**

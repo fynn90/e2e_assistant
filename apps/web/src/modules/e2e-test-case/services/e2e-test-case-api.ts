@@ -9,8 +9,8 @@ import type {
   TPlaywrightGenerationEvent,
   IUpdateE2ETestCaseRequest,
   IUpdateE2ETestCaseResponse,
-} from '@fynn90-e2e_assistant/types'
-import { playwrightGenerationEventSchema } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
+import { playwrightGenerationEventSchema } from '@charlie_deng/e2e-assistant-types'
 import { ApiClientError, requestJson } from '../../../services/http-client'
 import { consumeSseResponse } from '../../../services/sse'
 

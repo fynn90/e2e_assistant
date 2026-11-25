@@ -1,7 +1,7 @@
 <!-- 待办清单块：展示 Agent 的多步骤计划与实时进度（v12-pre）。 -->
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { IAgentTodoItem } from '@fynn90-e2e_assistant/types'
+import type { IAgentTodoItem } from '@charlie_deng/e2e-assistant-types'
 import IconFont from '../../../common/icon/IconFont.vue'
 import { TODO_BLOCK_ICON } from '../icons'
 import type { ITodoTimelineItem } from '../timeline'

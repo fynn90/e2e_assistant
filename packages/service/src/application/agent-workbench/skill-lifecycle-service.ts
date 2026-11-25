@@ -24,8 +24,8 @@
  */
 
 import { existsSync } from 'node:fs'
-import { deleteSkill } from '@fynn90-e2e_assistant/skill-manager'
-import { createSqliteSessionStore } from '@fynn90-e2e_assistant/agent'
+import { deleteSkill } from '@charlie_deng/e2e-assistant-skill-manager'
+import { createSqliteSessionStore } from '@charlie_deng/e2e-assistant-agent'
 import { ApiError } from '../../shared/errors/api-error'
 import {
   createWorkBlockStore,

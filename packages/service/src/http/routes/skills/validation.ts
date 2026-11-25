@@ -4,7 +4,7 @@ import {
   saveSkillDocumentRequestSchema,
   savePlaywrightScriptRequestSchema,
   updateE2ETestCaseRequestSchema,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { z } from 'zod'
 
 export const skillIdSchema = z.string().regex(/^[a-z0-9]{9}$/)

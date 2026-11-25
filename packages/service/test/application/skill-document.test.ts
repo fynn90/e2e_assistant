@@ -9,7 +9,7 @@ import {
   FileE2ETestCaseRepository,
   FileSkillDocumentRepository,
   createSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import { createE2ETestCaseApplicationServices } from '../../src/application/e2e-test-case/create-services'
 import type { ISkillMarkdownGenerator } from '../../src/application/e2e-test-case/skill-markdown-generator'
 

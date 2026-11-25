@@ -5,7 +5,7 @@
 import { describe, expect, it } from 'vitest'
 import { resolve } from 'node:path'
 import { createGenerationWriteGuard } from '../../src/application/e2e-test-case/generation-tool-guards'
-import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
+import type { IToolGuard } from '@charlie_deng/e2e-assistant-agent'
 
 const WORKSPACE = '/tmp/authine-workspace'
 const TARGET = '/tmp/authine-workspace/skill-1/temp/candidate.spec.ts'

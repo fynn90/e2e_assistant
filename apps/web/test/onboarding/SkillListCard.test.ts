@@ -1,5 +1,5 @@
 // Skill 目录组件测试：验证首次使用引导、入门入口、卡片键盘打开与删除确认契约。
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import SkillListCard from '../../src/modules/skills/SkillListCard.vue'

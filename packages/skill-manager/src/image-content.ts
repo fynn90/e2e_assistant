@@ -22,7 +22,7 @@ import path from 'node:path'
 import {
   resolvePreviewImageMimeType,
   type ISkillFileImageContent,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { MAX_SKILL_FILE_BYTES } from './constants'
 import { resolveSkill } from './detail'
 import { SkillManagerError } from './errors'

@@ -6,7 +6,7 @@ import { lock } from 'proper-lockfile'
 import {
   parseEnvFileContent,
   type IUpdateSkillFileRequest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   E2E_SCHEMA_FILE_NAME,
   MAX_SKILL_FILE_BYTES,

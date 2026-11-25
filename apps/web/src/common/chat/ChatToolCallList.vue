@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { NTag } from 'naive-ui'
-import type { IToolCallView } from '@fynn90-e2e_assistant/types'
+import type { IToolCallView } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 工具步骤组件属性。

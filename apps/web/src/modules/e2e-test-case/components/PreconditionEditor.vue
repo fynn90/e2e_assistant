@@ -5,7 +5,7 @@ import { NAlert, NButton, NEmpty, NInput, NSelect, NSpace } from 'naive-ui'
 import {
   ENV_REFERENCE_PATTERN,
   type IE2EPrecondition,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { createPrecondition } from '../utils/test-case-draft'
 import {
   fieldErrorsForPrefix,

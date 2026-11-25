@@ -7,7 +7,7 @@
  */
 
 import type { Hono } from 'hono'
-import type { IDeleteSkillResponse } from '@fynn90-e2e_assistant/types'
+import type { IDeleteSkillResponse } from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { requirePlatformConfig } from '../route-utils'

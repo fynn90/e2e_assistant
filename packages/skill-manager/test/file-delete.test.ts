@@ -19,7 +19,7 @@ import {
 import os from 'node:os'
 import path from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { isProtectedSkillRootFile } from '@fynn90-e2e_assistant/types'
+import { isProtectedSkillRootFile } from '@charlie_deng/e2e-assistant-types'
 import { deleteSkillEntry } from '../src/file-delete'
 
 let workspaceRoot: string

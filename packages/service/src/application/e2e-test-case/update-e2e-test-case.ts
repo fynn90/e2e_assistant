@@ -4,11 +4,11 @@
 import {
   FileE2ETestCaseRepository,
   FileSkillDocumentRepository,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import type {
   IUpdateE2ETestCaseData,
   IUpdateE2ETestCaseRequest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 保存结构化 E2E 用例。

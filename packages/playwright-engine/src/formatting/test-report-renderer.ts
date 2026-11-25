@@ -11,7 +11,7 @@
  */
 
 import { readFile, stat } from 'node:fs/promises'
-import type { IExecutionTestCaseResult } from '@fynn90-e2e_assistant/types'
+import type { IExecutionTestCaseResult } from '@charlie_deng/e2e-assistant-types'
 import type {
   IPlaywrightJsonReport,
   IPlaywrightJsonStep,

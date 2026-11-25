@@ -1,4 +1,4 @@
-# `@fynn90-e2e_assistant/web-host`
+# `@charlie_deng/e2e-assistant-web-host`
 
 把 Web 工作台的构建产物挂载到任意 Hono 应用上。
 
@@ -23,8 +23,8 @@ apps/cli ──▶ packages/service   （纯 API，提供 extendApp 扩展点）
 ## 2. 用法
 
 ```ts
-import { registerWebStaticRoutes } from '@fynn90-e2e_assistant/web-host'
-import { startLocalServer } from '@fynn90-e2e_assistant/service'
+import { registerWebStaticRoutes } from '@charlie_deng/e2e-assistant-web-host'
+import { startLocalServer } from '@charlie_deng/e2e-assistant-service'
 
 // 方式一：作为服务启动的扩展点（CLI 当前的做法）
 await startLocalServer({ port: 5826, extendApp: registerWebStaticRoutes })
@@ -62,7 +62,7 @@ registerWebStaticRoutes(app) // 必须最后调用
 
 ## 4. 依赖声明不可省
 
-本包用 `createRequire(import.meta.url)` 在运行时解析 `@fynn90-e2e_assistant/web`，
+本包用 `createRequire(import.meta.url)` 在运行时解析 `@charlie_deng/e2e-assistant-web`，
 因此必须在 `dependencies` 中**显式声明**它——pnpm 只有看到这条声明才会建立
 `node_modules` 链接。
 

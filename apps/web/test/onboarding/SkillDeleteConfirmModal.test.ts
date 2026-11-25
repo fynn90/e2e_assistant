@@ -2,7 +2,7 @@
 // naive-ui 的 NModal 会 teleport 到 body，因此断言与触发均基于 document.body 查询。
 import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 import SkillDeleteConfirmModal from '../../src/modules/skills/SkillDeleteConfirmModal.vue'
 
 const mocks = vi.hoisted(() => ({

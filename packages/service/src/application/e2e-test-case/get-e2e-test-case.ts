@@ -4,8 +4,8 @@
 import {
   FileE2ETestCaseRepository,
   FileSkillDocumentRepository,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { IE2ETestCaseDocumentData } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { IE2ETestCaseDocumentData } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 读取前端结构化编辑器需要的完整文档状态。

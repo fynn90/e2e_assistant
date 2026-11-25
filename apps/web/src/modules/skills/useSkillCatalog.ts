@@ -1,7 +1,7 @@
 // Skill 目录查询模型：提供可复用的搜索、排序与分页派生状态。
 import { computed, shallowRef, toValue, watch } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 
 export type TSkillCatalogSort = 'updated-desc' | 'created-desc' | 'title-asc'
 

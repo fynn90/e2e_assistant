@@ -7,7 +7,7 @@
  */
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import type { ISkillChatMessage } from '@fynn90-e2e_assistant/types'
+import type { ISkillChatMessage } from '@charlie_deng/e2e-assistant-types'
 import { createSkillChatRuntime } from '../src/service/skill-chat'
 
 /** 测试用工作区（工具只绑定 cwd，不落盘即可）。 */

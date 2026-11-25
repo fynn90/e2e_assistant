@@ -12,7 +12,7 @@
  */
 import { computed, ref } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 import { resolveScriptContext } from '../../src/modules/generation-flow/script-context'
 import type { IScriptStageOptions } from '../../src/modules/generation-flow/script-stage'
 

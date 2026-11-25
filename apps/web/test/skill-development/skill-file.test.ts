@@ -14,7 +14,7 @@ import {
   resolveSkillFileOpenTarget,
   toTreeOptions,
 } from '../../src/modules/skill-development/skill-file'
-import type { ISkillFileTreeNode } from '@fynn90-e2e_assistant/types'
+import type { ISkillFileTreeNode } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 构造一个文件树节点。

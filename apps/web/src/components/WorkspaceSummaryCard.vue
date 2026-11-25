@@ -14,7 +14,7 @@ import type {
   IConfigSummary,
   IUpdateConfigRequest,
   TConfigIssue,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   validateConfigUpdate,
   type TConfigFieldErrors,

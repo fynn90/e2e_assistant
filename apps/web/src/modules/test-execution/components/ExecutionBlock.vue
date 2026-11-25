@@ -8,7 +8,7 @@
 import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { NAlert, NButton, NEmpty, NSpin, NTag } from 'naive-ui'
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 import { fetchE2ETestCase } from '../../e2e-test-case/services/e2e-test-case-api'
 import {
   createSkillDevelopmentCodeLocation,

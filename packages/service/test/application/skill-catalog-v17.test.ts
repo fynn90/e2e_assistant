@@ -11,12 +11,12 @@ import { describe, expect, it } from 'vitest'
 import { mkdtemp, mkdir, writeFile, access } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
-import type { IExecutionRunSummary } from '@fynn90-e2e_assistant/types'
+import { createSkill } from '@charlie_deng/e2e-assistant-skill-manager'
+import type { IExecutionRunSummary } from '@charlie_deng/e2e-assistant-types'
 import { createSkillCatalog } from '../../src/application/agent-workbench/skill-catalog'
 import { createReadinessService } from '../../src/application/agent-workbench/execution-readiness'
 import { createGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
-import { writeTestReportSummary } from '@fynn90-e2e_assistant/skill-manager'
+import { writeTestReportSummary } from '@charlie_deng/e2e-assistant-skill-manager'
 
 /**
  * 造一个用例目录（可选带 env.json 值、文档、脚本）。

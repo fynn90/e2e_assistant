@@ -11,7 +11,7 @@ import {
   NSpace,
 } from 'naive-ui'
 import type { FormInst, FormRules, FormItemRule } from 'naive-ui'
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 import { createSkill } from '../../services/skill-api'
 import { useGlobalMessage } from '../../composables/useGlobalMessage'
 

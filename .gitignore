@@ -91,3 +91,7 @@ vite.config.d.ts
 .e2e_assistant.json
 .local-config
 PRD
+
+# 本地需求 / 技术方案文档与发布产物摘要（不入库）
+agent_docs/
+pnpm-publish-summary.json

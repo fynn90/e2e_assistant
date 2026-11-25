@@ -17,7 +17,7 @@
 import { constants as fsConstants } from 'node:fs'
 import { access, lstat, mkdir } from 'node:fs/promises'
 import path from 'node:path'
-import { normalizeUserWorkspaceRelativePath } from '@fynn90-e2e_assistant/types'
+import { normalizeUserWorkspaceRelativePath } from '@charlie_deng/e2e-assistant-types'
 import { USER_WORKSPACE_DIRECTORY_NAME } from './constants'
 import type { ISkillStorageOptions } from './storage'
 import { resolveSkill } from './detail'

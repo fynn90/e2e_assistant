@@ -5,7 +5,7 @@ import type {
   IInitializeConfigRequest,
   IUpdateConfigRequest,
   TConfigIssue,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   fetchConfigStatus,
   fetchLocalServiceHealth,

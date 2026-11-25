@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { computed, shallowRef } from 'vue'
 import { NButton, NDynamicTags, NForm, NFormItem, NInput } from 'naive-ui'
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 import {
   fieldErrorFor,
   validateDraftForSave,

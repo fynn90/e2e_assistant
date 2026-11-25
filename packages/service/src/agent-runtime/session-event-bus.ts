@@ -13,7 +13,7 @@
 import type {
   TAgentClientEvent,
   TAgentClientEventDraft,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IWorkBlockStore } from './work-block-store'
 
 /** 每会话内存缓冲的最大事件条数。 */

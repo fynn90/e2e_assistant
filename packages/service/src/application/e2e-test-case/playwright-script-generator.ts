@@ -17,8 +17,8 @@
 
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
-import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
+import type { IToolGuard } from '@charlie_deng/e2e-assistant-agent'
 import { createGenerationWriteGuard } from './generation-tool-guards'
 import { SkillDocumentAgentError } from '../../shared/errors/skill-document-errors'
 import type { ISkillGenerationSessionRunner } from '../../shared/ports/skill-generation-session'
@@ -458,7 +458,7 @@ function extractListItems (content: string): string[] {
 function classifyAgentError (
   error: unknown,
 ): Extract<
-  import('@fynn90-e2e_assistant/types').TApiErrorCode,
+  import('@charlie_deng/e2e-assistant-types').TApiErrorCode,
   | 'LLM_AUTH_FAILED'
   | 'LLM_RATE_LIMITED'
   | 'LLM_TIMEOUT'

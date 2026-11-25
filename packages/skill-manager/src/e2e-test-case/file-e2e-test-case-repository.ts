@@ -6,7 +6,7 @@ import {
   parseE2ETestCase,
   validateE2ETestCaseForSave,
   type IE2ETestCase,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { E2E_SCHEMA_FILE_NAME, SKILL_MANIFEST_FILE_NAME } from '../constants'
 import { resolveSkill } from '../detail'
 import { SkillManagerError } from '../errors'

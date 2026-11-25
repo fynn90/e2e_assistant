@@ -5,11 +5,11 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
-import { hashBytes } from '@fynn90-e2e_assistant/skill-manager'
+import { hashBytes } from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   createDefaultE2ETestCase,
   type IE2ETestCaseDocumentData,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { createE2ETestCaseApplicationServices } from '../../src/application/e2e-test-case/create-services'
 import type { IPlaywrightScriptAgentGenerator } from '../../src/application/e2e-test-case/playwright-script-generator'
 import { createHttpApp } from '../../src/http/app'

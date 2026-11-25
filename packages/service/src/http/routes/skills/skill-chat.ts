@@ -3,14 +3,14 @@ import { streamSSE } from 'hono/streaming'
 import type {
   ISkillChatRuntime,
   ISkillChatRuntimeOptions,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 import {
   getSkillDetail,
   listSkillFiles,
   readSkillFile,
   resolveSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { TSkillChatEvent } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { TSkillChatEvent } from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../../app-types'
 import { toApiError } from '../../error-mapper'
 import { ApiError } from '../../../shared/errors/api-error'

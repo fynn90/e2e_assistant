@@ -43,8 +43,8 @@ import {
   readTestReportSummary,
   resolveSkill,
   writeSkillFile,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { ISkillStorageOptions } from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   parseEnvFileContent,
   type ICaseChangeTargets,
@@ -54,7 +54,7 @@ import {
   type TAgentWorkbenchProposalState,
   type TCaseChangeOrigin,
   type IE2ETestCase,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IAgentWorkRuntime } from '../../agent-runtime/agent-work-runtime'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import { ApiError } from '../../shared/errors/api-error'

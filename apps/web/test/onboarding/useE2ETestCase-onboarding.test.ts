@@ -3,7 +3,7 @@
  */
 import { defineComponent, ref, type Ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const apiMocks = vi.hoisted(() => ({

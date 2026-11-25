@@ -5,7 +5,7 @@ import { computed, type ComputedRef, type Ref } from 'vue'
 import type {
   IE2ETestCase,
   IE2EValidationIssue,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { TE2ETestCaseEditorStatus } from './useE2ETestCase'
 import {
   issuesToValidationSummaries,

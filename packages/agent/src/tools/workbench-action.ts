@@ -19,7 +19,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import type { TAgentWorkbenchAction } from '@fynn90-e2e_assistant/types'
+import type { TAgentWorkbenchAction } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 动作卡片请求的宿主端口：由 CLI 组合根注入。

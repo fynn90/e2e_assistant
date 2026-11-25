@@ -11,12 +11,12 @@
 
 import { accessSync, constants as fsConstants, statSync } from 'node:fs'
 import path from 'node:path'
-import { analyzeTestScript } from '@fynn90-e2e_assistant/playwright-engine'
+import { analyzeTestScript } from '@charlie_deng/e2e-assistant-playwright-engine'
 import {
   TEST_REPORT_DIRECTORY_NAME,
   ensureTestReportDirectory,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { IExecutionPrecheckIssue } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { IExecutionPrecheckIssue } from '@charlie_deng/e2e-assistant-types'
 
 /** env.json 在执行链路中的状态（与生成链路 env-readiness 同构，额外携带值备注入）。 */
 export type TExecutionEnvFileState =

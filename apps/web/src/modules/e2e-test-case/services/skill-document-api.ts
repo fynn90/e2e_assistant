@@ -6,10 +6,10 @@ import type {
   ISaveSkillDocumentRequest,
   ISaveSkillDocumentResponse,
   TSkillDocumentGenerationEvent,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { ApiClientError, requestJson } from '../../../services/http-client'
 import { consumeSseResponse } from '../../../services/sse'
-import { skillDocumentGenerationEventSchema } from '@fynn90-e2e_assistant/types'
+import { skillDocumentGenerationEventSchema } from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 保存已审阅的 SKILL.md。

@@ -1,5 +1,5 @@
 {
-  "name": "@fynn90-e2e_assistant/cli",
+  "name": "@charlie_deng/e2e-assistant-cli",
   "version": "0.3.1",
   "private": false,
   "type": "module",
@@ -12,7 +12,7 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "bin": {
     "e2e_assistant": "./dist/index.js",
@@ -28,10 +28,10 @@
     "start": "node dist/index.js start"
   },
   "dependencies": {
-    "@fynn90-e2e_assistant/config": "workspace:^",
-    "@fynn90-e2e_assistant/service": "workspace:^",
-    "@fynn90-e2e_assistant/types": "workspace:^",
-    "@fynn90-e2e_assistant/web-host": "workspace:^",
+    "@charlie_deng/e2e-assistant-config": "workspace:^",
+    "@charlie_deng/e2e-assistant-service": "workspace:^",
+    "@charlie_deng/e2e-assistant-types": "workspace:^",
+    "@charlie_deng/e2e-assistant-web-host": "workspace:^",
     "@earendil-works/pi-tui": "^0.78.0",
     "cac": "^7.0.0",
     "open": "^11.0.0"

@@ -5,8 +5,8 @@
  * 不留孤儿窗口。容错性质与 `release()` 一致——单个会话关闭失败不影响其余。
  */
 import { describe, expect, it, vi } from 'vitest'
-import { browserSessionRegistry } from '@fynn90-e2e_assistant/agent'
-import type { IBrowserSession } from '@fynn90-e2e_assistant/playwright-engine'
+import { browserSessionRegistry } from '@charlie_deng/e2e-assistant-agent'
+import type { IBrowserSession } from '@charlie_deng/e2e-assistant-playwright-engine'
 import { createGenerationBrowserHost } from '../../src/generation-runtime/browser-session-host'
 
 /**

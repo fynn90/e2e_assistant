@@ -1,4 +1,4 @@
-# @fynn90-e2e_assistant/web-host
+# @charlie_deng/e2e-assistant-web-host
 
 ## 0.0.6
 
@@ -6,7 +6,7 @@
 
 - 优化架构
 - Updated dependencies
-  - @fynn90-e2e_assistant/web@0.0.6
+  - @charlie_deng/e2e-assistant-web@0.0.6
 
 ## 0.0.5
 
@@ -14,7 +14,7 @@
 
 - 更新 CLI
 - Updated dependencies
-  - @fynn90-e2e_assistant/web@0.0.5
+  - @charlie_deng/e2e-assistant-web@0.0.5
 
 ## 0.0.4
 
@@ -22,7 +22,7 @@
 
 - 优化 playwright engine
 - Updated dependencies
-  - @fynn90-e2e_assistant/web@0.0.4
+  - @charlie_deng/e2e-assistant-web@0.0.4
 
 ## 0.0.3
 
@@ -30,7 +30,7 @@
 
 - 支持 iframe
 - Updated dependencies
-  - @fynn90-e2e_assistant/web@0.0.3
+  - @charlie_deng/e2e-assistant-web@0.0.3
 
 ## 0.0.2
 
@@ -38,4 +38,4 @@
 
 - 优化 cli运行
 - Updated dependencies
-  - @fynn90-e2e_assistant/web@0.0.2
+  - @charlie_deng/e2e-assistant-web@0.0.2

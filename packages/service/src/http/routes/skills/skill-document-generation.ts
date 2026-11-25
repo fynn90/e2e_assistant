@@ -2,7 +2,7 @@
 import { randomUUID } from 'node:crypto'
 import type { Hono } from 'hono'
 import { streamSSE } from 'hono/streaming'
-import type { TSkillDocumentGenerationEvent } from '@fynn90-e2e_assistant/types'
+import type { TSkillDocumentGenerationEvent } from '@charlie_deng/e2e-assistant-types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type { IAppEnv } from '../../app-types'
 import { toApiError } from '../../error-mapper'

@@ -38,8 +38,8 @@ import {
   parseEnvFileContent,
   SKILL_ENV_FILE_NAME,
   type IEnvFileIssue,
-} from '@fynn90-e2e_assistant/types'
-import type { ISkillDetail, ISkillFileTreeNode } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
+import type { ISkillDetail, ISkillFileTreeNode } from '@charlie_deng/e2e-assistant-types'
 import type { IChatMessageViewModel } from '../../common/chat/types'
 import { streamSkillChat } from '../../services/chat-api'
 import { ApiClientError } from '../../services/http-client'

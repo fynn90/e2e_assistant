@@ -1,8 +1,8 @@
 /**
  * 定义 E2E 测试用例文件仓储接口和文档结果。
  */
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
-import type { IPlaywrightScriptState } from '@fynn90-e2e_assistant/types'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
+import type { IPlaywrightScriptState } from '@charlie_deng/e2e-assistant-types'
 
 export interface IE2ETestCaseDocument {
   testCase: IE2ETestCase

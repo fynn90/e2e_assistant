@@ -30,7 +30,7 @@ import {
   INTERACTION_CANCEL_ANSWER,
   type IAgentInteractionOption,
   type IAgentInteractionQuestion,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import IconFont from '../../../common/icon/IconFont.vue'
 import { INTERACTION_ANSWERED_ICON, INTERACTION_ICON } from '../icons'
 import type { IInteractionTimelineItem } from '../timeline'

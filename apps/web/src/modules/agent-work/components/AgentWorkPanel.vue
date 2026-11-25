@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 import type {
   ISkillSummary,
   TAgentInteractionAnswer,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import ChatComposer from '../../../common/chat/ChatComposer.vue'
 import { useAgentWorkStore } from '../../../stores/agent-work'
 import {

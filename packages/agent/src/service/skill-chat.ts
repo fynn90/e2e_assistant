@@ -18,7 +18,7 @@ import type {
   ISkillChatMessage,
   ISkillChatUsage,
   TSkillChatEvent,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { AgentService } from '../service'
 import { AgentFactory } from '../agents/factory'
 

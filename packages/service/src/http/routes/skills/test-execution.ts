@@ -23,11 +23,11 @@ import {
   TEST_REPORT_RUN_DIR_PATTERN,
   deleteTestReportRun,
   resolveSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import type {
   IDeleteTestReportResponse,
   IStartExecutionResponse,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import type { IExecutionEventBus } from '../../../application/test-execution/execution-event-bus'

@@ -5,7 +5,7 @@
  * 以及未注册会话的兜底行为——这些是「生成任务不污染工作台会话列表」的依据。
  */
 import { describe, expect, it } from 'vitest'
-import type { TAgentClientEvent } from '@fynn90-e2e_assistant/types'
+import type { TAgentClientEvent } from '@charlie_deng/e2e-assistant-types'
 import { createWorkBlockStore } from '../../src/agent-runtime/work-block-store'
 
 /** 自增序号：store.applyEvent 要求事件带 seq（总线发布时分配）。 */

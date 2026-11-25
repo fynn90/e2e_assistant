@@ -24,18 +24,18 @@ import {
   ensureUserWorkSpace,
   resolveSkill,
   type ITempWorkspace,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   PlaywrightScriptValidator,
   type IBrowserSessionFactory,
   type IPlaywrightValidationIssue,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 import {
   isBlockingDiagnostic,
   validateE2ETestCaseForGeneration,
   type IGeneratePlaywrightData,
   type IGeneratePlaywrightRequest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { ApiError } from '../../shared/errors/api-error'
 import type { IAuthinePlatformConfig } from '../../config/config-store'
 import {

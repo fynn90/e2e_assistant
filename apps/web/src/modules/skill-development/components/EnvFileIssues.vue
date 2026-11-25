@@ -1,7 +1,7 @@
 <!-- env.json 编辑页的校验反馈区（v10 PRD 5.3）：blocked 态的专属呈现，展示「行:列 + 原因」并可点击定位。 -->
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { IEnvFileIssue } from '@fynn90-e2e_assistant/types'
+import type { IEnvFileIssue } from '@charlie_deng/e2e-assistant-types'
 
 const props = defineProps<{
   issues: IEnvFileIssue[]

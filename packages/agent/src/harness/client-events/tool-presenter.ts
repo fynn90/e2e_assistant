@@ -10,7 +10,7 @@ import type {
   TAgentFileChangeOperation,
   TAgentToolAction,
   TAgentToolCategory,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 工具的客户端展示信息。

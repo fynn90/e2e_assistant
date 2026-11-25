@@ -1,6 +1,6 @@
 import { readdir } from 'node:fs/promises'
 import path from 'node:path'
-import type { IProjectFileItem } from '@fynn90-e2e_assistant/types'
+import type { IProjectFileItem } from '@charlie_deng/e2e-assistant-types'
 
 interface IListProjectFilesOptions {
   rootDirectory: string

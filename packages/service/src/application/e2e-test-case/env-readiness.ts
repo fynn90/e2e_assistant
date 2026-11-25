@@ -12,12 +12,12 @@ import {
   findMissingEnvReferences,
   parseEnvFileContent,
   type IE2EValidationIssue,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   readSkillFile,
   SKILL_ENV_FILE_NAME,
   type ISkillStorageOptions,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 
 /** env.json 的读取状态：合法（含 key 集合）、缺失或格式非法。 */
 export type TEnvFileState =

@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useMessage } from 'naive-ui'
-import type { TAgentInteractionAnswer } from '@fynn90-e2e_assistant/types'
+import type { TAgentInteractionAnswer } from '@charlie_deng/e2e-assistant-types'
 import { answerAgentInteraction } from '../../../services/agent-work-api'
 import { useGenerationFlowStore } from '../../../stores/generation-flow'
 import type { IProductCard } from '../../generation-flow/types'

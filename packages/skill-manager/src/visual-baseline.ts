@@ -26,7 +26,7 @@
 
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { normalizeUserWorkspaceRelativePath } from '@fynn90-e2e_assistant/types'
+import { normalizeUserWorkspaceRelativePath } from '@charlie_deng/e2e-assistant-types'
 import {
   MAX_VISUAL_BASELINE_BYTES,
   USER_WORKSPACE_DIRECTORY_NAME,

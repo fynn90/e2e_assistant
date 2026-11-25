@@ -2,7 +2,7 @@
  * 定义浏览器会话实现侧契约：会话创建选项、凭据解析端口、iframe 访问策略与会话工厂。
  *
  * 会话的共享契约（IBrowserSession 及其签名涉及的全部数据类型）已迁移至
- * @fynn90-e2e_assistant/types，此处再导出以保持引擎公共 API 不变；
+ * @charlie_deng/e2e-assistant-types，此处再导出以保持引擎公共 API 不变；
  * agent 包从共享类型包导入这些契约，与引擎互不依赖。
  */
 
@@ -12,9 +12,9 @@ import type { INetworkPolicy } from './network'
 import type {
   IBrowserSession,
   ISensitiveDataRedactor,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
-// 共享契约再导出：符号的真实定义在 @fynn90-e2e_assistant/types
+// 共享契约再导出：符号的真实定义在 @charlie_deng/e2e-assistant-types
 export type {
   IBrowserSession,
   IPageSnapshotRef,
@@ -36,7 +36,7 @@ export type {
   IWaitCondition,
   IWaitOptions,
   IWaitResult,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 浏览器会话创建选项。

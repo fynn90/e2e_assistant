@@ -11,7 +11,7 @@ export const DEFAULT_AUTHINE_WEB_DEV_PORT = 5176
 /**
  * 独立发布的 Web 工作台包名。
  */
-export const AUTHINE_WEB_PACKAGE_NAME = '@fynn90-e2e_assistant/web'
+export const AUTHINE_WEB_PACKAGE_NAME = '@charlie_deng/e2e-assistant-web'
 
 export {
   getAuthineConfigDirectory,

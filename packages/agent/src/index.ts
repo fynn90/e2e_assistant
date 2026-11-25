@@ -1,5 +1,5 @@
 ﻿/**
- * @fynn90-e2e_assistant/agent 对外暴露的接口，提供的接口可以给 CLI、Web 使用。
+ * @charlie_deng/e2e-assistant-agent 对外暴露的接口，提供的接口可以给 CLI、Web 使用。
  *
  * 当前暴露资源加载器；后续 agent 服务等接口在此基础上逐步补充。
  */

@@ -11,13 +11,13 @@ const packageJsonGlobPaths = [
   path.join(workspaceRootPath, 'apps'),
   path.join(workspaceRootPath, 'packages'),
 ]
-const cliPackageName = '@fynn90-e2e_assistant/cli'
-const webPackageName = '@fynn90-e2e_assistant/web'
-const servicePackageName = '@fynn90-e2e_assistant/service'
-const webHostPackageName = '@fynn90-e2e_assistant/web-host'
-const agentPackageName = '@fynn90-e2e_assistant/agent'
-const playwrightEnginePackageName = '@fynn90-e2e_assistant/playwright-engine'
-const skillManagerPackageName = '@fynn90-e2e_assistant/skill-manager'
+const cliPackageName = '@charlie_deng/e2e-assistant-cli'
+const webPackageName = '@charlie_deng/e2e-assistant-web'
+const servicePackageName = '@charlie_deng/e2e-assistant-service'
+const webHostPackageName = '@charlie_deng/e2e-assistant-web-host'
+const agentPackageName = '@charlie_deng/e2e-assistant-agent'
+const playwrightEnginePackageName = '@charlie_deng/e2e-assistant-playwright-engine'
+const skillManagerPackageName = '@charlie_deng/e2e-assistant-skill-manager'
 const requireChangeset = process.argv.includes('--require-changeset')
 
 /**
@@ -384,7 +384,7 @@ function validateNoOneDependsOnCli (options) {
  * 校验 agent、playwright-engine、skill-manager 三包互不依赖。
  *
  * agent 是模型能力层，浏览器实现归 playwright-engine、SKILL 存储归 skill-manager，
- * 三者的共享契约（浏览器会话类型、脱敏器接口等）统一定义在 @fynn90-e2e_assistant/types。
+ * 三者的共享契约（浏览器会话类型、脱敏器接口等）统一定义在 @charlie_deng/e2e-assistant-types。
  * 任何一边直接依赖另一边都会破坏依赖倒转：组合根（service / CLI）应负责装配实现，
  * 三包也才能独立构建、测试与发布。
  *
@@ -426,7 +426,7 @@ function validateBrowserLayerIndependence (options) {
       for (const dependencySection of dependencySections) {
         if (sourcePackage.packageJson[dependencySection]?.[targetPackageName]) {
           options.validationState.errors.push(
-            `包 ${edge.sourcePackageName} 在 ${dependencySection} 中依赖 ${targetPackageName}：agent、playwright-engine、skill-manager 三包互不依赖，共享契约统一定义在 @fynn90-e2e_assistant/types，由组合根注入实现。`,
+            `包 ${edge.sourcePackageName} 在 ${dependencySection} 中依赖 ${targetPackageName}：agent、playwright-engine、skill-manager 三包互不依赖，共享契约统一定义在 @charlie_deng/e2e-assistant-types，由组合根注入实现。`,
           )
         }
       }

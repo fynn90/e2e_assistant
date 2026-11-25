@@ -18,11 +18,11 @@ import { randomUUID } from 'node:crypto'
 import { Hono } from 'hono'
 import { streamSSE } from 'hono/streaming'
 import { z } from 'zod'
-import { listSkills } from '@fynn90-e2e_assistant/skill-manager'
+import { listSkills } from '@charlie_deng/e2e-assistant-skill-manager'
 import type {
   IAgentSessionSummary,
   IAgentWorkBlock,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { parseJsonBody } from '../../request-validation'

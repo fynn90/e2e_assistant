@@ -15,12 +15,12 @@ import {
   FileSkillDocumentRepository,
   SkillManagerError,
   collectSkillDocumentDiagnostics,
-} from '@fynn90-e2e_assistant/skill-manager'
-import { isBlockingDiagnostic } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import { isBlockingDiagnostic } from '@charlie_deng/e2e-assistant-types'
 import type {
   ISaveSkillDocumentData,
   ISaveSkillDocumentRequest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 保存 SKILL.md 正文并提交 manifest.generatedSkill 元数据。

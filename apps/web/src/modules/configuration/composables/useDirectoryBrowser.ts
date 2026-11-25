@@ -2,7 +2,7 @@
  * 提供目录选择器的导航状态机：加载目录、进入子目录、返回上一级、新建文件夹。
  */
 import { ref, type Ref } from 'vue'
-import type { IDirectoryListing } from '@fynn90-e2e_assistant/types'
+import type { IDirectoryListing } from '@charlie_deng/e2e-assistant-types'
 import { ApiClientError } from '../../../services/http-client'
 import {
   createDirectory,

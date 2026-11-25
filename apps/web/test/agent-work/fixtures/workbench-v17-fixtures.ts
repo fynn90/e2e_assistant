@@ -9,7 +9,7 @@
  * 构造器一律走**归约器的真实创建路径**（`createWorkbenchXxxItem`），而不是手写
  * 字面量对象：这样事件 → 项 的字段映射（含 v17 新增字段）顺带被锁住。
  */
-import type { TAgentClientEvent } from '@fynn90-e2e_assistant/types'
+import type { TAgentClientEvent } from '@charlie_deng/e2e-assistant-types'
 import {
   createWorkbenchProposalItem,
   createWorkbenchTaskItem,

@@ -26,7 +26,7 @@
 import {
   isDangerousBashCommand,
   type IToolGuard,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 import {
   BLOCKED_READ_FILE_NAMES,
   PROTECTED_WRITE_FILE_NAMES,

@@ -18,7 +18,7 @@ import {
   INTERACTION_OTHER_TEXT_LIMIT,
   type IAgentInteractionOption,
   type IAgentInteractionQuestion,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /** 作答草稿的对外接口。 */
 export interface IAskUserQuestionDraft {

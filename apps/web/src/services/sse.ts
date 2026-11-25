@@ -1,7 +1,7 @@
 /**
  * 提供与业务事件类型解耦的 SSE frame 解析、错误信封保留和 fetch 消费能力。
  */
-import { apiErrorResponseSchema } from '@fynn90-e2e_assistant/types'
+import { apiErrorResponseSchema } from '@charlie_deng/e2e-assistant-types'
 import { ApiClientError } from './http-client'
 
 export interface ISseFrame {

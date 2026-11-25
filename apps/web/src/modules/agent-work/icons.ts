@@ -19,7 +19,7 @@
 import type {
   TAgentToolAction,
   TAgentToolCategory,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 图标字形名（不含 `h-icon-all-` 前缀）。

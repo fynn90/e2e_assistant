@@ -15,7 +15,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type {
   IAgentSessionSummary,
   TAgentClientEvent,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { useAgentWorkStore } from '../../src/stores/agent-work'
 import SessionList from '../../src/modules/agent-work/components/SessionList.vue'
 import {

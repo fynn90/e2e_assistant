@@ -5,7 +5,7 @@ import process from 'node:process'
 import {
   LOCAL_SERVICE_IDENTITY,
   LOCAL_SERVICE_PROTOCOL_VERSION,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { probeLocalService } from '../../../src/infrastructure/http/service-probe'
 
 // 探测是 socket 客户端，必须打真实监听；用 app.request() 无法覆盖网络层行为。

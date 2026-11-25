@@ -30,14 +30,14 @@ import {
   SKILL_ENV_FILE_NAME,
   readSkillFile,
   resolveSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
-import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
+import type { ISkillStorageOptions } from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   parseEnvFileContent,
   type IExecutionPrecheckIssue,
   type IReadinessViewPayload,
   type TAgentWorkbenchAction,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import {
   checkBaseUrlConfigured,

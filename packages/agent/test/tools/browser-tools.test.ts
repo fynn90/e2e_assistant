@@ -8,7 +8,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest'
-import type { IPageScreenshot } from '@fynn90-e2e_assistant/types'
+import type { IPageScreenshot } from '@charlie_deng/e2e-assistant-types'
 import type { IBrowserSessionHost } from '../../src/tools/browser/Browser_session'
 import { createBrowserClickTool } from '../../src/tools/browser/browser_click'
 import { createBrowserSelectTool } from '../../src/tools/browser/browser_select'

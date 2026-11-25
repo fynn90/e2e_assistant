@@ -15,7 +15,7 @@ import type {
   ICaseChangeTargets,
   IProposalChange,
   IE2ETestCase,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /** 步骤比对用的最小形状（磁盘与目标两侧共用）。 */
 interface IStepLike {

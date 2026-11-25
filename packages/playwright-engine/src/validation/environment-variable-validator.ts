@@ -3,14 +3,14 @@
 import {
   collectEnvReferences,
   PLATFORM_BUILTIN_ENV_KEYS,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IValidationTestCase } from '../contracts/validation'
 import type { IPlaywrightValidationIssue } from './validation-types'
 
 /**
  * 从 SDK 最小用例的可生成内容中提取环境变量名称。
  *
- * 提取规则下沉至 `@fynn90-e2e_assistant/types` 的 `collectEnvReferences` 统一维护
+ * 提取规则下沉至 `@charlie_deng/e2e-assistant-types` 的 `collectEnvReferences` 统一维护
  * （v10 起 Web 与 CLI 共用同一份正则，消除多端正则漂移风险）；
  * 本函数保留原签名作为转发实现，调用方无感知。
  *

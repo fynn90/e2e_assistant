@@ -7,7 +7,7 @@
  *   ③ 对同一参数两次调用应得到等价的宿主调用（平台自取的确定性）。
  */
 import { describe, expect, it, vi } from 'vitest'
-import type { TWorkbenchRenderParams } from '@fynn90-e2e_assistant/types'
+import type { TWorkbenchRenderParams } from '@charlie_deng/e2e-assistant-types'
 import {
   createRenderViewTool,
   type IViewHost,

@@ -1,12 +1,12 @@
 /**
  * 解析服务层使用的平台配置目录与文件路径。
  *
- * 用户级配置根目录由 `@fynn90-e2e_assistant/config` 统一解析——CLI 的
+ * 用户级配置根目录由 `@charlie_deng/e2e-assistant-config` 统一解析——CLI 的
  * runtime.json 与本服务的 config.json 必须落在同一目录下（见 PRD v18 §4.5）。
  * 本文件只负责拼接服务层自己的文件名。
  */
 import path from 'node:path'
-import { getAuthineConfigDirectory } from '@fynn90-e2e_assistant/config'
+import { getAuthineConfigDirectory } from '@charlie_deng/e2e-assistant-config'
 
 const AUTHINE_CONFIG_FILE_NAME = 'config.json'
 const AUTHINE_SKILLS_DIRECTORY_NAME = 'skills'

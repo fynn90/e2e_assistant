@@ -5,7 +5,7 @@ import { createPinia, setActivePinia } from 'pinia'
 import type {
   IConfigSummary,
   IUpdateConfigRequest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import ConfigurationPage from '../../src/pages/ConfigurationPage.vue'
 import { usePlatformStore } from '../../src/stores/platform'

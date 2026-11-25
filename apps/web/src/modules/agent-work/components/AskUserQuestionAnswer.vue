@@ -27,7 +27,7 @@ import {
   INTERACTION_OTHER_OPTION_VALUE,
   INTERACTION_OTHER_TEXT_LIMIT,
   type IAgentInteractionOption,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 const props = defineProps<{
   /** 候选项（host 组装时已在末尾追加固定「其它」）。 */

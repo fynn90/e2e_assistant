@@ -8,7 +8,7 @@ import type {
   ISkillDetail,
   ISkillFileContent,
   ISkillFileTreeNode,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IChatMessageViewModel } from '../../common/chat/types'
 import type { TAutoSaveState } from '../../common/autosave/types'
 

@@ -2,7 +2,7 @@
  * 验证前端字段错误映射与保存/生成两级校验。
  */
 import { describe, expect, it } from 'vitest'
-import { createDefaultE2ETestCase } from '@fynn90-e2e_assistant/types'
+import { createDefaultE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 import {
   issuesToValidationSummaries,
   getDraftGenerationIssues,

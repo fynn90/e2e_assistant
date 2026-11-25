@@ -8,7 +8,7 @@
  * 全新依赖以替身注入，测试不派生真实进程、不触达真实端口。
  */
 import { describe, expect, it, vi } from 'vitest'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@charlie_deng/e2e-assistant-types'
 import {
   launchBackgroundService,
   type IBackgroundLauncherDependencies,

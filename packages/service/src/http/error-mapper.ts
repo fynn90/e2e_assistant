@@ -6,8 +6,8 @@
  * 与之相对，ApiError 类本身已下沉到 shared/errors/：application 只用类、不用映射器，
  * 这样既满足「业务层不依赖传输层」，又让状态码知识集中在 http 层（见 PRD v18 §4.2 L5）。
  */
-import { SkillManagerError } from '@fynn90-e2e_assistant/skill-manager'
-import type { IEnvFileIssuePayload } from '@fynn90-e2e_assistant/types'
+import { SkillManagerError } from '@charlie_deng/e2e-assistant-skill-manager'
+import type { IEnvFileIssuePayload } from '@charlie_deng/e2e-assistant-types'
 import { ConfigValidationError } from '../config/config-store'
 import {
   DirectoryBrowserError,

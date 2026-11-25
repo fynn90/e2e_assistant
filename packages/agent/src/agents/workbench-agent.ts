@@ -45,7 +45,7 @@ import {
 } from '../tools'
 import { createSessionAskTools } from '../tools/ask-user-question'
 import { browserSessionRegistry } from '../tools/browser/browser-session-registry'
-import { SKILL_ENV_FILE_NAME } from '@fynn90-e2e_assistant/types'
+import { SKILL_ENV_FILE_NAME } from '@charlie_deng/e2e-assistant-types'
 import { getWorkbenchThresholdSection } from '../prompt/workbench-section'
 import { renderCapabilityPromptSection } from '../prompt/sections/workbench-capabilities'
 import type { IAgentBaseConfig } from './types'

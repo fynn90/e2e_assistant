@@ -4,7 +4,7 @@
  * 位置说明：与其它域错误集中在共享位置，便于「错误定义只此一处」。
  * 它本身不构成循环依赖（workspace 不引用 http），此处是归类决策而非破环要求。
  */
-import type { TApiErrorCode } from '@fynn90-e2e_assistant/types'
+import type { TApiErrorCode } from '@charlie_deng/e2e-assistant-types'
 
 /** 目录浏览模块可产生的稳定错误码。 */
 export type TDirectoryBrowserErrorCode = Extract<

@@ -9,7 +9,7 @@
 import type {
   IEnvFileIssuePayload,
   TApiErrorCode,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 表示可安全返回给 HTTP 客户端的标准 API 错误。

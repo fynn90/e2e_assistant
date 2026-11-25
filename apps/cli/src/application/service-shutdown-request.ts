@@ -7,7 +7,7 @@
  * 结果刻意收敛为四态而不是抛异常：调用方（stop 决策表）要对「不支持」「凭据
  * 不匹配」「够不着」分别给出不同的用户文案与回退动作。
  */
-import { SHUTDOWN_TOKEN_HEADER } from '@fynn90-e2e_assistant/service'
+import { SHUTDOWN_TOKEN_HEADER } from '@charlie_deng/e2e-assistant-service'
 import { resolveProbeUrl } from '../infrastructure/http/service-probe'
 
 /** 请求优雅关闭的默认超时；端点应答很快，超时即视为够不着。 */

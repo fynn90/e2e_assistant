@@ -1,5 +1,5 @@
 {
-  "name": "@fynn90-e2e_assistant/config",
+  "name": "@charlie_deng/e2e-assistant-config",
   "version": "0.0.6",
   "private": false,
   "type": "module",
@@ -15,7 +15,7 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "restricted"
+    "access": "public"
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm && tsc --ignoreConfig src/index.ts --declaration --emitDeclarationOnly --outDir dist --module ESNext --target ES2022 --moduleResolution Bundler --ignoreDeprecations 6.0 --skipLibCheck --types node",

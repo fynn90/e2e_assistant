@@ -8,7 +8,7 @@
  *
  * 本模块只做**组织与呈现**，不改变任何校验判定：判断哪些问题算 error 仍是校验器的职责。
  */
-import type { IPlaywrightValidationIssue } from '@fynn90-e2e_assistant/playwright-engine'
+import type { IPlaywrightValidationIssue } from '@charlie_deng/e2e-assistant-playwright-engine'
 
 /** 单条错误的呈现上限：超出后只给数量，避免提示卡片被刷屏。 */
 const MAX_LISTED_ERRORS = 3

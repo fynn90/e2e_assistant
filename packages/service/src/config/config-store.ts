@@ -1,7 +1,7 @@
 import { access, mkdir, readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { constants as fsConstants } from 'node:fs'
-import type { IConfigSummary, TConfigIssue } from '@fynn90-e2e_assistant/types'
+import type { IConfigSummary, TConfigIssue } from '@charlie_deng/e2e-assistant-types'
 import { getAuthineConfigDirectory, getPlatformConfigPath } from './config-path'
 import { buildStorageAccessError } from './storage-error'
 import {

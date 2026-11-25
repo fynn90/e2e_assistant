@@ -7,7 +7,7 @@ import {
   validateE2ETestCaseForSave,
   type IE2ETestCase,
   type IE2EValidationIssue,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 export type TFieldErrorMap = Record<string, string>
 

@@ -6,7 +6,7 @@ import type {
   IE2EPrecondition,
   IE2ETestCase,
   IE2ETestStep,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 深拷贝普通或 Vue 响应式代理形式的 E2E 用例草稿。

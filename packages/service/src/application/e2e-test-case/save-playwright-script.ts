@@ -13,18 +13,18 @@ import {
   FileE2ETestCaseRepository,
   FilePlaywrightScriptRepository,
   SkillManagerError,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   PlaywrightScriptValidator,
   type IPlaywrightValidationIssue,
   type IPlaywrightValidationResult,
-} from '@fynn90-e2e_assistant/playwright-engine'
-import { isBlockingDiagnostic } from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
+import { isBlockingDiagnostic } from '@charlie_deng/e2e-assistant-types'
 import type {
   IFileSaveDiagnostic,
   ISavePlaywrightScriptData,
   ISavePlaywrightScriptRequest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { ApiError } from '../../shared/errors/api-error'
 import { buildValidationFailureDigest } from './validation-error-digest'
 

@@ -11,7 +11,7 @@ import path from 'node:path'
 import {
   FileE2ETestCaseRepository,
   createSkill,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import { createSkillMarkdownGenerator } from '../../src/application/e2e-test-case/skill-markdown-generator'
 
 /** 用例创建的临时工作区，测试结束后统一清理。 */

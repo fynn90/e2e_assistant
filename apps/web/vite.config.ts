@@ -15,7 +15,7 @@ const printDevelopmentUrlPlugin = {
 
       if (developmentUrl) {
         console.log(
-          `\n  🚀【web】 @fynn90-e2e_assistant/web hot reload: ${developmentUrl}`,
+          `\n  🚀【web】 @charlie_deng/e2e-assistant-web hot reload: ${developmentUrl}`,
         )
         console.log(`  🚀【web】 CLI API proxy: ${cliTarget}`)
       }

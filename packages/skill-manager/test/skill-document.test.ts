@@ -14,7 +14,7 @@ import {
   createDefaultE2ETestCase,
   isBlockingDiagnostic,
   type IE2ETestCase,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 const tempDirectories: string[] = []
 

@@ -2,7 +2,7 @@ import type {
   IApiErrorResponse,
   ICreateSkillChatRequest,
   TSkillChatEvent,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { ApiClientError } from './http-client'
 
 export async function streamSkillChat (options: {

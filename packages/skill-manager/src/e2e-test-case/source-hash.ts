@@ -2,7 +2,7 @@
  * 计算与文件字节版本独立的 E2E 领域 sourceHash。
  */
 import { createHash } from 'node:crypto'
-import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IE2ETestCase } from '@charlie_deng/e2e-assistant-types'
 import { canonicalizeE2ETestCaseForHash } from './serializer'
 
 /**

@@ -8,7 +8,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import type { IElementInfo } from '@fynn90-e2e_assistant/types'
+import type { IElementInfo } from '@charlie_deng/e2e-assistant-types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** browser_query 工具接受的参数 Schema。 */

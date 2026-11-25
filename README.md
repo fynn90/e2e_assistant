@@ -97,21 +97,21 @@ node apps/cli/dist/index.js start --foreground
 构建后也可以使用包脚本：
 
 ```bash
-pnpm --filter @fynn90-e2e_assistant/cli start
+pnpm --filter @charlie_deng/e2e-assistant-cli start
 ```
 
 `start` 默认会打开浏览器；加 `--no-open` 可只打印地址。默认端口为 `5826`，被占用时会自动顺延到下一个可用端口；加 `--strict-port` 则直接报错。
 
-### 2.4 npm 包（当前尚未发布）
+### 2.4 npm 包（已发布）
 
-CLI 的 npm 包名为 **`@fynn90-e2e_assistant/cli`**，可发布包的 `publishConfig.access` 当前为 `restricted`，且**尚未发布到公共 npm 仓库**。发布后计划以全局命令形式安装（需要该 scope 的访问权限）：
+CLI 的 npm 包名为 **`@charlie_deng/e2e-assistant-cli`**，已发布到公共 npm 仓库。安装前请确认 Node.js 满足 `>= 22.19.0`：
 
 ```bash
-npm install -g @fynn90-e2e_assistant/cli
+npm install -g @charlie_deng/e2e-assistant-cli
 e2e_assistant start
 ```
 
-在发布前，可以用本地链接的方式注册全局命令：
+如需从源码调试，也可以用本地链接的方式注册全局命令：
 
 ```bash
 pnpm install
@@ -127,7 +127,7 @@ e2e_assistant start
 e2e_assistant status
 ```
 
-> 可独立复用的 SDK 包（`@fynn90-e2e_assistant/agent`、`@fynn90-e2e_assistant/playwright-engine` 等）同样尚未发布；从源码使用时先执行 `pnpm --filter <包名> build`。
+> 可独立复用的 SDK 包（`@charlie_deng/e2e-assistant-agent`、`@charlie_deng/e2e-assistant-playwright-engine`、`@charlie_deng/e2e-assistant-types` 等）也同步发布在 npm 公共仓库；从源码使用时先执行 `pnpm --filter <包名> build`。
 
 ### 2.5 首次配置
 
@@ -379,7 +379,7 @@ e2e_assistant stop           # 优雅停止
 | CLI | `cac`、`open`、`@earendil-works/pi-tui` |
 | 存储 | 本地文件系统 + SQLite（WAL）；无云数据库依赖 |
 | 测试 | Vitest 4（单元 / 集成）、Playwright Test（仓库级 E2E）、Node 内置 test runner（脚本） |
-| 发布 | Changesets 版本管理；npm scope 当前为 restricted，尚未发布 |
+| 发布 | Changesets 版本管理；npm scope 为 `@charlie_deng` |
 
 ---
 
@@ -404,16 +404,16 @@ apps/cli ── 命令解析 / 进程生命周期 / 终端展示
 
 | 路径 | 包名 | 职责 |
 | --- | --- | --- |
-| `apps/cli` | `@fynn90-e2e_assistant/cli` | CLI 命令层：命令注册、环境检查、进程生命周期（启动/探测/停止/日志）、终端面板与 TUI、打开浏览器。**依赖图的最顶端，任何包都不得依赖它** |
-| `apps/web` | `@fynn90-e2e_assistant/web` | Vue 工作台：Agent 工作台、Skill 管理、系统配置、Skill 开发页（Chat / 代码 / 结构化用例 / 报告 / 图片） |
-| `apps/desktop` | `@fynn90-e2e_assistant/desktop` | 桌面端壳层预留位（Electron / Tauri 迁移用），当前未实现 |
-| `packages/service` | `@fynn90-e2e_assistant/service` | 本地服务层（纯 API）：Hono 路由、Agent 工作通道运行时、生成运行时、测试执行编排、平台配置、工作区访问。**不含任何进程生命周期管理** |
-| `packages/web-host` | `@fynn90-e2e_assistant/web-host` | 把 Web 构建产物挂到任意 Hono 应用上；路径穿越防护、安全响应头、产物缺失时返回 503 降级页 |
-| `packages/agent` | `@fynn90-e2e_assistant/agent` | E2E Agent SDK：`AgentService.chat` 门面、`AgentLoop` 核心、Harness 插件、工具（工作区 / 浏览器 / 工作台 / 提问）、系统技能、SQLite 会话 |
-| `packages/playwright-engine` | `@fynn90-e2e_assistant/playwright-engine` | 独立 Playwright 能力 SDK：Chromium 安装、浏览器会话与 frame、网络策略、候选脚本静态校验、真实测试执行器、HTML 报告渲染 |
-| `packages/skill-manager` | `@fynn90-e2e_assistant/skill-manager` | Skill 领域存储：manifest、`e2e_schema.json`、`SKILL.md`、`test.spec.ts`、`env.json`、文件树、路径守卫、基线、报告、锁与原子写入 |
-| `packages/types` | `@fynn90-e2e_assistant/types` | 跨包契约：Zod 领域 Schema、API 请求/响应类型、事件与工作块协议、协议版本常量 |
-| `packages/config` | `@fynn90-e2e_assistant/config` | 用户级配置目录解析（跨平台路径约定） |
+| `apps/cli` | `@charlie_deng/e2e-assistant-cli` | CLI 命令层：命令注册、环境检查、进程生命周期（启动/探测/停止/日志）、终端面板与 TUI、打开浏览器。**依赖图的最顶端，任何包都不得依赖它** |
+| `apps/web` | `@charlie_deng/e2e-assistant-web` | Vue 工作台：Agent 工作台、Skill 管理、系统配置、Skill 开发页（Chat / 代码 / 结构化用例 / 报告 / 图片） |
+| `apps/desktop` | `@charlie_deng/e2e-assistant-desktop` | 桌面端壳层预留位（Electron / Tauri 迁移用），当前未实现 |
+| `packages/service` | `@charlie_deng/e2e-assistant-service` | 本地服务层（纯 API）：Hono 路由、Agent 工作通道运行时、生成运行时、测试执行编排、平台配置、工作区访问。**不含任何进程生命周期管理** |
+| `packages/web-host` | `@charlie_deng/e2e-assistant-web-host` | 把 Web 构建产物挂到任意 Hono 应用上；路径穿越防护、安全响应头、产物缺失时返回 503 降级页 |
+| `packages/agent` | `@charlie_deng/e2e-assistant-agent` | E2E Agent SDK：`AgentService.chat` 门面、`AgentLoop` 核心、Harness 插件、工具（工作区 / 浏览器 / 工作台 / 提问）、系统技能、SQLite 会话 |
+| `packages/playwright-engine` | `@charlie_deng/e2e-assistant-playwright-engine` | 独立 Playwright 能力 SDK：Chromium 安装、浏览器会话与 frame、网络策略、候选脚本静态校验、真实测试执行器、HTML 报告渲染 |
+| `packages/skill-manager` | `@charlie_deng/e2e-assistant-skill-manager` | Skill 领域存储：manifest、`e2e_schema.json`、`SKILL.md`、`test.spec.ts`、`env.json`、文件树、路径守卫、基线、报告、锁与原子写入 |
+| `packages/types` | `@charlie_deng/e2e-assistant-types` | 跨包契约：Zod 领域 Schema、API 请求/响应类型、事件与工作块协议、协议版本常量 |
+| `packages/config` | `@charlie_deng/e2e-assistant-config` | 用户级配置目录解析（跨平台路径约定） |
 
 ### 6.3 依赖方向与边界
 

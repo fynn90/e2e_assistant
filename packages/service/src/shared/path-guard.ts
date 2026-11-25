@@ -12,7 +12,7 @@
  */
 
 import { basename, isAbsolute, relative, resolve } from 'node:path'
-import { SKILL_ENV_FILE_NAME } from '@fynn90-e2e_assistant/skill-manager'
+import { SKILL_ENV_FILE_NAME } from '@charlie_deng/e2e-assistant-skill-manager'
 
 /**
  * 禁止 Agent 读取的值级敏感文件名清单（小写）。

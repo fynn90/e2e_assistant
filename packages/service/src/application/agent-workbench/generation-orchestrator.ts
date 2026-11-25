@@ -28,9 +28,9 @@ import type { IRepairContext } from '../e2e-test-case/playwright-script-generato
 import type {
   IGeneratePlaywrightData,
   ISkillDocumentGenerationResult,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { ApiError } from '../../shared/errors/api-error'
-import { SkillManagerError } from '@fynn90-e2e_assistant/skill-manager'
+import { SkillManagerError } from '@charlie_deng/e2e-assistant-skill-manager'
 
 /** 工作台可发起的生成动作。 */
 export type TGenerationAction =
@@ -442,7 +442,7 @@ async function buildSkillDocumentRequest (
   expectedSkillDocumentVersion: string | null
 }> {
   const { FileE2ETestCaseRepository, FileSkillDocumentRepository } =
-    await import('@fynn90-e2e_assistant/skill-manager')
+    await import('@charlie_deng/e2e-assistant-skill-manager')
   const storage = { rootDir }
 
   try {
@@ -483,7 +483,7 @@ async function buildScriptRequest (
   expectedScriptVersion: string | null
 }> {
   const { FileE2ETestCaseRepository, FilePlaywrightScriptRepository } =
-    await import('@fynn90-e2e_assistant/skill-manager')
+    await import('@charlie_deng/e2e-assistant-skill-manager')
   const storage = { rootDir }
 
   try {
@@ -574,7 +574,7 @@ async function resolveRetryAction (
 ): Promise<'generate-skill-document' | 'generate-playwright-script'> {
   try {
     const { FileSkillDocumentRepository } =
-      await import('@fynn90-e2e_assistant/skill-manager')
+      await import('@charlie_deng/e2e-assistant-skill-manager')
     const state = await new FileSkillDocumentRepository({ rootDir }).getState(
       skillId,
       '',
@@ -600,7 +600,7 @@ async function resolveRetryAction (
 async function hasScript (rootDir: string, skillId: string): Promise<boolean> {
   try {
     const { PLAYWRIGHT_SCRIPT_FILE_NAME, readSkillFile } =
-      await import('@fynn90-e2e_assistant/skill-manager')
+      await import('@charlie_deng/e2e-assistant-skill-manager')
     await readSkillFile({ rootDir }, skillId, PLAYWRIGHT_SCRIPT_FILE_NAME)
     return true
   } catch {

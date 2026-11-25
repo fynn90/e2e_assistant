@@ -11,7 +11,7 @@ import type {
   ISaveSkillDocumentData,
   ISkillDocumentData,
   ISkillDocumentState,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { SKILL_DOCUMENT_FILE_NAME, SKILL_MANIFEST_FILE_NAME } from './constants'
 import { resolveSkill } from './detail'
 import { SkillManagerError } from './errors'

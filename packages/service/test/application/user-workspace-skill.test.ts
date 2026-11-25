@@ -12,9 +12,9 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import type { IValidationTestCase } from '@fynn90-e2e_assistant/playwright-engine'
-import { PlaywrightScriptValidator } from '@fynn90-e2e_assistant/playwright-engine'
-import { resourceLoader } from '@fynn90-e2e_assistant/agent'
+import type { IValidationTestCase } from '@charlie_deng/e2e-assistant-playwright-engine'
+import { PlaywrightScriptValidator } from '@charlie_deng/e2e-assistant-playwright-engine'
+import { resourceLoader } from '@charlie_deng/e2e-assistant-agent'
 
 const validator = new PlaywrightScriptValidator()
 

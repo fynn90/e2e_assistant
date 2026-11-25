@@ -13,7 +13,7 @@ import {
   otherTextError,
   useAskUserQuestionDraft,
 } from '../../src/modules/agent-work/composables/useAskUserQuestionDraft'
-import type { IAgentInteractionQuestion } from '@fynn90-e2e_assistant/types'
+import type { IAgentInteractionQuestion } from '@charlie_deng/e2e-assistant-types'
 
 /** 造一份多问题形态的题目列表。 */
 function makeQuestions (): IAgentInteractionQuestion[] {

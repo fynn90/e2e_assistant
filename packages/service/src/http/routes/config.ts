@@ -4,7 +4,7 @@ import type {
   IGetConfigResponse,
   IInitializeConfigSuccessResponse,
   IUpdateConfigResponse,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { getPlatformConfigPath } from '../../config/config-path'
 import {
   ensurePlatformConfigStorage,

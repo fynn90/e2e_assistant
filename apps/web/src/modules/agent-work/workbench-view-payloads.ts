@@ -19,7 +19,7 @@ import type {
   ISkillListViewPayload,
   IWorkbenchSkillRow,
   TWorkbenchSkillListStatus,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /** 读取为数组；非数组时给空数组。 */
 function asArray<T> (value: unknown): T[] {

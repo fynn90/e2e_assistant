@@ -1,5 +1,5 @@
 /**
- * @fynn90-e2e_assistant/agent 对外暴露的会话服务，提供给 CLI、Web 使用。
+ * @charlie_deng/e2e-assistant-agent 对外暴露的会话服务，提供给 CLI、Web 使用。
  *
  * AgentService 是多轮会话编排的门面：持有共享模型运行时与会话存储，
  * 统一通过 chat 方法接入「一个会话多轮对话」模型；Skill 的选择和具体任务

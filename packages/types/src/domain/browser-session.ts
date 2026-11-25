@@ -4,7 +4,7 @@
  * 本文件是 agent 与 playwright-engine 之间唯一的共享边界：
  *   - playwright-engine 提供契约的 Playwright 实现（会话选项、凭据解析、工厂仍在引擎）；
  *   - agent 只面向契约声明工具宿主端口（依赖倒转），由 service 组合根注入实现。
- * 双方均从 @fynn90-e2e_assistant/types 导入，两个包之间互不引用。
+ * 双方均从 @charlie_deng/e2e-assistant-types 导入，两个包之间互不引用。
  */
 
 /**

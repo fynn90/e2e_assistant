@@ -13,7 +13,7 @@ import {
 } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
-import { createSqliteSessionStore } from '@fynn90-e2e_assistant/agent'
+import { createSqliteSessionStore } from '@charlie_deng/e2e-assistant-agent'
 import {
   createWorkBlockStore,
   resolveRuntimeDbPaths,

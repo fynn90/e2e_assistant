@@ -1,5 +1,5 @@
 // 目录选择器状态机测试：验证加载、导航、初始路径降级与新建文件夹行为。
-import type { IDirectoryListing } from '@fynn90-e2e_assistant/types'
+import type { IDirectoryListing } from '@charlie_deng/e2e-assistant-types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ApiClientError } from '../../src/services/http-client'
 import { useDirectoryBrowser } from '../../src/modules/configuration/composables/useDirectoryBrowser'

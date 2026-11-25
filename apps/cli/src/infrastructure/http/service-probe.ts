@@ -9,7 +9,7 @@
  * 而不是「进程号是否还在」作为判据。三态结果刻意区分「无人应答」与「有人应答但
  * 不回应」，因为前者可以安全地判定陈旧，后者不能。
  */
-import { localServiceHealthSchema } from '@fynn90-e2e_assistant/types'
+import { localServiceHealthSchema } from '@charlie_deng/e2e-assistant-types'
 
 const DEFAULT_PROBE_TIMEOUT_MS = 1000
 // URL.hostname 对 IPv6 会保留方括号（形如 [::1]），因此这里按原样列出。

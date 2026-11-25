@@ -9,7 +9,7 @@ import type {
   IAgentWorkBlock,
   TAgentClientEvent,
   TAgentInteractionAnswer,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { requestJson, ApiClientError } from './http-client'
 import { consumeSseResponse } from './sse'
 

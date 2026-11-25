@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { NButton } from 'naive-ui'
-import type { TAgentWorkbenchAction } from '@fynn90-e2e_assistant/types'
+import type { TAgentWorkbenchAction } from '@charlie_deng/e2e-assistant-types'
 import { readReadinessPayload } from '../workbench-view-payloads'
 
 const props = defineProps<{

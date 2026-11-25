@@ -11,7 +11,7 @@
  */
 import { describe, expect, it, vi } from 'vitest'
 import process from 'node:process'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@charlie_deng/e2e-assistant-types'
 import {
   startPlatformService,
   stopPlatformService,

@@ -3,7 +3,7 @@
 import { computed, onMounted } from 'vue'
 import { NAlert } from 'naive-ui'
 import { useRouter } from 'vue-router'
-import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
+import type { ISkillSummary } from '@charlie_deng/e2e-assistant-types'
 import OnboardingProgressStrip from '../modules/onboarding/components/OnboardingProgressStrip.vue'
 import { useOnboardingStore } from '../modules/onboarding/stores/onboarding'
 import SkillListCard from '../modules/skills/SkillListCard.vue'

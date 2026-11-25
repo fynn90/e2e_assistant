@@ -1,5 +1,5 @@
 // 平台配置表单校验：在浏览器端镜像可确定的后端更新规则。
-import type { IUpdateConfigRequest } from '@fynn90-e2e_assistant/types'
+import type { IUpdateConfigRequest } from '@charlie_deng/e2e-assistant-types'
 
 export type TConfigFieldName = keyof IUpdateConfigRequest
 export type TConfigFieldErrors = Partial<Record<TConfigFieldName, string>>

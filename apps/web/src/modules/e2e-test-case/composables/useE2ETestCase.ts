@@ -7,7 +7,7 @@ import type {
   IE2ETestCaseDocumentData,
   IPlaywrightScriptState,
   ISkillDocumentState,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import { useGlobalMessage } from '../../../composables/useGlobalMessage'
 import { ApiClientError } from '../../../services/http-client'
 import {

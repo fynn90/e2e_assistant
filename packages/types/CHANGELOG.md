@@ -1,4 +1,4 @@
-# @fynn90-e2e_assistant/types
+# @charlie_deng/e2e-assistant-types
 
 ## 0.1.3
 

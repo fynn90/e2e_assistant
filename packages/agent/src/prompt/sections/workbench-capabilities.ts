@@ -20,7 +20,7 @@
 import type {
   ICapabilityViewPayload,
   IWorkbenchCapabilityManifest,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /**
  * 平台能力清单（唯一事实来源）。

@@ -13,7 +13,7 @@ export type {
   ISkillDetailViewPayload,
   ISkillListViewPayload,
   IWorkbenchSkillRow,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 
 /** 清单筛选的四种状态（与 `ISkillListViewPayload.filter.status` 同源）。 */
 export type TSkillListStatusFilterLike =

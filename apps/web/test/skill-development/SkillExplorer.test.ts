@@ -14,7 +14,7 @@ import { defineComponent } from 'vue'
 import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { NMessageProvider } from 'naive-ui'
-import type { ISkillFileTreeNode } from '@fynn90-e2e_assistant/types'
+import type { ISkillFileTreeNode } from '@charlie_deng/e2e-assistant-types'
 import SkillExplorer from '../../src/modules/skill-development/SkillExplorer.vue'
 
 // 新建 API 打桩：只验证调用与失败保留输入，不触网。

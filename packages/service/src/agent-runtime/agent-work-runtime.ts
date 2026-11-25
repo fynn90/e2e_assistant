@@ -18,13 +18,13 @@ import {
   ClientEventTranslator,
   askUserRegistry,
   newBlockId,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 import type {
   AgentOperateType,
   IChatHandle,
   IToolGuard,
   IWorkbenchAgentAssembly,
-} from '@fynn90-e2e_assistant/agent'
+} from '@charlie_deng/e2e-assistant-agent'
 
 import type {
   IAgentSessionSummary,
@@ -37,7 +37,7 @@ import type {
   TAgentSessionKind,
   TAgentWorkbenchTaskKind,
   TAgentWorkbenchTaskStatus,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import {
   createSessionEventBus,
   type ISessionEventBus,

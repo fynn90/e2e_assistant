@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { NButton } from 'naive-ui'
-import type { TAgentInteractionAnswer } from '@fynn90-e2e_assistant/types'
+import type { TAgentInteractionAnswer } from '@charlie_deng/e2e-assistant-types'
 import type { IStageRecord } from '../../../modules/generation-flow/types'
 import { isTerminalStatus } from '../../../modules/generation-flow/types'
 import { summarizeStage } from '../../../modules/generation-flow/card-model'

@@ -26,7 +26,7 @@ const SERVICE_LOG_FILE_NAME = 'service.log'
 /**
  * 后台服务日志路径：`<配置目录>/logs/service.log`。
  *
- * 沿用 `@fynn90-e2e_assistant/config` 的配置目录约定（Windows `%APPDATA%\e2e_assistant`，
+ * 沿用 `@charlie_deng/e2e-assistant-config` 的配置目录约定（Windows `%APPDATA%\e2e_assistant`，
  * POSIX `~/.config/e2e_assistant`），不引入第二个用户级根目录（PRD Q3）。
  *
  * @returns 日志文件绝对路径。

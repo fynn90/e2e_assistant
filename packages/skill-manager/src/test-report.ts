@@ -29,7 +29,7 @@ import {
   writeFile,
 } from 'node:fs/promises'
 import path from 'node:path'
-import type { IExecutionRunSummary } from '@fynn90-e2e_assistant/types'
+import type { IExecutionRunSummary } from '@charlie_deng/e2e-assistant-types'
 import {
   TEST_REPORT_DIRECTORY_NAME,
   TEST_REPORT_REPORT_FILE_NAME,

@@ -25,12 +25,12 @@ import type {
   ITestRunResult,
   ITestRunner,
   TEngineRunEvent,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 import {
   DefaultSensitiveDataRedactor,
   parseTestReportData,
   renderTestReportHtml,
-} from '@fynn90-e2e_assistant/playwright-engine'
+} from '@charlie_deng/e2e-assistant-playwright-engine'
 import {
   FileE2ETestCaseRepository,
   ensureUserWorkSpace,
@@ -41,7 +41,7 @@ import {
   writeTestReport,
   writeTestReportAttachment,
   writeTestReportSummary,
-} from '@fynn90-e2e_assistant/skill-manager'
+} from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   parseEnvFileContent,
   type IExecutionPrecheckIssue,
@@ -50,9 +50,9 @@ import {
   type IExecutionSummary,
   type TExecutionEvent,
   type TExecutionStatus,
-} from '@fynn90-e2e_assistant/types'
+} from '@charlie_deng/e2e-assistant-types'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
-import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
+import type { ISkillStorageOptions } from '@charlie_deng/e2e-assistant-skill-manager'
 import {
   checkBaseUrlConfigured,
   checkEnvReferencesForExecution,

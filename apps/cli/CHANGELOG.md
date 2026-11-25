@@ -1,4 +1,4 @@
-# @fynn90-e2e_assistant/cli
+# @charlie_deng/e2e-assistant-cli
 
 ## 0.3.1
 
@@ -6,10 +6,10 @@
 
 - 优化架构
 - Updated dependencies
-  - @fynn90-e2e_assistant/config@0.0.6
-  - @fynn90-e2e_assistant/service@0.2.3
-  - @fynn90-e2e_assistant/types@0.1.3
-  - @fynn90-e2e_assistant/web-host@0.0.6
+  - @charlie_deng/e2e-assistant-config@0.0.6
+  - @charlie_deng/e2e-assistant-service@0.2.3
+  - @charlie_deng/e2e-assistant-types@0.1.3
+  - @charlie_deng/e2e-assistant-web-host@0.0.6
 
 ## 0.3.0
 
@@ -20,7 +20,7 @@
   - 新增 `src/infrastructure/cli-package-version.ts`：经**包自我引用**从自身
     package.json 运行时读取版本号。不采用构建期注入，是因为版本号由 changesets
     唯一维护在 package.json 里，注入会引入第二处需要同步的定义，漏改即出现
-    「面板报的版本与实际安装的版本对不上」。为此 `@fynn90-e2e_assistant/cli` 的
+    「面板报的版本与实际安装的版本对不上」。为此 `@charlie_deng/e2e-assistant-cli` 的
     `exports` 增加 `./package.json` 白名单项（缺它只会拿到
     `ERR_PACKAGE_PATH_NOT_EXPORTED`）。源码（tsx）与构建产物（dist）两种运行
     形态均可解析，且与当前工作目录无关。
@@ -38,10 +38,10 @@
 - 更新 CLI
 - Updated dependencies [9466e14]
 - Updated dependencies
-  - @fynn90-e2e_assistant/service@0.2.2
-  - @fynn90-e2e_assistant/config@0.0.5
-  - @fynn90-e2e_assistant/types@0.1.2
-  - @fynn90-e2e_assistant/web-host@0.0.5
+  - @charlie_deng/e2e-assistant-service@0.2.2
+  - @charlie_deng/e2e-assistant-config@0.0.5
+  - @charlie_deng/e2e-assistant-types@0.1.2
+  - @charlie_deng/e2e-assistant-web-host@0.0.5
 
 ## 0.2.1
 
@@ -49,10 +49,10 @@
 
 - 优化 playwright engine
 - Updated dependencies
-  - @fynn90-e2e_assistant/config@0.0.4
-  - @fynn90-e2e_assistant/service@0.2.1
-  - @fynn90-e2e_assistant/types@0.1.1
-  - @fynn90-e2e_assistant/web-host@0.0.4
+  - @charlie_deng/e2e-assistant-config@0.0.4
+  - @charlie_deng/e2e-assistant-service@0.2.1
+  - @charlie_deng/e2e-assistant-types@0.1.1
+  - @charlie_deng/e2e-assistant-web-host@0.0.4
 
 ## 0.2.0
 
@@ -141,10 +141,10 @@
 - 支持 iframe
 - Updated dependencies
 - Updated dependencies [30cce7f]
-  - @fynn90-e2e_assistant/config@0.0.3
-  - @fynn90-e2e_assistant/service@0.2.0
-  - @fynn90-e2e_assistant/types@0.1.0
-  - @fynn90-e2e_assistant/web-host@0.0.3
+  - @charlie_deng/e2e-assistant-config@0.0.3
+  - @charlie_deng/e2e-assistant-service@0.2.0
+  - @charlie_deng/e2e-assistant-types@0.1.0
+  - @charlie_deng/e2e-assistant-web-host@0.0.3
 
 ## 0.1.0
 
@@ -159,7 +159,7 @@
 - 优化 cli运行
 - Updated dependencies [052303f]
 - Updated dependencies
-  - @fynn90-e2e_assistant/service@0.1.0
-  - @fynn90-e2e_assistant/config@0.0.2
-  - @fynn90-e2e_assistant/types@0.0.2
-  - @fynn90-e2e_assistant/web-host@0.0.2
+  - @charlie_deng/e2e-assistant-service@0.1.0
+  - @charlie_deng/e2e-assistant-config@0.0.2
+  - @charlie_deng/e2e-assistant-types@0.0.2
+  - @charlie_deng/e2e-assistant-web-host@0.0.2

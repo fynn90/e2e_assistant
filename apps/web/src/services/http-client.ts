@@ -1,7 +1,7 @@
 /**
  * 提供 Web 工作台访问本地 CLI HTTP API 的统一请求、响应校验与错误分类能力。
  */
-import type { IApiErrorResponse, TApiErrorCode } from '@fynn90-e2e_assistant/types'
+import type { IApiErrorResponse, TApiErrorCode } from '@charlie_deng/e2e-assistant-types'
 
 export class ApiClientError extends Error {
   readonly status: number
