@@ -58,7 +58,7 @@ export interface IStartPanelInput {
    */
   logRotationFailureReason?: string
   /**
-   * 本 CLI 包（`@authine-e2e-agent/cli`）的版本号，**不含 `v` 前缀**。
+   * 本 CLI 包（`@fynn90-e2e_assistant/cli`）的版本号，**不含 `v` 前缀**。
    *
    * 由命令层从 `infrastructure/cli-package-version` 解析后注入：presentation
    * 层不做 I/O，面板只负责呈现。不可得时为 `null`，此时不渲染该行——与 PID、
@@ -74,7 +74,7 @@ export interface IStartPanelInput {
  * @returns 待打印的完整文本（含结尾换行）。
  * @throws 不抛出异常。
  */
-export function renderStartPanel(input: IStartPanelInput): string {
+export function renderStartPanel (input: IStartPanelInput): string {
   return renderPanel({
     content: buildStartPanelContent(input),
     mode: resolveTerminalOutputMode(),
@@ -92,7 +92,7 @@ export function renderStartPanel(input: IStartPanelInput): string {
  * @returns 与渲染层级无关的面板内容。
  * @throws 不抛出异常。
  */
-export function buildStartPanelContent(input: IStartPanelInput): IPanelContent {
+export function buildStartPanelContent (input: IStartPanelInput): IPanelContent {
   return {
     title: PANEL_TITLE,
     headline: buildHeadline(input),
@@ -113,7 +113,7 @@ export function buildStartPanelContent(input: IStartPanelInput): IPanelContent {
  * @returns 字段行列表。
  * @throws 不抛出异常。
  */
-function buildFields(input: IStartPanelInput): IPanelField[] {
+function buildFields (input: IStartPanelInput): IPanelField[] {
   const localizedStartedAt = formatLocalTimestamp(input.startedAt)
   const fields: IPanelField[] = [
     { icon: '📌', label: '状态', value: buildStatusValue(input), tone: 'ok' },
@@ -169,7 +169,7 @@ function buildFields(input: IStartPanelInput): IPanelField[] {
  * @returns 命令提示列表。
  * @throws 不抛出异常。
  */
-function buildActions(input: IStartPanelInput): IPanelAction[] {
+function buildActions (input: IStartPanelInput): IPanelAction[] {
   const actions: IPanelAction[] = []
 
   if (input.mode === 'background') {
@@ -196,7 +196,7 @@ function buildActions(input: IStartPanelInput): IPanelAction[] {
  * @returns 概述行文本。
  * @throws 不抛出异常。
  */
-function buildHeadline(input: IStartPanelInput): string {
+function buildHeadline (input: IStartPanelInput): string {
   if (input.outcome === 'reused') {
     return '♻️ Authine E2E Agent Platform is already running'
   }
@@ -217,7 +217,7 @@ function buildHeadline(input: IStartPanelInput): string {
  * @returns 状态文本。
  * @throws 不抛出异常。
  */
-function buildStatusValue(input: IStartPanelInput): string {
+function buildStatusValue (input: IStartPanelInput): string {
   if (input.outcome === 'reused') {
     return '已复用 · 服务已在运行'
   }
@@ -236,7 +236,7 @@ function buildStatusValue(input: IStartPanelInput): string {
  * @returns 说明文本列表；无需说明时为空数组。
  * @throws 不抛出异常。
  */
-function buildNotes(input: IStartPanelInput): string[] {
+function buildNotes (input: IStartPanelInput): string[] {
   const notes: string[] = []
 
   if (input.outcome === 'started-after-stale-record') {
@@ -271,7 +271,7 @@ function buildNotes(input: IStartPanelInput): string[] {
  * @returns 台词文本。
  * @throws 不抛出异常。
  */
-function buildMascot(input: IStartPanelInput): string {
+function buildMascot (input: IStartPanelInput): string {
   if (input.outcome === 'reused') {
     return '( •_•)  我早就在这儿干活了，没重复启动哦～'
   }

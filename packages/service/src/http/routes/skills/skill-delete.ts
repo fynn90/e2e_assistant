@@ -7,7 +7,7 @@
  */
 
 import type { Hono } from 'hono'
-import type { IDeleteSkillResponse } from '@authine-e2e-agent/types'
+import type { IDeleteSkillResponse } from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { requirePlatformConfig } from '../route-utils'
@@ -22,7 +22,7 @@ import type { ISkillLifecycleService } from '../../../application/agent-workbenc
  * @returns 无返回值。
  * @throws 不在注册阶段抛出异常。
  */
-export function registerSkillDeleteRoute(
+export function registerSkillDeleteRoute (
   routes: Hono<IAppEnv>,
   skillLifecycle: ISkillLifecycleService,
   taskRegistry: Parameters<

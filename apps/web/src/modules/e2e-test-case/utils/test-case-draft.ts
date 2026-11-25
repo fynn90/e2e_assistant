@@ -6,7 +6,7 @@ import type {
   IE2EPrecondition,
   IE2ETestCase,
   IE2ETestStep,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 深拷贝普通或 Vue 响应式代理形式的 E2E 用例草稿。
@@ -14,15 +14,15 @@ import type {
  * @returns 与输入数据解耦的普通对象副本。
  * @throws 当输入包含结构化克隆不支持的数据时抛出 DataCloneError。
  */
-export function cloneTestCaseDraft(testCase: IE2ETestCase): IE2ETestCase {
+export function cloneTestCaseDraft (testCase: IE2ETestCase): IE2ETestCase {
   return structuredClone(toRaw(testCase))
 }
 
-export function createPrecondition(): IE2EPrecondition {
+export function createPrecondition (): IE2EPrecondition {
   return { id: createStableId('pre'), description: '' }
 }
 
-export function createStep(order: number): IE2ETestStep {
+export function createStep (order: number): IE2ETestStep {
   return {
     id: createStableId('step'),
     order,
@@ -34,11 +34,11 @@ export function createStep(order: number): IE2ETestStep {
   }
 }
 
-export function normalizeStepOrder(steps: IE2ETestStep[]): IE2ETestStep[] {
+export function normalizeStepOrder (steps: IE2ETestStep[]): IE2ETestStep[] {
   return steps.map((step, index) => ({ ...step, order: index + 1 }))
 }
 
-export function insertStepAfter(
+export function insertStepAfter (
   steps: IE2ETestStep[],
   index: number,
 ): IE2ETestStep[] {
@@ -47,7 +47,7 @@ export function insertStepAfter(
   return normalizeStepOrder(next)
 }
 
-export function duplicateStep(
+export function duplicateStep (
   steps: IE2ETestStep[],
   index: number,
 ): IE2ETestStep[] {
@@ -65,14 +65,14 @@ export function duplicateStep(
   return normalizeStepOrder(next)
 }
 
-export function deleteStep(
+export function deleteStep (
   steps: IE2ETestStep[],
   index: number,
 ): IE2ETestStep[] {
   return normalizeStepOrder(steps.filter((_, itemIndex) => itemIndex !== index))
 }
 
-export function moveStep(
+export function moveStep (
   steps: IE2ETestStep[],
   fromIndex: number,
   toIndex: number,
@@ -98,6 +98,6 @@ export function moveStep(
   return normalizeStepOrder(next)
 }
 
-function createStableId(prefix: string): string {
+function createStableId (prefix: string): string {
   return `${prefix}_${crypto.randomUUID().replace(/-/g, '')}`
 }

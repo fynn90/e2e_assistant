@@ -1,5 +1,5 @@
 // Skill 目录组件测试：验证首次使用引导、入门入口、卡片键盘打开与删除确认契约。
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import SkillListCard from '../../src/modules/skills/SkillListCard.vue'
@@ -10,7 +10,7 @@ import SkillListCard from '../../src/modules/skills/SkillListCard.vue'
  * @returns Vue Test Utils 包装器。
  * @throws 组件挂载失败时由测试框架抛出异常。
  */
-function mountSkillList(skillList: ISkillSummary[] = []) {
+function mountSkillList (skillList: ISkillSummary[] = []) {
   return mount(SkillListCard, {
     props: {
       skillList,

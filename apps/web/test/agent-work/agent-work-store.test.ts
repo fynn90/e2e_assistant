@@ -6,7 +6,7 @@
  */
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import type { TAgentClientEvent } from '@authine-e2e-agent/types'
+import type { TAgentClientEvent } from '@fynn90-e2e_assistant/types'
 import { useAgentWorkStore } from '../../src/stores/agent-work'
 import type {
   ICommandTimelineItem,
@@ -29,7 +29,7 @@ function eventOf<
     TAgentClientEvent,
     'sessionId' | 'blockId' | 'timestamp' | 'seq'
   >,
->(seq: number, blockId: string, payload: T): TAgentClientEvent {
+> (seq: number, blockId: string, payload: T): TAgentClientEvent {
   return {
     sessionId: 's1',
     blockId,

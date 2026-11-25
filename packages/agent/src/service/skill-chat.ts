@@ -18,7 +18,7 @@ import type {
   ISkillChatMessage,
   ISkillChatUsage,
   TSkillChatEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { AgentService } from '../service'
 import { AgentFactory } from '../agents/factory'
 
@@ -110,9 +110,9 @@ export interface ISkillChatPreparedStream {
 /** Skill Chat 运行时接口。 */
 export interface ISkillChatRuntime {
   /** 用一次对话输入准备流式输出。 */
-  open(options: ISkillChatOpenOptions): Promise<ISkillChatPreparedStream>
+  open (options: ISkillChatOpenOptions): Promise<ISkillChatPreparedStream>
   /** 释放运行时（含内建 AgentService）。 */
-  close(): Promise<void>
+  close (): Promise<void>
 }
 
 /**
@@ -121,7 +121,7 @@ export interface ISkillChatRuntime {
  * @param options - 工作区、模型配置与请求中止信号。
  * @returns 可运行一次对话的 Skill Chat 运行时。
  */
-export function createSkillChatRuntime(
+export function createSkillChatRuntime (
   options: ISkillChatRuntimeOptions,
 ): ISkillChatRuntime {
   return new SkillChatRuntime(options)
@@ -179,7 +179,7 @@ class SkillChatRuntime implements ISkillChatRuntime {
    * @returns 可被 SSE 路由逐条写出的准备流。
    * @throws {Error} 当对话历史为空或最后一条不是 user 消息时抛出。
    */
-  async open(
+  async open (
     openOptions: ISkillChatOpenOptions,
   ): Promise<ISkillChatPreparedStream> {
     // 1. 历史与当前文件规范化（截断超长内容）。
@@ -283,9 +283,9 @@ class SkillChatRuntime implements ISkillChatRuntime {
       sessionId,
       currentFile: currentFile
         ? {
-            relativePath: currentFile.relativePath,
-            version: currentFile.version,
-          }
+          relativePath: currentFile.relativePath,
+          version: currentFile.version,
+        }
         : undefined,
       contextWarnings,
       historyTruncated,
@@ -301,7 +301,7 @@ class SkillChatRuntime implements ISkillChatRuntime {
   /**
    * 释放运行时：释放内建 AgentService（释放全部任务与会话存储）。
    */
-  async close(): Promise<void> {
+  async close (): Promise<void> {
     if (this.closed) return
     this.closed = true
     await this.agentService.dispose()
@@ -314,7 +314,7 @@ class SkillChatRuntime implements ISkillChatRuntime {
  * @param type - pi-agent-core 工具事件类型。
  * @returns 对应的公共工具事件阶段。
  */
-function toolEventPhase(
+function toolEventPhase (
   type: 'tool_execution_start' | 'tool_execution_update' | 'tool_execution_end',
 ): 'start' | 'update' | 'end' {
   if (type === 'tool_execution_start') return 'start'
@@ -330,7 +330,7 @@ function toolEventPhase(
  * @param currentFile - 规范化后的当前文件（可选）。
  * @returns 组合后的系统提示词。
  */
-function composeSystemPrompt(
+function composeSystemPrompt (
   basePrompt: string,
   skill: ISkillDetail,
   fileTreeSummary: string,
@@ -369,7 +369,7 @@ function composeSystemPrompt(
  * @returns 规范化后的消息、是否截断与上下文告警。
  * @throws {Error} 当消息为空或最后一条不是 user 时抛出。
  */
-function normalizeHistory(messages: ISkillChatMessage[]): {
+function normalizeHistory (messages: ISkillChatMessage[]): {
   messages: ISkillChatMessage[]
   historyTruncated: boolean
   contextWarnings: string[]
@@ -420,7 +420,7 @@ function normalizeHistory(messages: ISkillChatMessage[]): {
  * @param currentFile - 客户端携带的当前文件。
  * @returns 规范化后的当前文件与是否截断。
  */
-function normalizeCurrentFile(
+function normalizeCurrentFile (
   currentFile: ISkillChatOpenOptions['currentFile'],
 ): {
   currentFile: ISkillChatOpenOptions['currentFile'] | undefined
@@ -442,7 +442,7 @@ function normalizeCurrentFile(
  * @param messages - 规范化后的对话历史。
  * @returns 可直接送入 AgentLoop 的消息数组。
  */
-function toAgentMessages(messages: ISkillChatMessage[]): AgentMessage[] {
+function toAgentMessages (messages: ISkillChatMessage[]): AgentMessage[] {
   // AgentMessage 是判别联合，这里按消息角色构造后整体断言，交由运行期承担一致性。
   return messages.map(
     (message) =>
@@ -460,7 +460,7 @@ function toAgentMessages(messages: ISkillChatMessage[]): AgentMessage[] {
  * @param messages - 运行结束后的会话消息。
  * @returns token 用量（inputTokens / outputTokens）；无用量时返回 undefined。
  */
-function extractUsage(messages: AgentMessage[]): ISkillChatUsage | undefined {
+function extractUsage (messages: AgentMessage[]): ISkillChatUsage | undefined {
   for (let index = messages.length - 1; index >= 0; index -= 1) {
     const message = messages[index]
     const usage = (message as Partial<AgentMessage> & { usage?: unknown }).usage
@@ -478,7 +478,7 @@ function extractUsage(messages: AgentMessage[]): ISkillChatUsage | undefined {
  * @param content - AgentMessage 的内容（字符串或内容块数组）。
  * @returns 拼接后的文本。
  */
-function extractText(content: unknown): string {
+function extractText (content: unknown): string {
   if (typeof content === 'string') return content
   if (Array.isArray(content)) {
     return content
@@ -503,17 +503,17 @@ function extractText(content: unknown): string {
  * @param max - 最大字符数。
  * @returns 截断后的文本（不超过 max）。
  */
-function truncateText(text: string, max: number): string {
+function truncateText (text: string, max: number): string {
   return text.length <= max ? text : text.slice(0, max)
 }
 
 /**
  * 创建事件通道：push 写入、close 关闭、async 迭代消费。
  */
-function createEventChannel<T>(): {
-  push(value: T): void
-  close(): void
-  [Symbol.asyncIterator](): AsyncIterator<T>
+function createEventChannel<T> (): {
+  push (value: T): void
+  close (): void
+  [Symbol.asyncIterator] (): AsyncIterator<T>
 } {
   const queue: T[] = []
   const waiters: (() => void)[] = []
@@ -526,19 +526,19 @@ function createEventChannel<T>(): {
   }
 
   return {
-    push(value: T): void {
+    push (value: T): void {
       if (closed) return
       queue.push(value)
       notify()
     },
-    close(): void {
+    close (): void {
       if (closed) return
       closed = true
       notify()
     },
-    async *[Symbol.asyncIterator](): AsyncIterator<T> {
+    async *[Symbol.asyncIterator] (): AsyncIterator<T> {
       let index = 0
-      for (;;) {
+      for (; ;) {
         if (index < queue.length) {
           yield queue[index++]
           continue
@@ -557,16 +557,16 @@ function createEventChannel<T>(): {
  * @param cleanup - 结束清理函数（退订、移除中止监听、释放运行时）。
  * @returns 带清理逻辑的可迭代事件流。
  */
-function withCleanup<T>(
+function withCleanup<T> (
   channel: {
-    push(value: T): void
-    close(): void
-    [Symbol.asyncIterator](): AsyncIterator<T>
+    push (value: T): void
+    close (): void
+    [Symbol.asyncIterator] (): AsyncIterator<T>
   },
   cleanup: () => Promise<void>,
 ): AsyncIterable<T> {
   return {
-    async *[Symbol.asyncIterator](): AsyncIterator<T> {
+    async *[Symbol.asyncIterator] (): AsyncIterator<T> {
       try {
         yield* channel
       } finally {

@@ -11,7 +11,7 @@
  * 因此没有 blockStore 物化步骤。
  */
 
-import type { TExecutionEvent } from '@authine-e2e-agent/types'
+import type { TExecutionEvent } from '@fynn90-e2e_assistant/types'
 
 /**
  * 分布式 Omit：对联合类型逐成员剔除字段。
@@ -54,7 +54,7 @@ export interface IExecutionEventBus {
    * @param draft - 不含 seq 的事件草稿。
    * @returns 已分配 seq 的完整事件。
    */
-  publish(executionId: string, draft: TExecutionEventDraft): TExecutionEvent
+  publish (executionId: string, draft: TExecutionEventDraft): TExecutionEvent
   /**
    * 订阅执行任务：先补发 afterSeq 之后的缓冲事件，再实时推送。
    *
@@ -63,15 +63,15 @@ export interface IExecutionEventBus {
    * @param listener - 事件监听器。
    * @returns 取消订阅函数。
    */
-  subscribe(
+  subscribe (
     executionId: string,
     afterSeq: number | undefined,
     listener: TExecutionEventListener,
   ): TExecutionUnsubscribe
   /** 指定执行任务当前最大 seq（无事件时为 0）。 */
-  currentSeq(executionId: string): number
+  currentSeq (executionId: string): number
   /** 释放执行任务的缓冲与订阅者（任务被清理时调用）。 */
-  dispose(executionId: string): void
+  dispose (executionId: string): void
 }
 
 /**
@@ -81,14 +81,14 @@ export interface IExecutionEventBus {
  * @returns 事件总线实例。
  * @throws 不抛出异常。
  */
-export function createExecutionEventBus(
+export function createExecutionEventBus (
   options: { logCapacity?: number } = {},
 ): IExecutionEventBus {
   const logCapacity = options.logCapacity ?? LOG_BUFFER_CAPACITY
   const channels = new Map<string, IExecutionChannel>()
 
   /** 获取或创建执行通道。 */
-  function channelOf(executionId: string): IExecutionChannel {
+  function channelOf (executionId: string): IExecutionChannel {
     let channel = channels.get(executionId)
     if (!channel) {
       channel = { lastSeq: 0, buffer: [], listeners: new Set() }
@@ -101,7 +101,7 @@ export function createExecutionEventBus(
    * 把 log 行事件写入缓冲：超限时只淘汰最旧的 log 行，
    * 保证结构化事件（状态/测试/步骤/文件/汇总）全量保留。
    */
-  function pushWithLogCap(
+  function pushWithLogCap (
     channel: IExecutionChannel,
     event: TExecutionEvent,
   ): void {
@@ -121,7 +121,7 @@ export function createExecutionEventBus(
   }
 
   /** 从缓冲头部移除指定数量的最旧 log 行（保持整体顺序单调）。 */
-  function removeOldestLogs(channel: IExecutionChannel, count: number): void {
+  function removeOldestLogs (channel: IExecutionChannel, count: number): void {
     let remaining = count
     let index = 0
 
@@ -136,7 +136,7 @@ export function createExecutionEventBus(
   }
 
   return {
-    publish(executionId, draft) {
+    publish (executionId, draft) {
       const channel = channelOf(executionId)
       channel.lastSeq += 1
       const event = { ...draft, seq: channel.lastSeq } as TExecutionEvent
@@ -149,7 +149,7 @@ export function createExecutionEventBus(
       return event
     },
 
-    subscribe(executionId, afterSeq, listener) {
+    subscribe (executionId, afterSeq, listener) {
       const channel = channelOf(executionId)
 
       // 补发缓冲事件：afterSeq 之后的缺口；undefined 表示从头回放全部缓冲
@@ -166,11 +166,11 @@ export function createExecutionEventBus(
       }
     },
 
-    currentSeq(executionId) {
+    currentSeq (executionId) {
       return channelOf(executionId).lastSeq
     },
 
-    dispose(executionId) {
+    dispose (executionId) {
       channels.delete(executionId)
     },
   }

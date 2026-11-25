@@ -23,14 +23,14 @@ import {
   createSkill,
   E2E_SCHEMA_FILE_NAME,
   USER_WORKSPACE_DIRECTORY_NAME,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import type {
   IChromiumInstaller,
   IChromiumStatus,
   ITestRunRequest,
   ITestRunner,
   ITestRunResult,
-} from '@authine-e2e-agent/playwright-engine'
+} from '@fynn90-e2e_assistant/playwright-engine'
 import { createTestExecutionService } from '../../src/application/test-execution/execution-service'
 import { createGenerationTaskRegistry } from '../../src/generation-runtime'
 
@@ -46,10 +46,10 @@ afterEach(async () => {
 
 /** 已安装状态的 fake Chromium 检测器（跳过真实安装，J7 直接就绪）。 */
 const fakeChromium: IChromiumInstaller = {
-  async detect(): Promise<IChromiumStatus> {
+  async detect (): Promise<IChromiumStatus> {
     return { installed: true, executablePath: '/fake/chromium' }
   },
-  async install(): Promise<IChromiumStatus> {
+  async install (): Promise<IChromiumStatus> {
     return { installed: true, executablePath: '/fake/chromium' }
   },
 }
@@ -73,7 +73,7 @@ test('占位用例', async ({ page }) => {
  * @param workspaceSeed - 预先写入 userWorkSpace 的相对路径与内容（用于零改动断言）。
  * @returns skillId、skillRoot 与捕获 run 请求的 fake runner。
  */
-async function createExecutableSkill(
+async function createExecutableSkill (
   workspaceSeed: Array<{ relativePath: string; content: string }> = [],
 ): Promise<{
   skillId: string
@@ -110,7 +110,7 @@ async function createExecutableSkill(
 
   const capturedRequests: ITestRunRequest[] = []
   const fakeRunner: ITestRunner = {
-    async run(request: ITestRunRequest): Promise<ITestRunResult> {
+    async run (request: ITestRunRequest): Promise<ITestRunResult> {
       capturedRequests.push(request)
       return {
         status: 'passed',
@@ -120,7 +120,7 @@ async function createExecutableSkill(
         jsonReport: { stats: { duration: 5 } },
         workspace: {
           path: path.join(os.tmpdir(), 'fake-run-workspace'),
-          async cleanup() {
+          async cleanup () {
             // fake 工作区不触盘；真实清理只针对运行工作区，绝不碰 userWorkSpace。
           },
         },
@@ -136,7 +136,7 @@ async function createExecutableSkill(
  * @param runner - fake testRunner。
  * @returns 执行服务实例。
  */
-function createService(runner: ITestRunner) {
+function createService (runner: ITestRunner) {
   return createTestExecutionService({
     taskRegistry: createGenerationTaskRegistry(),
     chromium: fakeChromium,
@@ -150,7 +150,7 @@ function createService(runner: ITestRunner) {
  * @param executionId - 执行 ID。
  * @returns 终态状态。
  */
-async function waitForTerminal(
+async function waitForTerminal (
   service: ReturnType<typeof createService>,
   executionId: string,
 ) {
@@ -215,7 +215,7 @@ describe('执行链路 userWorkSpace 注入（B11/W38）', () => {
           durationMs: 5,
           exitCode: 0,
           jsonReport: { stats: { duration: 5 } },
-          workspace: { path: skillRoot, async cleanup() {} },
+          workspace: { path: skillRoot, async cleanup () { } },
         }
       }),
     }
@@ -250,7 +250,7 @@ describe('执行链路 userWorkSpace 零改动（W18/W19）', () => {
           durationMs: 5,
           exitCode: 0,
           jsonReport: { stats: { duration: 5 } },
-          workspace: { path: skillRoot, async cleanup() {} },
+          workspace: { path: skillRoot, async cleanup () { } },
         }
       },
     })

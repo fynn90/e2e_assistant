@@ -12,13 +12,13 @@ import {
   validateWebHostDependency,
 } from './release-precheck.mjs'
 
-const CLI_PACKAGE_NAME = '@authine-e2e-agent/cli'
-const SERVICE_PACKAGE_NAME = '@authine-e2e-agent/service'
-const WEB_PACKAGE_NAME = '@authine-e2e-agent/web'
-const WEB_HOST_PACKAGE_NAME = '@authine-e2e-agent/web-host'
-const AGENT_PACKAGE_NAME = '@authine-e2e-agent/agent'
-const PLAYWRIGHT_ENGINE_PACKAGE_NAME = '@authine-e2e-agent/playwright-engine'
-const SKILL_MANAGER_PACKAGE_NAME = '@authine-e2e-agent/skill-manager'
+const CLI_PACKAGE_NAME = '@fynn90-e2e_assistant/cli'
+const SERVICE_PACKAGE_NAME = '@fynn90-e2e_assistant/service'
+const WEB_PACKAGE_NAME = '@fynn90-e2e_assistant/web'
+const WEB_HOST_PACKAGE_NAME = '@fynn90-e2e_assistant/web-host'
+const AGENT_PACKAGE_NAME = '@fynn90-e2e_assistant/agent'
+const PLAYWRIGHT_ENGINE_PACKAGE_NAME = '@fynn90-e2e_assistant/playwright-engine'
+const SKILL_MANAGER_PACKAGE_NAME = '@fynn90-e2e_assistant/skill-manager'
 
 /**
  * 构造一个工作区包条目。
@@ -26,7 +26,7 @@ const SKILL_MANAGER_PACKAGE_NAME = '@authine-e2e-agent/skill-manager'
  * @param {object} packageJson 额外的 package.json 字段。
  * @returns {{packageJson: object, relativeDirectoryPath: string}} 工作区包条目。
  */
-function buildWorkspacePackage(name, packageJson = {}) {
+function buildWorkspacePackage (name, packageJson = {}) {
   return {
     packageJson: { name, version: '0.0.0', ...packageJson },
     relativeDirectoryPath: `packages/${name.split('/').pop()}`,
@@ -39,7 +39,7 @@ function buildWorkspacePackage(name, packageJson = {}) {
  * @param {object[]} workspacePackages 工作区包列表。
  * @returns {string[]} 收集到的错误消息。
  */
-function collectErrors(validate, workspacePackages) {
+function collectErrors (validate, workspacePackages) {
   const validationState = { errors: [], warnings: [] }
 
   validate({ workspacePackages, validationState })
@@ -50,10 +50,10 @@ function collectErrors(validate, workspacePackages) {
 test('正常工作区不产生「依赖 cli」错误', () => {
   const errors = collectErrors(validateNoOneDependsOnCli, [
     buildWorkspacePackage(CLI_PACKAGE_NAME, {
-      dependencies: { '@authine-e2e-agent/types': 'workspace:^' },
+      dependencies: { '@fynn90-e2e_assistant/types': 'workspace:^' },
     }),
     buildWorkspacePackage(SERVICE_PACKAGE_NAME, {
-      dependencies: { '@authine-e2e-agent/types': 'workspace:^' },
+      dependencies: { '@fynn90-e2e_assistant/types': 'workspace:^' },
       devDependencies: { vitest: '^4.1.10' },
     }),
   ])
@@ -83,7 +83,7 @@ test('四个依赖段都受检查', () => {
   ]) {
     const errors = collectErrors(validateNoOneDependsOnCli, [
       buildWorkspacePackage(CLI_PACKAGE_NAME),
-      buildWorkspacePackage('@authine-e2e-agent/agent', {
+      buildWorkspacePackage('@fynn90-e2e_assistant/agent', {
         [dependencySection]: { [CLI_PACKAGE_NAME]: 'workspace:^' },
       }),
     ])
@@ -100,7 +100,7 @@ test('四个依赖段都受检查', () => {
 test('cli 自身声明自己不算违规（它不是「被其它包依赖」）', () => {
   const errors = collectErrors(validateNoOneDependsOnCli, [
     buildWorkspacePackage(CLI_PACKAGE_NAME, {
-      dependencies: { '@authine-e2e-agent/types': 'workspace:^' },
+      dependencies: { '@fynn90-e2e_assistant/types': 'workspace:^' },
     }),
   ])
 
@@ -113,7 +113,7 @@ test('web-host 显式依赖 web、服务层不碰 web 时通过', () => {
       dependencies: { [SERVICE_PACKAGE_NAME]: 'workspace:^' },
     }),
     buildWorkspacePackage(SERVICE_PACKAGE_NAME, {
-      dependencies: { '@authine-e2e-agent/types': 'workspace:^' },
+      dependencies: { '@fynn90-e2e_assistant/types': 'workspace:^' },
     }),
     buildWorkspacePackage(WEB_HOST_PACKAGE_NAME, {
       dependencies: { [WEB_PACKAGE_NAME]: 'workspace:^' },
@@ -193,24 +193,24 @@ test('web 未发布 dist 或缺少 build 脚本时报错', () => {
 test('changeset frontmatter 的行尾兼容 CRLF', () => {
   // Windows 上 core.autocrlf 会把 changeset 检出成 CRLF；若解析器只认 \n，
   // 这些文件会被误报为「没有声明任何包版本变更」。
-  const lfContent = '---\n"@authine-e2e-agent/web": minor\n---\n\n正文\n'
-  const crlfContent = '---\r\n"@authine-e2e-agent/web": minor\r\n---\r\n\r\n正文\r\n'
+  const lfContent = '---\n"@fynn90-e2e_assistant/web": minor\n---\n\n正文\n'
+  const crlfContent = '---\r\n"@fynn90-e2e_assistant/web": minor\r\n---\r\n\r\n正文\r\n'
 
   assert.deepEqual(parseChangesetPackageNames(lfContent), [
-    '@authine-e2e-agent/web',
+    '@fynn90-e2e_assistant/web',
   ])
   assert.deepEqual(parseChangesetPackageNames(crlfContent), [
-    '@authine-e2e-agent/web',
+    '@fynn90-e2e_assistant/web',
   ])
 })
 
 test('changeset frontmatter 多包与缺 frontmatter 的边界', () => {
   const multiPackageContent =
-    '---\n"@authine-e2e-agent/cli": major\n"@authine-e2e-agent/service": minor\n---\n\n正文\n'
+    '---\n"@fynn90-e2e_assistant/cli": major\n"@fynn90-e2e_assistant/service": minor\n---\n\n正文\n'
 
   assert.deepEqual(parseChangesetPackageNames(multiPackageContent), [
-    '@authine-e2e-agent/cli',
-    '@authine-e2e-agent/service',
+    '@fynn90-e2e_assistant/cli',
+    '@fynn90-e2e_assistant/service',
   ])
   assert.deepEqual(parseChangesetPackageNames('没有 frontmatter 的正文'), [])
 })
@@ -221,22 +221,22 @@ test('缺失 web-host 或 web 包时给出明确错误', () => {
   ])
 
   assert.equal(missingWebHostErrors.length, 1)
-  assert.match(missingWebHostErrors[0], /缺少 @authine-e2e-agent\/web-host 包/)
+  assert.match(missingWebHostErrors[0], /缺少 @fynn90-e2e_assistant\/web-host 包/)
 })
 
 test('三包只依赖共享类型包时不产生「浏览器分层」错误', () => {
   const errors = collectErrors(validateBrowserLayerIndependence, [
     buildWorkspacePackage(AGENT_PACKAGE_NAME, {
-      dependencies: { '@authine-e2e-agent/types': 'workspace:^' },
+      dependencies: { '@fynn90-e2e_assistant/types': 'workspace:^' },
     }),
     buildWorkspacePackage(PLAYWRIGHT_ENGINE_PACKAGE_NAME, {
       dependencies: {
-        '@authine-e2e-agent/types': 'workspace:^',
+        '@fynn90-e2e_assistant/types': 'workspace:^',
         playwright: '1.64.0',
       },
     }),
     buildWorkspacePackage(SKILL_MANAGER_PACKAGE_NAME, {
-      dependencies: { '@authine-e2e-agent/types': 'workspace:^' },
+      dependencies: { '@fynn90-e2e_assistant/types': 'workspace:^' },
     }),
   ])
 

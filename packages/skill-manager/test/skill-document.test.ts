@@ -14,7 +14,7 @@ import {
   createDefaultE2ETestCase,
   isBlockingDiagnostic,
   type IE2ETestCase,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 const tempDirectories: string[] = []
 
@@ -32,7 +32,7 @@ const tempDirectories: string[] = []
  * @param testCase - 结构化用例。
  * @returns 诊断消息列表。
  */
-function diagnosticsOf(
+function diagnosticsOf (
   content: string,
   testCase: Parameters<typeof collectSkillDocumentDiagnostics>[1],
 ): string[] {
@@ -51,7 +51,7 @@ function diagnosticsOf(
  * @param testCase - 结构化用例。
  * @returns 无任何诊断时返回 true。
  */
-function passesValidation(
+function passesValidation (
   content: string,
   testCase: Parameters<typeof collectSkillDocumentDiagnostics>[1],
 ): boolean {
@@ -60,7 +60,7 @@ function passesValidation(
   )
 }
 
-function buildContent(title: string, description: string): string {
+function buildContent (title: string, description: string): string {
   return `---
 name: ${title}
 description: ${description}
@@ -633,7 +633,7 @@ describe('诊断分级不变式（v15）', () => {
    * 任何把安全码误降为 warning、或把质量码误标为 error 的改动都会在这里失败——
    * 前者是静默的安全漏洞，后者是用户体验回归，两者都不该靠人工 review 兜住。
    */
-  function buildCoveredTestCase(): IE2ETestCase {
+  function buildCoveredTestCase (): IE2ETestCase {
     const base = createDefaultE2ETestCase({
       skillId: 'abcdef123',
       title: '登录测试',

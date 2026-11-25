@@ -6,8 +6,8 @@
  * 与之相对，ApiError 类本身已下沉到 shared/errors/：application 只用类、不用映射器，
  * 这样既满足「业务层不依赖传输层」，又让状态码知识集中在 http 层（见 PRD v18 §4.2 L5）。
  */
-import { SkillManagerError } from '@authine-e2e-agent/skill-manager'
-import type { IEnvFileIssuePayload } from '@authine-e2e-agent/types'
+import { SkillManagerError } from '@fynn90-e2e_assistant/skill-manager'
+import type { IEnvFileIssuePayload } from '@fynn90-e2e_assistant/types'
 import { ConfigValidationError } from '../config/config-store'
 import {
   DirectoryBrowserError,
@@ -26,7 +26,7 @@ import { ApiError } from '../shared/errors/api-error'
  * @returns 可被路由安全序列化的 API 错误。
  * @throws 不抛出异常。
  */
-export function toApiError(error: unknown): ApiError {
+export function toApiError (error: unknown): ApiError {
   if (error instanceof ApiError) {
     return error
   }
@@ -78,7 +78,7 @@ export function toApiError(error: unknown): ApiError {
   })
 }
 
-function getSkillManagerStatus(code: SkillManagerError['code']): number {
+function getSkillManagerStatus (code: SkillManagerError['code']): number {
   switch (code) {
     case 'INVALID_REQUEST':
     case 'INVALID_SKILL_ID':
@@ -129,7 +129,7 @@ function getSkillManagerStatus(code: SkillManagerError['code']): number {
  * @returns 问题明细；非 ENV_FILE_INVALID 或结构不符时返回 undefined。
  * @throws 不抛出异常。
  */
-function extractEnvFileIssues(
+function extractEnvFileIssues (
   error: SkillManagerError,
 ): IEnvFileIssuePayload[] | undefined {
   if (error.code !== 'ENV_FILE_INVALID') return undefined
@@ -146,7 +146,7 @@ function extractEnvFileIssues(
  * @returns 对应的 HTTP 状态码。
  * @throws 不抛出异常。
  */
-function getDirectoryBrowserStatus(code: TDirectoryBrowserErrorCode): number {
+function getDirectoryBrowserStatus (code: TDirectoryBrowserErrorCode): number {
   switch (code) {
     case 'INVALID_REQUEST':
       return 400
@@ -168,7 +168,7 @@ function getDirectoryBrowserStatus(code: TDirectoryBrowserErrorCode): number {
  * @returns 对应的 HTTP 状态码。
  * @throws 不抛出异常。
  */
-function getSkillDocumentAgentStatus(
+function getSkillDocumentAgentStatus (
   code: SkillDocumentAgentError['code'],
 ): number {
   switch (code) {

@@ -14,7 +14,7 @@ import {
   PLAYWRIGHT_SCRIPT_FILE_NAME,
   SKILL_DOCUMENT_FILE_NAME,
   type IEnvFileIssue,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { saveSkillDocument } from '../../modules/e2e-test-case/services/skill-document-api'
 import { savePlaywrightScript } from '../../modules/e2e-test-case/services/e2e-test-case-api'
 import { updateSkillFile } from '../../services/skill-api'
@@ -49,7 +49,7 @@ export class EnvFileBlockedError extends Error {
  * @param initialVersion - 初始期望文件版本；文件不存在时传 null。
  * @returns SKILL.md 保存目标。
  */
-export function createSkillDocumentTarget(
+export function createSkillDocumentTarget (
   skillId: string,
   sourceHash: string,
   initialVersion: string | null,
@@ -58,7 +58,7 @@ export function createSkillDocumentTarget(
 
   return {
     key: SKILL_DOCUMENT_FILE_NAME,
-    async save(content, signal): Promise<ISaveTargetResult> {
+    async save (content, signal): Promise<ISaveTargetResult> {
       const response = await saveSkillDocument(
         skillId,
         {
@@ -89,7 +89,7 @@ export function createSkillDocumentTarget(
  * @param initialVersion - 初始期望文件版本；文件不存在时传 null。
  * @returns 脚本保存目标。
  */
-export function createPlaywrightScriptTarget(
+export function createPlaywrightScriptTarget (
   skillId: string,
   sourceHash: string,
   initialVersion: string | null,
@@ -98,7 +98,7 @@ export function createPlaywrightScriptTarget(
 
   return {
     key: PLAYWRIGHT_SCRIPT_FILE_NAME,
-    async save(content, signal): Promise<ISaveTargetResult> {
+    async save (content, signal): Promise<ISaveTargetResult> {
       const response = await savePlaywrightScript(
         skillId,
         {
@@ -129,7 +129,7 @@ export function createPlaywrightScriptTarget(
  * @param initialVersion - 初始期望文件版本。
  * @returns 通用文件保存目标。
  */
-export function createGenericFileTarget(
+export function createGenericFileTarget (
   skillId: string,
   relativePath: string,
   initialVersion: string,
@@ -138,7 +138,7 @@ export function createGenericFileTarget(
 
   return {
     key: relativePath,
-    async save(content, signal): Promise<ISaveTargetResult> {
+    async save (content, signal): Promise<ISaveTargetResult> {
       const response = await updateSkillFile(
         skillId,
         { relativePath, content, expectedVersion },
@@ -165,7 +165,7 @@ export function createGenericFileTarget(
  * @param initialVersion - 初始期望文件版本。
  * @returns env.json 保存目标。
  */
-export function createEnvFileTarget(
+export function createEnvFileTarget (
   skillId: string,
   relativePath: string,
   initialVersion: string,
@@ -174,7 +174,7 @@ export function createEnvFileTarget(
 
   return {
     key: relativePath,
-    async save(content, signal): Promise<ISaveTargetResult> {
+    async save (content, signal): Promise<ISaveTargetResult> {
       // 客户端校验是主路径：非法内容在此拦截，请求不发出。
       const parsed = parseEnvFileContent(content)
 

@@ -3,11 +3,11 @@
  *
  * 依赖倒转（技术方案 3）：Agent 不直接创建或管理浏览器进程，
  * 浏览器会话由 Service 的 generation-runtime 创建并注入；本模块只声明端口。
- * 会话契约类型（IBrowserSession 等）位于 @authine-e2e-agent/types 共享契约包，
+ * 会话契约类型（IBrowserSession 等）位于 @fynn90-e2e_assistant/types 共享契约包，
  * agent 包对 playwright-engine 零依赖，测试也可注入替身。
  */
 
-import type { IAgentToolImageRef } from '@authine-e2e-agent/types'
+import type { IAgentToolImageRef } from '@fynn90-e2e_assistant/types'
 import type {
   IBrowserSession,
   IPageSnapshot,
@@ -24,7 +24,7 @@ import type {
   IWaitCondition,
   IWaitOptions,
   IWaitResult,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 截图持久化端口（v12-pre）。

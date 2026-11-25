@@ -13,15 +13,15 @@ import {
   resolveSkill,
   restoreFixedUtf8File,
   collectSkillDocumentDiagnostics,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import type {
   IGenerateSkillDocumentRequest,
   ISkillDocumentGenerationResult,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   isBlockingDiagnostic,
   validateE2ETestCaseForGeneration,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiError } from '../../shared/errors/api-error'
 import type { IAuthinePlatformConfig } from '../../config/config-store'
 import {
@@ -43,7 +43,7 @@ export type TSkillMarkdownGeneratorFactory = (
  * @returns 读取自 Agent 目标文件且通过正文校验的 SKILL.md 结果。
  * @throws SkillManagerError 当用例、版本、目标文件或产物不满足条件时抛出。
  */
-export async function generateSkillDocument(
+export async function generateSkillDocument (
   input: {
     config: IAuthinePlatformConfig
     skillId: string
@@ -225,7 +225,7 @@ export async function generateSkillDocument(
  * @returns 恢复完成后兑现的 Promise。
  * @throws 当读取或恢复文件失败时抛出，但调用方应优先保留原始生成错误。
  */
-async function restoreGeneratedDocument(
+async function restoreGeneratedDocument (
   skillRoot: string,
   previousSnapshot: Awaited<ReturnType<typeof readFixedUtf8File>>,
   generatedVersion: string | undefined,
@@ -247,6 +247,6 @@ async function restoreGeneratedDocument(
 }
 
 /** 将换行归一化，便于校验 Agent 写入内容与返回内容的一致性。 */
-function normalizeForComparison(content: string): string {
+function normalizeForComparison (content: string): string {
   return content.replace(/\r\n/g, '\n').replace(/\r/g, '\n').trimEnd()
 }

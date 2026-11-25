@@ -26,16 +26,16 @@ import {
   readFixedUtf8File,
   readTestReportSummary,
   resolveSkill,
-} from '@authine-e2e-agent/skill-manager'
-import type { ISkillStorageOptions } from '@authine-e2e-agent/skill-manager'
-import { DefaultSensitiveDataRedactor } from '@authine-e2e-agent/playwright-engine'
-import { parseEnvFileContent } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
+import { DefaultSensitiveDataRedactor } from '@fynn90-e2e_assistant/playwright-engine'
+import { parseEnvFileContent } from '@fynn90-e2e_assistant/types'
 import type { IRepairContext } from '../e2e-test-case/playwright-script-generator'
 import type {
   IAgentSkillCandidate,
   IAgentWorkbenchTaskSummary,
   TAgentWorkbenchAction,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type {
   IBatchRunnerHost,
   IExecuteTestIssue,
@@ -47,7 +47,7 @@ import type {
   IWorkbenchActionHost,
   TExecuteTestHostResult,
   TReadSkillDocumentHostResult,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import type { ITestExecutionService } from '../test-execution/execution-service'
 import type { IExecutionEventBus } from '../test-execution/execution-event-bus'
@@ -166,14 +166,14 @@ export interface IAgentWorkbenchDependencies {
 /** 工作台服务接口。 */
 export interface IAgentWorkbenchService {
   /** 检索宿主（注入给 list_skills / read_skill_document / read_test_case / read_run_history）。 */
-  createCatalogHost(rootDir: string): ISkillCatalogHost
+  createCatalogHost (rootDir: string): ISkillCatalogHost
   /**
    * 体检宿主（注入给 check_readiness，v17 R3）。
    *
    * @param rootDir - 工作区根目录。
    * @returns 体检宿主（不启动运行、不占用执行通道）。
    */
-  createReadinessHost(rootDir: string): IReadinessHost
+  createReadinessHost (rootDir: string): IReadinessHost
   /**
    * 视图宿主（注入给 render_view，v17 §6.2）。
    *
@@ -182,7 +182,7 @@ export interface IAgentWorkbenchService {
    * @param runtime - 承载该会话的常驻运行时。
    * @returns 视图宿主（按 params 自取数据后发布只读卡片）。
    */
-  createViewHost(
+  createViewHost (
     rootDir: string,
     sessionId: string,
     runtime: IAgentWorkRuntime,
@@ -195,7 +195,7 @@ export interface IAgentWorkbenchService {
    * @param runtime - 承载该会话的常驻运行时。
    * @returns 提案宿主（建提案，不执行写操作）。
    */
-  createProposalHost(
+  createProposalHost (
     rootDir: string,
     sessionId: string,
     runtime: IAgentWorkRuntime,
@@ -208,7 +208,7 @@ export interface IAgentWorkbenchService {
    * @param runtime - 承载该会话的常驻运行时。
    * @returns 批次宿主（建批次，不启动执行）。
    */
-  createBatchHost(
+  createBatchHost (
     rootDir: string,
     sessionId: string,
     runtime: IAgentWorkRuntime,
@@ -220,7 +220,7 @@ export interface IAgentWorkbenchService {
    * @param sessionId - 发起执行的会话。
    * @param runtime - 承载该会话的常驻运行时（执行卡片的发布落点）。
    */
-  createTestRunnerHost(
+  createTestRunnerHost (
     rootDir: string,
     sessionId: string,
     runtime: IAgentWorkRuntime,
@@ -232,7 +232,7 @@ export interface IAgentWorkbenchService {
    * @param sessionId - 发起会话。
    * @param runtime - 承载该会话的常驻运行时（动作卡片的发布落点）。
    */
-  createActionHost(
+  createActionHost (
     rootDir: string,
     sessionId: string,
     runtime: IAgentWorkRuntime,
@@ -244,7 +244,7 @@ export interface IAgentWorkbenchService {
    * @returns 处理结果；被拒绝时 message 说明原因（互斥、就绪不足、需确认等）。
    * @throws ApiError 目标会话/动作不存在时抛出。
    */
-  runAction(input: {
+  runAction (input: {
     rootDir: string
     sessionId: string
     runtime: IAgentWorkRuntime
@@ -260,7 +260,7 @@ export interface IAgentWorkbenchService {
  * @returns 工作台服务实例。
  * @throws 不抛出异常。
  */
-export function createAgentWorkbenchService(
+export function createAgentWorkbenchService (
   dependencies: IAgentWorkbenchDependencies,
 ): IAgentWorkbenchService {
   const catalog = dependencies.skillCatalog ?? createSkillCatalog()
@@ -293,7 +293,7 @@ export function createAgentWorkbenchService(
    * @returns 登记后的动作记录。
    * @throws 不抛出异常。
    */
-  function publishAction(input: {
+  function publishAction (input: {
     runtime: IAgentWorkRuntime
     sessionId: string
     action: TAgentWorkbenchAction
@@ -357,7 +357,7 @@ export function createAgentWorkbenchService(
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function settleAction(
+  function settleAction (
     runtime: IAgentWorkRuntime,
     record: IActionRecord,
     state: 'consumed' | 'expired',
@@ -385,7 +385,7 @@ export function createAgentWorkbenchService(
    * @returns 用例标题。
    * @throws ApiError 目标不存在或 ID 非法时抛出（INVALID_SKILL_ID / SKILL_NOT_FOUND）。
    */
-  async function requireSkill(
+  async function requireSkill (
     rootDir: string,
     skillId: string,
   ): Promise<{ title: string }> {
@@ -415,7 +415,7 @@ export function createAgentWorkbenchService(
    * @returns 与 `ITestRunnerHost` 同构的结果。
    * @throws 不抛出异常——互斥与就绪失败都归一为 `{ ok: false, issues }`。
    */
-  async function startExecution(
+  async function startExecution (
     runtime: IAgentWorkRuntime,
     rootDir: string,
     sessionId: string,
@@ -491,7 +491,7 @@ export function createAgentWorkbenchService(
    * @returns 无返回值（订阅在两扇门都兑现后自行解除）。
    * @throws 不抛出异常。
    */
-  function watchExecutionTerminal(
+  function watchExecutionTerminal (
     runtime: IAgentWorkRuntime,
     context: {
       executionId: string
@@ -632,7 +632,7 @@ export function createAgentWorkbenchService(
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function publishExecutionCard(
+  function publishExecutionCard (
     runtime: IAgentWorkRuntime,
     context: {
       executionId: string
@@ -676,7 +676,7 @@ export function createAgentWorkbenchService(
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function settleExecution(
+  function settleExecution (
     runtime: IAgentWorkRuntime,
     context: {
       executionId: string
@@ -743,7 +743,7 @@ export function createAgentWorkbenchService(
           '报告卡片已在对话流中给出统计与报告入口，**不要再用表格复述统计数字**。',
           '请只给出：一句话解读（结果是否正常）；有失败时说明失败发生在哪一步、可能原因与修复方向。',
           state.outcome!.status === 'completed' &&
-          (state.outcome!.summary?.failed ?? 0) > 0
+            (state.outcome!.summary?.failed ?? 0) > 0
             ? '存在失败：然后用 propose_action 给出 update-playwright-script 入口，不要自行修改脚本。'
             : '',
           '不要编造结果之外的过程细节。',
@@ -767,7 +767,7 @@ export function createAgentWorkbenchService(
    * @returns 恢复出的登记；找不到时返回 undefined。
    * @throws 不抛出异常（块不存在或 payload 不完整时返回 undefined）。
    */
-  function recoverAction(
+  function recoverAction (
     runtime: IAgentWorkRuntime,
     sessionId: string,
     actionId: string,
@@ -812,7 +812,7 @@ export function createAgentWorkbenchService(
   }
 
   return {
-    createCatalogHost(rootDir: string): ISkillCatalogHost {
+    createCatalogHost (rootDir: string): ISkillCatalogHost {
       return {
         listSkills: (): Promise<IAgentSkillCandidate[]> =>
           catalog.listCandidates(rootDir),
@@ -827,7 +827,7 @@ export function createAgentWorkbenchService(
       }
     },
 
-    createTestRunnerHost(
+    createTestRunnerHost (
       rootDir: string,
       sessionId: string,
       runtime: IAgentWorkRuntime,
@@ -838,7 +838,7 @@ export function createAgentWorkbenchService(
       }
     },
 
-    createReadinessHost(rootDir: string): IReadinessHost {
+    createReadinessHost (rootDir: string): IReadinessHost {
       return {
         checkReadiness: async (skillId) => {
           const result = await readiness.check(rootDir, skillId)
@@ -849,7 +849,7 @@ export function createAgentWorkbenchService(
       }
     },
 
-    createViewHost(
+    createViewHost (
       rootDir: string,
       sessionId: string,
       runtime: IAgentWorkRuntime,
@@ -866,7 +866,7 @@ export function createAgentWorkbenchService(
       })
     },
 
-    createProposalHost(
+    createProposalHost (
       rootDir: string,
       sessionId: string,
       runtime: IAgentWorkRuntime,
@@ -896,7 +896,7 @@ export function createAgentWorkbenchService(
       }
     },
 
-    createBatchHost(
+    createBatchHost (
       rootDir: string,
       sessionId: string,
       runtime: IAgentWorkRuntime,
@@ -917,28 +917,28 @@ export function createAgentWorkbenchService(
           })
           return result.ok
             ? {
-                ok: true,
-                batchId: result.batchId,
-                message: result.message,
-              }
+              ok: true,
+              batchId: result.batchId,
+              message: result.message,
+            }
             : { ok: false, message: result.message }
         },
       }
     },
 
-    createActionHost(
+    createActionHost (
       rootDir: string,
       sessionId: string,
       runtime: IAgentWorkRuntime,
     ): IWorkbenchActionHost {
       return {
-        async requestAction(input) {
+        async requestAction (input) {
           return requestAction(runtime, rootDir, sessionId, input)
         },
       }
     },
 
-    async runAction(input) {
+    async runAction (input) {
       let record = actions.get(input.actionId)
 
       // 服务重启后内存登记丢失，但卡片仍物化在会话历史里：从已落盘的
@@ -983,7 +983,7 @@ export function createAgentWorkbenchService(
    * @returns 登记后的动作记录（宿主取 actionId 下发到清单行）。
    * @throws 不抛出异常。
    */
-  function registerInlineAction(
+  function registerInlineAction (
     runtime: IAgentWorkRuntime,
     sessionId: string,
     input: {
@@ -1014,7 +1014,7 @@ export function createAgentWorkbenchService(
    * @returns 发布结果。
    * @throws 不抛出异常——校验失败归一为 `{ ok: false }`。
    */
-  async function requestAction(
+  async function requestAction (
     runtime: IAgentWorkRuntime,
     rootDir: string,
     sessionId: string,
@@ -1050,7 +1050,7 @@ export function createAgentWorkbenchService(
 
     let title: string
     try {
-      ;({ title } = await requireSkill(rootDir, input.skillId))
+      ; ({ title } = await requireSkill(rootDir, input.skillId))
     } catch {
       return {
         ok: false,
@@ -1110,7 +1110,7 @@ export function createAgentWorkbenchService(
    * @returns 发布结果。
    * @throws 不抛出异常。
    */
-  async function requestRepairAction(
+  async function requestRepairAction (
     runtime: IAgentWorkRuntime,
     rootDir: string,
     sessionId: string,
@@ -1190,7 +1190,7 @@ export function createAgentWorkbenchService(
    * @returns 处理结果。
    * @throws 不抛出异常——失败归一为 `{ ok: false, message }`。
    */
-  async function executeAction(
+  async function executeAction (
     runtime: IAgentWorkRuntime,
     rootDir: string,
     record: IActionRecord,
@@ -1305,7 +1305,7 @@ export function createAgentWorkbenchService(
    * @returns 引导完成后兑现。
    * @throws 不抛出异常（引导失败不影响生成结果的呈现）。
    */
-  async function proposeNextStep(
+  async function proposeNextStep (
     runtime: IAgentWorkRuntime,
     rootDir: string,
     sessionId: string,
@@ -1372,7 +1372,7 @@ export function createAgentWorkbenchService(
  * @returns 文档与脚本的存在性。
  * @throws 不抛出异常——读取失败按「不存在」处理（引导用户补齐产物是安全方向）。
  */
-async function readArtifactState(
+async function readArtifactState (
   rootDir: string,
   skillId: string,
 ): Promise<{ hasSkillDocument: boolean; hasPlaywrightScript: boolean }> {
@@ -1396,7 +1396,7 @@ async function readArtifactState(
  * @returns 不相符时的说明；相符时返回 undefined。
  * @throws 不抛出异常。
  */
-function describeActionMismatch(
+function describeActionMismatch (
   action: TAgentWorkbenchAction,
   state: { hasSkillDocument: boolean; hasPlaywrightScript: boolean },
 ): string | undefined {
@@ -1415,7 +1415,7 @@ function describeActionMismatch(
 }
 
 /** 动作的中文按钮文案。 */
-function actionLabel(action: TAgentWorkbenchAction): string {
+function actionLabel (action: TAgentWorkbenchAction): string {
   switch (action) {
     case 'create-skill':
       return '创建 e2e SKILL'
@@ -1441,7 +1441,7 @@ function actionLabel(action: TAgentWorkbenchAction): string {
  * @returns 生成动作；非生成类返回 undefined。
  * @throws 不抛出异常。
  */
-function toGenerationAction(
+function toGenerationAction (
   action: TAgentWorkbenchAction,
 ): TGenerationAction | undefined {
   if (
@@ -1471,7 +1471,7 @@ function toGenerationAction(
  * @returns 修复上下文；读不到摘要时返回失败并说明。
  * @throws 不抛出异常——所有失败都归一为 `{ ok: false }`。
  */
-async function buildRepairContext(
+async function buildRepairContext (
   rootDir: string,
   skillId: string,
   reportRunId: string | undefined,
@@ -1522,9 +1522,8 @@ async function buildRepairContext(
   } catch (error) {
     return {
       ok: false,
-      message: `读取失败信息出错：${
-        error instanceof Error ? error.message : String(error)
-      }`,
+      message: `读取失败信息出错：${error instanceof Error ? error.message : String(error)
+        }`,
     }
   }
 }
@@ -1537,7 +1536,7 @@ async function buildRepairContext(
  * @returns 值列表；文件缺失或非法时为空数组。
  * @throws 不抛出异常。
  */
-async function readEnvSecretValues(
+async function readEnvSecretValues (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<string[]> {
@@ -1570,7 +1569,7 @@ async function readEnvSecretValues(
  * @returns 已编辑或无法判定时返回 true；脚本不存在时返回 false。
  * @throws 不抛出异常——读取失败按「已编辑」处理（保守）。
  */
-async function isScriptManuallyEdited(
+async function isScriptManuallyEdited (
   rootDir: string,
   skillId: string,
 ): Promise<boolean> {
@@ -1596,7 +1595,7 @@ async function isScriptManuallyEdited(
 }
 
 /** 就绪问题归一（保持 v11 的问题码与文案不变）。 */
-function toExecutionIssues(
+function toExecutionIssues (
   issues: ReadonlyArray<{ code: string; message: string }>,
 ): IExecuteTestIssue[] {
   return issues.map((issue) => ({ code: issue.code, message: issue.message }))
@@ -1627,7 +1626,7 @@ function toExecutionIssues(
  * @throws 不抛出异常——读取失败按「没有进行中的轮次」处理（立即发布更安全：
  *   宁可卡片早出现，也不要它永远不出现）。
  */
-function hasOpenTurn(runtime: IAgentWorkRuntime, sessionId: string): boolean {
+function hasOpenTurn (runtime: IAgentWorkRuntime, sessionId: string): boolean {
   try {
     const summary = runtime
       .listSessions()
@@ -1638,7 +1637,7 @@ function hasOpenTurn(runtime: IAgentWorkRuntime, sessionId: string): boolean {
   }
 }
 
-function isTerminalExecutionStatus(
+function isTerminalExecutionStatus (
   status: string,
 ): status is 'completed' | 'failed' | 'interrupted' {
   return (
@@ -1647,7 +1646,7 @@ function isTerminalExecutionStatus(
 }
 
 /** 由执行汇总生成一句给模型看的结论（只含统计，不含任何 env 值）。 */
-function describeSummary(summary: {
+function describeSummary (summary: {
   status: string
   total: number
   passed: number

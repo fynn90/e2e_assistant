@@ -5,14 +5,14 @@
  * 以及未注册会话的兜底行为——这些是「生成任务不污染工作台会话列表」的依据。
  */
 import { describe, expect, it } from 'vitest'
-import type { TAgentClientEvent } from '@authine-e2e-agent/types'
+import type { TAgentClientEvent } from '@fynn90-e2e_assistant/types'
 import { createWorkBlockStore } from '../../src/agent-runtime/work-block-store'
 
 /** 自增序号：store.applyEvent 要求事件带 seq（总线发布时分配）。 */
 let nextSeq = 1
 
 /** 构造一条最小内容块事件（用于推进会话行）。 */
-function contentEvent(sessionId: string, text: string): TAgentClientEvent {
+function contentEvent (sessionId: string, text: string): TAgentClientEvent {
   return {
     sessionId,
     blockId: 'block-1',
@@ -25,7 +25,7 @@ function contentEvent(sessionId: string, text: string): TAgentClientEvent {
 }
 
 /** 构造一条轮次开始事件（带输入预览，用于验证标题来源）。 */
-function turnBeginEvent(
+function turnBeginEvent (
   sessionId: string,
   inputPreview: string,
 ): TAgentClientEvent {
@@ -42,7 +42,7 @@ function turnBeginEvent(
 }
 
 /** 构造一条待办块事件（v12-pre，整体替换语义）。 */
-function todoEvent(
+function todoEvent (
   sessionId: string,
   items: Array<{
     id: string

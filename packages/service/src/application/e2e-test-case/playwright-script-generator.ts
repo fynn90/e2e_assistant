@@ -17,8 +17,8 @@
 
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
-import type { IToolGuard } from '@authine-e2e-agent/agent'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
 import { createGenerationWriteGuard } from './generation-tool-guards'
 import { SkillDocumentAgentError } from '../../shared/errors/skill-document-errors'
 import type { ISkillGenerationSessionRunner } from '../../shared/ports/skill-generation-session'
@@ -58,7 +58,7 @@ export interface IPlaywrightScriptAgentGenerator {
    * @returns Agent 生成的候选脚本内容与说明信息。
    * @throws SkillDocumentAgentError 当 Agent 取消、失败或未生成目标文件时抛出。
    */
-  generate(
+  generate (
     input: {
       testCase: IE2ETestCase
       /** 当前有效 SKILL.md 正文；为空表示 Agent 尚未生成该文档。 */
@@ -116,12 +116,12 @@ export interface IPlaywrightScriptCandidate {
  * @returns 通过会话运行器执行、由 Agent 写入临时文件并由本模块读回校验的生成器。
  * @throws 不在创建阶段抛出模型错误；运行时错误由 generate 转换为稳定错误码。
  */
-export function createPlaywrightScriptGenerator(options: {
+export function createPlaywrightScriptGenerator (options: {
   workspace: string
   sessionRunner: ISkillGenerationSessionRunner
 }): IPlaywrightScriptAgentGenerator {
   return {
-    async generate(
+    async generate (
       input,
       generationOptions,
     ): Promise<IPlaywrightScriptCandidate> {
@@ -212,7 +212,7 @@ export function createPlaywrightScriptGenerator(options: {
  * @returns 面向 Agent 的用户提示词：业务意图 + 目标文件 + 三项输入数据。
  * @throws 不抛出异常。
  */
-function buildPlaywrightScriptPrompt(
+function buildPlaywrightScriptPrompt (
   input: {
     testCase: IE2ETestCase
     skillDocumentContent: string
@@ -240,7 +240,7 @@ function buildPlaywrightScriptPrompt(
     buildUserWorkspaceContextBlock(),
     input.skillDocumentContent
       ? '作为参考，当前 Skill 的 SKILL.md 正文如下：\n\n' +
-        input.skillDocumentContent
+      input.skillDocumentContent
       : '当前 Skill 尚未生成 SKILL.md，请只依据用例数据生成，并在说明中提示该情况。',
     '作为参考，e2e_schema.json 中的用例数据如下：',
     JSON.stringify(input.testCase, null, 2),
@@ -267,7 +267,7 @@ function buildPlaywrightScriptPrompt(
  * @returns 注入到生成 prompt 的修复说明块。
  * @throws 不抛出异常。
  */
-function buildRepairContextBlock(context: IRepairContext): string {
+function buildRepairContextBlock (context: IRepairContext): string {
   const failures = context.failures
     .map((failure) => {
       const parts = [`- 「${failure.title}」`]
@@ -302,7 +302,7 @@ function buildRepairContextBlock(context: IRepairContext): string {
  * @returns 注入到生成 prompt 的 userWorkSpace 说明块。
  * @throws 不抛出异常。
  */
-function buildUserWorkspaceContextBlock(): string {
+function buildUserWorkspaceContextBlock (): string {
   return [
     '当前 Skill 根目录下存在固定目录 userWorkSpace。该目录用于存放测试流程执行过程中产生的目录和文件，例如截图、基准图片、差异图、导出文件和其他测试资源。',
     '用户可以在 userWorkSpace 内新建子目录或文件，也可以删除其中的子目录或文件。生成的 Playwright 脚本可以包含文件和目录操作，也可以引用 Node 原生文件和目录 API（例如 `node:fs`、`node:fs/promises`、`node:path`）。这些操作必须全部限定在当前 Skill 的 userWorkSpace 内，不能超过该目录。',
@@ -323,7 +323,7 @@ function buildUserWorkspaceContextBlock(): string {
  * @returns 工具调用前守卫。
  * @throws 不抛出异常；不符合白名单的调用返回阻断结果。
  */
-export function createScriptWriteOnlyToolGuard(
+export function createScriptWriteOnlyToolGuard (
   workspace: string,
   targetFile: string,
 ): IToolGuard {
@@ -347,7 +347,7 @@ export function createScriptWriteOnlyToolGuard(
  * @returns 归一化后的警告与假设列表。
  * @throws 不抛出异常。
  */
-export function parseAgentNotes(finalText: string): {
+export function parseAgentNotes (finalText: string): {
   warnings: Array<{
     code: string
     message: string
@@ -399,7 +399,7 @@ export function parseAgentNotes(finalText: string): {
  * @returns 标题到正文的映射；无标题时返回空数组。
  * @throws 不抛出异常。
  */
-function splitByHeadings(text: string): Array<[string, string]> {
+function splitByHeadings (text: string): Array<[string, string]> {
   const lines = text.replace(/\r\n/g, '\n').split('\n')
   const sections: Array<[string, string]> = []
   let currentHeading: string | null = null
@@ -436,7 +436,7 @@ function splitByHeadings(text: string): Array<[string, string]> {
  * @returns 去重后的说明条目；内容为"无"时返回空数组。
  * @throws 不抛出异常。
  */
-function extractListItems(content: string): string[] {
+function extractListItems (content: string): string[] {
   const items = content
     .split('\n')
     .map((line) => line.trim())
@@ -455,10 +455,10 @@ function extractListItems(content: string): string[] {
  * @returns 稳定的 Agent 错误码。
  * @throws 不抛出异常。
  */
-function classifyAgentError(
+function classifyAgentError (
   error: unknown,
 ): Extract<
-  import('@authine-e2e-agent/types').TApiErrorCode,
+  import('@fynn90-e2e_assistant/types').TApiErrorCode,
   | 'LLM_AUTH_FAILED'
   | 'LLM_RATE_LIMITED'
   | 'LLM_TIMEOUT'

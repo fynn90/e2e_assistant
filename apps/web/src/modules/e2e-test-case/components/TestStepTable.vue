@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue'
 import { NAlert, NButton, NEmpty, NSpace } from 'naive-ui'
-import type { IE2ETestStep } from '@authine-e2e-agent/types'
+import type { IE2ETestStep } from '@fynn90-e2e_assistant/types'
 import {
   createStep,
   deleteStep,

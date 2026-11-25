@@ -16,7 +16,7 @@ import { computed, ref, type Ref } from 'vue'
 import type {
   IE2ETestCase,
   IPlaywrightScriptState,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { fetchE2ETestCase } from '../e2e-test-case/services/e2e-test-case-api'
 import { getDraftGenerationIssues } from '../e2e-test-case/validation/test-case-form-validator'
 import type { IScriptStageOptions } from './script-stage'
@@ -43,7 +43,7 @@ export interface IScriptContextResolution {
  * @returns 解析结果。
  * @throws 当服务端读取失败时向上抛出（调用方负责转为失败卡片）。
  */
-export async function resolveScriptContext(input: {
+export async function resolveScriptContext (input: {
   skillId: string
   injected: IScriptStageOptions | null
   injectedSourceHash: string
@@ -107,7 +107,7 @@ export async function resolveScriptContext(input: {
  * @returns 磁盘上的用例、版本、来源哈希与脚本状态。
  * @throws ApiClientError 当本地服务返回错误时抛出。
  */
-async function defaultFetchCase(skillId: string) {
+async function defaultFetchCase (skillId: string) {
   const response = await fetchE2ETestCase(skillId)
   return {
     testCase: response.data.testCase,

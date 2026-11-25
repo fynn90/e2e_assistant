@@ -20,12 +20,12 @@ import { createExecutionEventBus } from '../../src/application/test-execution/ex
 import { createAgentWorkbenchService } from '../../src/application/agent-workbench/workbench-service'
 import { createGenerationOrchestrator } from '../../src/application/agent-workbench/generation-orchestrator'
 import { createGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
-import { createSkill } from '@authine-e2e-agent/skill-manager'
+import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
 import type { IE2ETestCaseApplicationServices } from '../../src/application/e2e-test-case/application-types'
 import type { ITestExecutionService } from '../../src/application/test-execution/execution-service'
 
 /** 采集发布到总线上的块事件。 */
-function createRuntimeSpy(): {
+function createRuntimeSpy (): {
   runtime: IAgentWorkRuntime
   published: Array<{ sessionId: string; payload: Record<string, unknown> }>
   taskCards: Array<Record<string, unknown>>
@@ -137,7 +137,7 @@ function createRuntimeSpy(): {
 }
 
 /** 构造一个最小可用的执行服务替身。 */
-function createExecutionServiceStub(
+function createExecutionServiceStub (
   result:
     | { ok: true; executionId: string }
     | { ok: false; issues: Array<{ code: string; message: string }> },
@@ -163,7 +163,7 @@ function createExecutionServiceStub(
  * @returns 工作区根目录与新用例 ID。
  * @throws 创建失败时透传 skill-manager 的错误。
  */
-async function createSkillFixture(options: {
+async function createSkillFixture (options: {
   hasDocument: boolean
   hasScript: boolean
 }): Promise<{ rootDir: string; skillId: string }> {

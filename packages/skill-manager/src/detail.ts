@@ -4,7 +4,7 @@
 import { constants as fsConstants } from 'node:fs'
 import { access, lstat, readFile, realpath } from 'node:fs/promises'
 import path from 'node:path'
-import type { ISkillDetail } from '@authine-e2e-agent/types'
+import type { ISkillDetail } from '@fynn90-e2e_assistant/types'
 import { SKILL_MANIFEST_FILE_NAME } from './constants'
 import { ensureEnvFile } from './env-file'
 import {
@@ -40,7 +40,7 @@ export interface IResolvedSkill {
  * @returns 解析后的真实目录、manifest 和 API 详情。
  * @throws SkillManagerError 当索引、目录、manifest 或权限不合法时抛出。
  */
-export async function resolveSkill(
+export async function resolveSkill (
   options: ISkillStorageOptions,
   skillId: string,
 ): Promise<IResolvedSkill> {
@@ -183,7 +183,7 @@ export async function resolveSkill(
   }
 }
 
-export async function getSkillDetail(
+export async function getSkillDetail (
   options: ISkillStorageOptions,
   skillId: string,
 ): Promise<ISkillDetail> {
@@ -198,14 +198,14 @@ export async function getSkillDetail(
   return resolved.detail
 }
 
-function areManifestProjectionsEqual(
+function areManifestProjectionsEqual (
   indexManifest: ISkillManifest,
   persistedManifest: ISkillManifest,
 ): boolean {
   return JSON.stringify(indexManifest) === JSON.stringify(persistedManifest)
 }
 
-function isPathInside(rootPath: string, targetPath: string): boolean {
+function isPathInside (rootPath: string, targetPath: string): boolean {
   const relativePath = path.relative(rootPath, targetPath)
   return (
     relativePath === '' ||

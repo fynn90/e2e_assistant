@@ -1,7 +1,7 @@
 import { access, mkdir, readFile, readdir, stat } from 'node:fs/promises'
 import path from 'node:path'
 import { constants as fsConstants } from 'node:fs'
-import type { IConfigSummary, TConfigIssue } from '@authine-e2e-agent/types'
+import type { IConfigSummary, TConfigIssue } from '@fynn90-e2e_assistant/types'
 import { getAuthineConfigDirectory, getPlatformConfigPath } from './config-path'
 import { buildStorageAccessError } from './storage-error'
 import {
@@ -55,7 +55,7 @@ interface ISavePlatformConfigOptions {
   payload: IInitializationPayload
 }
 
-export async function hasPlatformConfig(): Promise<boolean> {
+export async function hasPlatformConfig (): Promise<boolean> {
   try {
     await access(getPlatformConfigPath(), fsConstants.F_OK)
     return true
@@ -64,7 +64,7 @@ export async function hasPlatformConfig(): Promise<boolean> {
   }
 }
 
-export async function ensurePlatformConfigStorage(): Promise<void> {
+export async function ensurePlatformConfigStorage (): Promise<void> {
   const configDirectoryPath = getAuthineConfigDirectory()
   const configPath = getPlatformConfigPath()
 
@@ -80,7 +80,7 @@ export async function ensurePlatformConfigStorage(): Promise<void> {
   }
 }
 
-export async function inspectPlatformConfig(): Promise<TPlatformConfigInspection> {
+export async function inspectPlatformConfig (): Promise<TPlatformConfigInspection> {
   const configPath = getPlatformConfigPath()
 
   try {
@@ -122,12 +122,12 @@ export async function inspectPlatformConfig(): Promise<TPlatformConfigInspection
   }
 }
 
-export async function loadPlatformConfig(): Promise<IAuthinePlatformConfig | null> {
+export async function loadPlatformConfig (): Promise<IAuthinePlatformConfig | null> {
   const inspection = await inspectPlatformConfig()
   return inspection.state === 'configured' ? inspection.config : null
 }
 
-export async function savePlatformConfig(
+export async function savePlatformConfig (
   options: ISavePlatformConfigOptions,
 ): Promise<IAuthinePlatformConfig> {
   const inspection = await inspectPlatformConfig()
@@ -148,7 +148,7 @@ export async function savePlatformConfig(
   return nextConfig
 }
 
-export async function validateInitializationPayload(
+export async function validateInitializationPayload (
   payload: IInitializationPayload,
 ): Promise<IInitializationPayload> {
   const projectDirectoryInput = payload.projectDirectory.trim()
@@ -181,7 +181,7 @@ export async function validateInitializationPayload(
   }
 }
 
-export async function validateUpdatePayload(
+export async function validateUpdatePayload (
   payload: IUpdatePlatformConfigPayload,
 ): Promise<IInitializationPayload> {
   const projectDirectoryInput = payload.projectDirectory.trim()
@@ -220,7 +220,7 @@ export async function validateUpdatePayload(
   }
 }
 
-export async function evaluatePlatformConfig(
+export async function evaluatePlatformConfig (
   platformConfig: IAuthinePlatformConfig,
 ): Promise<IPlatformConfigReadiness> {
   const issues: TConfigIssue[] = []
@@ -273,7 +273,7 @@ export async function evaluatePlatformConfig(
   return { workspaceReady, chatReady, issues }
 }
 
-export function isPlatformConfigInitialized(
+export function isPlatformConfigInitialized (
   platformConfig: IAuthinePlatformConfig,
 ): boolean {
   return Boolean(
@@ -284,7 +284,7 @@ export function isPlatformConfigInitialized(
   )
 }
 
-export function toConfigSummary(
+export function toConfigSummary (
   platformConfig: IAuthinePlatformConfig,
 ): IConfigSummary {
   return {
@@ -297,7 +297,7 @@ export function toConfigSummary(
   }
 }
 
-export function normalizeApiBaseUrl(apiBaseUrl: string): string {
+export function normalizeApiBaseUrl (apiBaseUrl: string): string {
   const normalizedApiBaseUrl = apiBaseUrl.trim()
 
   if (!normalizedApiBaseUrl) {
@@ -354,7 +354,7 @@ export function normalizeApiBaseUrl(apiBaseUrl: string): string {
   return parsedApiBaseUrl.toString().replace(/\/$/, '')
 }
 
-function normalizePlatformConfig(
+function normalizePlatformConfig (
   platformConfig: Partial<IAuthinePlatformConfig>,
 ): IAuthinePlatformConfig {
   return {
@@ -385,7 +385,7 @@ function normalizePlatformConfig(
   }
 }
 
-async function writePlatformConfigFile(
+async function writePlatformConfigFile (
   nextConfig: IAuthinePlatformConfig,
 ): Promise<void> {
   const configPath = getPlatformConfigPath()
@@ -402,7 +402,7 @@ async function writePlatformConfigFile(
   }
 }
 
-async function ensureProjectDirectory(
+async function ensureProjectDirectory (
   projectDirectory: string,
   requireEmpty: boolean,
 ): Promise<void> {
@@ -441,7 +441,7 @@ async function ensureProjectDirectory(
   }
 }
 
-function maskApiKey(apiKey: string): string {
+function maskApiKey (apiKey: string): string {
   if (apiKey.length <= 8) {
     return `${apiKey.slice(0, 2)}****`
   }
@@ -449,7 +449,7 @@ function maskApiKey(apiKey: string): string {
   return `${apiKey.slice(0, 4)}****${apiKey.slice(-4)}`
 }
 
-function isMissingFileError(error: unknown): boolean {
+function isMissingFileError (error: unknown): boolean {
   return Boolean(
     error &&
     typeof error === 'object' &&

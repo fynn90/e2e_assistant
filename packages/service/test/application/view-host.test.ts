@@ -12,15 +12,15 @@ import { describe, expect, it } from 'vitest'
 import { mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { createSkill } from '@authine-e2e-agent/skill-manager'
-import type { IReadinessViewPayload } from '@authine-e2e-agent/types'
+import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
+import type { IReadinessViewPayload } from '@fynn90-e2e_assistant/types'
 import { createViewHost } from '../../src/application/agent-workbench/view-host'
 import { createSkillCatalog } from '../../src/application/agent-workbench/skill-catalog'
 import type { IReadinessService } from '../../src/application/agent-workbench/execution-readiness'
 import type { IAgentWorkRuntime } from '../../src/agent-runtime/agent-work-runtime'
 
 /** 采集发布的块事件。 */
-function createRuntimeSpy(options: { openTurn?: boolean } = {}): {
+function createRuntimeSpy (options: { openTurn?: boolean } = {}): {
   runtime: IAgentWorkRuntime
   blocks: Array<Record<string, unknown>>
 } {
@@ -43,16 +43,16 @@ function createRuntimeSpy(options: { openTurn?: boolean } = {}): {
 }
 
 /** 体检服务替身。 */
-function createReadinessStub(payload: IReadinessViewPayload): IReadinessService {
+function createReadinessStub (payload: IReadinessViewPayload): IReadinessService {
   return {
-    async check() {
+    async check () {
       return { ok: true, readiness: payload }
     },
   }
 }
 
 /** 造一个用例（含数据与脚本）。 */
-async function createCaseFixture(
+async function createCaseFixture (
   rootDir: string,
   input: { withDocument?: boolean; withScript?: boolean } = {},
 ): Promise<string> {
@@ -279,14 +279,14 @@ describe('发布门（沿用 v16 机制）', () => {
 
     // 让 turn end 能被驱动。
     let turnListener: ((event: unknown) => void) | undefined
-    ;(runtime.bus as unknown as { subscribe: unknown }).subscribe = (
-      _sessionId: string,
-      _afterSeq: number,
-      listener: (event: unknown) => void,
-    ) => {
-      turnListener = listener
-      return () => undefined
-    }
+      ; (runtime.bus as unknown as { subscribe: unknown }).subscribe = (
+        _sessionId: string,
+        _afterSeq: number,
+        listener: (event: unknown) => void,
+      ) => {
+        turnListener = listener
+        return () => undefined
+      }
 
     const host = createViewHost({
       sessionId: 's1',

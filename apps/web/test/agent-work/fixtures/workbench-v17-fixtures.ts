@@ -9,7 +9,7 @@
  * 构造器一律走**归约器的真实创建路径**（`createWorkbenchXxxItem`），而不是手写
  * 字面量对象：这样事件 → 项 的字段映射（含 v17 新增字段）顺带被锁住。
  */
-import type { TAgentClientEvent } from '@authine-e2e-agent/types'
+import type { TAgentClientEvent } from '@fynn90-e2e_assistant/types'
 import {
   createWorkbenchProposalItem,
   createWorkbenchTaskItem,
@@ -28,7 +28,7 @@ import {
  * @returns 可直接交由归约器或工厂处理的事件。
  * @throws 不抛出异常。
  */
-export function eventOf<T extends { type: string; phase: 'begin' }>(
+export function eventOf<T extends { type: string; phase: 'begin' }> (
   seq: number,
   blockId: string,
   payload: T,
@@ -49,7 +49,7 @@ export function eventOf<T extends { type: string; phase: 'begin' }>(
  * @returns 视图卡片项。
  * @throws 不抛出异常。
  */
-export function createViewItem(
+export function createViewItem (
   overrides: {
     viewKind?: IWorkbenchViewTimelineItem['viewKind']
     payload?: Record<string, unknown>
@@ -74,7 +74,7 @@ export function createViewItem(
  * @returns 提案卡片项。
  * @throws 不抛出异常。
  */
-export function createProposalItem(
+export function createProposalItem (
   overrides: Partial<IWorkbenchProposalTimelineItem> = {},
 ): IWorkbenchProposalTimelineItem {
   return {
@@ -102,7 +102,7 @@ export function createProposalItem(
  * @returns 任务卡片项。
  * @throws 不抛出异常。
  */
-export function createBatchItem(
+export function createBatchItem (
   overrides: Partial<IWorkbenchTaskTimelineItem> = {},
 ): IWorkbenchTaskTimelineItem {
   return {

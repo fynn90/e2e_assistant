@@ -12,12 +12,12 @@ import {
   findMissingEnvReferences,
   parseEnvFileContent,
   type IE2EValidationIssue,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   readSkillFile,
   SKILL_ENV_FILE_NAME,
   type ISkillStorageOptions,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 
 /** env.json 的读取状态：合法（含 key 集合）、缺失或格式非法。 */
 export type TEnvFileState =
@@ -41,7 +41,7 @@ export interface IEnvReadinessIssue extends IE2EValidationIssue {
  * @returns env.json 的解析状态。
  * @throws 不抛出异常——读取失败等价于「缺失」场景。
  */
-export async function readEnvFileState(
+export async function readEnvFileState (
   options: ISkillStorageOptions,
   skillId: string,
 ): Promise<TEnvFileState> {
@@ -77,7 +77,7 @@ export async function readEnvFileState(
  * @returns 阻断问题列表；空数组表示允许生成。
  * @throws 不抛出异常。
  */
-export function validateEnvReferencesForGeneration(
+export function validateEnvReferencesForGeneration (
   testCase: Parameters<typeof collectEnvReferences>[0],
   envFile: TEnvFileState,
 ): IEnvReadinessIssue[] {
@@ -117,7 +117,7 @@ export function validateEnvReferencesForGeneration(
  * @returns 形如「步骤 2 的测试数据」「前置条件 1」的位置描述。
  * @throws 不抛出异常。
  */
-function describeEnvReferencePath(path: Array<string | number>): string {
+function describeEnvReferencePath (path: Array<string | number>): string {
   const [section, itemIndex, field] = path
 
   if (section === 'preconditions' && typeof itemIndex === 'number') {

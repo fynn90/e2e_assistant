@@ -1,4 +1,4 @@
-/** 提供 @authine-e2e-agent/playwright-engine 的稳定公共导出入口。 */
+/** 提供 @fynn90-e2e_assistant/playwright-engine 的稳定公共导出入口。 */
 
 export * from './contracts/browser'
 export * from './contracts/browser-env'

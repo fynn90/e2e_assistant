@@ -2,11 +2,11 @@
  * 定义宿主可注入的敏感信息脱敏契约：运行期秘密登记能力。
  *
  * 基础脱敏接口 ISensitiveDataRedactor 属于 agent / 引擎共享契约，
- * 已迁移至 @authine-e2e-agent/types；此处再导出以保持引擎公共 API 不变。
+ * 已迁移至 @fynn90-e2e_assistant/types；此处再导出以保持引擎公共 API 不变。
  */
-import type { ISensitiveDataRedactor } from '@authine-e2e-agent/types'
+import type { ISensitiveDataRedactor } from '@fynn90-e2e_assistant/types'
 
-export type { ISensitiveDataRedactor } from '@authine-e2e-agent/types'
+export type { ISensitiveDataRedactor } from '@fynn90-e2e_assistant/types'
 
 /**
  * 可登记运行期秘密值的脱敏器（v20 凭据代理）。
@@ -28,7 +28,7 @@ export interface ISecretRegistrableRedactor {
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  registerSecret(secret: string): void
+  registerSecret (secret: string): void
   /**
    * 读取当前已登记的全部运行期秘密值。
    *
@@ -42,7 +42,7 @@ export interface ISecretRegistrableRedactor {
    * @returns 已登记秘密值的快照副本（外部修改不影响内部状态）。
    * @throws 不抛出异常。
    */
-  listSecrets(): readonly string[]
+  listSecrets (): readonly string[]
 }
 
 /**
@@ -52,7 +52,7 @@ export interface ISecretRegistrableRedactor {
  * @returns 支持 `registerSecret` 时返回 true。
  * @throws 不抛出异常。
  */
-export function isSecretRegistrable(
+export function isSecretRegistrable (
   redactor: ISensitiveDataRedactor | undefined,
 ): redactor is ISensitiveDataRedactor & ISecretRegistrableRedactor {
   return (

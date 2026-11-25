@@ -17,7 +17,7 @@ import {
   watch,
   type Ref,
 } from 'vue'
-import type { TAgentActivity } from '@authine-e2e-agent/types'
+import type { TAgentActivity } from '@fynn90-e2e_assistant/types'
 import {
   getAgentWorkBlocks,
   subscribeAgentWorkStream,
@@ -63,7 +63,7 @@ export interface IUseAgentWorkTimeline {
  * @returns 只读时间线状态与释放方法。
  * @throws 不抛出异常；历史加载失败通过 onError 回调上报。
  */
-export function useAgentWorkTimeline(
+export function useAgentWorkTimeline (
   options: IUseAgentWorkTimelineOptions,
 ): IUseAgentWorkTimeline {
   // 归约状态**必须**是深层响应式：归约器是**就地修改**已有项的
@@ -104,14 +104,14 @@ export function useAgentWorkTimeline(
    * 两者缺一不可——少了这次浅拷贝，新插入的块不会渲染；
    * 少了深层响应式，已有块的增长不会渲染。
    */
-  function syncRefs(): void {
+  function syncRefs (): void {
     items.value = [...state.items]
     activity.value = state.activity
     activityLabel.value = state.activityLabel
   }
 
   /** 断开事件流订阅。 */
-  function detach(): void {
+  function detach (): void {
     stream?.close()
     stream = undefined
     connection.value = 'offline'
@@ -123,7 +123,7 @@ export function useAgentWorkTimeline(
    * @param sessionId - 目标会话 ID。
    * @returns 打开完成后兑现的 Promise（历史加载失败时已通过 onError 上报）。
    */
-  async function open(sessionId: string): Promise<void> {
+  async function open (sessionId: string): Promise<void> {
     detach()
     clearTimeline(state)
     syncRefs()
@@ -168,7 +168,7 @@ export function useAgentWorkTimeline(
   )
 
   /** 断开订阅并标记已释放（避免迟到的异步结果写回）。 */
-  function dispose(): void {
+  function dispose (): void {
     disposed = true
     detach()
   }

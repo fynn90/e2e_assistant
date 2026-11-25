@@ -21,13 +21,13 @@ import {
   SKILL_ENV_FILE_NAME,
   listSkills,
   resolveSkill,
-} from '@authine-e2e-agent/skill-manager'
-import type { ISkillStorageOptions } from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
 import {
   parseEnvFileContent,
   type IAgentSkillCandidate,
-} from '@authine-e2e-agent/types'
-import type { TReadSkillDocumentHostResult } from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/types'
+import type { TReadSkillDocumentHostResult } from '@fynn90-e2e_assistant/agent'
 import {
   buildSkillDetailPayload,
   hasPlaywrightScript,
@@ -57,7 +57,7 @@ export interface ISkillCatalog {
    * @returns 候选列表；索引中条目不合法时跳过该条（不让单个坏条目拖垮整个列表）。
    * @throws 不抛出异常——工作区不可读时返回空列表（Agent 会据此如实说明「未找到」）。
    */
-  listCandidates(rootDir: string): Promise<IAgentSkillCandidate[]>
+  listCandidates (rootDir: string): Promise<IAgentSkillCandidate[]>
 
   /**
    * 读取指定用例的 SKILL.md 全文。
@@ -67,7 +67,7 @@ export interface ISkillCatalog {
    * @returns 文档内容与脚本存在性；不存在/未生成/不可读时返回归一化失败原因。
    * @throws 不抛出异常——所有失败都归一为 `{ ok: false }` 结果，由工具转述给模型。
    */
-  readSkillDocument(
+  readSkillDocument (
     rootDir: string,
     skillId: string,
   ): Promise<TReadSkillDocumentHostResult>
@@ -84,7 +84,7 @@ export interface ISkillCatalog {
    * @returns 命中行与总数（`total` 为筛选后的命中数）。
    * @throws 不抛出异常——工作区不可读时返回空结果。
    */
-  listFiltered(
+  listFiltered (
     rootDir: string,
     filter: {
       keyword?: string
@@ -101,7 +101,7 @@ export interface ISkillCatalog {
    * @returns 详情；目标不存在或数据不可读时返回归一化失败。
    * @throws 不抛出异常。
    */
-  readTestCase(
+  readTestCase (
     rootDir: string,
     skillId: string,
   ): Promise<
@@ -118,7 +118,7 @@ export interface ISkillCatalog {
    * @returns 历史；目标不存在时返回归一化失败。
    * @throws 不抛出异常。
    */
-  readRunHistory(
+  readRunHistory (
     rootDir: string,
     skillId: string,
     limit?: number,
@@ -134,9 +134,9 @@ export interface ISkillCatalog {
  * @returns 检索服务实例。
  * @throws 不抛出异常。
  */
-export function createSkillCatalog(): ISkillCatalog {
+export function createSkillCatalog (): ISkillCatalog {
   return {
-    async listCandidates(rootDir) {
+    async listCandidates (rootDir) {
       const storage: ISkillStorageOptions = { rootDir }
 
       let summaries
@@ -179,7 +179,7 @@ export function createSkillCatalog(): ISkillCatalog {
       return candidates
     },
 
-    async readSkillDocument(rootDir, skillId) {
+    async readSkillDocument (rootDir, skillId) {
       const storage: ISkillStorageOptions = { rootDir }
 
       try {
@@ -216,14 +216,13 @@ export function createSkillCatalog(): ISkillCatalog {
         return {
           ok: false,
           kind: 'unavailable',
-          message: `读取用例 ${skillId} 的 SKILL.md 失败：${
-            error instanceof Error ? error.message : String(error)
-          }`,
+          message: `读取用例 ${skillId} 的 SKILL.md 失败：${error instanceof Error ? error.message : String(error)
+            }`,
         }
       }
     },
 
-    async listFiltered(rootDir, filter) {
+    async listFiltered (rootDir, filter) {
       const storage: ISkillStorageOptions = { rootDir }
 
       let summaries
@@ -296,7 +295,7 @@ export function createSkillCatalog(): ISkillCatalog {
       return { rows, total: rows.length }
     },
 
-    async readTestCase(rootDir, skillId) {
+    async readTestCase (rootDir, skillId) {
       const storage: ISkillStorageOptions = { rootDir }
 
       let skillRoot: string
@@ -329,8 +328,8 @@ export function createSkillCatalog(): ISkillCatalog {
 
         const document = documentState.exists
           ? await new FileSkillDocumentRepository(storage).findBySkillId(
-              skillId,
-            )
+            skillId,
+          )
           : undefined
 
         return {
@@ -348,14 +347,13 @@ export function createSkillCatalog(): ISkillCatalog {
         return {
           ok: false,
           kind: 'unavailable',
-          message: `读取用例 ${skillId} 失败：${
-            error instanceof Error ? error.message : String(error)
-          }`,
+          message: `读取用例 ${skillId} 失败：${error instanceof Error ? error.message : String(error)
+            }`,
         }
       }
     },
 
-    async readRunHistory(rootDir, skillId, limit) {
+    async readRunHistory (rootDir, skillId, limit) {
       const storage: ISkillStorageOptions = { rootDir }
 
       let resolved
@@ -381,9 +379,8 @@ export function createSkillCatalog(): ISkillCatalog {
         return {
           ok: false,
           kind: 'unavailable',
-          message: `读取用例 ${skillId} 的执行历史失败：${
-            error instanceof Error ? error.message : String(error)
-          }`,
+          message: `读取用例 ${skillId} 的执行历史失败：${error instanceof Error ? error.message : String(error)
+            }`,
         }
       }
     },
@@ -401,7 +398,7 @@ export function createSkillCatalog(): ISkillCatalog {
  *   这是保守方向：多提示一个缺失比漏提示一个更安全）。
  * @throws 不抛出异常。
  */
-async function readEnvKeySet(
+async function readEnvKeySet (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<ReadonlySet<string>> {
@@ -428,7 +425,7 @@ async function readEnvKeySet(
  * @returns baseUrl；用例数据缺失或未配置时返回 undefined。
  * @throws 不抛出异常。
  */
-async function readBaseUrl(
+async function readBaseUrl (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<string | undefined> {

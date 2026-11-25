@@ -28,7 +28,7 @@ import {
   toToolCallView,
   type IToolCallRecord,
 } from '../tool-trace'
-import type { IToolCallView } from '@authine-e2e-agent/types'
+import type { IToolCallView } from '@fynn90-e2e_assistant/types'
 
 /**
  * Agent 主循环事件监听器。
@@ -154,7 +154,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param listener - 事件监听器，接收翻译后的事件对象与当前运行的取消信号。
    * @returns 取消订阅函数；调用后不再接收后续事件。
    */
-  subscribe(listener: AgentLoopListener<TAppEvent>): () => void {
+  subscribe (listener: AgentLoopListener<TAppEvent>): () => void {
     this.listeners.add(listener)
     return () => {
       this.listeners.delete(listener)
@@ -172,7 +172,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @returns 运行结束后的会话消息与错误信息。
    * @throws {Error} 当重试策略判定不可重试，且模型流式调用或工具执行失败时，透传底层异常。
    */
-  async run(
+  async run (
     sessionId: string,
     input: string | AgentMessage[],
   ): Promise<IAgentLoopResult> {
@@ -223,7 +223,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @returns 运行结束后的会话消息与错误信息。
    * @throws {Error} 当最后一条消息不符合继续运行前提，或模型/工具执行失败时，透传底层异常。
    */
-  async continue(sessionId: string): Promise<IAgentLoopResult> {
+  async continue (sessionId: string): Promise<IAgentLoopResult> {
     const context = this.createRunContext(sessionId)
     this.beginRun(context)
 
@@ -248,14 +248,14 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    *
    * 未运行时不产生副作用；已运行的 prompt/continue 会以 aborted 状态结束。
    */
-  abort(): void {
+  abort (): void {
     this.agent.abort()
   }
 
   /**
    * 等待当前运行与所有已订阅事件监听器全部结束。
    */
-  async waitForIdle(): Promise<void> {
+  async waitForIdle (): Promise<void> {
     await this.agent.waitForIdle()
   }
 
@@ -264,7 +264,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    *
    * 仅重置内存态；如需清空持久化历史和工具调用审计，请显式调用 ISessionStore.remove()。
    */
-  reset(): void {
+  reset (): void {
     this.agent.reset()
   }
 
@@ -274,7 +274,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param toolCallId - 模型分配的工具调用 ID。
    * @returns 当前记录副本；当前运行不存在该调用时返回 undefined。
    */
-  getToolCallRecord(toolCallId: string): IToolCallRecord | undefined {
+  getToolCallRecord (toolCallId: string): IToolCallRecord | undefined {
     return this.activeToolTraceRecorder?.get(toolCallId)
   }
 
@@ -284,7 +284,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param toolCallId - 模型分配的工具调用 ID。
    * @returns 已脱敏、截断的展示对象；记录不存在时返回 undefined。
    */
-  getToolCallView(toolCallId: string): IToolCallView | undefined {
+  getToolCallView (toolCallId: string): IToolCallView | undefined {
     const record = this.getToolCallRecord(toolCallId)
     return record ? this.projectToolCall(record) : undefined
   }
@@ -294,7 +294,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    *
    * @param context - 当前运行元信息。
    */
-  private beginRun(context: IHarnessRunContext): void {
+  private beginRun (context: IHarnessRunContext): void {
     this.activeRunContext = context
     this.activeRunAbort = new AbortController()
     this.activeToolTraceRecorder = new ToolTraceRecorder({
@@ -310,7 +310,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    *
    * @param context - 已结束的运行元信息。
    */
-  private endRun(context: IHarnessRunContext): void {
+  private endRun (context: IHarnessRunContext): void {
     if (this.activeRunContext?.runId !== context.runId) return
     this.activeRunContext = undefined
     this.activeToolTraceRecorder = undefined
@@ -323,7 +323,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    *
    * @param events - 适配器钩子返回的事件（单个、数组或 null）。
    */
-  private async emitLifecycleEvents(
+  private async emitLifecycleEvents (
     events: TAppEvent | TAppEvent[] | null | undefined,
   ): Promise<void> {
     if (!events) return
@@ -343,7 +343,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param context - 失败运行的上下文。
    * @param error - 导致运行失败的原始错误。
    */
-  private async emitRunEndLifecycle(
+  private async emitRunEndLifecycle (
     context: IHarnessRunContext,
     error: unknown,
   ): Promise<void> {
@@ -370,7 +370,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param context - 失败运行的上下文。
    * @returns 始终正常结束，保证不会覆盖原始模型或工具异常。
    */
-  private async persistSnapshotSafely(
+  private async persistSnapshotSafely (
     context: IHarnessRunContext,
   ): Promise<void> {
     try {
@@ -388,7 +388,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param event - 翻译后的应用事件。
    * @param signal - 当前运行的取消信号。
    */
-  private async emit(event: TAppEvent, signal: AbortSignal): Promise<void> {
+  private async emit (event: TAppEvent, signal: AbortSignal): Promise<void> {
     for (const listener of this.listeners) {
       await listener(event, signal)
     }
@@ -401,12 +401,12 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param operation - 实际执行主循环的操作函数（prompt / continue）。
    * @throws {Error} 当重试策略判定不可重试时，上报可观测层后透传原错误。
    */
-  private async executeRun(
+  private async executeRun (
     context: IHarnessRunContext,
     operation: () => Promise<void>,
   ): Promise<void> {
     let attempt = 0
-    for (;;) {
+    for (; ;) {
       try {
         await operation()
         return
@@ -431,7 +431,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param event - pi-agent-core 发出的生命周期事件。
    * @returns 审计成功、无需处理或失败已上报后正常结束。
    */
-  private async recordToolExecutionEvent(event: AgentEvent): Promise<void> {
+  private async recordToolExecutionEvent (event: AgentEvent): Promise<void> {
     if (
       event.type !== 'tool_execution_start' &&
       event.type !== 'tool_execution_update' &&
@@ -461,7 +461,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param record - 完整工具调用记录。
    * @returns 脱敏、截断后的客户端展示对象。
    */
-  private projectToolCall(record: IToolCallRecord): IToolCallView {
+  private projectToolCall (record: IToolCallRecord): IToolCallView {
     return toToolCallView(record)
   }
 
@@ -471,7 +471,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param context - 本次运行上下文。
    * @returns 包含 runId、会话消息与错误信息的运行结果。
    */
-  private async finishRun(
+  private async finishRun (
     context: IHarnessRunContext,
   ): Promise<IAgentLoopResult> {
     const result = this.collectResult(context.runId)
@@ -490,7 +490,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param runId - 本次运行的唯一标识。
    * @returns 当前会话消息副本与最近一次运行的错误信息。
    */
-  private collectResult(runId: string): IAgentLoopResult {
+  private collectResult (runId: string): IAgentLoopResult {
     const { messages, errorMessage } = this.agent.state
     return { runId, messages: [...messages], errorMessage }
   }
@@ -502,7 +502,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
    * @param input - 本次运行输入；continue 续跑时不传。
    * @returns 运行元信息，含唯一 runId、起始时间与会话 ID。
    */
-  private createRunContext(
+  private createRunContext (
     sessionId: string,
     input?: string | AgentMessage[],
   ): IHarnessRunContext {
@@ -523,7 +523,7 @@ export class AgentLoop<TAppEvent = AgentEvent> {
  * @param options - 可选配置：会话 ID 与 Harness 插件集合。
  * @returns 已绑定配置、运行时与插件的 Agent 主循环，可直接调用 run 启动对话。
  */
-export function createAgentLoop(
+export function createAgentLoop (
   agentConfig: IAgentBaseConfig,
   modelRuntime: IAgentModelRuntime,
   options?: IAgentLoopOptions,
@@ -537,6 +537,6 @@ export function createAgentLoop(
  * @param ms - 等待时长（毫秒）。
  * @returns 到时后 resolve 的 Promise。
  */
-function sleep(ms: number): Promise<void> {
+function sleep (ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }

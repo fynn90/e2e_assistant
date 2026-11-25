@@ -29,7 +29,7 @@ import {
   writeFile,
 } from 'node:fs/promises'
 import path from 'node:path'
-import type { IExecutionRunSummary } from '@authine-e2e-agent/types'
+import type { IExecutionRunSummary } from '@fynn90-e2e_assistant/types'
 import {
   TEST_REPORT_DIRECTORY_NAME,
   TEST_REPORT_REPORT_FILE_NAME,
@@ -49,7 +49,7 @@ import { isFileSystemPermissionError, SkillManagerError } from './errors'
  * @throws SkillManagerError（FILE_PERMISSION_DENIED）当目录被同名文件占用、
  *         创建失败或目录不可写时抛出。
  */
-export async function ensureTestReportDirectory(
+export async function ensureTestReportDirectory (
   skillRoot: string,
 ): Promise<string> {
   const directory = path.join(skillRoot, TEST_REPORT_DIRECTORY_NAME)
@@ -110,7 +110,7 @@ export async function ensureTestReportDirectory(
  * @returns 报告文件在 Skill 内的相对路径（`test_report/<runId>/report.html`）。
  * @throws SkillManagerError 当 runId 非法或写入失败时抛出。
  */
-export async function writeTestReport(
+export async function writeTestReport (
   skillRoot: string,
   runId: string,
   html: string,
@@ -154,7 +154,7 @@ export async function writeTestReport(
  * @returns 摘要文件在 Skill 内的相对路径（`test_report/<runId>/summary.json`）。
  * @throws SkillManagerError 当 runId 非法或写入失败时抛出。
  */
-export async function writeTestReportSummary(
+export async function writeTestReportSummary (
   skillRoot: string,
   runId: string,
   summary: IExecutionRunSummary,
@@ -191,7 +191,7 @@ export async function writeTestReportSummary(
  *          undefined（调用方按「该次无摘要」处理，不解析 HTML 兜底）。
  * @throws 不抛出异常——历史卡的渲染不应被单份坏摘要打断。
  */
-export async function readTestReportSummary(
+export async function readTestReportSummary (
   skillRoot: string,
   runId: string,
 ): Promise<IExecutionRunSummary | undefined> {
@@ -228,7 +228,7 @@ export async function readTestReportSummary(
  * @returns 结构合法的摘要；任一必需字段不符时返回 undefined。
  * @throws 不抛出异常（JSON 解析失败时返回 undefined）。
  */
-function parseRunSummary(raw: string): IExecutionRunSummary | undefined {
+function parseRunSummary (raw: string): IExecutionRunSummary | undefined {
   let value: unknown
   try {
     value = JSON.parse(raw)
@@ -306,7 +306,7 @@ function parseRunSummary(raw: string): IExecutionRunSummary | undefined {
  * @returns 附件在 Skill 内的相对路径。
  * @throws SkillManagerError 当文件名非法或写入失败时抛出。
  */
-export async function writeTestReportAttachment(
+export async function writeTestReportAttachment (
   skillRoot: string,
   runId: string,
   fileName: string,
@@ -353,7 +353,7 @@ export async function writeTestReportAttachment(
  * @returns 按名称升序的 runId 列表（即时间先后）。
  * @throws 不抛出异常；目录不存在或不可读时返回空数组。
  */
-export async function listTestReportRuns(skillRoot: string): Promise<string[]> {
+export async function listTestReportRuns (skillRoot: string): Promise<string[]> {
   try {
     const entries = await readdir(
       path.join(skillRoot, TEST_REPORT_DIRECTORY_NAME),
@@ -378,7 +378,7 @@ export async function listTestReportRuns(skillRoot: string): Promise<string[]> {
  * @throws SkillManagerError 当 runId 非法（INVALID_REQUEST）
  *         或报告目录不存在（FILE_NOT_FOUND）时抛出。
  */
-export async function deleteTestReportRun(
+export async function deleteTestReportRun (
   skillRoot: string,
   runId: string,
 ): Promise<void> {
@@ -433,7 +433,7 @@ export async function deleteTestReportRun(
  * @returns 运行目录绝对路径。
  * @throws SkillManagerError 当 runId 非法或目录创建失败时抛出。
  */
-async function resolveRunDirectory(
+async function resolveRunDirectory (
   skillRoot: string,
   runId: string,
 ): Promise<string> {
@@ -458,7 +458,7 @@ async function resolveRunDirectory(
 }
 
 /** 判断错误是否为「路径不存在」类。 */
-function isFileSystemMissingError(error: unknown): boolean {
+function isFileSystemMissingError (error: unknown): boolean {
   const code = (error as NodeJS.ErrnoException | undefined)?.code
   return code === 'ENOENT'
 }

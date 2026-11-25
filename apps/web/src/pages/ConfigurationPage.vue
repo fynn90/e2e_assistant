@@ -1,7 +1,7 @@
 <!-- 系统配置路由页：组合配置展示、保存反馈与工作区切换后的 Skill 状态失效。 -->
 <script setup lang="ts">
 import { NAlert } from 'naive-ui'
-import type { IUpdateConfigRequest } from '@authine-e2e-agent/types'
+import type { IUpdateConfigRequest } from '@fynn90-e2e_assistant/types'
 import WorkspaceSummaryCard from '../components/WorkspaceSummaryCard.vue'
 import { useGlobalMessage } from '../composables/useGlobalMessage'
 import { usePlatformStore } from '../stores/platform'

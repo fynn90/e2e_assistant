@@ -1,4 +1,4 @@
-# @authine-e2e-agent/types
+# @fynn90-e2e_assistant/types
 
 ## 0.1.3
 

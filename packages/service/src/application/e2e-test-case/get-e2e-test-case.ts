@@ -4,8 +4,8 @@
 import {
   FileE2ETestCaseRepository,
   FileSkillDocumentRepository,
-} from '@authine-e2e-agent/skill-manager'
-import type { IE2ETestCaseDocumentData } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { IE2ETestCaseDocumentData } from '@fynn90-e2e_assistant/types'
 
 /**
  * 读取前端结构化编辑器需要的完整文档状态。
@@ -14,7 +14,7 @@ import type { IE2ETestCaseDocumentData } from '@authine-e2e-agent/types'
  * @returns 结构化用例、来源版本以及脚本和 SKILL.md 状态。
  * @throws SkillManagerError 当 Skill 或固定业务文件损坏时抛出。
  */
-export async function getE2ETestCase(input: {
+export async function getE2ETestCase (input: {
   rootDir: string
   skillId: string
 }): Promise<IE2ETestCaseDocumentData> {

@@ -30,9 +30,9 @@ import type { IAgentWorkRuntime } from '../../agent-runtime/agent-work-runtime'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import type { ITestExecutionService } from '../test-execution/execution-service'
 import type { IExecutionEventBus } from '../test-execution/execution-event-bus'
-import type { ISkillStorageOptions } from '@authine-e2e-agent/skill-manager'
-import { resolveSkill } from '@authine-e2e-agent/skill-manager'
-import type { IBatchItem, TBatchStatus } from '@authine-e2e-agent/types'
+import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
+import { resolveSkill } from '@fynn90-e2e_assistant/skill-manager'
+import type { IBatchItem, TBatchStatus } from '@fynn90-e2e_assistant/types'
 import type { IReadinessService } from './execution-readiness'
 
 /**
@@ -89,7 +89,7 @@ export interface IBatchExecutionService {
    * @returns 批次 ID；超上限或目标不合法时返回失败并说明原因（R4b：不截断）。
    * @throws 不抛出异常——失败以 ok:false 归一，由工具转述给模型。
    */
-  create(
+  create (
     input: ICreateBatchInput,
   ): Promise<
     | { ok: true; batchId: string; message: string }
@@ -103,7 +103,7 @@ export interface IBatchExecutionService {
    * @returns 启动结果。
    * @throws ApiError 批次不存在或状态不符时抛出。
    */
-  confirm(input: {
+  confirm (input: {
     rootDir: string
     sessionId: string
     batchId: string
@@ -117,7 +117,7 @@ export interface IBatchExecutionService {
    * @returns 取消完成时兑现。
    * @throws ApiError 批次不存在时抛出。
    */
-  cancel(input: {
+  cancel (input: {
     sessionId: string
     batchId: string
     runtime: IAgentWorkRuntime
@@ -130,7 +130,7 @@ export interface IBatchExecutionService {
    * @returns 停止请求的受理结果。
    * @throws ApiError 批次不存在时抛出。
    */
-  stop(input: {
+  stop (input: {
     sessionId: string
     batchId: string
     runtime: IAgentWorkRuntime
@@ -144,18 +144,18 @@ export interface IBatchExecutionService {
  * @returns 批次服务实例。
  * @throws 不抛出异常。
  */
-export function createBatchExecutionService(
+export function createBatchExecutionService (
   dependencies: IBatchExecutionServiceDependencies,
 ): IBatchExecutionService {
   /** 批次登记表（batchId → 记录）。 */
   const batches = new Map<string, IBatchRecord>()
 
   return {
-    async create(input) {
+    async create (input) {
       return createBatch(dependencies, batches, input)
     },
 
-    async confirm(input) {
+    async confirm (input) {
       const record = requireBatch(batches, input.sessionId, input.batchId)
       if (record.status !== 'awaiting-confirmation') {
         return {
@@ -173,7 +173,7 @@ export function createBatchExecutionService(
       return { ok: true }
     },
 
-    cancel(input) {
+    cancel (input) {
       const record = requireBatch(batches, input.sessionId, input.batchId)
       if (record.status === 'awaiting-confirmation') {
         record.status = 'cancelled'
@@ -182,7 +182,7 @@ export function createBatchExecutionService(
       return { ok: true }
     },
 
-    stop(input) {
+    stop (input) {
       const record = requireBatch(batches, input.sessionId, input.batchId)
       if (record.status !== 'running') {
         return { ok: true }
@@ -211,7 +211,7 @@ export function createBatchExecutionService(
  * @returns 创建结果。
  * @throws 不抛出异常。
  */
-async function createBatch(
+async function createBatch (
   dependencies: IBatchExecutionServiceDependencies,
   batches: Map<string, IBatchRecord>,
   input: ICreateBatchInput,
@@ -258,9 +258,9 @@ async function createBatch(
       readyCheck: readyCheck.ok
         ? { ok: true }
         : {
-            ok: false,
-            ...(readyCheck.reason ? { reason: readyCheck.reason } : {}),
-          },
+          ok: false,
+          ...(readyCheck.reason ? { reason: readyCheck.reason } : {}),
+        },
     })
   }
 
@@ -280,9 +280,8 @@ async function createBatch(
   return {
     ok: true,
     batchId: record.batchId,
-    message: `连续执行卡（待确认）已在对话流中给出：共 ${items.length} 个用例${
-      notReady > 0 ? `，其中 ${notReady} 个当前不就绪（执行时会被跳过）` : ''
-    }。请说明**停止会终止整个批次**（剩余标「未执行」），等用户在卡片上确认后才会开始。`,
+    message: `连续执行卡（待确认）已在对话流中给出：共 ${items.length} 个用例${notReady > 0 ? `，其中 ${notReady} 个当前不就绪（执行时会被跳过）` : ''
+      }。请说明**停止会终止整个批次**（剩余标「未执行」），等用户在卡片上确认后才会开始。`,
   }
 }
 
@@ -300,7 +299,7 @@ async function createBatch(
  * @returns 批次跑完时兑现。
  * @throws 不抛出异常——任何异常都归为条目失败，不冒泡。
  */
-async function runBatch(
+async function runBatch (
   dependencies: IBatchExecutionServiceDependencies,
   batches: Map<string, IBatchRecord>,
   record: IBatchRecord,
@@ -370,7 +369,7 @@ async function runBatch(
  * @returns 该条目的终态（skipped 表示真校验没过而跳过）。
  * @throws 不抛出异常——启动失败归为 failed，真校验未过归为 skipped。
  */
-async function runSingleItem(
+async function runSingleItem (
   dependencies: IBatchExecutionServiceDependencies,
   record: IBatchRecord,
   rootDir: string,
@@ -409,7 +408,7 @@ async function runSingleItem(
  * @returns 条目的终态（passed / failed / interrupted）。
  * @throws 不抛出异常。
  */
-async function waitForExecutionTerminal(
+async function waitForExecutionTerminal (
   dependencies: IBatchExecutionServiceDependencies,
   executionId: string,
   item: IBatchItem,
@@ -469,7 +468,7 @@ async function waitForExecutionTerminal(
  * @returns 无返回值。
  * @throws 不抛出异常（失败不影响卡片终态）。
  */
-function injectBatchSummary(
+function injectBatchSummary (
   runtime: IAgentWorkRuntime,
   record: IBatchRecord,
 ): void {
@@ -486,8 +485,7 @@ function injectBatchSummary(
 
     const lines = [
       '【平台通知】连续执行已结束。',
-      `汇总：通过 ${counts.passed}、失败 ${counts.failed}、跳过 ${counts.skipped}${
-        counts.interrupted > 0 ? `、中断 ${counts.interrupted}` : ''
+      `汇总：通过 ${counts.passed}、失败 ${counts.failed}、跳过 ${counts.skipped}${counts.interrupted > 0 ? `、中断 ${counts.interrupted}` : ''
       }${counts.notExecuted > 0 ? `、未执行 ${counts.notExecuted}` : ''}。`,
       '逐条结果与报告入口已由对话流中的连续执行卡承载，**不要再用表格复述**。',
       '请只给出：一句话结论；有失败时逐条说明失败的用例与可能的修复方向。',
@@ -513,7 +511,7 @@ function injectBatchSummary(
  * @returns 无返回值。
  * @throws 不抛出异常。
  */
-function publishBatch(runtime: IAgentWorkRuntime, record: IBatchRecord): void {
+function publishBatch (runtime: IAgentWorkRuntime, record: IBatchRecord): void {
   runtime.publishTaskCard({
     sessionId: record.sessionId,
     taskId: record.batchId,
@@ -529,8 +527,8 @@ function publishBatch(runtime: IAgentWorkRuntime, record: IBatchRecord): void {
           : record.status === 'interrupted'
             ? 'interrupted'
             : // awaiting-confirmation / cancelled 在卡片上表现为「未开始」
-              //（running 是过程态；用 completed 会让用户误以为跑完了）。
-              'interrupted',
+            //（running 是过程态；用 completed 会让用户误以为跑完了）。
+            'interrupted',
     startedAt: record.startedAt,
     batchStatus: record.status,
     items: record.items,
@@ -547,7 +545,7 @@ function publishBatch(runtime: IAgentWorkRuntime, record: IBatchRecord): void {
  * @returns 批次记录。
  * @throws ApiError（INVALID_REQUEST / 404）批次不存在或归属不符。
  */
-function requireBatch(
+function requireBatch (
   batches: Map<string, IBatchRecord>,
   sessionId: string,
   batchId: string,

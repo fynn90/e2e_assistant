@@ -2,7 +2,7 @@
 // naive-ui 的 NModal 会 teleport 到 body，因此断言与触发均基于 document.body 查询。
 import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 import SkillDeleteConfirmModal from '../../src/modules/skills/SkillDeleteConfirmModal.vue'
 
 const mocks = vi.hoisted(() => ({
@@ -39,7 +39,7 @@ const fixtureSkill: ISkillSummary = {
  * @returns Vue Test Utils 包装器。
  * @throws 挂载失败时由测试框架抛出。
  */
-function mountModal() {
+function mountModal () {
   return mount(SkillDeleteConfirmModal, {
     props: { show: true, skill: fixtureSkill },
   })
@@ -51,7 +51,7 @@ function mountModal() {
  * @returns 匹配的按钮元素；无匹配时返回 undefined。
  * @throws 不抛出异常。
  */
-function findBodyButton(text: string): HTMLButtonElement | undefined {
+function findBodyButton (text: string): HTMLButtonElement | undefined {
   return Array.from(document.querySelectorAll('button')).find((button) =>
     (button.textContent ?? '').includes(text),
   )

@@ -17,12 +17,12 @@
 
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
-import { INTERACTION_CANCEL_ANSWER } from '@authine-e2e-agent/types'
+import { INTERACTION_CANCEL_ANSWER } from '@fynn90-e2e_assistant/types'
 import AskUserQuestion from '../../src/modules/agent-work/components/AskUserQuestion.vue'
 import type { IInteractionTimelineItem } from '../../src/modules/agent-work/timeline'
 
 /** 单问题形态的时间线项。 */
-function createSingleItem(): IInteractionTimelineItem {
+function createSingleItem (): IInteractionTimelineItem {
   return {
     kind: 'interaction',
     blockId: 'b1',
@@ -44,7 +44,7 @@ function createSingleItem(): IInteractionTimelineItem {
 }
 
 /** 多问题形态的时间线项。 */
-function createMultiItem(): IInteractionTimelineItem {
+function createMultiItem (): IInteractionTimelineItem {
   return {
     kind: 'interaction',
     blockId: 'b2',
@@ -93,14 +93,14 @@ function createMultiItem(): IInteractionTimelineItem {
  * 不带面板圈定：多问题形态下面板全部保持挂载，同名候选项（如两题都有「其它」）
  * 会命中**第一个**面板里的那个。多问题形态请用 `paneOptionButton` 按下标圈定。
  */
-function optionButton(wrapper: ReturnType<typeof mount>, label: string) {
+function optionButton (wrapper: ReturnType<typeof mount>, label: string) {
   return wrapper
     .findAll('.ask-option')
     .find((button) => button.text().includes(label))
 }
 
 /** 找到底部的提交按钮。 */
-function submitButton(wrapper: ReturnType<typeof mount>) {
+function submitButton (wrapper: ReturnType<typeof mount>) {
   return wrapper.findAll('button').find((button) => button.text() === '提交')
 }
 
@@ -109,14 +109,14 @@ function submitButton(wrapper: ReturnType<typeof mount>) {
  *
  * 过滤没有 `data-name` 的节点：分栏占位等元素也带 `n-tabs-tab` 前缀。
  */
-function tabButtons(wrapper: ReturnType<typeof mount>) {
+function tabButtons (wrapper: ReturnType<typeof mount>) {
   return wrapper
     .findAll('.n-tabs-tab')
     .filter((tab) => tab.attributes('data-name') !== undefined)
 }
 
 /** 切到指定下标的 tab。 */
-async function openTab(
+async function openTab (
   wrapper: ReturnType<typeof mount>,
   index: number,
 ): Promise<void> {
@@ -130,12 +130,12 @@ async function openTab(
  * 不带面板下标的查询（`find('textarea')` / `findAll('.ask-option')`）会命中
  * 第一个面板——多问题形态的查询必须按下标圈定面板。
  */
-function pane(wrapper: ReturnType<typeof mount>, tabIndex: number) {
+function pane (wrapper: ReturnType<typeof mount>, tabIndex: number) {
   return wrapper.findAll('.n-tab-pane')[tabIndex]
 }
 
 /** 取指定面板内的候选项按钮（按文案）。 */
-function paneOptionButton(
+function paneOptionButton (
   wrapper: ReturnType<typeof mount>,
   tabIndex: number,
   label: string,
@@ -146,7 +146,7 @@ function paneOptionButton(
 }
 
 /** 填完单问题形态（选一项后提交）。 */
-async function answerSingle(
+async function answerSingle (
   wrapper: ReturnType<typeof mount>,
   label: string,
 ): Promise<void> {

@@ -6,9 +6,9 @@
  * 会话种类、标题、守卫的透传，取消传播，以及无论成败都释放会话。
  */
 import { describe, expect, it, vi } from 'vitest'
-import type { IAgentTaskHandle } from '@authine-e2e-agent/agent'
-import type { IToolGuard } from '@authine-e2e-agent/agent'
-import type { TAgentSessionKind } from '@authine-e2e-agent/types'
+import type { IAgentTaskHandle } from '@fynn90-e2e_assistant/agent'
+import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
+import type { TAgentSessionKind } from '@fynn90-e2e_assistant/types'
 import {
   createSkillGenerationSessionRunner,
   type IAgentWorkRuntime,
@@ -31,7 +31,7 @@ interface ISentMessage {
  * @param options.hang - 让本轮永不结束（模拟长任务，用于取消场景）。
  * @returns fake 运行时与调用记录。
  */
-function createFakeRuntime(
+function createFakeRuntime (
   options: { resultError?: string; hang?: boolean } = {},
 ): {
   runtime: IAgentWorkRuntime
@@ -45,41 +45,41 @@ function createFakeRuntime(
 
   const runtime = {
     bus: {} as IAgentWorkRuntime['bus'],
-    sendMessage(input: ISentMessage) {
+    sendMessage (input: ISentMessage) {
       sent.push(input)
       const result = options.hang
         ? new Promise<never>(() => undefined)
         : Promise.resolve(
-            options.resultError ? { errorMessage: options.resultError } : {},
-          )
+          options.resultError ? { errorMessage: options.resultError } : {},
+        )
       return {
         sessionId: input.sessionId ?? 'generated',
         handle: { result } as unknown as IAgentTaskHandle,
       }
     },
-    abort(sessionId: string) {
+    abort (sessionId: string) {
       aborted.push(sessionId)
       return true
     },
     answerInteraction: () => false,
-    async releaseSession(sessionId: string) {
+    async releaseSession (sessionId: string) {
       released.push(sessionId)
     },
     listSessions: () => [],
     listBlocks: () => [],
-    async dispose() {},
+    async dispose () { },
   } as unknown as IAgentWorkRuntime
 
   return { runtime, sent, aborted, released }
 }
 
 /** 构造只返回指定运行时的注册表替身。 */
-function createRegistryStub(
+function createRegistryStub (
   runtime: IAgentWorkRuntime,
 ): IAgentWorkRuntimeRegistry {
   return {
     getRuntime: () => runtime,
-    async disposeAll() {},
+    async disposeAll () { },
   }
 }
 

@@ -5,7 +5,7 @@ import { NButton, NCard, NModal, NSpace } from 'naive-ui'
 import type {
   IE2ETestCase,
   IE2ETestCaseDocumentData,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import CodeDiffEditor from '../../../common/code/CodeDiffEditor.vue'
 
 const props = defineProps<{

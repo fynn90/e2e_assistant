@@ -30,7 +30,7 @@ import type {
   TAgentWorkbenchTaskKind,
   TAgentWorkbenchTaskStatus,
   TAgentWorkbenchViewKind,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /** 思考块时间线项。 */
 export interface IThinkingTimelineItem {

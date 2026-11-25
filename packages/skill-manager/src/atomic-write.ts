@@ -6,7 +6,7 @@ import { lock } from 'proper-lockfile'
 import {
   parseEnvFileContent,
   type IUpdateSkillFileRequest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   E2E_SCHEMA_FILE_NAME,
   MAX_SKILL_FILE_BYTES,
@@ -40,7 +40,7 @@ export interface IWriteSkillFileResult {
  */
 type TWriteContentValidator = (content: string) => void
 
-export async function writeSkillFile(
+export async function writeSkillFile (
   options: ISkillStorageOptions,
   skillId: string,
   input: IUpdateSkillFileRequest,
@@ -79,20 +79,20 @@ export async function writeSkillFile(
  * @returns 校验通过时无返回值。
  * @throws SkillManagerError（ENV_FILE_INVALID）携带 `{ issues }` 明细，磁盘保持上一份合法内容。
  */
-function validateEnvFileContent(content: string): void {
+function validateEnvFileContent (content: string): void {
   const result = parseEnvFileContent(content)
 
   if (result.issues.length > 0) {
     throw new SkillManagerError(
       'ENV_FILE_INVALID',
       result.issues[0]?.message ??
-        'env.json 校验未通过，已保留磁盘上的最近合法内容。',
+      'env.json 校验未通过，已保留磁盘上的最近合法内容。',
       { issues: result.issues },
     )
   }
 }
 
-async function writeGenericTextFile(
+async function writeGenericTextFile (
   options: ISkillStorageOptions,
   skillId: string,
   input: IUpdateSkillFileRequest,
@@ -215,7 +215,7 @@ async function writeGenericTextFile(
   }
 }
 
-async function writeManualPlaywrightScript(
+async function writeManualPlaywrightScript (
   options: ISkillStorageOptions,
   skillId: string,
   input: IUpdateSkillFileRequest,
@@ -241,7 +241,7 @@ async function writeManualPlaywrightScript(
   }
 }
 
-async function syncDirectory(directoryPath: string): Promise<void> {
+async function syncDirectory (directoryPath: string): Promise<void> {
   if (process.platform === 'win32') {
     return
   }

@@ -9,7 +9,7 @@
  * 而不是「进程号是否还在」作为判据。三态结果刻意区分「无人应答」与「有人应答但
  * 不回应」，因为前者可以安全地判定陈旧，后者不能。
  */
-import { localServiceHealthSchema } from '@authine-e2e-agent/types'
+import { localServiceHealthSchema } from '@fynn90-e2e_assistant/types'
 
 const DEFAULT_PROBE_TIMEOUT_MS = 1000
 // URL.hostname 对 IPv6 会保留方括号（形如 [::1]），因此这里按原样列出。
@@ -53,7 +53,7 @@ interface IProbeLocalServiceOptions {
  * @returns 三态探测结果；不会抛出异常，所有失败都收敛为 `unreachable`。
  * @throws 不抛出异常，网络错误、超时和非法地址都会被转换为结果对象。
  */
-export async function probeLocalService(
+export async function probeLocalService (
   options: IProbeLocalServiceOptions,
 ): Promise<TLocalServiceProbeResult> {
   const requestUrl = resolveProbeUrl(options.serverUrl)
@@ -104,7 +104,7 @@ export async function probeLocalService(
  * @returns 规范化后的根地址（不含末尾斜杠）；不合法时返回 null。
  * @throws 不抛出异常，非法 URL 会被转换为 null。
  */
-export function resolveProbeUrl(serverUrl: string): string | null {
+export function resolveProbeUrl (serverUrl: string): string | null {
   let parsedUrl: URL
 
   try {
@@ -135,7 +135,7 @@ export function resolveProbeUrl(serverUrl: string): string | null {
  * @returns 解析成功的 JSON 值；不是 JSON 或读取失败时返回 null。
  * @throws 不抛出异常，读取和解析失败都会被转换为 null。
  */
-async function readResponseBody(response: Response): Promise<unknown> {
+async function readResponseBody (response: Response): Promise<unknown> {
   try {
     return JSON.parse(await response.text())
   } catch {
@@ -154,7 +154,7 @@ async function readResponseBody(response: Response): Promise<unknown> {
  * @returns 无法应答的原因。
  * @throws 不抛出异常。
  */
-function classifyProbeFailure(error: unknown): TProbeUnreachableReason {
+function classifyProbeFailure (error: unknown): TProbeUnreachableReason {
   // AbortSignal.timeout 触发时抛出 TimeoutError（DOMException）。
   if (error instanceof Error && error.name === 'TimeoutError') {
     return 'timeout'
@@ -179,7 +179,7 @@ function classifyProbeFailure(error: unknown): TProbeUnreachableReason {
  * @returns 形如 ECONNREFUSED 的错误码；不存在时返回 null。
  * @throws 不抛出异常。
  */
-function extractErrorCode(error: unknown): string | null {
+function extractErrorCode (error: unknown): string | null {
   if (!error || typeof error !== 'object' || !('code' in error)) {
     return null
   }

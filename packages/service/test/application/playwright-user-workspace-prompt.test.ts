@@ -10,7 +10,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
 import { createPlaywrightScriptGenerator } from '../../src/application/e2e-test-case/playwright-script-generator'
 
 /** 临时目录清单（afterEach 统一清理）。 */
@@ -23,7 +23,7 @@ afterEach(async () => {
 })
 
 /** 构造最小用例。 */
-function createTestCase(): IE2ETestCase {
+function createTestCase (): IE2ETestCase {
   return {
     id: 'case_v14',
     schemaVersion: '1.0',
@@ -55,7 +55,7 @@ describe('生成 prompt 的 userWorkSpace 上下文（PRD 5.1，场景 9）', ()
     const generator = createPlaywrightScriptGenerator({
       workspace,
       sessionRunner: {
-        async run(input: { prompt: string }) {
+        async run (input: { prompt: string }) {
           prompts.push(input.prompt)
           await writeFile(
             targetFile,

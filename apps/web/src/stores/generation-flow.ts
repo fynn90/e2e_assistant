@@ -23,7 +23,7 @@ import type {
   IFileSaveDiagnostic,
   IGeneratePlaywrightData,
   ISkillDocumentGenerationResult,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { useGlobalChatStore, type IWorkbenchSubject } from './global-chat'
 import { useAutoSave, type IUseAutoSave } from '../common/autosave/useAutoSave'
 import {
@@ -161,7 +161,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param next - 两个阶段的依赖集合。
    * @param currentSourceHash - 当前用例来源哈希。
    */
-  function setDependencies(
+  function setDependencies (
     next: IGenerationFlowDependencies,
     currentSourceHash: string,
   ): void {
@@ -174,7 +174,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @param next - 最新来源哈希。
    */
-  function setSourceHash(next: string): void {
+  function setSourceHash (next: string): void {
     sourceHash = next
   }
 
@@ -189,7 +189,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function setTerminalNoticeSink(sink: ITerminalNoticeSink | null): void {
+  function setTerminalNoticeSink (sink: ITerminalNoticeSink | null): void {
     terminalNoticeSink = sink
   }
 
@@ -201,7 +201,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @returns 阶段是否成功完成（含即时保存）。
    */
-  async function startSkillGeneration(): Promise<boolean> {
+  async function startSkillGeneration (): Promise<boolean> {
     if (!dependencies) return false
 
     // 就绪校验：失败时**不展开侧边栏**、不创建阶段记录，
@@ -260,7 +260,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @returns 阶段是否成功完成（含即时保存）。
    * @throws 不抛出异常；解析上下文失败时以失败阶段呈现。
    */
-  async function startScriptGeneration(): Promise<boolean> {
+  async function startScriptGeneration (): Promise<boolean> {
     if (isRunning.value) return false
 
     // 目标 Skill：优先显示主体；主体不是生成（异常路径）时退回注入依赖。
@@ -317,7 +317,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @param stage - 已完成的 SKILL 阶段实例。
    */
-  function attachSkillAutoSave(stage: TSkillStage): void {
+  function attachSkillAutoSave (stage: TSkillStage): void {
     const record = stages.value.find((item) => item.kind === 'skill')
     if (!record?.card) return
 
@@ -354,7 +354,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @param stage - 已完成的脚本阶段实例。
    */
-  function attachScriptAutoSave(stage: TScriptStage): void {
+  function attachScriptAutoSave (stage: TScriptStage): void {
     const record = stages.value.find((item) => item.kind === 'script')
     if (!record?.card) return
 
@@ -391,7 +391,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param cardKey - 卡片唯一标识。
    * @param diagnostics - 最近一次校验诊断。
    */
-  function updateCardSaveState(
+  function updateCardSaveState (
     cardKey: string,
     diagnostics: readonly IFileSaveDiagnostic[] = [],
   ): void {
@@ -401,13 +401,13 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
     stages.value = stages.value.map((stage) =>
       stage.card?.key === cardKey
         ? {
-            ...stage,
-            card: {
-              ...stage.card,
-              saveState: autoSave.state.value,
-              diagnostics,
-            },
-          }
+          ...stage,
+          card: {
+            ...stage.card,
+            saveState: autoSave.state.value,
+            diagnostics,
+          },
+        }
         : stage,
     )
   }
@@ -421,7 +421,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param cardKey - 卡片唯一标识。
    * @param content - 最新内容。
    */
-  function updateCardContent(cardKey: string, content: string): void {
+  function updateCardContent (cardKey: string, content: string): void {
     const record = stages.value.find((stage) => stage.card?.key === cardKey)
     if (!record?.card) return
 
@@ -444,7 +444,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param cardKey - 卡片唯一标识。
    * @param viewMode - 目标视图模式。
    */
-  function setCardViewMode(
+  function setCardViewMode (
     cardKey: string,
     viewMode: 'preview' | 'source',
   ): void {
@@ -463,7 +463,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @param stage - 待同步的阶段实例。
    */
-  function syncStageRecord(stage: TSkillStage | TScriptStage): void {
+  function syncStageRecord (stage: TSkillStage | TScriptStage): void {
     const record = stages.value.find((item) => item.kind === stage.kind)
     if (!record) return
 
@@ -474,16 +474,16 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
     stages.value = stages.value.map((item) =>
       item === record
         ? {
-            ...item,
-            status: stage.status.value,
-            stageText: STAGE_TEXT_TABLE[stage.status.value] ?? '',
-            cancelable: stage.cancelable.value,
-            card: nextCard,
-            failureCard: deriveFailureCard(stage),
-            settledAt: terminal
-              ? (item.settledAt ?? new Date().toISOString())
-              : undefined,
-          }
+          ...item,
+          status: stage.status.value,
+          stageText: STAGE_TEXT_TABLE[stage.status.value] ?? '',
+          cancelable: stage.cancelable.value,
+          card: nextCard,
+          failureCard: deriveFailureCard(stage),
+          settledAt: terminal
+            ? (item.settledAt ?? new Date().toISOString())
+            : undefined,
+        }
         : item,
     )
 
@@ -496,7 +496,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @param stage - 新创建的阶段实例。
    */
-  function upsertStage(stage: TSkillStage | TScriptStage): void {
+  function upsertStage (stage: TSkillStage | TScriptStage): void {
     const record: IStageRecord = {
       kind: stage.kind,
       title: stage.title,
@@ -514,8 +514,8 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
     stages.value =
       existingIndex >= 0
         ? stages.value.map((item, index) =>
-            index === existingIndex ? record : item,
-          )
+          index === existingIndex ? record : item,
+        )
         : [...stages.value, record]
   }
 
@@ -527,7 +527,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param stage - 阶段实例。
    * @returns 产物卡片；未完成时返回 null。
    */
-  function deriveCard(stage: TSkillStage | TScriptStage): IProductCard | null {
+  function deriveCard (stage: TSkillStage | TScriptStage): IProductCard | null {
     if (stage.status.value !== 'completed') return null
 
     if (stage.kind === 'skill') {
@@ -598,7 +598,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function publishStageTerminalNotice(stage: TSkillStage | TScriptStage): void {
+  function publishStageTerminalNotice (stage: TSkillStage | TScriptStage): void {
     const status = stage.status.value
     if (!isTerminalStatus(status)) return
 
@@ -647,7 +647,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @returns 显示主体或 null。
    * @throws 不抛出异常。
    */
-  function currentSubject(): IWorkbenchSubject | null {
+  function currentSubject (): IWorkbenchSubject | null {
     const skillId = dependencies?.skill.skillId.value
     if (!skillId) return null
     return { kind: 'generation', skillId }
@@ -661,7 +661,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param stage - 阶段实例。
    * @returns 终止卡片；正常完成或运行中时返回 null。
    */
-  function deriveFailureCard(
+  function deriveFailureCard (
     stage: TSkillStage | TScriptStage,
   ): IFailureCard | null {
     const status = stage.status.value
@@ -700,7 +700,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @param refresh - 刷新动作（重新读取用例版本与来源哈希）。
    */
-  function setRefreshHandler(refresh: () => Promise<void>): void {
+  function setRefreshHandler (refresh: () => Promise<void>): void {
     dependencyRefresh = refresh
   }
 
@@ -710,7 +710,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param relativePath - 产物文件相对路径。
    * @returns 文件内容；读取失败时返回 null。
    */
-  async function readBackGeneratedFile(
+  async function readBackGeneratedFile (
     relativePath: string,
   ): Promise<string | null> {
     try {
@@ -730,7 +730,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @param kind - 阶段种类。
    */
-  function cancelStage(kind: 'skill' | 'script'): void {
+  function cancelStage (kind: 'skill' | 'script'): void {
     const stage = kind === 'skill' ? skillStage.value : scriptStage.value
     stage?.cancel()
     if (stage) syncStageRecord(stage)
@@ -742,7 +742,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param kind - 阶段种类。
    * @returns 会话 ID；阶段未建立会话时返回 null。
    */
-  function sessionIdFor(kind: 'skill' | 'script'): string | null {
+  function sessionIdFor (kind: 'skill' | 'script'): string | null {
     return kind === 'skill'
       ? (skillStage.value?.sessionId.value ?? null)
       : (scriptStage.value?.sessionId.value ?? null)
@@ -754,7 +754,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param card - 待判定的卡片。
    * @returns 置灰信息；无需置灰时返回 null。
    */
-  function primaryActionFor(
+  function primaryActionFor (
     card: IProductCard,
   ): { executedAt: string; label: string } | null {
     return derivePrimaryAction(stages.value, card)
@@ -765,7 +765,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @returns 磁盘脚本内容；未加载时返回空串（全部视为新增）。
    */
-  function scriptExistingCode(): string {
+  function scriptExistingCode (): string {
     return scriptStage.value?.existingCode.value ?? ''
   }
 
@@ -775,7 +775,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param cardKey - 卡片唯一标识。
    * @returns 保存状态；卡片不存在时视为已保存。
    */
-  function saveStateFor(cardKey: string): TAutoSaveState {
+  function saveStateFor (cardKey: string): TAutoSaveState {
     return autoSaves.get(cardKey)?.state.value ?? 'saved'
   }
 
@@ -785,7 +785,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param cardKey - 卡片唯一标识。
    * @returns 错误文案；无错误时返回空串。
    */
-  function saveErrorMessageFor(cardKey: string): string {
+  function saveErrorMessageFor (cardKey: string): string {
     return autoSaves.get(cardKey)?.errorMessage.value ?? ''
   }
 
@@ -795,7 +795,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param cardKey - 卡片唯一标识。
    * @returns 保存成功时返回 true。
    */
-  async function retrySave(cardKey: string): Promise<boolean> {
+  async function retrySave (cardKey: string): Promise<boolean> {
     return (await autoSaves.get(cardKey)?.retry()) ?? false
   }
 
@@ -808,7 +808,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * @param cardKey - 卡片唯一标识。
    * @returns 重新加载完成后的 Promise。
    */
-  async function reloadCard(cardKey: string): Promise<void> {
+  async function reloadCard (cardKey: string): Promise<void> {
     const record = stages.value.find((stage) => stage.card?.key === cardKey)
     const autoSave = autoSaves.get(cardKey)
     if (!record || !autoSave) return
@@ -838,7 +838,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    *
    * @returns 全部 flush 完成后兑现的 Promise。
    */
-  async function flushAll(): Promise<void> {
+  async function flushAll (): Promise<void> {
     await Promise.all(
       [...autoSaves.values()].map((autoSave) => autoSave.flushSilently()),
     )
@@ -854,7 +854,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * 调用方（组件）需先完成 flush 与「保存失败」二次确认（PRD B-8），
    * 因为这些动作需要用户交互，不适合放在 store 内。
    */
-  function reset(): void {
+  function reset (): void {
     for (const autoSave of autoSaves.values()) autoSave.dispose?.()
     autoSaves.clear()
     skillStage.value?.dispose()
@@ -872,13 +872,13 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
    * v13 起**不再有 UI 入口**（卡片上的「关闭」按钮已移除，PRD B-4）；
    * 保留此组合动作供「清空后随即收起」的场景使用。
    */
-  function close(): void {
+  function close (): void {
     reset()
     globalChat.collapse()
   }
 
   /** 收起工作台：保留状态，仅隐藏（v9 PRD 4.3）。 */
-  function collapse(): void {
+  function collapse (): void {
     globalChat.collapse()
   }
 
@@ -925,7 +925,7 @@ export const useGenerationFlowStore = defineStore('generation-flow', () => {
  * @returns 满足阶段选项形状的占位对象。
  * @throws 不抛出异常。
  */
-function unavailableScriptOptions(skillId: string): IScriptStageOptions {
+function unavailableScriptOptions (skillId: string): IScriptStageOptions {
   return {
     skillId: ref(skillId),
     draft: ref(null),

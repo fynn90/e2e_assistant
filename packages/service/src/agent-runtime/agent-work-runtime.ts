@@ -18,13 +18,13 @@ import {
   ClientEventTranslator,
   askUserRegistry,
   newBlockId,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 import type {
   AgentOperateType,
   IChatHandle,
   IToolGuard,
   IWorkbenchAgentAssembly,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 
 import type {
   IAgentSessionSummary,
@@ -37,7 +37,7 @@ import type {
   TAgentSessionKind,
   TAgentWorkbenchTaskKind,
   TAgentWorkbenchTaskStatus,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   createSessionEventBus,
   type ISessionEventBus,
@@ -201,7 +201,7 @@ export interface IAgentWorkRuntime {
   /** 会话事件总线（SSE 路由据此订阅/补发）。 */
   readonly bus: ISessionEventBus
   /** 发送一条用户消息：会话不存在则创建，存在则续接新一轮。 */
-  sendMessage(input: IAgentWorkMessageInput): IAgentWorkMessageHandle
+  sendMessage (input: IAgentWorkMessageInput): IAgentWorkMessageHandle
   /**
    * 在指定会话中发布一个工作块事件（v16：工作台卡片块的唯一发布入口）。
    *
@@ -214,7 +214,7 @@ export interface IAgentWorkRuntime {
    * @returns 已分配 seq 的完整事件（调用方可据此判断是否成功）。
    * @throws 不抛出异常。
    */
-  publishBlock(
+  publishBlock (
     sessionId: string,
     payload: TAgentClientEventPayload,
   ): TAgentClientEvent
@@ -228,7 +228,7 @@ export interface IAgentWorkRuntime {
    * @returns 已分配 seq 的完整事件。
    * @throws 不抛出异常。
    */
-  publishTaskCard(input: IWorkbenchTaskCardInput): TAgentClientEvent
+  publishTaskCard (input: IWorkbenchTaskCardInput): TAgentClientEvent
   /**
    * 发布一张报告卡片（v16，PRD RPT-2/RPT-3）。
    *
@@ -239,7 +239,7 @@ export interface IAgentWorkRuntime {
    * @returns 已分配 seq 的完整事件。
    * @throws 不抛出异常。
    */
-  publishReportCard(input: IWorkbenchReportCardInput): TAgentClientEvent
+  publishReportCard (input: IWorkbenchReportCardInput): TAgentClientEvent
   /**
    * 发布 / 更新一张提案卡片（v17）。
    *
@@ -250,7 +250,7 @@ export interface IAgentWorkRuntime {
    * @returns 已分配 seq 的完整事件。
    * @throws 不抛出异常。
    */
-  publishProposalCard(input: IWorkbenchProposalCardInput): TAgentClientEvent
+  publishProposalCard (input: IWorkbenchProposalCardInput): TAgentClientEvent
   /**
    * 发布 / 更新一张只读视图卡片（v17）。
    *
@@ -261,13 +261,13 @@ export interface IAgentWorkRuntime {
    * @returns 已分配 seq 的完整事件。
    * @throws 不抛出异常。
    */
-  publishViewCard(input: IWorkbenchViewCardInput): TAgentClientEvent
+  publishViewCard (input: IWorkbenchViewCardInput): TAgentClientEvent
   /**
    * 中止指定会话当前运行的轮次；会话不存在返回 false。
    */
-  abort(sessionId: string): boolean
+  abort (sessionId: string): boolean
   /** 提交交互回答；未命中等待中的交互返回 false。 */
-  answerInteraction(
+  answerInteraction (
     sessionId: string,
     interactionId: string,
     answer: TAgentInteractionAnswer,
@@ -284,7 +284,7 @@ export interface IAgentWorkRuntime {
    * @returns 用户提交的回答值（单问题 string / 多问题回答表）。
    * @throws 会话中止（abort/releaseSession）时 reject。
    */
-  waitForInteractionAnswer(
+  waitForInteractionAnswer (
     sessionId: string,
     interactionId: string,
   ): Promise<TAgentInteractionAnswer>
@@ -294,15 +294,15 @@ export interface IAgentWorkRuntime {
    * @param sessionId - 会话 ID。
    * @returns 释放完成后兑现的 Promise；会话本就存在时重复调用安全。
    */
-  releaseSession(sessionId: string): Promise<void>
+  releaseSession (sessionId: string): Promise<void>
   /**
    * 会话列表（按最近活跃倒序）。
    *
    * @param options.kind - 只返回指定种类的会话；缺省返回全部。
    */
-  listSessions(options?: { kind?: TAgentSessionKind }): IAgentSessionSummary[]
+  listSessions (options?: { kind?: TAgentSessionKind }): IAgentSessionSummary[]
   /** 指定会话的历史工作块（按 seq 升序）。 */
-  listBlocks(sessionId: string): IAgentWorkBlock[]
+  listBlocks (sessionId: string): IAgentWorkBlock[]
   /**
    * 重命名一个会话（v17 S1）。
    *
@@ -314,7 +314,7 @@ export interface IAgentWorkRuntime {
    * @returns 是否找到并更新了会话。
    * @throws 不抛出异常。
    */
-  renameSession(sessionId: string, title: string): boolean
+  renameSession (sessionId: string, title: string): boolean
   /**
    * 删除一个会话（v17 S2）。
    *
@@ -328,9 +328,9 @@ export interface IAgentWorkRuntime {
    * @returns 无返回值；会话不存在时静默（幂等）。
    * @throws 不抛出异常。
    */
-  removeSession(sessionId: string): void
+  removeSession (sessionId: string): void
   /** 释放运行时（AgentService + 工作块存储）。 */
-  dispose(): Promise<void>
+  dispose (): Promise<void>
 }
 
 /**
@@ -340,7 +340,7 @@ export interface IAgentWorkRuntime {
  * @returns 工作通道运行时实例。
  * @throws {Error} 当工作区为空或工作块数据库无法打开时抛出。
  */
-export function createAgentWorkRuntime(
+export function createAgentWorkRuntime (
   options: IAgentWorkRuntimeOptions,
 ): IAgentWorkRuntime {
   const blockStore: IWorkBlockStore = createWorkBlockStore({
@@ -400,7 +400,7 @@ export function createAgentWorkRuntime(
   const runtime: IAgentWorkRuntime = {
     bus,
 
-    sendMessage(input: IAgentWorkMessageInput): IAgentWorkMessageHandle {
+    sendMessage (input: IAgentWorkMessageInput): IAgentWorkMessageHandle {
       const sessionId = input.sessionId ?? randomUUID()
       // 会话种类是创建期属性：先落库声明，后续事件只推进 title/status/max_seq。
       blockStore.registerSession(sessionId, input.kind ?? 'chat')
@@ -462,7 +462,7 @@ export function createAgentWorkRuntime(
       return { sessionId, handle }
     },
 
-    abort(sessionId: string): boolean {
+    abort (sessionId: string): boolean {
       const handle = agentService.getTask(sessionId)
       interactions.abortAll(sessionId)
       if (!handle) return false
@@ -470,7 +470,7 @@ export function createAgentWorkRuntime(
       return true
     },
 
-    async releaseSession(sessionId: string): Promise<void> {
+    async releaseSession (sessionId: string): Promise<void> {
       // 先清本地簿记，避免释放后以同一 ID 重新建会话时事件桥接被跳过。
       wiredSessions.delete(sessionId)
       interactions.abortAll(sessionId)
@@ -484,7 +484,7 @@ export function createAgentWorkRuntime(
       await agentService.removeTask(sessionId)
     },
 
-    publishBlock(
+    publishBlock (
       sessionId: string,
       payload: TAgentClientEventPayload,
     ): TAgentClientEvent {
@@ -497,7 +497,7 @@ export function createAgentWorkRuntime(
       } as TAgentClientEventDraft)
     },
 
-    publishTaskCard(input: IWorkbenchTaskCardInput): TAgentClientEvent {
+    publishTaskCard (input: IWorkbenchTaskCardInput): TAgentClientEvent {
       return runtime.publishBlock(input.sessionId, {
         type: 'workbench_task',
         phase: 'begin',
@@ -520,7 +520,7 @@ export function createAgentWorkRuntime(
       } as TAgentClientEventPayload)
     },
 
-    publishReportCard(input: IWorkbenchReportCardInput): TAgentClientEvent {
+    publishReportCard (input: IWorkbenchReportCardInput): TAgentClientEvent {
       return runtime.publishBlock(input.sessionId, {
         type: 'workbench_report',
         phase: 'begin',
@@ -532,7 +532,7 @@ export function createAgentWorkRuntime(
       })
     },
 
-    publishProposalCard(input: IWorkbenchProposalCardInput): TAgentClientEvent {
+    publishProposalCard (input: IWorkbenchProposalCardInput): TAgentClientEvent {
       return runtime.publishBlock(input.sessionId, {
         type: 'workbench_proposal',
         phase: 'begin',
@@ -558,7 +558,7 @@ export function createAgentWorkRuntime(
       } as TAgentClientEventPayload)
     },
 
-    publishViewCard(input: IWorkbenchViewCardInput): TAgentClientEvent {
+    publishViewCard (input: IWorkbenchViewCardInput): TAgentClientEvent {
       return runtime.publishBlock(input.sessionId, {
         type: 'workbench_view',
         phase: 'begin',
@@ -569,7 +569,7 @@ export function createAgentWorkRuntime(
       } as TAgentClientEventPayload)
     },
 
-    answerInteraction(
+    answerInteraction (
       sessionId: string,
       interactionId: string,
       answer: TAgentInteractionAnswer,
@@ -577,28 +577,28 @@ export function createAgentWorkRuntime(
       return interactions.answer(sessionId, interactionId, answer)
     },
 
-    waitForInteractionAnswer(
+    waitForInteractionAnswer (
       sessionId: string,
       interactionId: string,
     ): Promise<TAgentInteractionAnswer> {
       return interactions.waitForAnswer(sessionId, interactionId)
     },
 
-    listSessions(
+    listSessions (
       options: { kind?: TAgentSessionKind } = {},
     ): IAgentSessionSummary[] {
       return blockStore.listSessions(options)
     },
 
-    listBlocks(sessionId: string): IAgentWorkBlock[] {
+    listBlocks (sessionId: string): IAgentWorkBlock[] {
       return blockStore.listBlocks(sessionId)
     },
 
-    renameSession(sessionId: string, title: string): boolean {
+    renameSession (sessionId: string, title: string): boolean {
       return blockStore.renameSession(sessionId, title)
     },
 
-    removeSession(sessionId: string): void {
+    removeSession (sessionId: string): void {
       // 先清内存簿记（与 releaseSession 同一理由：避免同 ID 重建时
       // 事件桥接被跳过、装配被继承）。
       wiredSessions.delete(sessionId)
@@ -609,7 +609,7 @@ export function createAgentWorkRuntime(
       blockStore.removeSession(sessionId)
     },
 
-    async dispose(): Promise<void> {
+    async dispose (): Promise<void> {
       // 释放整个运行时：先注销本运行时登记过的全部发问宿主，避免注册表残留
       // 指向已释放实例（未走完 releaseSession 的会话也能被清理干净）。
       for (const sessionId of askHostSessions) {
@@ -638,7 +638,7 @@ export function createAgentWorkRuntime(
  * @returns 稳定的块 ID；非工作台块回退为一次性随机 ID。
  * @throws 不抛出异常。
  */
-function nextBlockId(payload: TAgentClientEventPayload): string {
+function nextBlockId (payload: TAgentClientEventPayload): string {
   if (payload.type === 'workbench_action') {
     return `blk_action_${payload.actionId}`
   }

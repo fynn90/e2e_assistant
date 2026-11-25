@@ -1,4 +1,4 @@
-# @authine-e2e-agent/web-host
+# @fynn90-e2e_assistant/web-host
 
 ## 0.0.6
 
@@ -6,7 +6,7 @@
 
 - 优化架构
 - Updated dependencies
-  - @authine-e2e-agent/web@0.0.6
+  - @fynn90-e2e_assistant/web@0.0.6
 
 ## 0.0.5
 
@@ -14,7 +14,7 @@
 
 - 更新 CLI
 - Updated dependencies
-  - @authine-e2e-agent/web@0.0.5
+  - @fynn90-e2e_assistant/web@0.0.5
 
 ## 0.0.4
 
@@ -22,7 +22,7 @@
 
 - 优化 playwright engine
 - Updated dependencies
-  - @authine-e2e-agent/web@0.0.4
+  - @fynn90-e2e_assistant/web@0.0.4
 
 ## 0.0.3
 
@@ -30,7 +30,7 @@
 
 - 支持 iframe
 - Updated dependencies
-  - @authine-e2e-agent/web@0.0.3
+  - @fynn90-e2e_assistant/web@0.0.3
 
 ## 0.0.2
 
@@ -38,4 +38,4 @@
 
 - 优化 cli运行
 - Updated dependencies
-  - @authine-e2e-agent/web@0.0.2
+  - @fynn90-e2e_assistant/web@0.0.2

@@ -1,4 +1,4 @@
-import type { TApiErrorCode } from '@authine-e2e-agent/types'
+import type { TApiErrorCode } from '@fynn90-e2e_assistant/types'
 
 export interface IAppVariables {
   requestId: string

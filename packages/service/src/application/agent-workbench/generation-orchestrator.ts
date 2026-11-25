@@ -28,9 +28,9 @@ import type { IRepairContext } from '../e2e-test-case/playwright-script-generato
 import type {
   IGeneratePlaywrightData,
   ISkillDocumentGenerationResult,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiError } from '../../shared/errors/api-error'
-import { SkillManagerError } from '@authine-e2e-agent/skill-manager'
+import { SkillManagerError } from '@fynn90-e2e_assistant/skill-manager'
 
 /** 工作台可发起的生成动作。 */
 export type TGenerationAction =
@@ -80,7 +80,7 @@ export interface IGenerationOrchestrator {
    * @returns 生成结果（成功/失败与说明）。
    * @throws 不抛出异常——所有失败都归一为 `{ ok: false }` 结果。
    */
-  run(input: {
+  run (input: {
     rootDir: string
     sessionId: string
     /** 承载发起会话的常驻运行时（生成卡片的发布落点）。 */
@@ -105,11 +105,11 @@ export interface IGenerationOrchestrator {
  * @returns 生成编排实例。
  * @throws 不抛出异常。
  */
-export function createGenerationOrchestrator(
+export function createGenerationOrchestrator (
   dependencies: IGenerationOrchestratorDependencies,
 ): IGenerationOrchestrator {
   return {
-    async run(input) {
+    async run (input) {
       const config = await resolveConfig(dependencies)
       if (!config) {
         return {
@@ -187,18 +187,18 @@ export function createGenerationOrchestrator(
         const outcome =
           resolvedAction === 'generate-skill-document'
             ? await runSkillDocumentGeneration({
-                config,
-                input,
-                generationSessionId,
-                services,
-              })
+              config,
+              input,
+              generationSessionId,
+              services,
+            })
             : await runScriptGeneration({
-                config,
-                input,
-                generationSessionId,
-                services,
-                ...(browserHost ? { browserHost } : {}),
-              })
+              config,
+              input,
+              generationSessionId,
+              services,
+              ...(browserHost ? { browserHost } : {}),
+            })
 
         runtime.publishTaskCard({
           sessionId: input.sessionId,
@@ -210,9 +210,9 @@ export function createGenerationOrchestrator(
           startedAt,
           ...(outcome.ok
             ? {
-                summary: { diagnostics: outcome.diagnostics },
-                artifacts: outcome.artifacts,
-              }
+              summary: { diagnostics: outcome.diagnostics },
+              artifacts: outcome.artifacts,
+            }
             : { errorMessage: outcome.message }),
           // 进行中的任务卡片不携带终态字段（类型上可选，语义上不应出现）。
         })
@@ -287,7 +287,7 @@ type TGenerationInternalOutcome = IGenerationSuccess | IGenerationFailure
  * @returns 生成结果。
  * @throws 不抛出异常——失败归一为 `{ ok: false }`。
  */
-async function runSkillDocumentGeneration(
+async function runSkillDocumentGeneration (
   options: IGenerationInput,
 ): Promise<TGenerationInternalOutcome> {
   const { config, input, generationSessionId, services } = options
@@ -349,7 +349,7 @@ async function runSkillDocumentGeneration(
  * @returns 生成结果。
  * @throws 不抛出异常——失败归一为 `{ ok: false }`。
  */
-async function runScriptGeneration(
+async function runScriptGeneration (
   options: IGenerationInput & { browserHost?: IGenerationBrowserHost },
 ): Promise<TGenerationInternalOutcome> {
   const { config, input, generationSessionId, services, browserHost } = options
@@ -434,7 +434,7 @@ async function runScriptGeneration(
  * @returns 用例文件版本与当前 SKILL.md 版本（不存在时为 null）。
  * @throws ApiError 用例或文件不可读时抛出（E2E_SCHEMA_INVALID）。
  */
-async function buildSkillDocumentRequest(
+async function buildSkillDocumentRequest (
   rootDir: string,
   skillId: string,
 ): Promise<{
@@ -442,7 +442,7 @@ async function buildSkillDocumentRequest(
   expectedSkillDocumentVersion: string | null
 }> {
   const { FileE2ETestCaseRepository, FileSkillDocumentRepository } =
-    await import('@authine-e2e-agent/skill-manager')
+    await import('@fynn90-e2e_assistant/skill-manager')
   const storage = { rootDir }
 
   try {
@@ -475,7 +475,7 @@ async function buildSkillDocumentRequest(
  * @returns 用例文件版本与当前脚本版本（不存在时为 null）。
  * @throws ApiError 用例或文件不可读时抛出。
  */
-async function buildScriptRequest(
+async function buildScriptRequest (
   rootDir: string,
   skillId: string,
 ): Promise<{
@@ -483,7 +483,7 @@ async function buildScriptRequest(
   expectedScriptVersion: string | null
 }> {
   const { FileE2ETestCaseRepository, FilePlaywrightScriptRepository } =
-    await import('@authine-e2e-agent/skill-manager')
+    await import('@fynn90-e2e_assistant/skill-manager')
   const storage = { rootDir }
 
   try {
@@ -516,7 +516,7 @@ async function buildScriptRequest(
  * @returns 失败说明与是否属安全族阻断。
  * @throws 不抛出异常。
  */
-function describeGenerationFailure(
+function describeGenerationFailure (
   error: unknown,
   artifactName: string,
 ): { message: string; blocked?: boolean } {
@@ -555,9 +555,8 @@ function describeGenerationFailure(
   }
 
   return {
-    message: `${artifactName}生成失败：${
-      error instanceof Error ? error.message : String(error)
-    }`,
+    message: `${artifactName}生成失败：${error instanceof Error ? error.message : String(error)
+      }`,
   }
 }
 
@@ -569,13 +568,13 @@ function describeGenerationFailure(
  * @returns 缺文档则重生成文档，否则重生成脚本。
  * @throws 不抛出异常——读取失败按「重生成文档」处理（更保守，不会跳过前置）。
  */
-async function resolveRetryAction(
+async function resolveRetryAction (
   rootDir: string,
   skillId: string,
 ): Promise<'generate-skill-document' | 'generate-playwright-script'> {
   try {
     const { FileSkillDocumentRepository } =
-      await import('@authine-e2e-agent/skill-manager')
+      await import('@fynn90-e2e_assistant/skill-manager')
     const state = await new FileSkillDocumentRepository({ rootDir }).getState(
       skillId,
       '',
@@ -598,10 +597,10 @@ async function resolveRetryAction(
  * @returns 存在返回 true。
  * @throws 不抛出异常——读取失败按不存在处理。
  */
-async function hasScript(rootDir: string, skillId: string): Promise<boolean> {
+async function hasScript (rootDir: string, skillId: string): Promise<boolean> {
   try {
     const { PLAYWRIGHT_SCRIPT_FILE_NAME, readSkillFile } =
-      await import('@authine-e2e-agent/skill-manager')
+      await import('@fynn90-e2e_assistant/skill-manager')
     await readSkillFile({ rootDir }, skillId, PLAYWRIGHT_SCRIPT_FILE_NAME)
     return true
   } catch {
@@ -616,7 +615,7 @@ async function hasScript(rootDir: string, skillId: string): Promise<boolean> {
  * @returns 平台配置；不可用时返回 undefined。
  * @throws 不抛出异常——解析失败按「配置不可用」处理。
  */
-async function resolveConfig(
+async function resolveConfig (
   dependencies: IGenerationOrchestratorDependencies,
 ): Promise<IAuthinePlatformConfig | undefined> {
   if (!dependencies.resolveConfig) return undefined

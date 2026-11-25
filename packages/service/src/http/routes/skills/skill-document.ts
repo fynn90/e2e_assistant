@@ -2,7 +2,7 @@
  * 注册用户确认后的固定 SKILL.md 保存接口。
  */
 import type { Hono } from 'hono'
-import type { ISaveSkillDocumentResponse } from '@authine-e2e-agent/types'
+import type { ISaveSkillDocumentResponse } from '@fynn90-e2e_assistant/types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
@@ -20,7 +20,7 @@ const SKILL_DOCUMENT_BODY_LIMIT = 1024 * 1024
  * @returns 无返回值。
  * @throws ApiError 当 Skill ID 或请求参数不合法时抛出。
  */
-export function registerSkillDocumentRoute(
+export function registerSkillDocumentRoute (
   routes: Hono<IAppEnv>,
   services: IE2ETestCaseApplicationServices,
 ): void {

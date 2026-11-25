@@ -12,9 +12,9 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import type { IValidationTestCase } from '@authine-e2e-agent/playwright-engine'
-import { PlaywrightScriptValidator } from '@authine-e2e-agent/playwright-engine'
-import { resourceLoader } from '@authine-e2e-agent/agent'
+import type { IValidationTestCase } from '@fynn90-e2e_assistant/playwright-engine'
+import { PlaywrightScriptValidator } from '@fynn90-e2e_assistant/playwright-engine'
+import { resourceLoader } from '@fynn90-e2e_assistant/agent'
 
 const validator = new PlaywrightScriptValidator()
 
@@ -50,7 +50,7 @@ const SECTION_HEADING = '## userWorkSpace：测试产物的唯一存放地'
  * @returns 模板代码块正文（不含 markdown 围栏）。
  * @throws {Error} 章节或代码块缺失时抛出，提示同步更新测试。
  */
-function extractUserWorkspaceTemplate(): string {
+function extractUserWorkspaceTemplate (): string {
   const skill = resourceLoader.getSkill('playwright_script_generation').content
   const sectionStart = skill.indexOf(SECTION_HEADING)
 

@@ -14,7 +14,7 @@ import type {
   IFileSaveDiagnostic,
   ISkillDocumentGenerationResult,
   ISkillDocumentState,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiClientError } from '../../services/http-client'
 import { abortAgentSession } from '../../services/agent-work-api'
 import {
@@ -48,7 +48,7 @@ export interface ISkillStageOptions {
  * @returns 只读状态、产出的卡片数据与用户操作方法。
  * @throws 不向调用方抛出：网络与服务端错误由阶段状态吸收。
  */
-export function createSkillStage(options: ISkillStageOptions) {
+export function createSkillStage (options: ISkillStageOptions) {
   const status = ref<TStageStatus>('idle')
   /** 生成结果；保存成功后作为产物卡片的数据来源。 */
   const result = shallowRef<ISkillDocumentGenerationResult | null>(null)
@@ -80,7 +80,7 @@ export function createSkillStage(options: ISkillStageOptions) {
   const cancelable = ref(false)
 
   /** 同步运行中与可取消派生状态。 */
-  function syncDerivedState(): void {
+  function syncDerivedState (): void {
     running.value = ![
       'idle',
       'completed',
@@ -105,7 +105,7 @@ export function createSkillStage(options: ISkillStageOptions) {
    *
    * @returns 阶段是否成功完成（含落盘）。
    */
-  async function start(): Promise<boolean> {
+  async function start (): Promise<boolean> {
     if (running.value) return false
 
     errorMessage.value = ''
@@ -151,7 +151,7 @@ export function createSkillStage(options: ISkillStageOptions) {
           expectedSkillDocumentVersion:
             options.skillDocument.value?.version ?? null,
         },
-        onEvent(event) {
+        onEvent (event) {
           if (controller.signal.aborted || abortController !== controller)
             return
 
@@ -219,7 +219,7 @@ export function createSkillStage(options: ISkillStageOptions) {
    *
    * @returns 落盘成功时返回 true。
    */
-  async function save(): Promise<boolean> {
+  async function save (): Promise<boolean> {
     if (!result.value || status.value === 'saving-skill') return false
 
     status.value = 'saving-skill'
@@ -241,9 +241,9 @@ export function createSkillStage(options: ISkillStageOptions) {
     } catch (error) {
       const conflictCode =
         error instanceof ApiClientError &&
-        ['FILE_VERSION_CONFLICT', 'SOURCE_HASH_CONFLICT'].includes(
-          error.code ?? '',
-        )
+          ['FILE_VERSION_CONFLICT', 'SOURCE_HASH_CONFLICT'].includes(
+            error.code ?? '',
+          )
           ? error.code
           : null
 
@@ -269,7 +269,7 @@ export function createSkillStage(options: ISkillStageOptions) {
    * 主路径是中止浏览器 fetch（服务端感知请求断开后终止运行轮次）；
    * 额外调用显式中止端点，避免 SSE 断开与运行轮次存活之间的时序脱节。
    */
-  function cancel(): void {
+  function cancel (): void {
     if (!cancelable.value) return
 
     const activeSessionId = sessionId.value
@@ -283,12 +283,12 @@ export function createSkillStage(options: ISkillStageOptions) {
   }
 
   /** 更新产物卡片的可编辑正文。 */
-  function updateContent(next: string): void {
+  function updateContent (next: string): void {
     content.value = next
   }
 
   /** 释放时间线实例（store 关闭侧边栏时统一调用）。 */
-  function dispose(): void {
+  function dispose (): void {
     abortController?.abort()
     abortController = null
     timeline.dispose()

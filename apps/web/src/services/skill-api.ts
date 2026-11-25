@@ -13,29 +13,29 @@ import type {
   IListSkillsResponse,
   IUpdateSkillFileRequest,
   IUpdateSkillFileResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { requestJson } from './http-client'
 
-export function fetchSkills(
+export function fetchSkills (
   signal?: AbortSignal,
 ): Promise<IListSkillsResponse> {
   return requestJson({ path: '/api/skills', signal })
 }
 
-export function createSkill(
+export function createSkill (
   payload: ICreateSkillRequest,
 ): Promise<ICreateSkillResponse> {
   return requestJson({ path: '/api/skills', method: 'POST', body: payload })
 }
 
-export function deleteSkill(skillId: string): Promise<IDeleteSkillResponse> {
+export function deleteSkill (skillId: string): Promise<IDeleteSkillResponse> {
   return requestJson({
     path: `/api/skills/${encodeURIComponent(skillId)}`,
     method: 'DELETE',
   })
 }
 
-export function fetchSkill(
+export function fetchSkill (
   skillId: string,
   signal?: AbortSignal,
 ): Promise<IGetSkillResponse> {
@@ -45,7 +45,7 @@ export function fetchSkill(
   })
 }
 
-export function fetchSkillFiles(
+export function fetchSkillFiles (
   skillId: string,
   signal?: AbortSignal,
 ): Promise<IListSkillFilesResponse> {
@@ -55,7 +55,7 @@ export function fetchSkillFiles(
   })
 }
 
-export function fetchSkillFile(
+export function fetchSkillFile (
   skillId: string,
   relativePath: string,
   signal?: AbortSignal,
@@ -66,7 +66,7 @@ export function fetchSkillFile(
   })
 }
 
-export function updateSkillFile(
+export function updateSkillFile (
   skillId: string,
   payload: IUpdateSkillFileRequest,
   signal?: AbortSignal,
@@ -90,7 +90,7 @@ export function updateSkillFile(
  * @returns 删除结果（含被删路径与类型）。
  * @throws ApiClientError 失败时抛出（只读文件 403、路径非法 400、不存在 404）。
  */
-export function deleteSkillFile(
+export function deleteSkillFile (
   skillId: string,
   relativePath: string,
 ): Promise<IDeleteSkillFileResponse> {
@@ -111,7 +111,7 @@ export function deleteSkillFile(
  * @returns 同源的图片字节地址。
  * @throws 不抛出异常。
  */
-export function buildSkillImageUrl(
+export function buildSkillImageUrl (
   skillId: string,
   relativePath: string,
 ): string {
@@ -126,7 +126,7 @@ export function buildSkillImageUrl(
  * @returns 创建结果（含 Skill 内完整相对路径）。
  * @throws ApiClientError 路径非法（400）、已存在（409）、越界或符号链接占用（400）时抛出。
  */
-export function createUserWorkspaceDirectory(
+export function createUserWorkspaceDirectory (
   skillId: string,
   path: string,
 ): Promise<ICreateSkillDirectoryResponse> {
@@ -147,7 +147,7 @@ export function createUserWorkspaceDirectory(
  * @throws ApiClientError 路径非法（400）、已存在（409）、二进制扩展名（422）、
  *   超限（413）时抛出。
  */
-export function createUserWorkspaceFile(
+export function createUserWorkspaceFile (
   skillId: string,
   path: string,
   content: string,

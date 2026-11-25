@@ -12,7 +12,7 @@
  * 先注册的兜底会遮蔽后注册的精确路由（技术方案 M3，实测 404）。
  */
 import { Hono } from 'hono'
-import type { IApiSuccessResponse } from '@authine-e2e-agent/types'
+import type { IApiSuccessResponse } from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../app-types'
 import { ApiError } from '../../shared/errors/api-error'
 

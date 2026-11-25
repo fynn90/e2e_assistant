@@ -8,7 +8,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import type { IElementInfo } from '@authine-e2e-agent/types'
+import type { IElementInfo } from '@fynn90-e2e_assistant/types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** browser_query 工具接受的参数 Schema。 */
@@ -42,7 +42,7 @@ export interface BrowserQueryDetails {
  * @returns 每行一个元素的文本；无命中时返回明确的未命中说明。
  * @throws 不抛出异常。
  */
-function formatElements(elements: IElementInfo[], selector: string): string {
+function formatElements (elements: IElementInfo[], selector: string): string {
   if (elements.length === 0) {
     // 未命中是重要的核对结论：必须明确告知，不能让模型误以为页面元素存在。
     return `selector「${selector}」在当前页面没有匹配到任何元素。请核对页面结构后调整定位方式。`
@@ -60,13 +60,12 @@ function formatElements(elements: IElementInfo[], selector: string): string {
 
       const attributes = element.attributes
         ? Object.entries(element.attributes)
-            .map(([key, value]) => `${key}="${value}"`)
-            .join(' ')
+          .map(([key, value]) => `${key}="${value}"`)
+          .join(' ')
         : ''
 
-      return `${index + 1}. ${parts.join(' | ')}${
-        attributes ? `\n   属性：${attributes}` : ''
-      }`
+      return `${index + 1}. ${parts.join(' | ')}${attributes ? `\n   属性：${attributes}` : ''
+        }`
     })
     .join('\n')
 }
@@ -78,7 +77,7 @@ function formatElements(elements: IElementInfo[], selector: string): string {
  * @returns 可直接配置到 AgentTool[] 的 browser_query 工具。
  * @throws 不在创建阶段抛出异常；页面不可用、取消或浏览器断连时由宿主抛出结构化错误。
  */
-export function createBrowserQueryTool(
+export function createBrowserQueryTool (
   host: IBrowserSessionHost,
 ): AgentTool<typeof queryParameters, BrowserQueryDetails> {
   return {
@@ -98,7 +97,7 @@ export function createBrowserQueryTool(
      * @returns 包含命中元素结构化信息的工具结果。
      * @throws 由宿主抛出的结构化浏览器错误透传，由运行器记为工具失败。
      */
-    async execute(toolCallId, parameters, signal, onUpdate) {
+    async execute (toolCallId, parameters, signal, onUpdate) {
       void toolCallId
       void signal
       void onUpdate

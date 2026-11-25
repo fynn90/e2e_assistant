@@ -30,7 +30,7 @@ afterEach(async () => {
  * 构造一个只挂载了静态资源的应用。
  * @returns 待测试的 Hono 应用。
  */
-function createApp(): Hono {
+function createApp (): Hono {
   const app = new Hono()
   registerWebStaticRoutes(app)
   return app
@@ -41,7 +41,7 @@ describe('resolveWebDistInfo', () => {
     const resolved = await resolveWebDistInfo()
 
     // 工作区内 web 包已构建，因此应解析成功；
-    // 若失败说明 web-host 漏声明了 @authine-e2e-agent/web 依赖。
+    // 若失败说明 web-host 漏声明了 @fynn90-e2e_assistant/web 依赖。
     expect(resolved.source).toBe('dependency')
     expect(resolved.webDistDirectoryPath).not.toBeNull()
     expect(path.basename(resolved.webDistDirectoryPath ?? '')).toBe('dist')

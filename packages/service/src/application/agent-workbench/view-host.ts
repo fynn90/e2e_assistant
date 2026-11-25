@@ -30,13 +30,13 @@
  */
 
 import { randomUUID } from 'node:crypto'
-import { toCapabilityViewPayload } from '@authine-e2e-agent/agent'
+import { toCapabilityViewPayload } from '@fynn90-e2e_assistant/agent'
 import type {
   IReadinessViewPayload,
   ISkillListViewPayload,
   TAgentWorkbenchAction,
   TWorkbenchRenderParams,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IAgentWorkRuntime } from '../../agent-runtime/agent-work-runtime'
 import type { ISkillCatalog } from './skill-catalog'
 import type { IReadinessService } from './execution-readiness'
@@ -95,7 +95,7 @@ export interface IWorkbenchViewHost {
    * @returns 发布结果；目标不存在或参数不合法时为 ok:false 并说明。
    * @throws 不抛出异常——失败以 ok:false 归一，由工具转述给模型。
    */
-  renderView(
+  renderView (
     params: TWorkbenchRenderParams,
   ): Promise<{ ok: true; message: string } | { ok: false; message: string }>
 }
@@ -107,7 +107,7 @@ export interface IWorkbenchViewHost {
  * @returns 可注入给 `createRenderViewTool` 的宿主。
  * @throws 不抛出异常。
  */
-export function createViewHost(
+export function createViewHost (
   dependencies: IViewHostDependencies,
 ): IWorkbenchViewHost {
   return {
@@ -123,7 +123,7 @@ export function createViewHost(
  * @returns 发布结果。
  * @throws 不抛出异常。
  */
-async function renderView(
+async function renderView (
   dependencies: IViewHostDependencies,
   params: TWorkbenchRenderParams,
 ): Promise<{ ok: true; message: string } | { ok: false; message: string }> {
@@ -202,7 +202,7 @@ async function renderView(
  * @returns 发布结果。
  * @throws 不抛出异常。
  */
-async function renderSkillList(
+async function renderSkillList (
   dependencies: IViewHostDependencies,
   params: { status?: string; keyword?: string; tag?: string },
 ): Promise<{ ok: true; message: string } | { ok: false; message: string }> {
@@ -251,7 +251,7 @@ async function renderSkillList(
  * @returns 补了行内动作字段的行；登记不可用或失败时不补（前端据此不渲染按钮）。
  * @throws 不抛出异常。
  */
-function attachInlineAction(
+function attachInlineAction (
   dependencies: IViewHostDependencies,
   row: ISkillListViewPayload['rows'][number],
 ): ISkillListViewPayload['rows'][number] {
@@ -280,7 +280,7 @@ function attachInlineAction(
  * @returns 该行应给的动作。
  * @throws 不抛出异常。
  */
-function pickInlineAction(
+function pickInlineAction (
   row: ISkillListViewPayload['rows'][number],
 ): TAgentWorkbenchAction {
   if (!row.hasSkillDocument) return 'generate-skill-document'
@@ -302,7 +302,7 @@ function pickInlineAction(
  * @returns 补过入口的载荷；登记不可用或失败时不补对应字段。
  * @throws 不抛出异常。
  */
-function attachReadinessActions(
+function attachReadinessActions (
   dependencies: IViewHostDependencies,
   readiness: IReadinessViewPayload,
   skillId: string,
@@ -348,7 +348,7 @@ function attachReadinessActions(
  * @returns 中文按钮文案。
  * @throws 不抛出异常。
  */
-function inlineActionLabel(action: TAgentWorkbenchAction): string {
+function inlineActionLabel (action: TAgentWorkbenchAction): string {
   switch (action) {
     case 'generate-skill-document':
       return '生成 SKILL.md'
@@ -362,7 +362,7 @@ function inlineActionLabel(action: TAgentWorkbenchAction): string {
 /** 视图发布的输入。 */
 interface IPublishViewInput {
   viewKind:
-    'skill-list' | 'skill-detail' | 'run-history' | 'readiness' | 'capability'
+  'skill-list' | 'skill-detail' | 'run-history' | 'readiness' | 'capability'
   skillId: string | null
   /** 载荷由宿主自取后填充；发布时展开为普通对象交给事件契约。 */
   payload: object
@@ -383,7 +383,7 @@ interface IPublishViewInput {
  * @returns 发布结果（模型可见文本）。
  * @throws 不抛出异常。
  */
-function publishView(
+function publishView (
   dependencies: IViewHostDependencies,
   input: IPublishViewInput,
 ): { ok: true; message: string } {
@@ -446,7 +446,7 @@ function publishView(
  * @returns 存在进行中的轮次时返回 true。
  * @throws 不抛出异常——读取失败按「没有进行中的轮次」处理（立即发布更安全）。
  */
-function hasOpenTurn(runtime: IAgentWorkRuntime, sessionId: string): boolean {
+function hasOpenTurn (runtime: IAgentWorkRuntime, sessionId: string): boolean {
   try {
     const summary = runtime
       .listSessions()

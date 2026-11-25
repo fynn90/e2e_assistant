@@ -1,4 +1,4 @@
-# @authine-e2e-agent/config
+# @fynn90-e2e_assistant/config
 
 ## 0.0.6
 

@@ -23,7 +23,7 @@ import type {
   IRunHistoryViewPayload,
   ISkillDetailViewPayload,
   IWorkbenchSkillRow,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /** SKILL 唯一 ID 的形状：9 位 [a-z0-9]（与 skill-manager 的判定一致）。 */
 const SKILL_ID_PATTERN = /^[a-z0-9]{9}$/
@@ -63,7 +63,7 @@ export interface ISkillCatalogHost {
    * @returns 候选列表；工作区内无 SKILL 时为空数组。
    * @throws 实现方可抛出结构化错误，由工具作为失败结果返回给模型。
    */
-  listSkills(): Promise<IAgentSkillCandidate[]>
+  listSkills (): Promise<IAgentSkillCandidate[]>
 
   /**
    * 带筛选的用例盘点（v17 Q1/Q3）。
@@ -76,7 +76,7 @@ export interface ISkillCatalogHost {
    * @returns 命中行与总数（`total` 为筛选后的命中数）。
    * @throws 实现方可抛出结构化错误，由工具作为失败结果返回给模型。
    */
-  listFiltered(filter: {
+  listFiltered (filter: {
     keyword?: string
     tag?: string
     status?: TSkillListStatusFilter
@@ -89,7 +89,7 @@ export interface ISkillCatalogHost {
    * @returns SKILL.md 内容与脚本存在性；目标不存在/不可读时返回归一化失败。
    * @throws 实现方可抛出结构化错误，由工具作为失败结果返回给模型。
    */
-  readSkillDocument(skillId: string): Promise<TReadSkillDocumentHostResult>
+  readSkillDocument (skillId: string): Promise<TReadSkillDocumentHostResult>
 
   /**
    * 读取用例详情（v17 Q4）：结构化用例 + env key 清单 + 产物完备性。
@@ -98,7 +98,7 @@ export interface ISkillCatalogHost {
    * @returns 详情；目标不存在或数据不可读时返回归一化失败。
    * @throws 实现方可抛出结构化错误，由工具作为失败结果返回给模型。
    */
-  readTestCase(skillId: string): Promise<TReadTestCaseHostResult>
+  readTestCase (skillId: string): Promise<TReadTestCaseHostResult>
 
   /**
    * 读取执行历史（v17 Q7）：以**持久化报告**为准，最近 N 次。
@@ -108,7 +108,7 @@ export interface ISkillCatalogHost {
    * @returns 历史；目标不存在时返回归一化失败。
    * @throws 实现方可抛出结构化错误，由工具作为失败结果返回给模型。
    */
-  readRunHistory(
+  readRunHistory (
     skillId: string,
     limit?: number,
   ): Promise<TReadRunHistoryHostResult>
@@ -129,7 +129,7 @@ export interface IReadinessHost {
    * @returns 逐项检查结果；目标不存在时返回归一化失败。
    * @throws 不抛出异常——失败以 ok:false 归一，由工具转述给模型。
    */
-  checkReadiness(
+  checkReadiness (
     skillId: string,
   ): Promise<
     | { ok: true; readiness: IReadinessViewPayload }
@@ -195,7 +195,7 @@ const readSkillDocumentParameters = Type.Object({
  * @returns 可直接配置到 AgentTool[] 的 list_skills 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createListSkillsTool(
+export function createListSkillsTool (
   host: ISkillCatalogHost,
 ): AgentTool<typeof listSkillsParameters, ListSkillsDetails> {
   return {
@@ -215,7 +215,7 @@ export function createListSkillsTool(
      * @returns 包含候选列表的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate
@@ -336,7 +336,7 @@ export function createListSkillsTool(
  * @returns 中文描述，如「最近失败」「关键词『登录』」。
  * @throws 不抛出异常。
  */
-function describeFilter(filter: {
+function describeFilter (filter: {
   keyword?: string
   tag?: string
   status?: TSkillListStatusFilter
@@ -364,7 +364,7 @@ function describeFilter(filter: {
  * @returns 可直接配置到 AgentTool[] 的 read_skill_document 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createReadSkillDocumentTool(
+export function createReadSkillDocumentTool (
   host: ISkillCatalogHost,
 ): AgentTool<typeof readSkillDocumentParameters, ReadSkillDocumentDetails> {
   return {
@@ -384,7 +384,7 @@ export function createReadSkillDocumentTool(
      * @returns 包含文档内容的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate

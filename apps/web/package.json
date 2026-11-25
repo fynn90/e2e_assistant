@@ -1,5 +1,5 @@
 {
-  "name": "@authine-e2e-agent/web",
+  "name": "@fynn90-e2e_assistant/web",
   "version": "0.0.6",
   "private": false,
   "type": "module",
@@ -23,7 +23,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@authine-e2e-agent/types": "workspace:^",
+    "@fynn90-e2e_assistant/types": "workspace:^",
     "dompurify": "^3.4.12",
     "highlight.js": "^11.11.1",
     "markdown-it": "^14.3.0",

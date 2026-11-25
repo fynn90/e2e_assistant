@@ -23,7 +23,7 @@ import { resolve } from 'node:path'
 import {
   isDangerousBashCommand,
   type IToolGuard,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 import {
   BLOCKED_READ_FILE_NAMES,
   isPathInsideWorkspace,
@@ -61,7 +61,7 @@ export interface IGenerationWriteGuardOptions {
  * @returns 工具调用前守卫：放行读操作与目标写入，阻断其余工具调用。
  * @throws 不抛出异常；不符合白名单的调用以阻断结果返回，由调用方（Agent 循环）处理。
  */
-export function createGenerationWriteGuard(
+export function createGenerationWriteGuard (
   options: IGenerationWriteGuardOptions,
 ): IToolGuard {
   const workspace = resolve(options.workspace)
@@ -70,7 +70,7 @@ export function createGenerationWriteGuard(
 
   return {
     id: options.id,
-    async beforeCall(toolCall) {
+    async beforeCall (toolCall) {
       const args = asRecord(toolCall.args)
 
       // load_skill 是一切生成任务的公共前置：Agent 需要先加载对应 Skill 的完整规则。
@@ -179,7 +179,7 @@ export function createGenerationWriteGuard(
  * @returns 面向模型的拒绝原因与修复指令。
  * @throws 不抛出异常。
  */
-function buildWriteRedirectReason(
+function buildWriteRedirectReason (
   requestedPath: unknown,
   workspace: string,
   target: string,
@@ -204,7 +204,7 @@ function buildWriteRedirectReason(
  * @returns 请求路径解析后与目标文件一致时返回 true。
  * @throws 不抛出异常。
  */
-function isTargetFile(
+function isTargetFile (
   workspace: string,
   requestedPath: unknown,
   normalizedTarget: string,
@@ -216,7 +216,7 @@ function isTargetFile(
 }
 
 /** 将未知参数安全转换为键值对象。 */
-function asRecord(value: unknown): Record<string, unknown> | undefined {
+function asRecord (value: unknown): Record<string, unknown> | undefined {
   return value && typeof value === 'object' && !Array.isArray(value)
     ? (value as Record<string, unknown>)
     : undefined

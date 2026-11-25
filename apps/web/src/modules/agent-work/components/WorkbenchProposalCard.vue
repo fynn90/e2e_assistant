@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { NButton, NInput, NTag } from 'naive-ui'
-import type { IProposalChange } from '@authine-e2e-agent/types'
+import type { IProposalChange } from '@fynn90-e2e_assistant/types'
 import type { IWorkbenchProposalTimelineItem } from '../timeline'
 import { formatBytes } from './workbench-format'
 

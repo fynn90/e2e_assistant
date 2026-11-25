@@ -1,5 +1,5 @@
 // 平台配置表单校验：在浏览器端镜像可确定的后端更新规则。
-import type { IUpdateConfigRequest } from '@authine-e2e-agent/types'
+import type { IUpdateConfigRequest } from '@fynn90-e2e_assistant/types'
 
 export type TConfigFieldName = keyof IUpdateConfigRequest
 export type TConfigFieldErrors = Partial<Record<TConfigFieldName, string>>
@@ -16,7 +16,7 @@ export interface IConfigValidationResult {
  * @returns 校验结果；成功时包含可提交的规范化载荷。
  * @throws 不抛出异常，字段错误通过结果对象返回。
  */
-export function validateConfigUpdate(
+export function validateConfigUpdate (
   payload: IUpdateConfigRequest,
 ): IConfigValidationResult {
   const errors: TConfigFieldErrors = {}
@@ -63,7 +63,7 @@ export function validateConfigUpdate(
  * @returns 规范化地址或对应的字段错误。
  * @throws 不抛出异常，URL 解析失败会返回错误文本。
  */
-export function normalizeApiBaseUrl(
+export function normalizeApiBaseUrl (
   apiBaseUrl: string,
 ): { value: string; error?: undefined } | { value: ''; error: string } {
   const normalizedApiBaseUrl = apiBaseUrl.trim()

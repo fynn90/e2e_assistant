@@ -1,6 +1,6 @@
 // Workbench Store 测试：覆盖首次加载、后台刷新保留与过期请求取消。
 import { createPinia, setActivePinia } from 'pinia'
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { fetchSkills } from '../../src/services/skill-api'
 import { useWorkbenchStore } from '../../src/stores/workbench'

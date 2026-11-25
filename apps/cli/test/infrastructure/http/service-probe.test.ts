@@ -5,7 +5,7 @@ import process from 'node:process'
 import {
   LOCAL_SERVICE_IDENTITY,
   LOCAL_SERVICE_PROTOCOL_VERSION,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { probeLocalService } from '../../../src/infrastructure/http/service-probe'
 
 // 探测是 socket 客户端，必须打真实监听；用 app.request() 无法覆盖网络层行为。
@@ -223,7 +223,7 @@ interface IStartJsonServerOptions {
 }
 
 /** 启动一个返回固定 JSON 的回环服务，返回其监听端口。 */
-async function startJsonServer(
+async function startJsonServer (
   options: IStartJsonServerOptions,
 ): Promise<{ port: number }> {
   return await startRawServer({
@@ -240,7 +240,7 @@ interface IStartRawServerOptions {
 }
 
 /** 启动一个返回指定原始响应的回环服务，返回其监听端口。 */
-async function startRawServer(
+async function startRawServer (
   options: IStartRawServerOptions,
 ): Promise<{ port: number }> {
   const server = http.createServer((_request, response) => {
@@ -254,7 +254,7 @@ async function startRawServer(
 }
 
 /** 在回环地址的随机空闲端口上启动服务，返回实际端口并登记以便统一关闭。 */
-async function listenOnLoopback(
+async function listenOnLoopback (
   server: http.Server | net.Server,
 ): Promise<number> {
   servers.push(server as http.Server)
@@ -274,7 +274,7 @@ async function listenOnLoopback(
 }
 
 /** 取一个当前空闲的回环端口（先监听再释放）。 */
-async function findFreePort(): Promise<number> {
+async function findFreePort (): Promise<number> {
   const probeServer = net.createServer()
   const port = await listenOnLoopback(probeServer)
 
@@ -284,7 +284,7 @@ async function findFreePort(): Promise<number> {
   return port
 }
 
-function closeServer(server: http.Server | net.Server): Promise<void> {
+function closeServer (server: http.Server | net.Server): Promise<void> {
   return new Promise((resolve, reject) => {
     server.close((error) => {
       if (error) {

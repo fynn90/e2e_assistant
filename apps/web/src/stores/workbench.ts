@@ -1,7 +1,7 @@
 // Workbench 状态：管理 Skill 列表请求生命周期、刷新反馈与错误恢复。
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 import { fetchSkills } from '../services/skill-api'
 import { ApiClientError } from '../services/http-client'
 
@@ -25,7 +25,7 @@ export const useWorkbenchStore = defineStore('workbench', () => {
    * @returns 请求结束后无返回值，成功结果写入 Store。
    * @throws 不向调用方抛出异常；失败原因写入 `errorMessage`。
    */
-  async function refreshSkills(): Promise<void> {
+  async function refreshSkills (): Promise<void> {
     refreshController?.abort()
     const controller = new AbortController()
     refreshController = controller
@@ -61,7 +61,7 @@ export const useWorkbenchStore = defineStore('workbench', () => {
    * @returns 失效处理完成后无返回值。
    * @throws 不抛出异常。
    */
-  function invalidateSkills(): void {
+  function invalidateSkills (): void {
     const controller = refreshController
     refreshController = null
     controller?.abort()
@@ -77,7 +77,7 @@ export const useWorkbenchStore = defineStore('workbench', () => {
    * @returns 清理完成后无返回值。
    * @throws 不抛出异常。
    */
-  function clearError(): void {
+  function clearError (): void {
     errorMessage.value = ''
   }
 
@@ -101,7 +101,7 @@ export const useWorkbenchStore = defineStore('workbench', () => {
  * @returns 主动取消时返回 true。
  * @throws 不抛出异常。
  */
-function isAbortedRequest(error: unknown): boolean {
+function isAbortedRequest (error: unknown): boolean {
   return error instanceof ApiClientError && error.kind === 'aborted'
 }
 
@@ -111,7 +111,7 @@ function isAbortedRequest(error: unknown): boolean {
  * @returns 可直接展示的中文错误文本。
  * @throws 不抛出异常。
  */
-function getSkillListErrorMessage(error: unknown): string {
+function getSkillListErrorMessage (error: unknown): string {
   if (error instanceof ApiClientError || error instanceof Error) {
     return error.message || '获取 Skill 列表失败，请稍后重试。'
   }

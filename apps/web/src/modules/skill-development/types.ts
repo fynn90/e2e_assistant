@@ -8,7 +8,7 @@ import type {
   ISkillDetail,
   ISkillFileContent,
   ISkillFileTreeNode,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IChatMessageViewModel } from '../../common/chat/types'
 import type { TAutoSaveState } from '../../common/autosave/types'
 
@@ -42,11 +42,11 @@ export interface ISkillEnvFileState {
   /** 格式错误明细（invalid 时），供用例页与 env 编辑页提示复用。 */
   issues: Ref<IEnvFileIssue[]>
   /** 重新拉取（进入结构化面板、env.json 保存成功后由 store 调用）。 */
-  refresh(): Promise<void>
+  refresh (): Promise<void>
 }
 
 export interface IChatPanelHandle {
-  focusComposer(): void
+  focusComposer (): void
 }
 
 /** 页头状态标签描述：由工作区面板提供，页头统一渲染 */
@@ -80,17 +80,17 @@ export interface IHeaderActionItem {
 }
 
 export interface IStructuredEditorHandle {
-  save(): Promise<boolean>
-  discard(): void
-  reload(): Promise<boolean>
-  markSourceMissing(): void
+  save (): Promise<boolean>
+  discard (): void
+  reload (): Promise<boolean>
+  markSourceMissing (): void
   /** 页头副标题（结构化用例固定文件名） */
   readonly toolbarSubtitle: string
   /** 页头状态标签，随编辑器状态响应式更新（组件实例上的 ComputedRef 已解包为数组） */
   readonly toolbarTags: IHeaderStatusTag[]
   /** 页头操作按钮（保存/生成），随就绪状态响应式更新（组件实例上的 ComputedRef 已解包为数组） */
   readonly toolbarActions: IHeaderActionItem[]
-  getSavedFileContext(): { relativePath: string; version: string } | undefined
+  getSavedFileContext (): { relativePath: string; version: string } | undefined
 }
 
 export interface ISkillDevelopmentWorkspaceContext {
@@ -114,24 +114,24 @@ export interface ISkillDevelopmentWorkspaceContext {
   /** env.json 最新合法状态（下拉数据源、失效判定与格式错误提示，v10）。 */
   envFileState: ISkillEnvFileState
   /** 用户点击「重试保存」。 */
-  retryAutoSave(): Promise<boolean>
+  retryAutoSave (): Promise<boolean>
   /** 用户点击「重新加载」：放弃本地改动，用磁盘内容覆盖。 */
-  reloadAutoSave(): Promise<void>
+  reloadAutoSave (): Promise<void>
   chatReady: ComputedRef<boolean>
   showOnboardingCaseHint: ComputedRef<boolean>
-  requestSend(content: string): void
-  stopChat(): void
-  retryChat(messageId: string): Promise<void>
-  saveCurrentFile(): Promise<boolean>
-  openRawE2ETestCase(): Promise<void>
+  requestSend (content: string): void
+  stopChat (): void
+  retryChat (messageId: string): Promise<void>
+  saveCurrentFile (): Promise<boolean>
+  openRawE2ETestCase (): Promise<void>
   /** 刷新文件树；返回是否刷新成功（被中止或失败时为 false） */
-  refreshTree(): Promise<boolean>
-  setStructuredDirty(value: boolean): void
-  updateSkillProjection(data: { title: string; description: string }): void
-  recordCaseReady(skillId: string): void
-  recordReviewedScriptSaved(skillId: string): void
-  registerChatPanel(handle: IChatPanelHandle | null): void
-  registerStructuredEditor(handle: IStructuredEditorHandle | null): void
+  refreshTree (): Promise<boolean>
+  setStructuredDirty (value: boolean): void
+  updateSkillProjection (data: { title: string; description: string }): void
+  recordCaseReady (skillId: string): void
+  recordReviewedScriptSaved (skillId: string): void
+  registerChatPanel (handle: IChatPanelHandle | null): void
+  registerStructuredEditor (handle: IStructuredEditorHandle | null): void
 }
 
 export type TSkillFileNode = Extract<ISkillFileTreeNode, { kind: 'file' }>

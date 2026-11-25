@@ -11,12 +11,12 @@ import { describe, expect, it } from 'vitest'
 import { access, mkdtemp, mkdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { createSkill } from '@authine-e2e-agent/skill-manager'
+import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
 import { createSkillLifecycleService } from '../../src/application/agent-workbench/skill-lifecycle-service'
 import type { IGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
 
 /** 任务注册表替身。 */
-function createRegistry(running: Record<string, string> = {}): IGenerationTaskRegistry {
+function createRegistry (running: Record<string, string> = {}): IGenerationTaskRegistry {
   const map = new Map(Object.entries(running))
   return {
     currentSessionId: (skillId: string) => map.get(skillId),
@@ -24,7 +24,7 @@ function createRegistry(running: Record<string, string> = {}): IGenerationTaskRe
 }
 
 /** 造一个用例目录。 */
-async function createCase(rootDir: string, title: string): Promise<string> {
+async function createCase (rootDir: string, title: string): Promise<string> {
   const created = await createSkill({ rootDir, title, description: '描述' })
   return created.skillManifest.id
 }
@@ -42,7 +42,7 @@ describe('deleteCase（L2c）', () => {
     })
 
     // 索引里已找不到 → resolveSkill 失败即「已删除」。
-    const { resolveSkill } = await import('@authine-e2e-agent/skill-manager')
+    const { resolveSkill } = await import('@fynn90-e2e_assistant/skill-manager')
     await expect(resolveSkill({ rootDir }, skillId)).rejects.toThrow()
   })
 
@@ -61,7 +61,7 @@ describe('deleteCase（L2c）', () => {
     ).rejects.toThrow(/正在执行/)
 
     // 用例仍在（拒绝发生在任何写操作之前）。
-    const { resolveSkill } = await import('@authine-e2e-agent/skill-manager')
+    const { resolveSkill } = await import('@fynn90-e2e_assistant/skill-manager')
     await expect(resolveSkill({ rootDir }, skillId)).resolves.toBeTruthy()
   })
 

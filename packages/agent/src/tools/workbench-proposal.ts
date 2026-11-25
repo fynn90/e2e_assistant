@@ -30,7 +30,7 @@ import type {
   ICaseChangeTargets,
   IEnvKeyOperation,
   TCaseChangeOrigin,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /** SKILL 唯一 ID 的形状：9 位 [a-z0-9]（与 skill-manager 的判定一致）。 */
 const SKILL_ID_PATTERN = /^[a-z0-9]{9}$/
@@ -54,7 +54,7 @@ export interface IProposalHost {
    * @returns 提案 ID；被拒绝时 message 说明原因。
    * @throws 不抛出异常——失败以 ok:false 归一，由工具转述给模型。
    */
-  createProposal(input: {
+  createProposal (input: {
     kind: 'case-change' | 'env-fill' | 'report-cleanup' | 'case-delete'
     skillId: string
     /** 提案来源（**由工具置位，模型无从传入**）。 */
@@ -235,7 +235,7 @@ const proposeCaseDeletionParameters = Type.Object({
  * @returns 可直接配置到 AgentTool[] 的 propose_case_change 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createProposeCaseChangeTool(
+export function createProposeCaseChangeTool (
   host: IProposalHost,
 ): AgentTool<typeof proposeCaseChangeParameters, ProposalToolDetails> {
   return {
@@ -255,7 +255,7 @@ export function createProposeCaseChangeTool(
      * @returns 包含提案结果的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate
@@ -291,7 +291,7 @@ export function createProposeCaseChangeTool(
  * @returns 可直接配置到 AgentTool[] 的 propose_case_repair 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createProposeCaseRepairTool(
+export function createProposeCaseRepairTool (
   host: IProposalHost,
 ): AgentTool<typeof proposeCaseRepairParameters, ProposalToolDetails> {
   return {
@@ -311,7 +311,7 @@ export function createProposeCaseRepairTool(
      * @returns 包含提案结果的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate
@@ -366,7 +366,7 @@ export function createProposeCaseRepairTool(
  * @returns 可直接配置到 AgentTool[] 的 propose_env_fill 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createProposeEnvFillTool(
+export function createProposeEnvFillTool (
   host: IProposalHost,
 ): AgentTool<typeof proposeEnvFillParameters, ProposalToolDetails> {
   return {
@@ -386,7 +386,7 @@ export function createProposeEnvFillTool(
      * @returns 包含提案结果的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate
@@ -443,7 +443,7 @@ export function createProposeEnvFillTool(
  * @returns 可直接配置到 AgentTool[] 的 propose_report_cleanup 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createProposeReportCleanupTool(
+export function createProposeReportCleanupTool (
   host: IProposalHost,
 ): AgentTool<typeof proposeReportCleanupParameters, ProposalToolDetails> {
   return {
@@ -463,7 +463,7 @@ export function createProposeReportCleanupTool(
      * @returns 包含提案结果的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate
@@ -513,7 +513,7 @@ export function createProposeReportCleanupTool(
  * @returns 可直接配置到 AgentTool[] 的 propose_case_deletion 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createProposeCaseDeletionTool(
+export function createProposeCaseDeletionTool (
   host: IProposalHost,
 ): AgentTool<typeof proposeCaseDeletionParameters, ProposalToolDetails> {
   return {
@@ -533,7 +533,7 @@ export function createProposeCaseDeletionTool(
      * @returns 包含提案结果的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate
@@ -563,7 +563,7 @@ export function createProposeCaseDeletionTool(
  * @returns 用例变更的目标值。
  * @throws 不抛出异常。
  */
-function toCaseChangeTargets(targets: {
+function toCaseChangeTargets (targets: {
   title?: string
   description?: string
   baseUrl?: string
@@ -590,11 +590,11 @@ function toCaseChangeTargets(targets: {
       : {}),
     ...(targets.steps !== undefined
       ? {
-          steps: targets.steps.map((step) => ({
-            ...step,
-            testData: {},
-          })),
-        }
+        steps: targets.steps.map((step) => ({
+          ...step,
+          testData: {},
+        })),
+      }
       : {}),
   }
 }
@@ -608,7 +608,7 @@ function toCaseChangeTargets(targets: {
  * @returns 工具结果（模型可见文本 + 结构化详情）。
  * @throws 不抛出异常。
  */
-function proposalToolResult(
+function proposalToolResult (
   result: { ok: true; message: string } | { ok: false; message: string },
   skillId: string,
   repair = false,

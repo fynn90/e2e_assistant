@@ -15,8 +15,8 @@ import { describe, expect, it } from 'vitest'
 import type {
   TAgentClientEventDraft,
   TAgentInteractionAnswer,
-} from '@authine-e2e-agent/types'
-import type { IAskUserHost } from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/types'
+import type { IAskUserHost } from '@fynn90-e2e_assistant/agent'
 import type { IAgentWorkRuntime } from '../../src/agent-runtime'
 import { createAskUserHost } from '../../src/agent-runtime/ask-user-host'
 
@@ -33,14 +33,14 @@ type TInteractionBeginEvent = Extract<
  * @returns 是 begin 事件时返回 true（同时完成类型收窄）。
  * @throws 不抛出异常。
  */
-function isInteractionBegin(
+function isInteractionBegin (
   event: TAgentClientEventDraft,
 ): event is TInteractionBeginEvent {
   return event.type === 'interaction' && event.phase === 'begin'
 }
 
 /** 从事件流中取第一条 interaction begin 事件（未定义时断言失败）。 */
-function firstInteractionBegin(
+function firstInteractionBegin (
   events: TAgentClientEventDraft[],
 ): TInteractionBeginEvent {
   const begin = events.find(isInteractionBegin)
@@ -52,9 +52,9 @@ function firstInteractionBegin(
 interface IAskHarness {
   host: IAskUserHost
   events: TAgentClientEventDraft[]
-  answerWith(answer: TAgentInteractionAnswer): void
+  answerWith (answer: TAgentInteractionAnswer): void
   /** 模拟会话中止：让等待中的提问以 reject 结束。 */
-  abortWith(error: Error): void
+  abortWith (error: Error): void
 }
 
 /**
@@ -62,14 +62,14 @@ interface IAskHarness {
  *
  * @returns 提问现场。
  */
-function createHarness(): IAskHarness {
+function createHarness (): IAskHarness {
   const events: TAgentClientEventDraft[] = []
   let resolveAnswer!: (answer: TAgentInteractionAnswer) => void
   let rejectAnswer!: (error: Error) => void
 
   const runtime = {
     bus: {
-      publish(event: TAgentClientEventDraft) {
+      publish (event: TAgentClientEventDraft) {
         events.push(event)
       },
     },
@@ -92,7 +92,7 @@ function createHarness(): IAskHarness {
 }
 
 /** 合法的多问题输入。 */
-function buildTwoQuestionInput() {
+function buildTwoQuestionInput () {
   return {
     questions: [
       {
@@ -115,7 +115,7 @@ function buildTwoQuestionInput() {
 }
 
 /** 合法的单问题输入。 */
-function buildOneQuestionInput() {
+function buildOneQuestionInput () {
   return {
     questions: [
       {
@@ -136,7 +136,7 @@ function buildOneQuestionInput() {
  * @param events - 已发布的总线事件。
  * @returns 与 questions 顺序一致的 questionId 数组。
  */
-function questionIdsOf(events: TAgentClientEventDraft[]): string[] {
+function questionIdsOf (events: TAgentClientEventDraft[]): string[] {
   const begin = firstInteractionBegin(events)
   return (begin.interaction.questions ?? []).map(
     (question) => question.questionId,

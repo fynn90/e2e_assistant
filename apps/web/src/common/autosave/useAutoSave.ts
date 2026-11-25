@@ -21,7 +21,7 @@ import {
   type ComputedRef,
   type Ref,
 } from 'vue'
-import type { IEnvFileIssue } from '@authine-e2e-agent/types'
+import type { IEnvFileIssue } from '@fynn90-e2e_assistant/types'
 import { ApiClientError } from '../../services/http-client'
 import type { ISaveTarget, ISaveTargetResult, TAutoSaveState } from './types'
 import { isBlockedError, isConflictError } from './types'
@@ -65,7 +65,7 @@ export interface IUseAutoSave {
   state: Ref<TAutoSaveState>
   /** 最近一次校验诊断。 */
   diagnostics: Ref<
-    readonly import('@authine-e2e-agent/types').IFileSaveDiagnostic[]
+    readonly import('@fynn90-e2e_assistant/types').IFileSaveDiagnostic[]
   >
   /**
    * 最近一次校验阻断的问题明细（blocked 态专属，v10 PRD 5.3）。
@@ -117,10 +117,10 @@ export interface IUseAutoSave {
  * @returns 状态、诊断与操作方法。
  * @throws 不抛出异常；保存失败通过状态与 errorMessage 体现。
  */
-export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
+export function useAutoSave (options: IUseAutoSaveOptions): IUseAutoSave {
   const state = ref<TAutoSaveState>('saved')
   const diagnostics = ref<
-    readonly import('@authine-e2e-agent/types').IFileSaveDiagnostic[]
+    readonly import('@fynn90-e2e_assistant/types').IFileSaveDiagnostic[]
   >([])
   const blockedIssues = ref<IEnvFileIssue[]>([])
   const errorMessage = ref('')
@@ -143,7 +143,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    *
    * @returns 内容有差异时返回 true。
    */
-  function hasPendingChanges(): boolean {
+  function hasPendingChanges (): boolean {
     return (
       lastSavedContent !== null && options.getContent() !== lastSavedContent
     )
@@ -155,7 +155,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    * @param content - 本次发送的正文。
    * @param result - 保存目标返回的版本与诊断。
    */
-  function acceptSaved(content: string, result: ISaveTargetResult): void {
+  function acceptSaved (content: string, result: ISaveTargetResult): void {
     lastSavedContent = content
     diagnostics.value = result.diagnostics
     blockedIssues.value = []
@@ -168,7 +168,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    *
    * @returns 无变化时返回 true。
    */
-  function isUnchanged(): boolean {
+  function isUnchanged (): boolean {
     return (
       lastSavedContent !== null && options.getContent() === lastSavedContent
     )
@@ -180,7 +180,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    * @param error - 捕获到的异常。
    * @returns 问题明细；异常未携带时返回空数组。
    */
-  function extractBlockedIssues(error: unknown): IEnvFileIssue[] {
+  function extractBlockedIssues (error: unknown): IEnvFileIssue[] {
     if (error && typeof error === 'object' && 'issues' in error) {
       const issues = (error as { issues?: unknown }).issues
       return Array.isArray(issues) ? (issues as IEnvFileIssue[]) : []
@@ -198,7 +198,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    * @param error - 校验阻断异常。
    * @returns 固定返回 false：退出 drain 循环。
    */
-  function enterBlockedState(error: unknown): false {
+  function enterBlockedState (error: unknown): false {
     state.value = 'blocked'
     blockedIssues.value = extractBlockedIssues(error)
     // 问题明细缺失时（如版本偏差下的服务端兜底拒绝），退回通用错误文案。
@@ -216,7 +216,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    * @param error - 捕获到的异常。
    * @returns 已通过重试恢复时返回 true；需要退出 drain 循环时返回 false。
    */
-  async function handleFailure(error: unknown): Promise<boolean> {
+  async function handleFailure (error: unknown): Promise<boolean> {
     if (isConflictError(error)) {
       state.value = 'conflict'
       errorMessage.value = '文件已被外部修改，请选择重新加载或覆盖保存。'
@@ -265,7 +265,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    *
    * @returns 排空完成后的 Promise。
    */
-  async function drain(): Promise<void> {
+  async function drain (): Promise<void> {
     if (inFlight) return inFlight
 
     inFlight = (async () => {
@@ -310,14 +310,14 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
   }
 
   /** 清除待触发的防抖定时器。 */
-  function clearTimer(): void {
+  function clearTimer (): void {
     if (timer !== null) {
       clearTimeout(timer)
       timer = null
     }
   }
 
-  function markDirty(): void {
+  function markDirty (): void {
     errorMessage.value = ''
     state.value = 'pending'
     clearTimer()
@@ -332,7 +332,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    *
    * @returns 保存成功时返回 true；失败/冲突/无目标时返回 false。
    */
-  async function saveNow(): Promise<boolean> {
+  async function saveNow (): Promise<boolean> {
     clearTimer()
     if (!options.target.value) return false
     if (isUnchanged()) {
@@ -350,7 +350,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    *
    * @returns 排空完成后的 Promise。
    */
-  async function flushSilently(): Promise<void> {
+  async function flushSilently (): Promise<void> {
     clearTimer()
     if (!options.target.value) return
     if (isUnchanged()) return
@@ -358,13 +358,13 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
   }
 
   /** 用户点击「重试保存」。 */
-  async function retry(): Promise<boolean> {
+  async function retry (): Promise<boolean> {
     errorMessage.value = ''
     return saveNow()
   }
 
   /** 用户选择「重新加载」：放弃本地改动，重新拉取磁盘内容。 */
-  async function reload(): Promise<void> {
+  async function reload (): Promise<void> {
     clearTimer()
     state.value = 'saved'
     diagnostics.value = []
@@ -380,7 +380,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    * 服务端始终执行版本校验，因此做法是重置本地版本基准后重新保存——
    * 若磁盘确实已被外部修改，服务端仍会返回冲突，此时提示用户先重新加载。
    */
-  async function overwrite(): Promise<boolean> {
+  async function overwrite (): Promise<boolean> {
     // 把基准清空，使「跳过无变化」判定不会误判为已同步。
     lastSavedContent = null
     return saveNow()
@@ -392,7 +392,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    * @param content - 磁盘上的最新正文。
    * @param version - 磁盘版本（保留参数以便调用方回填文件版本）。
    */
-  function syncFromDisk(content: string, version: string): void {
+  function syncFromDisk (content: string, version: string): void {
     void version
     lastSavedContent = content
     state.value = 'saved'
@@ -426,7 +426,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
    * 在 store 中创建实例时（不存在活动组件）由调用方显式释放；
    * 组件内创建时随卸载自动释放。
    */
-  function dispose(): void {
+  function dispose (): void {
     disposed = true
     clearTimer()
     controller.abort()
@@ -460,7 +460,7 @@ export function useAutoSave(options: IUseAutoSaveOptions): IUseAutoSave {
  * @param error - 捕获到的异常。
  * @returns 可展示的错误信息。
  */
-function describeError(error: unknown): string {
+function describeError (error: unknown): string {
   if (error instanceof ApiClientError) return error.message
   return error instanceof Error ? error.message : '保存失败。'
 }
@@ -471,6 +471,6 @@ function describeError(error: unknown): string {
  * @param ms - 等待时长。
  * @returns 计时结束后的 Promise。
  */
-function sleep(ms: number): Promise<void> {
+function sleep (ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }

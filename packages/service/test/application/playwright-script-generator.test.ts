@@ -7,7 +7,7 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
 import { createGenerationWriteGuard } from '../../src/application/e2e-test-case/generation-tool-guards'
 import {
   createPlaywrightScriptGenerator,
@@ -27,7 +27,7 @@ afterEach(async () => {
 })
 
 /** 构造一份结构完整的最小用例，作为生成器的输入数据。 */
-function createTestCase(overrides: Partial<IE2ETestCase> = {}): IE2ETestCase {
+function createTestCase (overrides: Partial<IE2ETestCase> = {}): IE2ETestCase {
   return {
     schemaVersion: '1.0',
     id: 'case_login',
@@ -58,12 +58,12 @@ describe('createPlaywrightScriptGenerator 提示词边界', () => {
    * 必须真实写盘：生成器会从 targetFile 读回产物，
    * 只返回文本而不落盘会让用例以 LLM_INVALID_RESPONSE 失败。
    */
-  function createFakeRunner(targetFile: string, code: string) {
+  function createFakeRunner (targetFile: string, code: string) {
     const runs: Array<{ prompt: string; title: string }> = []
     return {
       runs,
       runner: {
-        async run(input: { prompt: string; title: string }) {
+        async run (input: { prompt: string; title: string }) {
           runs.push({ prompt: input.prompt, title: input.title })
           await writeFile(targetFile, code, 'utf8')
           return { finalText: '脚本已写入。' }
@@ -73,7 +73,7 @@ describe('createPlaywrightScriptGenerator 提示词边界', () => {
   }
 
   /** 在临时工作区中准备生成器与候选脚本目标路径（真实 Skill 的 temp/ 结构）。 */
-  async function prepareGenerator(
+  async function prepareGenerator (
     code = "import { test } from '@playwright/test'\n",
   ) {
     const workspace = await mkdtemp(

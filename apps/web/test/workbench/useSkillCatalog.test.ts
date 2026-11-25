@@ -1,6 +1,6 @@
 // Skill 目录查询模型测试：覆盖检索、排序、分页与响应式输入。
 import { nextTick, ref } from 'vue'
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 import { describe, expect, it } from 'vitest'
 import { useSkillCatalog } from '../../src/modules/skills/useSkillCatalog'
 
@@ -11,7 +11,7 @@ import { useSkillCatalog } from '../../src/modules/skills/useSkillCatalog'
  * @returns 可用于目录测试的 Skill 摘要。
  * @throws 不抛出异常。
  */
-function createSkill(
+function createSkill (
   index: number,
   overrides: Partial<ISkillSummary> = {},
 ): ISkillSummary {

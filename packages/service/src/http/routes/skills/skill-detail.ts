@@ -1,12 +1,12 @@
 import type { Hono } from 'hono'
-import { getSkillDetail } from '@authine-e2e-agent/skill-manager'
-import type { IGetSkillResponse } from '@authine-e2e-agent/types'
+import { getSkillDetail } from '@fynn90-e2e_assistant/skill-manager'
+import type { IGetSkillResponse } from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { requirePlatformConfig } from '../route-utils'
 import { skillIdSchema } from './validation'
 
-export function registerSkillDetailRoutes(routes: Hono<IAppEnv>): void {
+export function registerSkillDetailRoutes (routes: Hono<IAppEnv>): void {
   routes.get('/:skillId', async (context) => {
     const skillIdResult = skillIdSchema.safeParse(context.req.param('skillId'))
 

@@ -10,7 +10,7 @@ import { randomUUID } from 'node:crypto'
 import {
   startLocalServer,
   type TStartLocalServer,
-} from '@authine-e2e-agent/service'
+} from '@fynn90-e2e_assistant/service'
 import { probeBashShell, resolveBashShellPath } from './bash-shell-check'
 import { ensurePlatformConfigStorage } from './platform-config-storage'
 import {
@@ -138,7 +138,7 @@ export interface IServiceLifecycleDependencies {
  * @returns 合并后的依赖集合。
  * @throws 不抛出异常。
  */
-export function createServiceLifecycleDependencies(
+export function createServiceLifecycleDependencies (
   overrides: Partial<IServiceLifecycleDependencies> = {},
 ): IServiceLifecycleDependencies {
   return {
@@ -178,7 +178,7 @@ interface IRegisterShutdownHandlersOptions {
  * `closeServer` 现在是优雅序列（中止任务 → 关浏览器 → 强关连接），
  * 因此 Ctrl+C 有 SSE 连接时也能在数秒内退出（修 F4/F5）。
  */
-function registerShutdownHandlers(
+function registerShutdownHandlers (
   options: IRegisterShutdownHandlersOptions,
 ): void {
   process.once('SIGINT', () => options.shutdown(0))
@@ -194,7 +194,7 @@ function registerShutdownHandlers(
  * @returns 随机凭据字符串。
  * @throws 不抛出异常。
  */
-function generateShutdownToken(): string {
+function generateShutdownToken (): string {
   return randomUUID()
 }
 
@@ -209,7 +209,7 @@ function generateShutdownToken(): string {
  * @returns 信号能触发服务侧清理时返回 true。
  * @throws 不抛出异常。
  */
-export function isSignalGracefulOnCurrentPlatform(
+export function isSignalGracefulOnCurrentPlatform (
   platform: NodeJS.Platform = process.platform,
 ): boolean {
   return platform !== 'win32'
@@ -222,7 +222,7 @@ export function isSignalGracefulOnCurrentPlatform(
  * @returns 成功发出结束信号返回 true；进程已不存在或无权限时返回 false。
  * @throws 不抛出异常，失败会被转换为 false。
  */
-function terminateProcessBySignal(pid: number): boolean {
+function terminateProcessBySignal (pid: number): boolean {
   try {
     process.kill(pid, 'SIGTERM')
     return true

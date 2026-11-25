@@ -1,10 +1,10 @@
-# `@authine-e2e-agent/cli`
+# `@fynn90-e2e_assistant/cli`
 
 `apps/cli` 是 Authine E2E Agent Platform 的 **CLI 命令层**。它只负责命令行本身的事：解析命令、
 检查用户环境、管理本地服务的进程生命周期、唤起浏览器、提供终端交互界面。
 
 v18 起，全部后端服务能力（HTTP API、Agent 运行时、生成与执行编排）已迁入独立的
-[`packages/service`](../../packages/service) 包。CLI 通过 `@authine-e2e-agent/service`
+[`packages/service`](../../packages/service) 包。CLI 通过 `@fynn90-e2e_assistant/service`
 的启动入口拿服务，不再自己承载业务实现。
 
 ## 1. 包的作用与依赖项
@@ -78,14 +78,14 @@ fi
 
 ### 当前包依赖的内部包
 
-- `@authine-e2e-agent/service`
+- `@fynn90-e2e_assistant/service`
   本地服务层（纯 API）。本包调用它的 `startLocalServer()` 启动服务，并消费其类型。
-- `@authine-e2e-agent/web-host`
+- `@fynn90-e2e_assistant/web-host`
   前端产物托管。本包通过服务层的 `extendApp` 扩展点把 Web 工作台页面挂到同一地址上——
   服务层因此不需要依赖任何前端包，可独立部署到服务器端。
-- `@authine-e2e-agent/config`
+- `@fynn90-e2e_assistant/config`
   共享的用户级配置目录约定。CLI 的 `runtime.json` 与服务层的 `config.json` 必须落在同一目录下。
-- `@authine-e2e-agent/types`
+- `@fynn90-e2e_assistant/types`
   跨包线协议常量：`LOCAL_SERVICE_PROTOCOL_VERSION`（版本比对）与 `localServiceHealthSchema`（`/health` 应答校验）。
 
 ### 当前包依赖的第三方库
@@ -181,7 +181,7 @@ apps/cli/
 **前台（`--foreground`）**：
 
 1. `start-command` 分派到 `application/service-lifecycle`，先探测已登记的服务状态。
-2. 若需启动新服务：探测 bash 路径 → 调用 `@authine-e2e-agent/service` 的 `startLocalServer()` →
+2. 若需启动新服务：探测 bash 路径 → 调用 `@fynn90-e2e_assistant/service` 的 `startLocalServer()` →
    登记 `runtime.json`（含运行形态与关闭凭据）→ 注册 SIGINT/SIGTERM 清理钩子。
 3. 打印启动文案并自动打开浏览器。
 
@@ -219,7 +219,7 @@ apps/cli/
 
 - 输出入口：`dist/index.js`
 - 可执行命令：`e2e_assistant`、`authine-e2e-agent`
-- 包名：`@authine-e2e-agent/cli`
+- 包名：`@fynn90-e2e_assistant/cli`
 
 > ⚠️ **本包是依赖图的最顶端，不得被任何包依赖。** 一旦服务层或未来的桌面端依赖 CLI，
 > 它们就能触达「启动进程 / 结束进程」的能力，「谁提供能力」与「谁管理进程」的边界立刻失效。
@@ -267,9 +267,9 @@ apps/cli/
 ## 常用脚本
 
 ```bash
-pnpm --filter @authine-e2e-agent/cli dev
-pnpm --filter @authine-e2e-agent/cli build
-pnpm --filter @authine-e2e-agent/cli test
+pnpm --filter @fynn90-e2e_assistant/cli dev
+pnpm --filter @fynn90-e2e_assistant/cli build
+pnpm --filter @fynn90-e2e_assistant/cli test
 ```
 
 ## 开发说明

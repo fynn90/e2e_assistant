@@ -7,7 +7,7 @@
  */
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import type { ISkillChatMessage } from '@authine-e2e-agent/types'
+import type { ISkillChatMessage } from '@fynn90-e2e_assistant/types'
 import { createSkillChatRuntime } from '../src/service/skill-chat'
 
 /** 测试用工作区（工具只绑定 cwd，不落盘即可）。 */
@@ -25,7 +25,7 @@ const skill = {
 }
 
 /** 构造 mock SSE 响应体：先输出文本增量，再 stop。 */
-function mockSseBody(text: string): string {
+function mockSseBody (text: string): string {
   return [
     `data: {"id":"c1","object":"chat.completion.chunk","created":0,"model":"test-model","choices":[{"index":0,"delta":{"content":"${text}"},"finish_reason":null}]}\n\n`,
     'data: {"id":"c1","object":"chat.completion.chunk","created":0,"model":"test-model","choices":[{"index":0,"delta":{},"finish_reason":"stop"}]}\n\n',

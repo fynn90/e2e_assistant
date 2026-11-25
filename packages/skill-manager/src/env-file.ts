@@ -9,7 +9,7 @@
 import { access } from 'node:fs/promises'
 import path from 'node:path'
 import writeFileAtomic from 'write-file-atomic'
-import { DEFAULT_ENV_FILE_CONTENT } from '@authine-e2e-agent/types'
+import { DEFAULT_ENV_FILE_CONTENT } from '@fynn90-e2e_assistant/types'
 import { SKILL_ENV_FILE_NAME } from './constants'
 import { resolveSkill } from './detail'
 import { isFileSystemMissingError } from './errors'
@@ -29,7 +29,7 @@ import type { ISkillStorageOptions } from './storage'
  * @returns 本次执行了补建时返回 true；已存在、只读或兜底失败返回 false。
  * @throws 不抛出异常——补建失败降级为「文件树中暂无 env.json」，不阻断调用方流程。
  */
-export async function ensureEnvFile(
+export async function ensureEnvFile (
   options: ISkillStorageOptions,
   skillId: string,
 ): Promise<boolean> {

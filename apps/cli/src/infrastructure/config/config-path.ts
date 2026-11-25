@@ -1,12 +1,12 @@
 /**
  * 解析 CLI 侧使用的配置目录与运行态文件路径。
  *
- * 用户级配置根目录与 e2e_assistant 目录名由 `@authine-e2e-agent/config` 统一解析——
+ * 用户级配置根目录与 e2e_assistant 目录名由 `@fynn90-e2e_assistant/config` 统一解析——
  * 本进程的 runtime.json 与服务层的 config.json 必须落在同一目录下（PRD v18 §4.5）。
  * 本文件只负责拼接 CLI 自己的文件名。
  */
 import path from 'node:path'
-import { getAuthineConfigDirectory } from '@authine-e2e-agent/config'
+import { getAuthineConfigDirectory } from '@fynn90-e2e_assistant/config'
 
 const AUTHINE_RUNTIME_FILE_NAME = 'runtime.json'
 const AUTHINE_CONFIG_FILE_NAME = 'config.json'

@@ -5,7 +5,7 @@ import type {
   IInitializeConfigRequest,
   IUpdateConfigRequest,
   TConfigIssue,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   fetchConfigStatus,
   fetchLocalServiceHealth,
@@ -34,7 +34,7 @@ export const usePlatformStore = defineStore('platform', () => {
   })
   const initialized = computed(() => pageState.value === 'ready')
 
-  async function bootstrap(): Promise<void> {
+  async function bootstrap (): Promise<void> {
     pageState.value = 'loading'
     errorMessage.value = ''
 
@@ -48,7 +48,7 @@ export const usePlatformStore = defineStore('platform', () => {
     }
   }
 
-  async function initialize(): Promise<boolean> {
+  async function initialize (): Promise<boolean> {
     submitting.value = true
     errorMessage.value = ''
 
@@ -66,7 +66,7 @@ export const usePlatformStore = defineStore('platform', () => {
     }
   }
 
-  async function update(payload?: IUpdateConfigRequest): Promise<boolean> {
+  async function update (payload?: IUpdateConfigRequest): Promise<boolean> {
     submitting.value = true
     errorMessage.value = ''
 
@@ -91,11 +91,11 @@ export const usePlatformStore = defineStore('platform', () => {
     }
   }
 
-  function clearError(): void {
+  function clearError (): void {
     errorMessage.value = ''
   }
 
-  function populateFormFromSummary(): void {
+  function populateFormFromSummary (): void {
     if (!configSummary.value) {
       return
     }
@@ -106,7 +106,7 @@ export const usePlatformStore = defineStore('platform', () => {
     formModel.llmModelName = configSummary.value.llmModelName
   }
 
-  function applyConfigData(
+  function applyConfigData (
     data: Awaited<ReturnType<typeof fetchConfigStatus>>['data'],
   ): void {
     configPath.value = data.configPath
@@ -137,7 +137,7 @@ export const usePlatformStore = defineStore('platform', () => {
     pageState.value = data.workspaceReady ? 'ready' : 'corrupted'
   }
 
-  function applyMutationData(data: {
+  function applyMutationData (data: {
     configPath: string
     configSummary: IConfigSummary
     workspaceReady: boolean
@@ -171,7 +171,7 @@ export const usePlatformStore = defineStore('platform', () => {
   }
 })
 
-function getErrorMessage(error: unknown, fallback: string): string {
+function getErrorMessage (error: unknown, fallback: string): string {
   if (error instanceof ApiClientError || error instanceof Error) {
     return error.message || fallback
   }

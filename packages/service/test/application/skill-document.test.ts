@@ -9,7 +9,7 @@ import {
   FileE2ETestCaseRepository,
   FileSkillDocumentRepository,
   createSkill,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import { createE2ETestCaseApplicationServices } from '../../src/application/e2e-test-case/create-services'
 import type { ISkillMarkdownGenerator } from '../../src/application/e2e-test-case/skill-markdown-generator'
 
@@ -58,7 +58,7 @@ describe('SKILL.md application flow', () => {
     )
 
     const generator: ISkillMarkdownGenerator = {
-      async generate(input) {
+      async generate (input) {
         const content = `---
 name: 登录应用服务
 description: 验证登录流程。
@@ -109,11 +109,11 @@ description: 验证登录流程。
     }
     let receivedConfig:
       | {
-          projectDirectory: string
-          llmApiKey: string
-          llmApiBaseUrl: string
-          llmModelName: string
-        }
+        projectDirectory: string
+        llmApiKey: string
+        llmApiBaseUrl: string
+        llmModelName: string
+      }
       | undefined
     const services = createE2ETestCaseApplicationServices(
       undefined,
@@ -219,7 +219,7 @@ description: 验证登录流程。
     )
 
     const generator: ISkillMarkdownGenerator = {
-      async generate(input) {
+      async generate (input) {
         const content = `---
 name: 编辑应用服务
 description: 验证用户手改实时保存。
@@ -468,7 +468,7 @@ description: 验证用户手改实时保存。
     )
     let generatorCalled = false
     const generator: ISkillMarkdownGenerator = {
-      async generate(input) {
+      async generate (input) {
         generatorCalled = true
         const content = `---
 name: 敏感数据用例

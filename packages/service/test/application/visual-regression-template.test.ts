@@ -23,9 +23,9 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import type { IValidationTestCase } from '@authine-e2e-agent/playwright-engine'
-import { PlaywrightScriptValidator } from '@authine-e2e-agent/playwright-engine'
-import { resourceLoader } from '@authine-e2e-agent/agent'
+import type { IValidationTestCase } from '@fynn90-e2e_assistant/playwright-engine'
+import { PlaywrightScriptValidator } from '@fynn90-e2e_assistant/playwright-engine'
+import { resourceLoader } from '@fynn90-e2e_assistant/agent'
 
 const validator = new PlaywrightScriptValidator()
 
@@ -58,7 +58,7 @@ const testCase: IValidationTestCase = {
  * @returns 模板中的辅助函数源码（从第一个 function 到「在步骤内按下面的形态使用」之前）。
  * @throws {Error} 模板结构变化导致无法抽取时抛出，提示测试需要同步更新。
  */
-function extractHelperFunctions(): string {
+function extractHelperFunctions (): string {
   const skill = resourceLoader.getSkill('playwright_script_generation').content
   const marker = "import { test, expect } from '@playwright/test'"
   const start = skill.indexOf(marker)
@@ -87,7 +87,7 @@ function extractHelperFunctions(): string {
 }
 
 /** 组装一份完整的候选脚本（辅助函数 + 步骤体）。 */
-function buildScript(
+function buildScript (
   stepBody: string,
   helpers = extractHelperFunctions(),
 ): string {

@@ -1,4 +1,4 @@
-# `@authine-e2e-agent/service`
+# `@fynn90-e2e_assistant/service`
 
 `packages/service` 是 Authine E2E Agent Platform 的**本地服务层**，承载 Web 工作台的全部
 后端能力：HTTP API、Agent 工作通道运行时、生成与执行编排、平台配置读写、Skill 编排。
@@ -11,7 +11,7 @@
 本包对外只暴露**两件事**：装配（构造 HTTP 应用）与启动（在可用端口上监听）。
 
 ```ts
-import { startLocalServer } from '@authine-e2e-agent/service'
+import { startLocalServer } from '@fynn90-e2e_assistant/service'
 
 const started = await startLocalServer({ port: 5826, strictPort: false, shellPath })
 // started.port / started.serverUrl / started.closeServer()
@@ -65,7 +65,7 @@ packages/service/
 ```text
 http ──▶ application ──▶ agent-runtime · generation-runtime · config · workspace
   │            │
-  └────────────┴──────▶ shared ──▶ @authine-e2e-agent/types
+  └────────────┴──────▶ shared ──▶ @fynn90-e2e_assistant/types
 ```
 
 三条硬约束（可用 grep 验证）：
@@ -91,7 +91,7 @@ http ──▶ application ──▶ agent-runtime · generation-runtime · conf
 
 **本包是纯 API 服务，不依赖任何前端包**——这样它才能独立部署到服务器端。
 
-页面由 [`@authine-e2e-agent/web-host`](../web-host) 托管，它依赖 `web` 并把其 `dist`
+页面由 [`@fynn90-e2e_assistant/web-host`](../web-host) 托管，它依赖 `web` 并把其 `dist`
 挂到宿主 HTTP 应用上。两者的组合由调用方（`apps/cli`）完成：
 
 ```ts
@@ -116,13 +116,13 @@ const started = await startLocalServer({
 | Skill 与用例 | 平台配置中的 `projectDirectory` 之下 |
 | 测试报告 | `<Skill>/test_report/<runId>/` |
 
-用户级配置根目录由 `@authine-e2e-agent/config` 统一解析（Windows 用 `APPDATA`、
+用户级配置根目录由 `@fynn90-e2e_assistant/config` 统一解析（Windows 用 `APPDATA`、
 POSIX 用 `XDG_CONFIG_HOME`、兜底 `homedir()`），CLI 与服务层各自拼接自己的文件名。
 
 ## 5. 测试
 
 ```bash
-pnpm --filter @authine-e2e-agent/service test
+pnpm --filter @fynn90-e2e_assistant/service test
 ```
 
 `vitest.config.ts` 中 **`fileParallelism: false` 必须保留**：多个测试文件通过设置

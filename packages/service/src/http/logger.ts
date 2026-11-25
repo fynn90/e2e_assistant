@@ -1,4 +1,4 @@
-import type { TApiErrorCode } from '@authine-e2e-agent/types'
+import type { TApiErrorCode } from '@fynn90-e2e_assistant/types'
 
 export interface IHttpRequestLogEntry {
   requestId: string
@@ -10,8 +10,8 @@ export interface IHttpRequestLogEntry {
 }
 
 export interface IHttpLogger {
-  request(entry: IHttpRequestLogEntry): void
-  error(entry: IHttpRequestLogEntry, cause?: unknown): void
+  request (entry: IHttpRequestLogEntry): void
+  error (entry: IHttpRequestLogEntry, cause?: unknown): void
 }
 
 /**
@@ -27,17 +27,17 @@ export interface IHttpLogger {
  * @returns 应当静默时返回 true。
  * @throws 不抛出异常。
  */
-export function isQuietHttpRequest(entry: IHttpRequestLogEntry): boolean {
+export function isQuietHttpRequest (entry: IHttpRequestLogEntry): boolean {
   return entry.status < 400 && entry.path.startsWith('/assets/')
 }
 
 export const consoleHttpLogger: IHttpLogger = {
-  request(entry) {
+  request (entry) {
     console.info(
       `[http] ${entry.method} ${entry.path} ${entry.status} ${entry.durationMs}ms requestId=${entry.requestId}`,
     )
   },
-  error(entry) {
+  error (entry) {
     console.error(
       `[http] ${entry.method} ${entry.path} ${entry.status} ${entry.durationMs}ms requestId=${entry.requestId} code=${entry.errorCode ?? 'INTERNAL_ERROR'}`,
     )

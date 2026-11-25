@@ -15,7 +15,7 @@ import {
   type IE2ETestCase,
   type IFileSaveDiagnostic,
   type TDiagnosticSeverity,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   isTextCovered,
   normalizeForCoverage,
@@ -70,7 +70,7 @@ type TSkillDocumentCheck = (context: {
  * @returns 规范化正文、全部诊断与环境变量名；正文始终可用（即使存在 error 诊断）。
  * @throws 不抛出异常（空文档以一条诊断表达）。
  */
-export function collectSkillDocumentDiagnostics(
+export function collectSkillDocumentDiagnostics (
   content: string,
   testCase: IE2ETestCase,
 ): ISkillDocumentValidationResult {
@@ -106,7 +106,7 @@ export function collectSkillDocumentDiagnostics(
  * @param context - 已规范化的正文与当前用例。
  * @returns 诊断列表（按检查顺序；未命中的检查不产出条目）。
  */
-function runChecks(context: {
+function runChecks (context: {
   normalizedContent: string
   testCase: IE2ETestCase
 }): IFileSaveDiagnostic[] {
@@ -127,7 +127,7 @@ function runChecks(context: {
  * @param severity - 展现级别；安全族发 `error`，质量族发 `warning`。
  * @returns 一条诊断。
  */
-function invalid(
+function invalid (
   code: TSkillDocumentDiagnosticCode,
   message: string,
   severity: TDiagnosticSeverity = 'warning',
@@ -148,7 +148,7 @@ const SKILL_DOCUMENT_CHECKS: readonly TSkillDocumentCheck[] = [
 ]
 
 /** 校验 frontmatter 存在，且 name / description 与用例标题、描述完全一致。 */
-function checkFrontmatter(context: {
+function checkFrontmatter (context: {
   normalizedContent: string
   testCase: IE2ETestCase
 }): IFileSaveDiagnostic | null {
@@ -191,7 +191,7 @@ function checkFrontmatter(context: {
 }
 
 /** 校验必需章节齐全。 */
-function checkRequiredSections(context: {
+function checkRequiredSections (context: {
   normalizedContent: string
 }): IFileSaveDiagnostic | null {
   for (const [heading, label] of REQUIRED_SECTIONS) {
@@ -206,16 +206,16 @@ function checkRequiredSections(context: {
 }
 
 /** 校验正文覆盖用例目标 URL。 */
-function checkBaseUrl(context: {
+function checkBaseUrl (context: {
   normalizedContent: string
   testCase: IE2ETestCase
 }): IFileSaveDiagnostic | null {
   return context.normalizedContent.includes(context.testCase.baseUrl.trim())
     ? null
     : invalid(
-        'SKILL_DOCUMENT_BASE_URL_MISSING',
-        'SKILL.md 未完整覆盖用例目标 URL。',
-      )
+      'SKILL_DOCUMENT_BASE_URL_MISSING',
+      'SKILL.md 未完整覆盖用例目标 URL。',
+    )
 }
 
 /**
@@ -228,7 +228,7 @@ function checkBaseUrl(context: {
  * v15 起进一步吸收排版异形与个别字符笔误，避免模型转录长中文时的非语义差异
  * 导致生成任务被终止（判定边界见 skill-document-text-match）。
  */
-function checkEnabledSteps(context: {
+function checkEnabledSteps (context: {
   normalizedContent: string
   testCase: IE2ETestCase
 }): IFileSaveDiagnostic | null {
@@ -287,7 +287,7 @@ function checkEnabledSteps(context: {
  * @param context - 已规范化的正文。
  * @returns 命中疑似明文凭据时返回诊断，否则返回 null。
  */
-function checkSensitiveContent(context: {
+function checkSensitiveContent (context: {
   normalizedContent: string
 }): IFileSaveDiagnostic | null {
   const suspiciousPatterns = [
@@ -299,11 +299,11 @@ function checkSensitiveContent(context: {
     pattern.test(context.normalizedContent),
   )
     ? invalid(
-        'SKILL_DOCUMENT_SENSITIVE_CONTENT',
-        'SKILL.md 包含疑似明文凭据，请改用环境变量引用。',
-        // 安全族：真实凭据一旦落盘无法回收，且这是文档侧唯一的防线，必须阻断。
-        'error',
-      )
+      'SKILL_DOCUMENT_SENSITIVE_CONTENT',
+      'SKILL.md 包含疑似明文凭据，请改用环境变量引用。',
+      // 安全族：真实凭据一旦落盘无法回收，且这是文档侧唯一的防线，必须阻断。
+      'error',
+    )
     : null
 }
 
@@ -322,7 +322,7 @@ const REQUIRED_SECTIONS = [
  * @param content - 原始正文。
  * @returns 以单个换行结尾的规范化正文；内容为空时返回空串。
  */
-function normalizeContent(content: string): string {
+function normalizeContent (content: string): string {
   const normalized = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim()
   return normalized ? `${normalized}\n` : ''
 }
@@ -345,7 +345,7 @@ function normalizeContent(content: string): string {
  * @param content - 已规范化的正文。
  * @returns 移除代码块后的正文；代码块被整体删除（含围栏行），不留空行占位。
  */
-function stripFencedCodeBlocks(content: string): string {
+function stripFencedCodeBlocks (content: string): string {
   /** 开围栏：允许任意前导空白 + ≥3 个连续反引号，后可跟语言标注。 */
   const openingFence = /^\s*(`{3,})/
   const kept: string[] = []
@@ -379,7 +379,7 @@ function stripFencedCodeBlocks(content: string): string {
  * @param content - 已规范化的正文。
  * @returns 解析出的 name / description；缺少 frontmatter 时返回 null。
  */
-function parseFrontmatter(content: string): {
+function parseFrontmatter (content: string): {
   name: string
   description: string
 } | null {
@@ -407,7 +407,7 @@ function parseFrontmatter(content: string): {
 }
 
 /** 收集正文中引用的环境变量名称。 */
-function collectEnvironmentVariables(content: string): string[] {
+function collectEnvironmentVariables (content: string): string[] {
   return [
     ...new Set(
       [...content.matchAll(/\$\{ENV:([A-Z_][A-Z0-9_]*)\}/g)].map(

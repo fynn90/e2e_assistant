@@ -14,7 +14,7 @@ import {
   resolveSkillFileOpenTarget,
   toTreeOptions,
 } from '../../src/modules/skill-development/skill-file'
-import type { ISkillFileTreeNode } from '@authine-e2e-agent/types'
+import type { ISkillFileTreeNode } from '@fynn90-e2e_assistant/types'
 
 /**
  * 构造一个文件树节点。
@@ -25,7 +25,7 @@ import type { ISkillFileTreeNode } from '@authine-e2e-agent/types'
  * @returns 文件树节点。
  * @throws 不抛出异常。
  */
-function createFileNode(
+function createFileNode (
   name: string,
   relativePath: string,
   options: {

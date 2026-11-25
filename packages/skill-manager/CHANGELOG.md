@@ -1,4 +1,4 @@
-# @authine-e2e-agent/skill-manager
+# @fynn90-e2e_assistant/skill-manager
 
 ## 0.0.6
 
@@ -6,7 +6,7 @@
 
 - 优化架构
 - Updated dependencies
-  - @authine-e2e-agent/types@0.1.3
+  - @fynn90-e2e_assistant/types@0.1.3
 
 ## 0.0.5
 
@@ -14,7 +14,7 @@
 
 - 更新 CLI
 - Updated dependencies
-  - @authine-e2e-agent/types@0.1.2
+  - @fynn90-e2e_assistant/types@0.1.2
 
 ## 0.0.4
 
@@ -22,7 +22,7 @@
 
 - 优化 playwright engine
 - Updated dependencies
-  - @authine-e2e-agent/types@0.1.1
+  - @fynn90-e2e_assistant/types@0.1.1
 
 ## 0.0.3
 
@@ -31,7 +31,7 @@
 - 支持 iframe
 - Updated dependencies
 - Updated dependencies [30cce7f]
-  - @authine-e2e-agent/types@0.1.0
+  - @fynn90-e2e_assistant/types@0.1.0
 
 ## 0.0.2
 
@@ -39,4 +39,4 @@
 
 - 优化 cli运行
 - Updated dependencies
-  - @authine-e2e-agent/types@0.0.2
+  - @fynn90-e2e_assistant/types@0.0.2

@@ -5,7 +5,7 @@ import {
   LOCAL_SERVICE_PROTOCOL_VERSION,
   type ILocalServiceHealthResponse,
   type IApiErrorResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { createE2ETestCaseApplicationServices } from '../application/e2e-test-case/create-services'
 import type { IE2ETestCaseApplicationServices } from '../application/e2e-test-case/application-types'
 import { createSkillMarkdownGenerator } from '../application/e2e-test-case/skill-markdown-generator'
@@ -58,7 +58,7 @@ import {
   type IGenerationBrowserHost,
   type IGenerationTaskRegistry,
 } from '../generation-runtime/index'
-import { createPlaywrightEngine } from '@authine-e2e-agent/playwright-engine'
+import { createPlaywrightEngine } from '@fynn90-e2e_assistant/playwright-engine'
 import {
   createExecutionEventBus,
   type IExecutionEventBus,
@@ -157,7 +157,7 @@ export interface ICreateHttpAppOptions {
   extendApp?: (app: Hono<IAppEnv>) => void
 }
 
-export function createHttpApp(options: ICreateHttpAppOptions): Hono<IAppEnv> {
+export function createHttpApp (options: ICreateHttpAppOptions): Hono<IAppEnv> {
   const app = new Hono<IAppEnv>()
   const logger = options.logger ?? consoleHttpLogger
   const requestIdGenerator = options.requestIdGenerator ?? randomUUID
@@ -356,7 +356,7 @@ export function createHttpApp(options: ICreateHttpAppOptions): Hono<IAppEnv> {
  * @returns 按平台配置构造生成器的工厂。
  * @throws 不抛出异常；配置不完整时由生成阶段返回稳定错误码。
  */
-function createDefaultSkillMarkdownGeneratorFactory(
+function createDefaultSkillMarkdownGeneratorFactory (
   registry: IAgentWorkRuntimeRegistry,
 ): TSkillMarkdownGeneratorFactory {
   return (config) =>
@@ -383,7 +383,7 @@ function createDefaultSkillMarkdownGeneratorFactory(
  * @returns 按平台配置构造 Playwright 生成器的工厂。
  * @throws 不抛出异常；配置不完整时由生成阶段返回稳定错误码。
  */
-function createDefaultPlaywrightGeneratorFactory(
+function createDefaultPlaywrightGeneratorFactory (
   registry: IAgentWorkRuntimeRegistry,
 ): TPlaywrightGeneratorFactory {
   return (config) =>
@@ -436,7 +436,7 @@ interface IRegisterApiRoutesOptions {
  * @returns 注册完成后无返回值。
  * @throws 不抛出异常。
  */
-function registerApiRoutes(
+function registerApiRoutes (
   app: Hono<IAppEnv>,
   options: IRegisterApiRoutesOptions,
 ): void {
@@ -487,7 +487,7 @@ function registerApiRoutes(
  * @returns 注册完成后无返回值。
  * @throws 不抛出异常。
  */
-function registerShutdownRoute(
+function registerShutdownRoute (
   app: Hono<IAppEnv>,
   options: IRegisterApiRoutesOptions,
 ): void {

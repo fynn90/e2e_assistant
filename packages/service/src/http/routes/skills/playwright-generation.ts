@@ -15,7 +15,7 @@ import { streamSSE } from 'hono/streaming'
 import type {
   IGeneratePlaywrightResponse,
   TPlaywrightGenerationEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type {
   IGenerationBrowserHost,
@@ -51,7 +51,7 @@ const GENERATION_BODY_LIMIT = 64 * 1024
  * @throws ApiError 当 Skill ID、请求体、模型配置或并发状态不合法时抛出，
  * 并由全局错误处理中间件转换为标准 JSON 错误响应。
  */
-export function registerPlaywrightGenerationRoute(
+export function registerPlaywrightGenerationRoute (
   routes: Hono<IAppEnv>,
   services: IE2ETestCaseApplicationServices,
   runtime: {

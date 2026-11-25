@@ -8,7 +8,7 @@
  * 全新依赖以替身注入，测试不派生真实进程、不触达真实端口。
  */
 import { describe, expect, it, vi } from 'vitest'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@authine-e2e-agent/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
 import {
   launchBackgroundService,
   type IBackgroundLauncherDependencies,
@@ -27,7 +27,7 @@ const RECORDED_PORT = 5826
 const RECORDED_SERVER_URL = `http://127.0.0.1:${RECORDED_PORT}`
 const LOG_PATH = 'C:/fake-config/logs/service.log'
 
-function createBackgroundRecord(): TPlatformRuntimeInspection {
+function createBackgroundRecord (): TPlatformRuntimeInspection {
   return {
     state: 'present',
     runtimeState: {
@@ -50,7 +50,7 @@ function createBackgroundRecord(): TPlatformRuntimeInspection {
  * @param overrides - 需要覆盖的记录字段（例如 pid）。
  * @returns 时间戳为当前时刻的后台记录。
  */
-function freshBackgroundRecord(
+function freshBackgroundRecord (
   overrides: Partial<IPlatformRuntimeState> = {},
 ): TPlatformRuntimeInspection {
   return {
@@ -68,7 +68,7 @@ function freshBackgroundRecord(
 }
 
 /** 尚未就绪时的记录读取结果（启动中的服务还没有记录）。 */
-function missingRecord(): TPlatformRuntimeInspection {
+function missingRecord (): TPlatformRuntimeInspection {
   return { state: 'missing', runtimeState: null }
 }
 
@@ -78,7 +78,7 @@ function missingRecord(): TPlatformRuntimeInspection {
  * @param overrides - 需要覆盖的依赖项。
  * @returns 依赖集合。
  */
-function createDependencies(
+function createDependencies (
   overrides: Partial<IBackgroundLauncherDependencies> = {},
 ): IBackgroundLauncherDependencies {
   return {
@@ -115,19 +115,19 @@ function createDependencies(
  * @param exitCode - 退出的码；传 `'never'` 表示永不退出（用于触发就绪超时路径）。
  * @returns 子进程句柄替身。
  */
-function createChildStub(
+function createChildStub (
   exitCode: null | number | 'never' = 'never',
 ): ISpawnedServiceProcess {
   return {
     pid: CHILD_PID,
     waitForExit: () =>
       exitCode === 'never'
-        ? new Promise<number | null>(() => {})
+        ? new Promise<number | null>(() => { })
         : Promise.resolve(exitCode),
   }
 }
 
-function probeReturning(result: TLocalServiceProbeResult) {
+function probeReturning (result: TLocalServiceProbeResult) {
   return async () => result
 }
 
@@ -140,7 +140,7 @@ function probeReturning(result: TLocalServiceProbeResult) {
  * @param readyRecord - 派生后各次读取返回的记录；缺省为后台记录。
  * @returns 读取实现。
  */
-function inspectBecomingReady(
+function inspectBecomingReady (
   readyRecord: () => TPlatformRuntimeInspection = freshBackgroundRecord,
 ): () => Promise<TPlatformRuntimeInspection> {
   let hasLaunched = false
@@ -155,7 +155,7 @@ function inspectBecomingReady(
   }
 }
 
-function confirmedProbe(
+function confirmedProbe (
   pid: number = RECORDED_PID,
   version: number = LOCAL_SERVICE_PROTOCOL_VERSION,
 ) {

@@ -14,7 +14,7 @@ import type {
   IAgentSessionSummary,
   TAgentActivity,
   TAgentClientEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   abortAgentSession,
   createAgentSession,
@@ -97,14 +97,14 @@ export const useAgentWorkStore = defineStore('agent-work', {
 
   getters: {
     /** 待回答的交互卡片（置顶提醒用）。 */
-    pendingInteractions(state): IInteractionTimelineItem[] {
+    pendingInteractions (state): IInteractionTimelineItem[] {
       return state.items.filter(
         (item): item is IInteractionTimelineItem =>
           item.kind === 'interaction' && item.status === 'pending',
       )
     },
     /** 当前会话是否正在运行（用于输入区禁用/中止按钮展示）。 */
-    isRunning(state): boolean {
+    isRunning (state): boolean {
       return state.activity !== 'idle'
     },
     /**
@@ -115,7 +115,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      * running 反映的是执行 / 生成 / 批次本身。用户在任务运行中离开页面时，
      * 轮次可能已结束而任务仍在跑，用 activity 会漏掉。
      */
-    hasRunningTask(state): boolean {
+    hasRunningTask (state): boolean {
       return state.items.some(
         (item) =>
           item.kind === 'workbench_task' && item.taskStatus === 'running',
@@ -125,7 +125,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
 
   actions: {
     /** 加载会话列表。 */
-    async loadSessions(): Promise<void> {
+    async loadSessions (): Promise<void> {
       this.sessions = await listAgentSessions()
     },
 
@@ -139,7 +139,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      * @returns 刷新完成后兑现的 Promise。
      * @throws 不抛出异常。
      */
-    async refreshSessionsQuietly(): Promise<void> {
+    async refreshSessionsQuietly (): Promise<void> {
       try {
         await this.loadSessions()
       } catch {
@@ -152,7 +152,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      *
      * @param message - 首条用户消息。
      */
-    async startSession(message: string): Promise<void> {
+    async startSession (message: string): Promise<void> {
       this.sending = true
       try {
         const sessionId = await createAgentSession(message)
@@ -168,7 +168,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      *
      * @param sessionId - 会话 ID。
      */
-    async openSession(sessionId: string): Promise<void> {
+    async openSession (sessionId: string): Promise<void> {
       this.detachStream()
       this.sessionId = sessionId
       // 复用归约器的历史恢复逻辑，保证与弹窗时间线的语义一致。
@@ -189,28 +189,28 @@ export const useAgentWorkStore = defineStore('agent-work', {
      *
      * @returns 与 store 状态双向绑定的状态对象。
      */
-    timelineState() {
+    timelineState () {
       const store = this
       return {
         items: store.items,
         itemIndex: store.itemIndex,
         fileChanges: store.fileChanges,
-        get lastSeq(): number {
+        get lastSeq (): number {
           return store.lastSeq
         },
-        set lastSeq(value: number) {
+        set lastSeq (value: number) {
           store.lastSeq = value
         },
-        get activity(): TAgentActivity {
+        get activity (): TAgentActivity {
           return store.activity
         },
-        set activity(value: TAgentActivity) {
+        set activity (value: TAgentActivity) {
           store.activity = value
         },
-        get activityLabel(): string | undefined {
+        get activityLabel (): string | undefined {
           return store.activityLabel
         },
-        set activityLabel(value: string | undefined) {
+        set activityLabel (value: string | undefined) {
           store.activityLabel = value
         },
       }
@@ -221,7 +221,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      *
      * @param message - 用户消息。
      */
-    async sendMessage(message: string): Promise<void> {
+    async sendMessage (message: string): Promise<void> {
       if (!this.sessionId) {
         await this.startSession(message)
         return
@@ -239,13 +239,13 @@ export const useAgentWorkStore = defineStore('agent-work', {
     },
 
     /** 中止当前会话的轮次。 */
-    async abort(): Promise<void> {
+    async abort (): Promise<void> {
       if (!this.sessionId) return
       await abortAgentSession(this.sessionId)
     },
 
     /** 离开工作台：断开事件流并清空时间线。 */
-    dispose(): void {
+    dispose (): void {
       this.detachStream()
       this.sessionId = null
       clearTimeline(this.timelineState())
@@ -263,7 +263,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      * @returns 无返回值。
      * @throws 不抛出异常。
      */
-    detachView(): void {
+    detachView (): void {
       this.viewAttached = false
       if (!this.hasRunningTask) {
         this.dispose()
@@ -271,7 +271,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
     },
 
     /** 订阅实时事件流（断线自动重连，重连带 afterSeq 补发）。 */
-    attachStream(): void {
+    attachStream (): void {
       if (!this.sessionId) return
       const sessionId = this.sessionId
       this.stream = subscribeAgentWorkStream(
@@ -287,7 +287,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
     },
 
     /** 断开实时事件流。 */
-    detachStream(): void {
+    detachStream (): void {
       this.stream?.close()
       this.stream = undefined
       this.connection = 'offline'
@@ -300,7 +300,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      *
      * @param event - 客户端工作事件。
      */
-    applyEvent(event: TAgentClientEvent): void {
+    applyEvent (event: TAgentClientEvent): void {
       // 会话过滤属于 store 特有职责（弹窗版由独立实例天然隔离）。
       if (event.sessionId !== this.sessionId) return
 
@@ -332,7 +332,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      * @returns 该块是 `workbench_task` 时的任务状态；否则 undefined。
      * @throws 不抛出异常。
      */
-    taskStatusOf(blockId: string): string | undefined {
+    taskStatusOf (blockId: string): string | undefined {
       const item = this.items.find((entry) => entry.blockId === blockId)
       return item?.kind === 'workbench_task' ? item.taskStatus : undefined
     },
@@ -349,7 +349,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      * @returns 待发布的提示；不构成「运行 → 终态」时返回 null。
      * @throws 不抛出异常。
      */
-    buildTerminalNotice(
+    buildTerminalNotice (
       event: TAgentClientEvent,
       previousTaskStatus: string | undefined,
     ): IPendingTerminalNotice | null {
@@ -372,7 +372,7 @@ export const useAgentWorkStore = defineStore('agent-work', {
      * @returns 待发布的提示；没有时返回 null。
      * @throws 不抛出异常。
      */
-    takePendingNotice(): IPendingTerminalNotice | null {
+    takePendingNotice (): IPendingTerminalNotice | null {
       const notice = this.pendingNotice
       this.pendingNotice = null
       return notice

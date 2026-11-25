@@ -1,5 +1,5 @@
 {
-  "name": "@authine-e2e-agent/service",
+  "name": "@fynn90-e2e_assistant/service",
   "version": "0.2.3",
   "private": false,
   "type": "module",
@@ -26,11 +26,11 @@
     "prepack": "pnpm run build"
   },
   "dependencies": {
-    "@authine-e2e-agent/agent": "workspace:^",
-    "@authine-e2e-agent/config": "workspace:^",
-    "@authine-e2e-agent/playwright-engine": "workspace:^",
-    "@authine-e2e-agent/skill-manager": "workspace:^",
-    "@authine-e2e-agent/types": "workspace:^",
+    "@fynn90-e2e_assistant/agent": "workspace:^",
+    "@fynn90-e2e_assistant/config": "workspace:^",
+    "@fynn90-e2e_assistant/playwright-engine": "workspace:^",
+    "@fynn90-e2e_assistant/skill-manager": "workspace:^",
+    "@fynn90-e2e_assistant/types": "workspace:^",
     "@hono/node-server": "^2.0.4",
     "better-sqlite3": "^13.0.3",
     "hono": "^4.12.23",

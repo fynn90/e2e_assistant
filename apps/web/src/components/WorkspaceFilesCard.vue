@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IProjectFileItem } from '@authine-e2e-agent/types'
+import type { IProjectFileItem } from '@fynn90-e2e_assistant/types'
 import { NButton, NCard, NEmpty, NSpace, NTag } from 'naive-ui'
 
 const props = defineProps<{

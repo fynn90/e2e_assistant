@@ -11,7 +11,7 @@ import {
   type ILocalServiceHealthResponse,
   type IUpdateConfigRequest,
   type IUpdateConfigResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiClientError, requestJson } from './http-client'
 
 /**
@@ -20,7 +20,7 @@ import { ApiClientError, requestJson } from './http-client'
  * @returns 通过校验的本地服务健康响应。
  * @throws 当服务不是 CLI、健康状态非法或协议版本不兼容时抛出协议错误。
  */
-export async function fetchLocalServiceHealth(
+export async function fetchLocalServiceHealth (
   signal?: AbortSignal,
 ): Promise<ILocalServiceHealthResponse> {
   const response = await requestJson<unknown>({ path: '/health', signal })
@@ -41,7 +41,7 @@ export async function fetchLocalServiceHealth(
  * @returns 平台配置状态响应。
  * @throws 当本地 API 请求失败时抛出客户端异常。
  */
-export function fetchConfigStatus(
+export function fetchConfigStatus (
   signal?: AbortSignal,
 ): Promise<IGetConfigResponse> {
   return requestJson({ path: '/api/config', signal })
@@ -53,7 +53,7 @@ export function fetchConfigStatus(
  * @returns 初始化成功响应。
  * @throws 当本地 API 请求失败时抛出客户端异常。
  */
-export function submitInitialization(
+export function submitInitialization (
   payload: IInitializeConfigRequest,
 ): Promise<IInitializeConfigSuccessResponse> {
   return requestJson({
@@ -69,13 +69,13 @@ export function submitInitialization(
  * @returns 配置更新成功响应。
  * @throws 当本地 API 请求失败时抛出客户端异常。
  */
-export function updatePlatformConfig(
+export function updatePlatformConfig (
   payload: IUpdateConfigRequest,
 ): Promise<IUpdateConfigResponse> {
   return requestJson({ path: '/api/config', method: 'PUT', body: payload })
 }
 
-function isLocalServiceHealthResponse(
+function isLocalServiceHealthResponse (
   value: unknown,
 ): value is ILocalServiceHealthResponse {
   const parsedHealth = localServiceHealthSchema.safeParse(value)

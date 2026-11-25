@@ -4,7 +4,7 @@
  * 本文件是 agent 与 playwright-engine 之间唯一的共享边界：
  *   - playwright-engine 提供契约的 Playwright 实现（会话选项、凭据解析、工厂仍在引擎）；
  *   - agent 只面向契约声明工具宿主端口（依赖倒转），由 service 组合根注入实现。
- * 双方均从 @authine-e2e-agent/types 导入，两个包之间互不引用。
+ * 双方均从 @fynn90-e2e_assistant/types 导入，两个包之间互不引用。
  */
 
 /**
@@ -18,7 +18,7 @@ export interface ISensitiveDataRedactor {
    * @returns 已脱敏且有长度上限的文本。
    * @throws 不抛出异常；异常输入按空字符串处理。
    */
-  redact(value: string): string
+  redact (value: string): string
 }
 
 /**
@@ -149,10 +149,10 @@ export interface IActionResult {
  */
 export type IWaitCondition =
   | {
-      kind: 'selector'
-      selector: string
-      state?: 'attached' | 'detached' | 'visible' | 'hidden'
-    }
+    kind: 'selector'
+    selector: string
+    state?: 'attached' | 'detached' | 'visible' | 'hidden'
+  }
   | { kind: 'loadState'; state: 'load' | 'domcontentloaded' | 'networkidle' }
   | { kind: 'url'; pattern: string }
   | { kind: 'timeout'; ms: number }
@@ -254,7 +254,7 @@ export interface IBrowserSession {
    * @returns 主文档与子 frame 的元数据清单。
    * @throws 页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  listFrames(options?: IFrameListOptions): Promise<IFrameInventory>
+  listFrames (options?: IFrameListOptions): Promise<IFrameInventory>
 
   readonly baseUrl: string
   /**
@@ -264,7 +264,7 @@ export interface IBrowserSession {
    * @returns 导航完成后的页面引用。
    * @throws 目标越权、页面访问失败、取消或浏览器断连时抛出结构化错误。
    */
-  navigate(url: string): Promise<IPageSnapshotRef>
+  navigate (url: string): Promise<IPageSnapshotRef>
   /**
    * 采集有界的可访问性和候选定位器快照。
    *
@@ -272,7 +272,7 @@ export interface IBrowserSession {
    * @returns 脱离 Playwright 对象的页面快照。
    * @throws 页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  snapshot(options?: ISnapshotOptions): Promise<IPageSnapshot>
+  snapshot (options?: ISnapshotOptions): Promise<IPageSnapshot>
   /**
    * 查询页面元素并转换为结构化信息。
    *
@@ -280,7 +280,7 @@ export interface IBrowserSession {
    * @returns 有界元素信息列表。
    * @throws 页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  query(selector: string, options?: IFrameTargetOptions): Promise<IElementInfo[]>
+  query (selector: string, options?: IFrameTargetOptions): Promise<IElementInfo[]>
   /**
    * 点击页面元素。
    *
@@ -292,7 +292,7 @@ export interface IBrowserSession {
    * @returns 点击完成后的页面地址与标题（点击可能触发导航）。
    * @throws selector 为空、页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  click(selector: string, options?: IActionOptions): Promise<IActionResult>
+  click (selector: string, options?: IActionOptions): Promise<IActionResult>
   /**
    * 在下拉框中选中指定值。
    *
@@ -302,7 +302,7 @@ export interface IBrowserSession {
    * @returns 选择完成后的页面地址与标题。
    * @throws selector 或 value 为空、页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  selectOption(
+  selectOption (
     selector: string,
     value: string,
     options?: IActionOptions,
@@ -328,7 +328,7 @@ export interface IBrowserSession {
    * @returns 填入完成后的页面地址与标题。
    * @throws selector 为空、引用解析失败、元素不可编辑、页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  fill(
+  fill (
     selector: string,
     value: string,
     options?: IActionOptions,
@@ -341,7 +341,7 @@ export interface IBrowserSession {
    * @returns 条件是否满足及实际耗时；超时返回 matched=false 而非抛出异常。
    * @throws 条件非法、页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  waitFor(
+  waitFor (
     condition: IWaitCondition,
     options?: IWaitOptions,
   ): Promise<IWaitResult>
@@ -352,7 +352,7 @@ export interface IBrowserSession {
    * @returns base64 图片数据与尺寸；**不落盘**，由调用方决定持久化方式。
    * @throws selector 为空、元素不存在、页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  screenshot(options?: IScreenshotOptions): Promise<IPageScreenshot>
+  screenshot (options?: IScreenshotOptions): Promise<IPageScreenshot>
   /**
    * 截取元素的**完整内容**（含元素内部滚动区域）。
    *
@@ -363,7 +363,7 @@ export interface IBrowserSession {
    * @returns base64 图片数据与尺寸；**不落盘**，由调用方决定持久化方式。
    * @throws selector 为空、元素不存在、页面不可用、取消或浏览器断连时抛出结构化错误。
    */
-  screenshotFullContent(
+  screenshotFullContent (
     options: IFullContentScreenshotOptions,
   ): Promise<IPageScreenshot>
   /**
@@ -372,5 +372,5 @@ export interface IBrowserSession {
    * @returns 资源释放完成的 Promise。
    * @throws 释放失败时抛出最后一个资源错误。
    */
-  close(): Promise<void>
+  close (): Promise<void>
 }

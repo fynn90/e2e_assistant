@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { NButton, NCard, NModal, NSpace } from 'naive-ui'
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 import { deleteSkill } from '../../services/skill-api'
 import { useGlobalMessage } from '../../composables/useGlobalMessage'
 

@@ -24,8 +24,8 @@
  */
 
 import { existsSync } from 'node:fs'
-import { deleteSkill } from '@authine-e2e-agent/skill-manager'
-import { createSqliteSessionStore } from '@authine-e2e-agent/agent'
+import { deleteSkill } from '@fynn90-e2e_assistant/skill-manager'
+import { createSqliteSessionStore } from '@fynn90-e2e_assistant/agent'
 import { ApiError } from '../../shared/errors/api-error'
 import {
   createWorkBlockStore,
@@ -60,7 +60,7 @@ export interface ISkillLifecycleService {
    * @throws ApiError（EXECUTION_MUTEX_CONFLICT / 429）该用例有运行中的任务（L2c）。
    * @throws SkillManagerError 目标不存在、索引损坏或权限不足时抛出（由路由映射为 HTTP）。
    */
-  deleteCase(input: IDeleteCaseInput): Promise<void>
+  deleteCase (input: IDeleteCaseInput): Promise<void>
 }
 
 /**
@@ -69,9 +69,9 @@ export interface ISkillLifecycleService {
  * @returns 服务实例。
  * @throws 不抛出异常。
  */
-export function createSkillLifecycleService(): ISkillLifecycleService {
+export function createSkillLifecycleService (): ISkillLifecycleService {
   return {
-    async deleteCase(input) {
+    async deleteCase (input) {
       const { rootDir, skillId, taskRegistry } = input
 
       // L2c：有任务在跑就拒绝——不区分生成还是执行（两侧共用同一映射）。
@@ -105,7 +105,7 @@ export function createSkillLifecycleService(): ISkillLifecycleService {
  * @returns 清理完成时兑现；失败时记日志并返回（不抛出）。
  * @throws 不抛出异常。
  */
-async function purgeSkillDatabaseData(
+async function purgeSkillDatabaseData (
   workspace: string,
   skillId: string,
 ): Promise<void> {
@@ -129,7 +129,7 @@ async function purgeSkillDatabaseData(
  * @returns 被删除的会话 ID 列表；库不存在时为空数组。
  * @throws 数据库异常透传（由调用方兜底）。
  */
-async function removeSessionsBySkillId(
+async function removeSessionsBySkillId (
   sessionsDbPath: string,
   skillId: string,
 ): Promise<string[]> {
@@ -150,7 +150,7 @@ async function removeSessionsBySkillId(
  * @returns 无返回值；库不存在或列表为空时不做任何事。
  * @throws 数据库异常透传（由调用方兜底）。
  */
-function removeWorkBlocksBySessionIds(
+function removeWorkBlocksBySessionIds (
   workBlocksDbPath: string,
   sessionIds: string[],
 ): void {

@@ -7,10 +7,10 @@
  */
 import { describe, expect, it } from 'vitest'
 import { createWorkBlockStore } from '../../src/agent-runtime/work-block-store'
-import type { TAgentClientEvent } from '@authine-e2e-agent/types'
+import type { TAgentClientEvent } from '@fynn90-e2e_assistant/types'
 
 /** 造一条带信封的事件。 */
-function createEvent(
+function createEvent (
   payload: Record<string, unknown>,
   seq: number,
 ): TAgentClientEvent {

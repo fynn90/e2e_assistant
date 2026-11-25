@@ -11,7 +11,7 @@ import path from 'node:path'
 import {
   FileE2ETestCaseRepository,
   createSkill,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import { createSkillMarkdownGenerator } from '../../src/application/e2e-test-case/skill-markdown-generator'
 
 /** 用例创建的临时工作区，测试结束后统一清理。 */
@@ -102,7 +102,7 @@ description: 验证 Agent 可以写入测试用例文档。
     const generator = createSkillMarkdownGenerator({
       workspace: rootDir,
       sessionRunner: {
-        async run(input) {
+        async run (input) {
           const guard = input.toolGuard
           runs.push({
             sessionId: input.sessionId,
@@ -200,7 +200,7 @@ description: 验证 Agent 可以写入测试用例文档。
       workspace: rootDir,
       // 模拟 Agent 本轮结束但没写任何文件。
       sessionRunner: {
-        async run() {
+        async run () {
           return {}
         },
       },

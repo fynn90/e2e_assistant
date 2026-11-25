@@ -19,7 +19,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import type { TAgentWorkbenchAction } from '@authine-e2e-agent/types'
+import type { TAgentWorkbenchAction } from '@fynn90-e2e_assistant/types'
 
 /**
  * 动作卡片请求的宿主端口：由 CLI 组合根注入。
@@ -35,7 +35,7 @@ export interface IWorkbenchActionHost {
    * @returns 发布结果；被拒绝时 message 说明原因（如目标不存在、动作与缺口不符）。
    * @throws 实现方可抛出结构化错误，由工具作为失败结果返回给模型。
    */
-  requestAction(input: {
+  requestAction (input: {
     action: TAgentWorkbenchAction
     skillId: string | null
     /** 补充说明（可选），如「脚本已被手工修改，重新生成将覆盖」。 */
@@ -104,7 +104,7 @@ export interface ProposeActionDetails {
  * @returns 可直接配置到 AgentTool[] 的 propose_action 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createProposeActionTool(
+export function createProposeActionTool (
   host: IWorkbenchActionHost,
 ): AgentTool<typeof proposeActionParameters, ProposeActionDetails> {
   return {
@@ -124,7 +124,7 @@ export function createProposeActionTool(
      * @returns 包含发布结果的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate

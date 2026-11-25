@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { NButton, NSpin, NTag } from 'naive-ui'
-import type { TAgentActivity } from '@authine-e2e-agent/types'
+import type { TAgentActivity } from '@fynn90-e2e_assistant/types'
 import type { TWorkConnection } from '../timeline'
 
 const props = withDefaults(

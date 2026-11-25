@@ -16,11 +16,11 @@ import type { IAgentWorkRuntime } from '../../src/agent-runtime/agent-work-runti
 import type { IGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
 import { createProposalService } from '../../src/application/agent-workbench/proposal-service'
 import { createSkillLifecycleService } from '../../src/application/agent-workbench/skill-lifecycle-service'
-import { createSkill } from '@authine-e2e-agent/skill-manager'
+import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
 import type { IUpdateE2ETestCase } from '../../src/application/agent-workbench/proposal-types'
 
 /** 采集发布出去的提案卡片载荷。 */
-function createRuntimeSpy(): {
+function createRuntimeSpy (): {
   runtime: IAgentWorkRuntime
   proposalCards: Array<Record<string, unknown>>
   blocks: Array<{ kind: string; payload: Record<string, unknown> }>
@@ -41,7 +41,7 @@ function createRuntimeSpy(): {
 }
 
 /** 任务注册表替身：默认空闲，可指定某个用例处于运行中。 */
-function createTaskRegistrySpy(running: Record<string, string> = {}): {
+function createTaskRegistrySpy (running: Record<string, string> = {}): {
   registry: IGenerationTaskRegistry
   setRunning: (skillId: string, sessionId: string) => void
 } {
@@ -55,7 +55,7 @@ function createTaskRegistrySpy(running: Record<string, string> = {}): {
 }
 
 /** 造一个用例目录（含 e2e_schema.json）。 */
-async function createCaseFixture(
+async function createCaseFixture (
   rootDir: string,
   title = '云7登录',
 ): Promise<{ skillId: string; skillRoot: string }> {
@@ -670,7 +670,7 @@ describe('提案服务·重启恢复', () => {
  * @returns apply 的结果。
  * @throws 不抛出异常。
  */
-async function applyFirstCard(
+async function applyFirstCard (
   service: ReturnType<typeof createProposalService>,
   runtime: IAgentWorkRuntime,
   rootDir: string,

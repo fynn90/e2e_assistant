@@ -1,6 +1,6 @@
 # AgentService 使用指南（多轮对话）
 
-`AgentService` 是 `@authine-e2e-agent/agent` 对外暴露的会话级多轮对话服务。核心模型：
+`AgentService` 是 `@fynn90-e2e_assistant/agent` 对外暴露的会话级多轮对话服务。核心模型：
 
 > **一个会话（sessionId）= 一个复用的 AgentLoop + 一份持久化历史。**
 
@@ -11,7 +11,7 @@ AgentService 对外只提供 `chat` 任务入口。客户端可以通过 prompt 
 ## 快速开始
 
 ```ts
-import { AgentService } from '@authine-e2e-agent/agent'
+import { AgentService } from '@fynn90-e2e_assistant/agent'
 
 const service = new AgentService('/path/to/workspace', {
   name: 'gpt-4o',
@@ -113,7 +113,7 @@ await handle.result
 ### 自定义存储
 
 ```ts
-import { createMemorySessionStore } from '@authine-e2e-agent/agent'
+import { createMemorySessionStore } from '@fynn90-e2e_assistant/agent'
 
 const service = new AgentService(workspace, modelInfo, {
   sessionStore: createMemorySessionStore(),
@@ -128,7 +128,7 @@ const service = new AgentService(workspace, modelInfo, {
 CLI / Web 的 `/chat` 接口基于 `createSkillChatRuntime` 实现：每个请求内建一个 `AgentService`，把客户端携带的完整对话历史作为一轮任务运行，并把事件流翻译为 `TSkillChatEvent`（`delta` / `complete` / `error`）供 SSE 输出。
 
 ```ts
-import { createSkillChatRuntime } from '@authine-e2e-agent/agent'
+import { createSkillChatRuntime } from '@fynn90-e2e_assistant/agent'
 
 const runtime = createSkillChatRuntime({
   workspace: config.projectDirectory,

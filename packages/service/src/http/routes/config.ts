@@ -4,7 +4,7 @@ import type {
   IGetConfigResponse,
   IInitializeConfigSuccessResponse,
   IUpdateConfigResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { getPlatformConfigPath } from '../../config/config-path'
 import {
   ensurePlatformConfigStorage,
@@ -36,7 +36,7 @@ const updateSchema = z
   })
   .strict()
 
-export function createConfigRoutes(): Hono<IAppEnv> {
+export function createConfigRoutes (): Hono<IAppEnv> {
   const routes = new Hono<IAppEnv>()
 
   routes.get('/', async (context) => {

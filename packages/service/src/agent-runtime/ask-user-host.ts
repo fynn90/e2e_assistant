@@ -27,13 +27,13 @@ import {
   INTERACTION_OTHER_OPTION_VALUE,
   type IAgentInteraction,
   type IAgentInteractionQuestion,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type {
   AskUserQuestionDetails,
   IAskUserHost,
   IAskUserAnswer,
   IAskUserQuestionItem,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 import type { IAgentWorkRuntime } from './agent-work-runtime'
 
 /** 缺省卡片标题（Agent 未传 title 时使用；标题不含任何领域语义）。 */
@@ -66,11 +66,11 @@ export interface IAskUserHostDependencies {
  * @returns 实现-agent 包 IAskUserHost 端口的宿主实例。
  * @throws 不在创建阶段抛出异常；ask 过程中的校验失败、取消与中止见该方法的异常说明。
  */
-export function createAskUserHost(
+export function createAskUserHost (
   deps: IAskUserHostDependencies,
 ): IAskUserHost {
   return {
-    async ask(input): Promise<AskUserQuestionDetails> {
+    async ask (input): Promise<AskUserQuestionDetails> {
       // 1. 结构校验：拒绝时抛出明确错误，让模型修正后重新发起。
       validateAskInput(input)
 
@@ -146,11 +146,11 @@ export function createAskUserHost(
  * @returns 无返回值；校验通过时静默结束。
  * @throws Error 任何校验失败时抛出携带修正指引的错误（向模型返回，不产生用户侧卡片）。
  */
-function validateAskInput(input: Parameters<IAskUserHost['ask']>[0]): void {
+function validateAskInput (input: Parameters<IAskUserHost['ask']>[0]): void {
   if (input.questions.length === 0 || input.questions.length > 4) {
     throw new Error(
       `一次提问需要 1-4 个问题，实际给了 ${input.questions.length} 个；` +
-        '同时缺多项信息时用一张卡片一次问完，不要拆成多轮追问。',
+      '同时缺多项信息时用一张卡片一次问完，不要拆成多轮追问。',
     )
   }
 
@@ -162,7 +162,7 @@ function validateAskInput(input: Parameters<IAskUserHost['ask']>[0]): void {
     if (question.options.length < 2 || question.options.length > 5) {
       throw new Error(
         `第 ${index + 1} 个问题（${question.label}）的候选项数量必须为 2-5 项` +
-          '（不含平台自动追加的「其它」）。',
+        '（不含平台自动追加的「其它」）。',
       )
     }
 
@@ -202,7 +202,7 @@ function validateAskInput(input: Parameters<IAskUserHost['ask']>[0]): void {
  * @returns 可发布到事件总线的交互元信息（含追加「其它」后的选项）。
  * @throws 不抛出异常。
  */
-function buildInteraction(
+function buildInteraction (
   input: Parameters<IAskUserHost['ask']>[0],
   questionIds: string[],
 ): IAgentInteraction {
@@ -241,7 +241,7 @@ function buildInteraction(
  * @returns 卡片问题。
  * @throws 不抛出异常。
  */
-function toCardQuestion(
+function toCardQuestion (
   questionId: string,
   question: IAskUserQuestionItem,
 ): IAgentInteractionQuestion {
@@ -260,7 +260,7 @@ function toCardQuestion(
  * @returns 追加「其它」后的选项列表。
  * @throws 不抛出异常。
  */
-function withOtherOption(
+function withOtherOption (
   options: IAskUserQuestionItem['options'],
 ): IAgentInteractionQuestion['options'] {
   return [
@@ -285,7 +285,7 @@ function withOtherOption(
  * @returns 归一化结果；取消与格式异常返回 cancelled（answers 为空）。
  * @throws 不抛出异常。
  */
-function normalizeAnswer(
+function normalizeAnswer (
   input: Parameters<IAskUserHost['ask']>[0],
   rawAnswer: string | Record<string, string>,
   questionIds: string[],
@@ -337,6 +337,6 @@ function normalizeAnswer(
  * @returns cancelled 结果。
  * @throws 不抛出异常。
  */
-function cancelledWithInvalid(reason: string): AskUserQuestionDetails {
+function cancelledWithInvalid (reason: string): AskUserQuestionDetails {
   return { status: 'cancelled', reason, answers: [] }
 }

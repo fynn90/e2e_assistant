@@ -1,5 +1,5 @@
 {
-  "name": "@authine-e2e-agent/cli",
+  "name": "@fynn90-e2e_assistant/cli",
   "version": "0.3.1",
   "private": false,
   "type": "module",
@@ -28,10 +28,10 @@
     "start": "node dist/index.js start"
   },
   "dependencies": {
-    "@authine-e2e-agent/config": "workspace:^",
-    "@authine-e2e-agent/service": "workspace:^",
-    "@authine-e2e-agent/types": "workspace:^",
-    "@authine-e2e-agent/web-host": "workspace:^",
+    "@fynn90-e2e_assistant/config": "workspace:^",
+    "@fynn90-e2e_assistant/service": "workspace:^",
+    "@fynn90-e2e_assistant/types": "workspace:^",
+    "@fynn90-e2e_assistant/web-host": "workspace:^",
     "@earendil-works/pi-tui": "^0.78.0",
     "cac": "^7.0.0",
     "open": "^11.0.0"

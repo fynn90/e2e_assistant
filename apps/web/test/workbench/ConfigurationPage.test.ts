@@ -5,7 +5,7 @@ import { createPinia, setActivePinia } from 'pinia'
 import type {
   IConfigSummary,
   IUpdateConfigRequest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import ConfigurationPage from '../../src/pages/ConfigurationPage.vue'
 import { usePlatformStore } from '../../src/stores/platform'
@@ -67,7 +67,7 @@ const basePayload: IUpdateConfigRequest = {
  * @returns 测试配置页所需对象。
  * @throws 组件挂载失败时由测试框架抛出异常。
  */
-function mountConfigurationPage(saved: boolean) {
+function mountConfigurationPage (saved: boolean) {
   const pinia = createPinia()
   setActivePinia(pinia)
   const platformStore = usePlatformStore()

@@ -1,8 +1,8 @@
 import { Hono } from 'hono'
-import type { IRecordStartResponse } from '@authine-e2e-agent/types'
+import type { IRecordStartResponse } from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../app-types'
 
-export function createRecordRoutes(): Hono<IAppEnv> {
+export function createRecordRoutes (): Hono<IAppEnv> {
   const routes = new Hono<IAppEnv>()
 
   routes.post('/start', (context) => {

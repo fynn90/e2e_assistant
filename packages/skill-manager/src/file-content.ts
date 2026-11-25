@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto'
 import { access, open } from 'node:fs/promises'
 import { constants as fsConstants } from 'node:fs'
 import path from 'node:path'
-import type { ISkillFileContent } from '@authine-e2e-agent/types'
+import type { ISkillFileContent } from '@fynn90-e2e_assistant/types'
 import { KNOWN_BINARY_EXTENSIONS, MAX_SKILL_FILE_BYTES } from './constants'
 import { resolveSkill } from './detail'
 import { SkillManagerError } from './errors'
@@ -23,7 +23,7 @@ export interface IRawSkillFileSnapshot {
   language: string
 }
 
-export async function readSkillFile(
+export async function readSkillFile (
   options: ISkillStorageOptions,
   skillId: string,
   relativePath: string,
@@ -48,7 +48,7 @@ export async function readSkillFile(
   }
 }
 
-export async function readResolvedSkillFile(
+export async function readResolvedSkillFile (
   resolvedPath: IResolvedSkillFilePath,
 ): Promise<IRawSkillFileSnapshot> {
   if (resolvedPath.stat.size > MAX_SKILL_FILE_BYTES) {
@@ -137,11 +137,11 @@ export async function readResolvedSkillFile(
   }
 }
 
-export function hashBytes(bytes: Uint8Array): string {
+export function hashBytes (bytes: Uint8Array): string {
   return createHash('sha256').update(bytes).digest('hex')
 }
 
-export function serializeEditorContent(
+export function serializeEditorContent (
   content: string,
   options: { lineEnding: 'lf' | 'crlf'; hasUtf8Bom: boolean },
 ): Buffer {
@@ -161,7 +161,7 @@ export function serializeEditorContent(
   return Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), contentBuffer])
 }
 
-async function openFileWithoutFollowingSymlink(filePath: string) {
+async function openFileWithoutFollowingSymlink (filePath: string) {
   const noFollowFlag =
     typeof fsConstants.O_NOFOLLOW === 'number' ? fsConstants.O_NOFOLLOW : 0
 
@@ -176,7 +176,7 @@ async function openFileWithoutFollowingSymlink(filePath: string) {
   }
 }
 
-async function readBoundedFile(
+async function readBoundedFile (
   fileHandle: Awaited<ReturnType<typeof open>>,
 ): Promise<Buffer> {
   const buffer = Buffer.alloc(MAX_SKILL_FILE_BYTES + 1)
@@ -204,11 +204,11 @@ async function readBoundedFile(
   return buffer.subarray(0, bytesReadTotal)
 }
 
-function detectLineEnding(content: string): 'lf' | 'crlf' {
+function detectLineEnding (content: string): 'lf' | 'crlf' {
   return content.includes('\r\n') ? 'crlf' : 'lf'
 }
 
-function detectLanguage(relativePath: string): string {
+function detectLanguage (relativePath: string): string {
   const extension = path.extname(relativePath).toLowerCase()
   const languageMap: Record<string, string> = {
     '.ts': 'typescript',
@@ -238,7 +238,7 @@ function detectLanguage(relativePath: string): string {
   return languageMap[extension] ?? 'plaintext'
 }
 
-function getErrorCode(error: unknown): string | undefined {
+function getErrorCode (error: unknown): string | undefined {
   return error && typeof error === 'object' && 'code' in error
     ? String((error as { code?: unknown }).code ?? '')
     : undefined

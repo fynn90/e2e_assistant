@@ -11,17 +11,17 @@ import { describe, expect, it } from 'vitest'
 import { mkdtemp, mkdir, writeFile, access } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { createSkill } from '@authine-e2e-agent/skill-manager'
-import type { IExecutionRunSummary } from '@authine-e2e-agent/types'
+import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
+import type { IExecutionRunSummary } from '@fynn90-e2e_assistant/types'
 import { createSkillCatalog } from '../../src/application/agent-workbench/skill-catalog'
 import { createReadinessService } from '../../src/application/agent-workbench/execution-readiness'
 import { createGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
-import { writeTestReportSummary } from '@authine-e2e-agent/skill-manager'
+import { writeTestReportSummary } from '@fynn90-e2e_assistant/skill-manager'
 
 /**
  * 造一个用例目录（可选带 env.json 值、文档、脚本）。
  */
-async function createCaseFixture(
+async function createCaseFixture (
   rootDir: string,
   input: {
     title: string
@@ -96,7 +96,7 @@ async function createCaseFixture(
 }
 
 /** 写一份报告摘要（含 report.html 占位）。 */
-async function writeSummary(
+async function writeSummary (
   skillRoot: string,
   summary: IExecutionRunSummary,
 ): Promise<void> {
@@ -112,7 +112,7 @@ async function writeSummary(
 }
 
 /** 造一份摘要。 */
-function createSummary(input: {
+function createSummary (input: {
   skillId: string
   runId: string
   failed?: number

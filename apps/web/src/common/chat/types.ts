@@ -4,7 +4,7 @@
  * 工具步骤只保存服务端发来的安全投影，页面不得在此处追加或缓存原始工具参数与结果。
  */
 
-import type { IToolCallView } from '@authine-e2e-agent/types'
+import type { IToolCallView } from '@fynn90-e2e_assistant/types'
 
 /**
  * Chat 消息的页面视图模型。

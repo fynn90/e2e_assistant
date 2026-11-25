@@ -1,4 +1,4 @@
-# @authine-e2e-agent/agent
+# @fynn90-e2e_assistant/agent
 
 ## 0.1.3
 
@@ -6,7 +6,7 @@
 
 - 优化架构
 - Updated dependencies
-  - @authine-e2e-agent/types@0.1.3
+  - @fynn90-e2e_assistant/types@0.1.3
 
 ## 0.1.2
 
@@ -14,8 +14,8 @@
 
 - 更新 CLI
 - Updated dependencies
-  - @authine-e2e-agent/playwright-engine@0.1.2
-  - @authine-e2e-agent/types@0.1.2
+  - @fynn90-e2e_assistant/playwright-engine@0.1.2
+  - @fynn90-e2e_assistant/types@0.1.2
 
 ## 0.1.1
 
@@ -23,8 +23,8 @@
 
 - 优化 playwright engine
 - Updated dependencies
-  - @authine-e2e-agent/playwright-engine@0.1.1
-  - @authine-e2e-agent/types@0.1.1
+  - @fynn90-e2e_assistant/playwright-engine@0.1.1
+  - @fynn90-e2e_assistant/types@0.1.1
 
 ## 0.1.0
 
@@ -90,8 +90,8 @@
 - Updated dependencies
 - Updated dependencies [30cce7f]
 - Updated dependencies [8c4aa8d]
-  - @authine-e2e-agent/playwright-engine@0.1.0
-  - @authine-e2e-agent/types@0.1.0
+  - @fynn90-e2e_assistant/playwright-engine@0.1.0
+  - @fynn90-e2e_assistant/types@0.1.0
 
 ## 0.0.2
 
@@ -99,5 +99,5 @@
 
 - 优化 cli运行
 - Updated dependencies
-  - @authine-e2e-agent/playwright-engine@0.0.2
-  - @authine-e2e-agent/types@0.0.2
+  - @fynn90-e2e_assistant/playwright-engine@0.0.2
+  - @fynn90-e2e_assistant/types@0.0.2

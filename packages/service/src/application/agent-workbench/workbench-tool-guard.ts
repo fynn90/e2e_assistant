@@ -26,7 +26,7 @@
 import {
   isDangerousBashCommand,
   type IToolGuard,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 import {
   BLOCKED_READ_FILE_NAMES,
   PROTECTED_WRITE_FILE_NAMES,
@@ -85,14 +85,14 @@ export interface IAgentWorkbenchGuardOptions {
  * @returns 工具调用前守卫：按 PRD SEC-1 的权限矩阵逐类判定。
  * @throws 不抛出异常；不符合边界的调用以阻断结果返回，由 Agent 循环处理。
  */
-export function createAgentWorkbenchGuard(
+export function createAgentWorkbenchGuard (
   options: IAgentWorkbenchGuardOptions,
 ): IToolGuard {
   const workspace = options.workspace
 
   return {
     id: options.id,
-    async beforeCall(toolCall) {
+    async beforeCall (toolCall) {
       const args = asRecord(toolCall.args)
 
       // 无副作用的工具直接放行：它们不读写工作区文件，
@@ -132,7 +132,7 @@ export function createAgentWorkbenchGuard(
  * @returns 阻断结果；合法时返回 undefined（放行）。
  * @throws 不抛出异常。
  */
-function guardRead(
+function guardRead (
   workspace: string,
   args: Record<string, unknown> | undefined,
 ): { block: true; reason: string } | undefined {
@@ -163,7 +163,7 @@ function guardRead(
  * @returns 阻断结果；合法时返回 undefined（放行）。
  * @throws 不抛出异常。
  */
-function guardWrite(
+function guardWrite (
   workspace: string,
   args: Record<string, unknown> | undefined,
 ): { block: true; reason: string } | undefined {
@@ -203,7 +203,7 @@ function guardWrite(
  * @returns 阻断结果；合法时返回 undefined（放行）。
  * @throws 不抛出异常。
  */
-function guardBash(
+function guardBash (
   workspace: string,
   args: Record<string, unknown> | undefined,
 ): { block: true; reason: string } | undefined {
@@ -221,7 +221,7 @@ function guardBash(
 }
 
 /** 将未知参数安全转换为键值对象。 */
-function asRecord(value: unknown): Record<string, unknown> | undefined {
+function asRecord (value: unknown): Record<string, unknown> | undefined {
   return value && typeof value === 'object' && !Array.isArray(value)
     ? (value as Record<string, unknown>)
     : undefined

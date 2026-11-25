@@ -3,7 +3,7 @@
  */
 import { defineComponent, ref, type Ref } from 'vue'
 import { mount } from '@vue/test-utils'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const apiMocks = vi.hoisted(() => ({
@@ -38,7 +38,7 @@ const baseTestCase: IE2ETestCase = {
  * @returns 模拟 API 文档数据。
  * @throws 不抛出异常。
  */
-function buildDocument(testCase: IE2ETestCase) {
+function buildDocument (testCase: IE2ETestCase) {
   return {
     testCase,
     title: testCase.title,
@@ -70,11 +70,11 @@ interface IOnboardingSaveResult {
  * @returns composable 实例和用于触发卸载清理的组件包装器。
  * @throws 组件挂载失败时由测试框架抛出异常。
  */
-async function mountEditor(onSaved: (data: IOnboardingSaveResult) => void) {
+async function mountEditor (onSaved: (data: IOnboardingSaveResult) => void) {
   let editor: ReturnType<typeof useE2ETestCase> | undefined
   const wrapper = mount(
     defineComponent({
-      setup() {
+      setup () {
         editor = useE2ETestCase(ref('abc123def') as Ref<string>, { onSaved })
         return () => null
       },

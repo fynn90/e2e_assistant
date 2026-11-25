@@ -19,7 +19,7 @@ import {
 import os from 'node:os'
 import path from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { isProtectedSkillRootFile } from '@authine-e2e-agent/types'
+import { isProtectedSkillRootFile } from '@fynn90-e2e_assistant/types'
 import { deleteSkillEntry } from '../src/file-delete'
 
 let workspaceRoot: string
@@ -32,7 +32,7 @@ let skillRoot: string
  * @returns 初始化完成的 Promise。
  * @throws 文件系统写入失败时抛出。
  */
-async function seedSkill(): Promise<void> {
+async function seedSkill (): Promise<void> {
   const meta = {
     id: skillId,
     title: 'Skill',

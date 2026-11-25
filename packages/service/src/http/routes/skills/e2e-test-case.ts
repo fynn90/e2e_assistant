@@ -5,7 +5,7 @@ import type { Hono } from 'hono'
 import type {
   IGetE2ETestCaseResponse,
   IUpdateE2ETestCaseResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
@@ -19,7 +19,7 @@ const E2E_TEST_CASE_BODY_LIMIT = 1024 * 1024
  * @param routes - Skill Hono router。
  * @param services - 可替换的 E2E 应用服务。
  */
-export function registerE2ETestCaseRoutes(
+export function registerE2ETestCaseRoutes (
   routes: Hono<IAppEnv>,
   services: IE2ETestCaseApplicationServices,
 ): void {
@@ -52,7 +52,7 @@ export function registerE2ETestCaseRoutes(
   })
 }
 
-function parseSkillId(value: string): string {
+function parseSkillId (value: string): string {
   const result = skillIdSchema.safeParse(value)
 
   if (!result.success) {

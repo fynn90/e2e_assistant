@@ -14,7 +14,7 @@ import { defineComponent } from 'vue'
 import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { NMessageProvider } from 'naive-ui'
-import type { ISkillFileTreeNode } from '@authine-e2e-agent/types'
+import type { ISkillFileTreeNode } from '@fynn90-e2e_assistant/types'
 import SkillExplorer from '../../src/modules/skill-development/SkillExplorer.vue'
 
 // 新建 API 打桩：只验证调用与失败保留输入，不触网。
@@ -35,7 +35,7 @@ vi.mock('../../src/services/skill-api', () => ({
 }))
 
 /** 构造测试文件树（含 userWorkSpace 各类节点与保护文件）。 */
-function buildNodes(): ISkillFileTreeNode[] {
+function buildNodes (): ISkillFileTreeNode[] {
   return [
     {
       kind: 'file',
@@ -112,7 +112,7 @@ const ExplorerHost = defineComponent({
 })
 
 /** 挂载组件（actionsEnabled 默认开启；userWorkSpace 层级默认展开以便断言子行）。 */
-function mountExplorer(props: Record<string, unknown> = {}) {
+function mountExplorer (props: Record<string, unknown> = {}) {
   return mount(ExplorerHost, {
     props: {
       explorerProps: {
@@ -129,14 +129,14 @@ function mountExplorer(props: Record<string, unknown> = {}) {
 }
 
 /** 按节点名找到对应树行。 */
-function findRow(label: string) {
+function findRow (label: string) {
   return Array.from(document.querySelectorAll('.n-tree-node')).find((row) =>
     row.textContent?.includes(label),
   )
 }
 
 /** 统计某树行内的悬停操作按钮数。 */
-function rowButtonCount(label: string): number {
+function rowButtonCount (label: string): number {
   return findRow(label)?.querySelectorAll('.tree-action-button').length ?? -1
 }
 
@@ -201,7 +201,7 @@ describe('受保护根的文件节点形态（缺陷 B 回归，W10/W21）', () 
    * 构造 userWorkSpace 路径被同名普通文件占用的边缘节点树：
    * 服务端此时标注的是 **文件节点**（kind:'file'）但仍带 protection 标记。
    */
-  function buildOccupiedNodes(): ISkillFileTreeNode[] {
+  function buildOccupiedNodes (): ISkillFileTreeNode[] {
     return [
       {
         kind: 'file',
@@ -238,7 +238,7 @@ describe('新建弹窗（W45/W47/W48）', () => {
 
     const row = findRow('userWorkSpace')
     const buttons = row?.querySelectorAll('.tree-action-button') ?? []
-    ;(buttons[0] as HTMLElement).click()
+      ; (buttons[0] as HTMLElement).click()
     await flushPromises()
 
     // 弹窗出现且含名称输入框。
@@ -252,7 +252,7 @@ describe('新建弹窗（W45/W47/W48）', () => {
 
     const row = findRow('userWorkSpace')
     const buttons = row?.querySelectorAll('.tree-action-button') ?? []
-    ;(buttons[0] as HTMLElement).click()
+      ; (buttons[0] as HTMLElement).click()
     await flushPromises()
 
     const input = document.querySelector('.n-modal input') as HTMLInputElement
@@ -264,7 +264,7 @@ describe('新建弹窗（W45/W47/W48）', () => {
     const confirmButton = Array.from(
       document.querySelectorAll('.n-modal button'),
     ).find((button) => button.textContent?.includes('新建'))
-    ;(confirmButton as HTMLElement).click()
+      ; (confirmButton as HTMLElement).click()
     await flushPromises()
 
     expect(document.body.textContent).toContain('名称不合法')
@@ -279,7 +279,7 @@ describe('新建弹窗（W45/W47/W48）', () => {
 
     const row = findRow('exports')
     const buttons = row?.querySelectorAll('.tree-action-button') ?? []
-    ;(buttons[0] as HTMLElement).click()
+      ; (buttons[0] as HTMLElement).click()
     await flushPromises()
 
     const input = document.querySelector('.n-modal input') as HTMLInputElement
@@ -290,7 +290,7 @@ describe('新建弹窗（W45/W47/W48）', () => {
     const confirmButton = Array.from(
       document.querySelectorAll('.n-modal button'),
     ).find((button) => button.textContent?.includes('新建'))
-    ;(confirmButton as HTMLElement).click()
+      ; (confirmButton as HTMLElement).click()
     await vi.waitFor(() => {
       expect(createUserWorkspaceDirectoryMock).toHaveBeenCalledWith(
         'abc123def',

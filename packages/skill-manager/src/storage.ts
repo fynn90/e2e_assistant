@@ -18,8 +18,8 @@ import writeFileAtomic from 'write-file-atomic'
 import {
   createDefaultE2ETestCase,
   type ISkillSummary,
-} from '@authine-e2e-agent/types'
-import { DEFAULT_ENV_FILE_CONTENT } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
+import { DEFAULT_ENV_FILE_CONTENT } from '@fynn90-e2e_assistant/types'
 import {
   E2E_SCHEMA_FILE_NAME,
   SKILL_ENV_FILE_NAME,
@@ -69,7 +69,7 @@ export interface ISkillDeleteResult {
  * @returns 新 Skill 的持久化 manifest 与目录路径。
  * @throws SkillManagerError 当标题重复、ID 生成失败或文件系统操作失败时抛出。
  */
-export async function createSkill(
+export async function createSkill (
   options: ICreateSkillOptions,
 ): Promise<ICreateSkillResult> {
   const normalizedTitle = validateSkillTitle(options.title)
@@ -217,7 +217,7 @@ export async function createSkill(
  * @returns 被删除的 Skill 的 ID 与目录名。
  * @throws SkillManagerError 当 ID 非法、Skill 不存在、索引损坏、目录结构异常或权限不足时抛出。
  */
-export async function deleteSkill(
+export async function deleteSkill (
   options: ISkillStorageOptions,
   skillId: string,
 ): Promise<ISkillDeleteResult> {
@@ -295,7 +295,7 @@ export async function deleteSkill(
  * @param skillRoot - Skill 根目录绝对路径。
  * @throws SkillManagerError 当目录为符号链接、结构非法或权限不足时抛出。
  */
-async function removeSkillDirectoryIfPresent(skillRoot: string): Promise<void> {
+async function removeSkillDirectoryIfPresent (skillRoot: string): Promise<void> {
   try {
     const directoryStat = await lstat(skillRoot)
 
@@ -328,7 +328,7 @@ async function removeSkillDirectoryIfPresent(skillRoot: string): Promise<void> {
  * @param skillId - 九位 Skill ID。
  * @returns Skill 目录路径；索引中不存在时返回 null。
  */
-export async function getSkillStoragePath(
+export async function getSkillStoragePath (
   options: ISkillStorageOptions,
   skillId: string,
 ): Promise<string | null> {
@@ -355,7 +355,7 @@ export async function getSkillStoragePath(
  * @param options - Skill 存储配置。
  * @returns 按更新时间倒序排列的 Skill 摘要。
  */
-export async function listSkills(
+export async function listSkills (
   options: ISkillStorageOptions,
 ): Promise<ISkillSummary[]> {
   const listPath = await ensureSkillListFile(options.rootDir)
@@ -397,12 +397,12 @@ export async function listSkills(
  * @returns 索引条目数组（未校验的原始 JSON 值）。
  * @throws SkillManagerError 索引文件不存在且无法创建、或 JSON 非法时抛出。
  */
-export async function readRawSkillIndex(rootDir: string): Promise<unknown[]> {
+export async function readRawSkillIndex (rootDir: string): Promise<unknown[]> {
   const listPath = await ensureSkillListFile(rootDir)
   return readRawSkillList(listPath)
 }
 
-export function buildSkillDirectoryName(
+export function buildSkillDirectoryName (
   title: string,
   skillId: string,
 ): string {
@@ -415,18 +415,18 @@ export function buildSkillDirectoryName(
  * @param manifest - 已校验的持久化 manifest。
  * @returns 运行时用于寻址的目录名。
  */
-export function resolveSkillDirectoryName(manifest: ISkillManifest): string {
+export function resolveSkillDirectoryName (manifest: ISkillManifest): string {
   return (
     manifest.directoryName ??
     buildSkillDirectoryName(manifest.title, manifest.id)
   )
 }
 
-export function sanitizeSkillTitleForPath(title: string): string {
+export function sanitizeSkillTitleForPath (title: string): string {
   return title.replace(/[\\/:*?"<>|]/g, '_')
 }
 
-export function validateSkillTitle(title: string): string {
+export function validateSkillTitle (title: string): string {
   const normalizedTitle = title.trim()
 
   if (
@@ -443,7 +443,7 @@ export function validateSkillTitle(title: string): string {
   return normalizedTitle
 }
 
-export function validateSkillDescription(description: string): string {
+export function validateSkillDescription (description: string): string {
   const normalizedDescription = description.trim()
 
   if (normalizedDescription.length > 1000) {
@@ -456,7 +456,7 @@ export function validateSkillDescription(description: string): string {
   return normalizedDescription
 }
 
-export async function ensureSkillListFile(rootDir: string): Promise<string> {
+export async function ensureSkillListFile (rootDir: string): Promise<string> {
   const listPath = path.join(rootDir, SKILL_LIST_FILE_NAME)
   await mkdir(rootDir, { recursive: true })
 
@@ -483,7 +483,7 @@ export async function ensureSkillListFile(rootDir: string): Promise<string> {
   return listPath
 }
 
-export async function readRawSkillList(listPath: string): Promise<unknown[]> {
+export async function readRawSkillList (listPath: string): Promise<unknown[]> {
   const listContent = await readFile(listPath, 'utf-8')
   let parsedList: unknown
 
@@ -504,7 +504,7 @@ export async function readRawSkillList(listPath: string): Promise<unknown[]> {
   return parsedList
 }
 
-async function writeJsonFile(filePath: string, value: unknown): Promise<void> {
+async function writeJsonFile (filePath: string, value: unknown): Promise<void> {
   await writeFileAtomic(filePath, `${JSON.stringify(value, null, 2)}\n`, {
     encoding: 'utf-8',
     mode: 0o600,
@@ -512,7 +512,7 @@ async function writeJsonFile(filePath: string, value: unknown): Promise<void> {
   })
 }
 
-async function syncDirectory(directoryPath: string): Promise<void> {
+async function syncDirectory (directoryPath: string): Promise<void> {
   if (process.platform === 'win32') {
     return
   }
@@ -526,6 +526,6 @@ async function syncDirectory(directoryPath: string): Promise<void> {
   }
 }
 
-function createSkillId(): string {
+function createSkillId (): string {
   return randomUUID().replace(/-/g, '').slice(0, 9)
 }

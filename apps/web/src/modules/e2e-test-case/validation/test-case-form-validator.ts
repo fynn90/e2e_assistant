@@ -7,7 +7,7 @@ import {
   validateE2ETestCaseForSave,
   type IE2ETestCase,
   type IE2EValidationIssue,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 export type TFieldErrorMap = Record<string, string>
 
@@ -25,7 +25,7 @@ export interface IE2EValidationSummary {
  * @returns 保留领域校验顺序和重复字段问题的数组。
  * @throws 不抛出异常。
  */
-export function getDraftSaveIssues(
+export function getDraftSaveIssues (
   testCase: IE2ETestCase,
 ): IE2EValidationIssue[] {
   return validateE2ETestCaseForSave(testCase)
@@ -37,7 +37,7 @@ export function getDraftSaveIssues(
  * @returns 包含保存约束和至少一个启用步骤约束的问题数组。
  * @throws 不抛出异常。
  */
-export function getDraftGenerationIssues(
+export function getDraftGenerationIssues (
   testCase: IE2ETestCase,
 ): IE2EValidationIssue[] {
   return validateE2ETestCaseForGeneration(testCase)
@@ -49,7 +49,7 @@ export function getDraftGenerationIssues(
  * @returns 每个字段路径对应的首个可见错误。
  * @throws 不抛出异常。
  */
-export function validateDraftForSave(testCase: IE2ETestCase): TFieldErrorMap {
+export function validateDraftForSave (testCase: IE2ETestCase): TFieldErrorMap {
   return issuesToFieldErrors(getDraftSaveIssues(testCase))
 }
 
@@ -59,7 +59,7 @@ export function validateDraftForSave(testCase: IE2ETestCase): TFieldErrorMap {
  * @returns 每个字段路径对应的首个可见错误。
  * @throws 不抛出异常。
  */
-export function validateDraftForGeneration(
+export function validateDraftForGeneration (
   testCase: IE2ETestCase,
 ): TFieldErrorMap {
   return issuesToFieldErrors(getDraftGenerationIssues(testCase))
@@ -72,7 +72,7 @@ export function validateDraftForGeneration(
  * @returns 找到的错误文案；不存在时返回 undefined。
  * @throws 不抛出异常。
  */
-export function fieldErrorFor(
+export function fieldErrorFor (
   errors: TFieldErrorMap,
   path: string,
 ): string | undefined {
@@ -89,7 +89,7 @@ export function fieldErrorFor(
  * @returns 保持字段映射顺序的错误文案数组。
  * @throws 不抛出异常。
  */
-export function fieldErrorsForPrefix(
+export function fieldErrorsForPrefix (
   errors: TFieldErrorMap,
   prefix: string,
 ): string[] {
@@ -108,7 +108,7 @@ export function fieldErrorsForPrefix(
  * @returns 每个字段路径对应的首个错误文案。
  * @throws 不抛出异常。
  */
-export function issuesToFieldErrors(
+export function issuesToFieldErrors (
   issues: IE2EValidationIssue[],
 ): TFieldErrorMap {
   const errors: TFieldErrorMap = {}
@@ -127,7 +127,7 @@ export function issuesToFieldErrors(
  * @returns 包含字段名称和稳定 DOM 目标的摘要数组。
  * @throws 不抛出异常。
  */
-export function issuesToValidationSummaries(
+export function issuesToValidationSummaries (
   issues: IE2EValidationIssue[],
 ): IE2EValidationSummary[] {
   return issues.map((issue, index) => {
@@ -150,7 +150,7 @@ export function issuesToValidationSummaries(
  * @returns 可供摘要展示和聚焦的字段信息。
  * @throws 不抛出异常。
  */
-function validationPathPresentation(path: Array<string | number>): {
+function validationPathPresentation (path: Array<string | number>): {
   label: string
   targetId: string
 } {

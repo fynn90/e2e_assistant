@@ -31,7 +31,7 @@ import {
   createReadTestCaseTool,
   createRenderViewTool,
   getWorkbenchPromptSection,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 import { createAgentWorkbenchGuard } from './workbench-tool-guard'
 import type { IAgentWorkbenchService } from './workbench-service'
 import type {
@@ -52,7 +52,7 @@ const WORKBENCH_GUARD_ID = 'agent-workbench-tool-guard'
  * @returns 该会话的能力装配（工具、规则提示词、守卫）。
  * @throws 不抛出异常。
  */
-export function assembleWorkbenchCapability(input: {
+export function assembleWorkbenchCapability (input: {
   sessionId: string
   workspace: string
   runtime: IAgentWorkRuntime

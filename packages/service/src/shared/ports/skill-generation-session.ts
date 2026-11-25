@@ -9,7 +9,7 @@
  * 与域错误同类：application（生成器）与 agent-runtime（实现方）都依赖它。
  * 留在 application/ 内会让 agent-runtime 反向依赖业务编排层（见 PRD v18 §4.4）。
  */
-import type { IToolGuard } from '@authine-e2e-agent/agent'
+import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
 
 /**
  * 生成会话运行器：应用层启动生成任务的唯一入口。
@@ -33,7 +33,7 @@ export interface ISkillGenerationSessionRunner {
    *   finalText 用于让生成器解析 Agent 按约定输出的断点 / 假设 / 警告说明。
    * @throws {SkillDocumentAgentError} 当会话被取消、启动失败或运行异常时抛出。
    */
-  run(
+  run (
     input: {
       sessionId: string
       prompt: string

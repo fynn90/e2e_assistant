@@ -5,7 +5,7 @@
  * 原始工具参数、完整命令输出或私有 details。
  */
 
-import type { IToolCallView } from '@authine-e2e-agent/types'
+import type { IToolCallView } from '@fynn90-e2e_assistant/types'
 import { toSafePreview } from './safe-value'
 import type { IToolCallRecord } from './types'
 
@@ -15,7 +15,7 @@ import type { IToolCallRecord } from './types'
  * @param record - 含原始 JSON 安全参数和结果的工具调用记录。
  * @returns 可安全经 SSE 传给客户端的预览对象。
  */
-export function toToolCallView(record: IToolCallRecord): IToolCallView {
+export function toToolCallView (record: IToolCallRecord): IToolCallView {
   const args = toSafePreview(record.args)
   const partialResult =
     record.partialResult === undefined
@@ -36,9 +36,9 @@ export function toToolCallView(record: IToolCallRecord): IToolCallView {
     argumentsTruncated: args.truncated,
     ...(partialResult
       ? {
-          partialResult: partialResult.value,
-          partialResultTruncated: partialResult.truncated,
-        }
+        partialResult: partialResult.value,
+        partialResultTruncated: partialResult.truncated,
+      }
       : {}),
     ...(result
       ? { result: result.value, resultTruncated: result.truncated }

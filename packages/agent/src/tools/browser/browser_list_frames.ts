@@ -10,7 +10,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import type { IFrameInfo } from '@authine-e2e-agent/types'
+import type { IFrameInfo } from '@fynn90-e2e_assistant/types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** browser_list_frames 工具接受的参数 Schema。 */
@@ -47,7 +47,7 @@ export interface BrowserListFramesDetails {
  * @returns 一行描述文本。
  * @throws 不抛出异常。
  */
-function formatFrame(frame: IFrameInfo, index: number): string {
+function formatFrame (frame: IFrameInfo, index: number): string {
   const parts = [
     `frameId=${frame.frameId}`,
     `父=${frame.parentFrameId ?? '无'}`,
@@ -66,7 +66,7 @@ function formatFrame(frame: IFrameInfo, index: number): string {
  * @returns 可直接配置到 AgentTool[] 的 browser_list_frames 工具。
  * @throws 不在创建阶段抛出异常；页面不可用时由宿主抛出结构化错误。
  */
-export function createBrowserListFramesTool(
+export function createBrowserListFramesTool (
   host: IBrowserSessionHost,
 ): AgentTool<typeof listFramesParameters, BrowserListFramesDetails> {
   return {
@@ -91,7 +91,7 @@ export function createBrowserListFramesTool(
      * @returns 包含 frame 清单的工具结果。
      * @throws 由宿主抛出的结构化浏览器错误透传，由运行器记为工具失败。
      */
-    async execute(toolCallId, parameters, signal, onUpdate) {
+    async execute (toolCallId, parameters, signal, onUpdate) {
       void toolCallId
       void signal
       void onUpdate

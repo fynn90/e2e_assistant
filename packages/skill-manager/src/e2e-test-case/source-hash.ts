@@ -2,7 +2,7 @@
  * 计算与文件字节版本独立的 E2E 领域 sourceHash。
  */
 import { createHash } from 'node:crypto'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
 import { canonicalizeE2ETestCaseForHash } from './serializer'
 
 /**
@@ -14,7 +14,7 @@ import { canonicalizeE2ETestCaseForHash } from './serializer'
  * @param testCase - 已校验的 E2E 测试用例。
  * @returns 带 `sha256:` 前缀的稳定源数据哈希。
  */
-export function calculateE2ESourceHash(testCase: IE2ETestCase): string {
+export function calculateE2ESourceHash (testCase: IE2ETestCase): string {
   const canonicalJson = JSON.stringify(canonicalizeE2ETestCaseForHash(testCase))
   return `sha256:${createHash('sha256').update(canonicalJson, 'utf-8').digest('hex')}`
 }

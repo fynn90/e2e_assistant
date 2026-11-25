@@ -12,12 +12,12 @@
  */
 import { computed, ref } from 'vue'
 import { describe, expect, it, vi } from 'vitest'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
 import { resolveScriptContext } from '../../src/modules/generation-flow/script-context'
 import type { IScriptStageOptions } from '../../src/modules/generation-flow/script-stage'
 
 /** 构造一个满足生成条件的用例（字段齐全，校验器不会报错）。 */
-function validCase(): IE2ETestCase {
+function validCase (): IE2ETestCase {
   return {
     schemaVersion: '1.0',
     id: 'case_login',
@@ -41,7 +41,7 @@ function validCase(): IE2ETestCase {
 }
 
 /** 造一份注入依赖（模拟编辑器已挂载）。 */
-function injectedDeps(skillId: string, dirty = true): IScriptStageOptions {
+function injectedDeps (skillId: string, dirty = true): IScriptStageOptions {
   return {
     skillId: ref(skillId),
     draft: ref(validCase()),

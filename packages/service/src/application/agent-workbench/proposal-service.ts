@@ -43,8 +43,8 @@ import {
   readTestReportSummary,
   resolveSkill,
   writeSkillFile,
-} from '@authine-e2e-agent/skill-manager'
-import type { ISkillStorageOptions } from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
 import {
   parseEnvFileContent,
   type ICaseChangeTargets,
@@ -54,7 +54,7 @@ import {
   type TAgentWorkbenchProposalState,
   type TCaseChangeOrigin,
   type IE2ETestCase,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IAgentWorkRuntime } from '../../agent-runtime/agent-work-runtime'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import { ApiError } from '../../shared/errors/api-error'
@@ -114,7 +114,7 @@ interface IProposalRecord {
  * @returns 无返回值。
  * @throws 不抛出异常。
  */
-function publishProposal(
+function publishProposal (
   runtime: IAgentWorkRuntime,
   record: IProposalRecord,
 ): void {
@@ -182,7 +182,7 @@ export interface IProposalService {
    * @returns 提案 ID；被拒绝时 message 说明原因。
    * @throws 不抛出异常——失败以 ok:false 归一，由工具转述给模型。
    */
-  create(
+  create (
     input: ICreateProposalInput,
   ): Promise<{ ok: true; message: string } | { ok: false; message: string }>
 
@@ -193,7 +193,7 @@ export interface IProposalService {
    * @returns 应用结果；冲突 / 失败时带状态与原因。
    * @throws ApiError 提案不存在时抛出（404）。
    */
-  apply(input: {
+  apply (input: {
     rootDir: string
     sessionId: string
     proposalId: string
@@ -211,7 +211,7 @@ export interface IProposalService {
    * @returns 取消完成时兑现。
    * @throws ApiError 提案不存在时抛出（404）。
    */
-  cancel(input: {
+  cancel (input: {
     runtime: IAgentWorkRuntime
     sessionId: string
     proposalId: string
@@ -228,7 +228,7 @@ export interface IProposalService {
    * @returns 恢复出的记录；找不到时返回 undefined。
    * @throws 不抛出异常。
    */
-  recover(
+  recover (
     runtime: IAgentWorkRuntime,
     sessionId: string,
     proposalId: string,
@@ -242,22 +242,22 @@ export interface IProposalService {
  * @returns 提案服务实例。
  * @throws 不抛出异常。
  */
-export function createProposalService(
+export function createProposalService (
   dependencies: IProposalServiceDependencies,
 ): IProposalService {
   /** 提案登记表（proposalId → 记录）。 */
   const proposals = new Map<string, IProposalRecord>()
 
   return {
-    async create(input) {
+    async create (input) {
       return createProposal(dependencies, proposals, input)
     },
 
-    async apply(input) {
+    async apply (input) {
       return applyProposal(dependencies, proposals, input)
     },
 
-    async cancel(input) {
+    async cancel (input) {
       const record = requireProposal(
         proposals,
         input.sessionId,
@@ -269,7 +269,7 @@ export function createProposalService(
       return { ok: true }
     },
 
-    recover(runtime, sessionId, proposalId) {
+    recover (runtime, sessionId, proposalId) {
       return recoverProposal(runtime, proposals, sessionId, proposalId)
     },
   }
@@ -284,7 +284,7 @@ export function createProposalService(
  * @returns 创建结果。
  * @throws 不抛出异常。
  */
-async function createProposal(
+async function createProposal (
   dependencies: IProposalServiceDependencies,
   proposals: Map<string, IProposalRecord>,
   input: ICreateProposalInput,
@@ -334,7 +334,7 @@ async function createProposal(
 }
 
 /** 创建用例变更提案（E 组 / G5 组共用通道，红线只对后者生效）。 */
-async function createCaseChangeProposal(
+async function createCaseChangeProposal (
   proposals: Map<string, IProposalRecord>,
   input: ICreateProposalInput,
   storage: ISkillStorageOptions,
@@ -408,7 +408,7 @@ async function createCaseChangeProposal(
 }
 
 /** 创建环境变量补齐提案（V 组）。 */
-async function createEnvFillProposal(
+async function createEnvFillProposal (
   proposals: Map<string, IProposalRecord>,
   input: ICreateProposalInput,
   storage: ISkillStorageOptions,
@@ -472,7 +472,7 @@ async function createEnvFillProposal(
 }
 
 /** 创建报告清理提案（L1）。 */
-async function createReportCleanupProposal(
+async function createReportCleanupProposal (
   proposals: Map<string, IProposalRecord>,
   input: ICreateProposalInput,
   skillRoot: string,
@@ -531,7 +531,7 @@ async function createReportCleanupProposal(
 }
 
 /** 创建用例删除提案（L2）。 */
-async function createCaseDeletionProposal(
+async function createCaseDeletionProposal (
   dependencies: IProposalServiceDependencies,
   proposals: Map<string, IProposalRecord>,
   input: ICreateProposalInput,
@@ -590,7 +590,7 @@ async function createCaseDeletionProposal(
  * @returns 应用结果。
  * @throws ApiError 提案不存在时抛出。
  */
-async function applyProposal(
+async function applyProposal (
   dependencies: IProposalServiceDependencies,
   proposals: Map<string, IProposalRecord>,
   input: {
@@ -626,7 +626,7 @@ async function applyProposal(
 }
 
 /** 应用用例变更（E4 冲突 → conflict；校验不过 → failed 并就地显示原因）。 */
-async function applyCaseChange(
+async function applyCaseChange (
   dependencies: IProposalServiceDependencies,
   record: IProposalRecord,
   input: { rootDir: string; sessionId: string; proposalId: string },
@@ -662,7 +662,7 @@ async function applyCaseChange(
 }
 
 /** 应用环境变量补齐（值由用户填写，只在此处进入平台）。 */
-async function applyEnvFill(
+async function applyEnvFill (
   record: IProposalRecord,
   input: {
     rootDir: string
@@ -756,7 +756,7 @@ async function applyEnvFill(
  * L4 的「逐条列出」只用于**删除过程中**的个别失败（权限、被占用）。
  * 两者不冲突。
  */
-async function applyReportCleanup(
+async function applyReportCleanup (
   dependencies: IProposalServiceDependencies,
   record: IProposalRecord,
   rootDir: string,
@@ -830,16 +830,16 @@ async function applyReportCleanup(
     message:
       failed.length > 0
         ? `已删除 ${removed.length} 份报告，${failed.length} 份删除失败：\n${failed
-            .map((item) => `- ${item.runId}：${item.reason}`)
-            .join(
-              '\n',
-            )}\n请把失败项与原因如实逐条告知用户，**不要笼统说「清理完成」**。`
+          .map((item) => `- ${item.runId}：${item.reason}`)
+          .join(
+            '\n',
+          )}\n请把失败项与原因如实逐条告知用户，**不要笼统说「清理完成」**。`
         : `已删除 ${removed.length} 份报告。请如实报告删除数量。`,
   }
 }
 
 /** 应用用例删除（L2c：有任务则拒绝）。 */
-async function applyCaseDeletion(
+async function applyCaseDeletion (
   dependencies: IProposalServiceDependencies,
   record: IProposalRecord,
   rootDir: string,
@@ -880,7 +880,7 @@ async function applyCaseDeletion(
  * @returns 失败结果。
  * @throws 不抛出异常。
  */
-function classifyApplyError(
+function classifyApplyError (
   error: unknown,
   action: string,
 ): { ok: false; state: 'conflict' | 'failed'; message: string } {
@@ -920,7 +920,7 @@ function classifyApplyError(
  * @returns 恢复出的记录；找不到时返回 undefined。
  * @throws 不抛出异常。
  */
-function recoverProposal(
+function recoverProposal (
   runtime: IAgentWorkRuntime,
   proposals: Map<string, IProposalRecord>,
   sessionId: string,
@@ -975,7 +975,7 @@ function recoverProposal(
  * @returns 提案记录。
  * @throws ApiError（INVALID_REQUEST / 404）提案不存在或归属不符。
  */
-function requireProposal(
+function requireProposal (
   proposals: Map<string, IProposalRecord>,
   sessionId: string,
   proposalId: string,
@@ -992,7 +992,7 @@ function requireProposal(
 }
 
 /** 已定格的提案的说明文案。 */
-function settledMessage(state: TAgentWorkbenchProposalState): string {
+function settledMessage (state: TAgentWorkbenchProposalState): string {
   switch (state) {
     case 'applied':
       return '该提案已经应用过了。'
@@ -1017,7 +1017,7 @@ function settledMessage(state: TAgentWorkbenchProposalState): string {
  * @returns 合并后的目标用例。
  * @throws 不抛出异常。
  */
-function mergeTargets(
+function mergeTargets (
   current: IE2ETestCase,
   targets: ICaseChangeTargets,
 ): IE2ETestCase {
@@ -1034,16 +1034,16 @@ function mergeTargets(
       : {}),
     ...(targets.steps !== undefined
       ? {
-          steps: targets.steps.map((step) => ({
-            id: step.id,
-            order: step.order,
-            description: step.description,
-            action: step.action,
-            expectedResult: step.expectedResult,
-            testData: step.testData ?? {},
-            enabled: step.enabled,
-          })),
-        }
+        steps: targets.steps.map((step) => ({
+          id: step.id,
+          order: step.order,
+          description: step.description,
+          action: step.action,
+          expectedResult: step.expectedResult,
+          testData: step.testData ?? {},
+          enabled: step.enabled,
+        })),
+      }
       : {}),
   }
 }
@@ -1056,7 +1056,7 @@ function mergeTargets(
  * @returns key 集合；文件缺失或非法时为空集。
  * @throws 不抛出异常。
  */
-async function readEnvKeySet(
+async function readEnvKeySet (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<Set<string>> {
@@ -1084,7 +1084,7 @@ async function readEnvKeySet(
  * @returns 当前键值；文件缺失时为空对象、不可读时 undefined。
  * @throws 不抛出异常。
  */
-async function readEnvFileRaw(
+async function readEnvFileRaw (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<Record<string, string> | undefined> {
@@ -1111,7 +1111,7 @@ async function readEnvFileRaw(
  * @returns 文档与脚本是否存在。
  * @throws 不抛出异常。
  */
-async function readDocumentAndScriptState(
+async function readDocumentAndScriptState (
   skillRoot: string,
 ): Promise<{ hasSkillDocument: boolean; hasPlaywrightScript: boolean }> {
   const [document, script] = await Promise.all([
@@ -1128,7 +1128,7 @@ async function readDocumentAndScriptState(
  * @returns 存在且是文件时返回 true。
  * @throws 不抛出异常。
  */
-async function fileExists(path: string): Promise<boolean> {
+async function fileExists (path: string): Promise<boolean> {
   try {
     const { stat } = await import('node:fs/promises')
     return (await stat(path)).isFile()

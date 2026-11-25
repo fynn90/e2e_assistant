@@ -23,11 +23,11 @@ import {
   TEST_REPORT_RUN_DIR_PATTERN,
   deleteTestReportRun,
   resolveSkill,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import type {
   IDeleteTestReportResponse,
   IStartExecutionResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import type { IExecutionEventBus } from '../../../application/test-execution/execution-event-bus'
@@ -54,7 +54,7 @@ export interface ITestExecutionRouteDependencies {
  * @returns 无返回值。
  * @throws 不抛出异常；业务错误以 ApiError 形式在 handler 内抛出。
  */
-export function registerTestExecutionRoutes(
+export function registerTestExecutionRoutes (
   routes: Hono<IAppEnv>,
   dependencies: ITestExecutionRouteDependencies,
 ): void {
@@ -286,7 +286,7 @@ export function registerTestExecutionRoutes(
 }
 
 /** 执行记录不存在的 404（服务重启或已被清理，R7）。 */
-function executionNotFoundError(): ApiError {
+function executionNotFoundError (): ApiError {
   return new ApiError({
     code: 'EXECUTION_NOT_FOUND',
     status: 404,
@@ -295,7 +295,7 @@ function executionNotFoundError(): ApiError {
 }
 
 /** 解析并校验 Skill ID 路径参数。 */
-function parseSkillId(skillId: string | undefined): string {
+function parseSkillId (skillId: string | undefined): string {
   const result = skillIdSchema.safeParse(skillId)
 
   if (!result.success) {

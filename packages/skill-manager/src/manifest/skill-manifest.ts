@@ -2,7 +2,7 @@
  * 定义 Skill manifest 的持久化模型、兼容解析和 API 投影。
  * manifest 字段与列表 API DTO 分离，避免新增持久化元数据时被旧校验器截断。
  */
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 
 export interface IGeneratedSkillMetadata {
   path: 'SKILL.md'
@@ -35,7 +35,7 @@ export interface ISkillManifest {
  * @returns 标准化后的持久化 manifest。
  * @throws Error 当身份、时间或生成脚本元数据不合法时抛出。
  */
-export function validateSkillManifest(input: unknown): ISkillManifest {
+export function validateSkillManifest (input: unknown): ISkillManifest {
   if (!input || typeof input !== 'object' || Array.isArray(input)) {
     throw new Error('Skill manifest 结构不正确。')
   }
@@ -103,7 +103,7 @@ export function validateSkillManifest(input: unknown): ISkillManifest {
  * @param manifest - 已校验的持久化 manifest。
  * @returns 不包含目录和生成脚本内部元数据的 API 摘要。
  */
-export function toSkillSummary(manifest: ISkillManifest): ISkillSummary {
+export function toSkillSummary (manifest: ISkillManifest): ISkillSummary {
   return {
     id: manifest.id,
     title: manifest.title,
@@ -114,7 +114,7 @@ export function toSkillSummary(manifest: ISkillManifest): ISkillSummary {
   }
 }
 
-function parseGeneratedSkillMetadata(
+function parseGeneratedSkillMetadata (
   input: unknown,
 ): IGeneratedSkillMetadata | undefined {
   if (input === undefined) return undefined
@@ -139,7 +139,7 @@ function parseGeneratedSkillMetadata(
     generatedAt: metadata.generatedAt,
   }
 }
-function parseGeneratedScriptMetadata(
+function parseGeneratedScriptMetadata (
   input: unknown,
 ): IGeneratedScriptMetadata | undefined {
   if (input === undefined) {
@@ -169,7 +169,7 @@ function parseGeneratedScriptMetadata(
   }
 }
 
-function isSafeDirectoryName(value: string): boolean {
+function isSafeDirectoryName (value: string): boolean {
   return (
     value !== '.' &&
     value !== '..' &&
@@ -179,6 +179,6 @@ function isSafeDirectoryName(value: string): boolean {
   )
 }
 
-function isIsoDate(value: string): boolean {
+function isIsoDate (value: string): boolean {
   return Boolean(value && !Number.isNaN(Date.parse(value)))
 }

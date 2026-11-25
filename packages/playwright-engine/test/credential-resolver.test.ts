@@ -10,7 +10,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest'
-import { isSensitiveTestDataEntry } from '@authine-e2e-agent/types'
+import { isSensitiveTestDataEntry } from '@fynn90-e2e_assistant/types'
 import { resolveFillValue } from '../src/browser-session/credential-resolver'
 
 describe('resolveFillValue', () => {

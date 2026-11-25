@@ -13,7 +13,7 @@ import type {
   IGeneratePlaywrightData,
   IE2ETestCase,
   IPlaywrightScriptState,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiClientError } from '../../services/http-client'
 import { fetchSkillFile } from '../../services/skill-api'
 import {
@@ -47,7 +47,7 @@ export interface IScriptStageOptions {
  * @returns 只读状态、产出的卡片数据与用户操作方法。
  * @throws 不向调用方抛出：网络与服务端错误由阶段状态吸收。
  */
-export function createScriptStage(options: IScriptStageOptions) {
+export function createScriptStage (options: IScriptStageOptions) {
   const status = ref<TStageStatus>('idle')
   /** 生成结果；保存成功后作为脚本卡片的数据来源。 */
   const result = shallowRef<IGeneratePlaywrightData | null>(null)
@@ -81,7 +81,7 @@ export function createScriptStage(options: IScriptStageOptions) {
   const cancelable = ref(false)
 
   /** 同步运行中与可取消派生状态。 */
-  function syncDerivedState(): void {
+  function syncDerivedState (): void {
     running.value = ![
       'idle',
       'completed',
@@ -106,7 +106,7 @@ export function createScriptStage(options: IScriptStageOptions) {
    *
    * @returns 阶段是否成功完成（含落盘）。
    */
-  async function start(): Promise<boolean> {
+  async function start (): Promise<boolean> {
     if (running.value) return false
 
     errorMessage.value = ''
@@ -155,7 +155,7 @@ export function createScriptStage(options: IScriptStageOptions) {
           expectedTestCaseFileVersion: options.version.value,
           expectedScriptVersion: options.script.value?.version ?? null,
         },
-        onEvent(event) {
+        onEvent (event) {
           if (abortController !== controller || controller.signal.aborted)
             return
 
@@ -222,7 +222,7 @@ export function createScriptStage(options: IScriptStageOptions) {
    *
    * @returns 落盘成功时返回 true。
    */
-  async function save(): Promise<boolean> {
+  async function save (): Promise<boolean> {
     if (!result.value || status.value === 'saving-script') return false
 
     status.value = 'saving-script'
@@ -254,9 +254,9 @@ export function createScriptStage(options: IScriptStageOptions) {
     } catch (error) {
       const conflictCode =
         error instanceof ApiClientError &&
-        ['FILE_VERSION_CONFLICT', 'SOURCE_HASH_CONFLICT'].includes(
-          error.code ?? '',
-        )
+          ['FILE_VERSION_CONFLICT', 'SOURCE_HASH_CONFLICT'].includes(
+            error.code ?? '',
+          )
           ? error.code
           : null
 
@@ -277,7 +277,7 @@ export function createScriptStage(options: IScriptStageOptions) {
   }
 
   /** 读取磁盘上已有的脚本，供卡片中的差异对比与重新生成参考。 */
-  async function loadExistingCode(): Promise<void> {
+  async function loadExistingCode (): Promise<void> {
     if (!options.script.value?.exists) {
       existingCode.value = ''
       return
@@ -305,7 +305,7 @@ export function createScriptStage(options: IScriptStageOptions) {
   }
 
   /** 取消生成（仅可取消阶段生效）。 */
-  function cancel(): void {
+  function cancel (): void {
     if (!cancelable.value) return
 
     abortController?.abort()
@@ -315,12 +315,12 @@ export function createScriptStage(options: IScriptStageOptions) {
   }
 
   /** 更新脚本卡片的可编辑代码。 */
-  function updateCode(next: string): void {
+  function updateCode (next: string): void {
     code.value = next
   }
 
   /** 释放阶段占用的资源（store 关闭侧边栏时统一调用）。 */
-  function dispose(): void {
+  function dispose (): void {
     abortController?.abort()
     abortController = null
     timeline.dispose()

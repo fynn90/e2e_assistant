@@ -18,11 +18,11 @@ import { randomUUID } from 'node:crypto'
 import { Hono } from 'hono'
 import { streamSSE } from 'hono/streaming'
 import { z } from 'zod'
-import { listSkills } from '@authine-e2e-agent/skill-manager'
+import { listSkills } from '@fynn90-e2e_assistant/skill-manager'
 import type {
   IAgentSessionSummary,
   IAgentWorkBlock,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { parseJsonBody } from '../../request-validation'
@@ -137,13 +137,13 @@ export interface IAgentRouteDependencies {
  * @param dependencies - 工作通道运行时注册表与工作台服务。
  * @returns 挂载到 /api/agent 下的路由组。
  */
-export function createAgentRoutes(
+export function createAgentRoutes (
   dependencies: IAgentRouteDependencies,
 ): Hono<IAppEnv> {
   const routes = new Hono<IAppEnv>()
 
   /** 按平台配置获取（或惰性创建）当前工作区的常驻运行时。 */
-  async function runtimeOf(options: { requireChat?: boolean } = {}) {
+  async function runtimeOf (options: { requireChat?: boolean } = {}) {
     const { config } = await requirePlatformConfig(options)
     return dependencies.workRuntimeRegistry.getRuntime({
       workspace: config.projectDirectory,
@@ -161,7 +161,7 @@ export function createAgentRoutes(
    * @returns 已确认存在的服务。
    * @throws ApiError（INTERNAL_ERROR / 503）服务未装配时抛出。
    */
-  function requireService<T>(service: T | undefined, message: string): T {
+  function requireService<T> (service: T | undefined, message: string): T {
     if (!service) {
       throw new ApiError({
         code: 'INTERNAL_ERROR',
@@ -179,7 +179,7 @@ export function createAgentRoutes(
    * @returns 已校验的会话 ID 与批次 ID。
    * @throws ApiError（INVALID_REQUEST / 400）格式不正确时抛出。
    */
-  function parseBatchParams(context: {
+  function parseBatchParams (context: {
     req: { param: (name: string) => string | undefined }
   }): { sessionId: string; batchId: string } {
     const sessionId = sessionIdSchema.safeParse(context.req.param('sessionId'))
@@ -208,7 +208,7 @@ export function createAgentRoutes(
    * @returns 能力装配；工作台服务未配置时返回 undefined（会话退化为普通对话）。
    * @throws 不抛出异常。
    */
-  function buildWorkbenchAssembly(
+  function buildWorkbenchAssembly (
     sessionId: string,
     workspace: string,
     runtime: IAgentWorkRuntime,
@@ -487,7 +487,7 @@ export function createAgentRoutes(
    * @returns 已不存在的用例 ID 集合；工作区不可读时为空集（不标注）。
    * @throws 不抛出异常。
    */
-  async function collectMissingSkillIds(
+  async function collectMissingSkillIds (
     blocks: readonly IAgentWorkBlock[],
   ): Promise<Set<string>> {
     const referenced = new Set<string>()

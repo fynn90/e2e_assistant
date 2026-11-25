@@ -26,16 +26,16 @@ importers:
 
   apps/cli:
     dependencies:
-      '@authine-e2e-agent/config':
+      '@fynn90-e2e_assistant/config':
         specifier: workspace:^
         version: link:../../packages/config
-      '@authine-e2e-agent/service':
+      '@fynn90-e2e_assistant/service':
         specifier: workspace:^
         version: link:../../packages/service
-      '@authine-e2e-agent/types':
+      '@fynn90-e2e_assistant/types':
         specifier: workspace:^
         version: link:../../packages/types
-      '@authine-e2e-agent/web-host':
+      '@fynn90-e2e_assistant/web-host':
         specifier: workspace:^
         version: link:../../packages/web-host
       '@earendil-works/pi-tui':
@@ -68,7 +68,7 @@ importers:
 
   apps/web:
     dependencies:
-      '@authine-e2e-agent/types':
+      '@fynn90-e2e_assistant/types':
         specifier: workspace:^
         version: link:../../packages/types
       dompurify:
@@ -129,7 +129,7 @@ importers:
 
   packages/agent:
     dependencies:
-      '@authine-e2e-agent/types':
+      '@fynn90-e2e_assistant/types':
         specifier: workspace:^
         version: link:../types
       '@earendil-works/pi-agent-core':
@@ -196,7 +196,7 @@ importers:
 
   packages/playwright-engine:
     dependencies:
-      '@authine-e2e-agent/types':
+      '@fynn90-e2e_assistant/types':
         specifier: workspace:^
         version: link:../types
       playwright:
@@ -218,19 +218,19 @@ importers:
 
   packages/service:
     dependencies:
-      '@authine-e2e-agent/agent':
+      '@fynn90-e2e_assistant/agent':
         specifier: workspace:^
         version: link:../agent
-      '@authine-e2e-agent/config':
+      '@fynn90-e2e_assistant/config':
         specifier: workspace:^
         version: link:../config
-      '@authine-e2e-agent/playwright-engine':
+      '@fynn90-e2e_assistant/playwright-engine':
         specifier: workspace:^
         version: link:../playwright-engine
-      '@authine-e2e-agent/skill-manager':
+      '@fynn90-e2e_assistant/skill-manager':
         specifier: workspace:^
         version: link:../skill-manager
-      '@authine-e2e-agent/types':
+      '@fynn90-e2e_assistant/types':
         specifier: workspace:^
         version: link:../types
       '@hono/node-server':
@@ -264,7 +264,7 @@ importers:
 
   packages/skill-manager:
     dependencies:
-      '@authine-e2e-agent/types':
+      '@fynn90-e2e_assistant/types':
         specifier: workspace:^
         version: link:../types
       adm-zip:
@@ -317,7 +317,7 @@ importers:
 
   packages/web-host:
     dependencies:
-      '@authine-e2e-agent/web':
+      '@fynn90-e2e_assistant/web':
         specifier: workspace:^
         version: link:../../apps/web
       hono:

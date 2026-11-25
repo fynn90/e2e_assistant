@@ -20,7 +20,7 @@
 
 import { lstat, mkdir, open } from 'node:fs/promises'
 import path from 'node:path'
-import { normalizeUserWorkspaceRelativePath } from '@authine-e2e-agent/types'
+import { normalizeUserWorkspaceRelativePath } from '@fynn90-e2e_assistant/types'
 import {
   KNOWN_BINARY_EXTENSIONS,
   MAX_SKILL_FILE_BYTES,
@@ -44,7 +44,7 @@ import type { ISkillStorageOptions } from './storage'
  *   （TREE_TOO_LARGE）、中间段被文件或符号链接占用（INVALID_FILE_PATH）、
  *   已存在（DIRECTORY_ALREADY_EXISTS）或权限不足（FILE_PERMISSION_DENIED）时抛出。
  */
-export async function createUserWorkspaceDirectory(
+export async function createUserWorkspaceDirectory (
   options: ISkillStorageOptions,
   skillId: string,
   relativePath: string,
@@ -98,7 +98,7 @@ export async function createUserWorkspaceDirectory(
  *   二进制扩展名（FILE_NOT_SUPPORTED）、文件已存在（FILE_ALREADY_EXISTS）、
  *   中间段被文件或符号链接占用（INVALID_FILE_PATH）或权限不足（FILE_PERMISSION_DENIED）时抛出。
  */
-export async function createUserWorkspaceFile(
+export async function createUserWorkspaceFile (
   options: ISkillStorageOptions,
   skillId: string,
   relativePath: string,
@@ -169,7 +169,7 @@ export async function createUserWorkspaceFile(
  * @throws SkillManagerError 路径非法（含越界、绝对路径、重复 userWorkSpace 段）或
  *   深度超过文件树上限时抛出。
  */
-function normalizeWorkspaceSegments(relativePath: string): string[] {
+function normalizeWorkspaceSegments (relativePath: string): string[] {
   const normalized = normalizeUserWorkspaceRelativePath(relativePath)
 
   if (normalized === undefined) {
@@ -201,7 +201,7 @@ function normalizeWorkspaceSegments(relativePath: string): string[] {
  * @throws SkillManagerError 段被普通文件或符号链接占用时抛出（INVALID_FILE_PATH）；
  *   创建失败抛出对应分类错误。
  */
-async function ensureSegmentAcceptableForDirectory(
+async function ensureSegmentAcceptableForDirectory (
   segmentPath: string,
   segment: string,
 ): Promise<void> {
@@ -236,7 +236,7 @@ async function ensureSegmentAcceptableForDirectory(
  * @returns 已分类的 SkillManagerError。
  * @throws 不抛出异常。
  */
-function translateCreateError(
+function translateCreateError (
   error: unknown,
   targetPath: string,
 ): SkillManagerError {

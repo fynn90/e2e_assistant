@@ -47,13 +47,13 @@ const harness = vi.hoisted(() => ({
   chatThrows: false,
 }))
 
-vi.mock('@authine-e2e-agent/agent', async (importOriginal) => {
+vi.mock('@fynn90-e2e_assistant/agent', async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import('@authine-e2e-agent/agent')>()
+    await importOriginal<typeof import('@fynn90-e2e_assistant/agent')>()
 
   /** AgentService 的最小替身：只实现工作运行时用到的四个成员。 */
   class FakeAgentService {
-    chat(
+    chat (
       _message: string,
       options: {
         sessionId?: string
@@ -88,15 +88,15 @@ vi.mock('@authine-e2e-agent/agent', async (importOriginal) => {
       }
     }
 
-    getTask() {
+    getTask () {
       return undefined
     }
 
-    async removeTask() {
+    async removeTask () {
       /* 无任务可移除 */
     }
 
-    async dispose() {
+    async dispose () {
       /* 无资源可释放 */
     }
   }
@@ -106,7 +106,7 @@ vi.mock('@authine-e2e-agent/agent', async (importOriginal) => {
 
 // mock 之后再 import：此时 runtime 模块拿到的 AgentService 已是替身，
 // 而 askUserRegistry 仍是真实单例（上面用 ...actual 保留了原导出）。
-const { askUserRegistry } = await import('@authine-e2e-agent/agent')
+const { askUserRegistry } = await import('@fynn90-e2e_assistant/agent')
 const { createAgentWorkRuntime } =
   await import('../../src/agent-runtime/agent-work-runtime')
 
@@ -138,7 +138,7 @@ afterEach(async () => {
  *
  * @returns 运行时实例（模型配置为占位值，AgentService 已被替换为替身）。
  */
-function openRuntime(): ReturnType<typeof createAgentWorkRuntime> {
+function openRuntime (): ReturnType<typeof createAgentWorkRuntime> {
   const opened = createAgentWorkRuntime({
     workspace,
     model: 'fake-model',

@@ -1,4 +1,4 @@
-import type { TApiErrorCode } from '@authine-e2e-agent/types'
+import type { TApiErrorCode } from '@fynn90-e2e_assistant/types'
 
 export type TSkillManagerErrorCode = Extract<
   TApiErrorCode,
@@ -42,16 +42,16 @@ export class SkillManagerError extends Error {
   }
 }
 
-export function isFileSystemPermissionError(error: unknown): boolean {
+export function isFileSystemPermissionError (error: unknown): boolean {
   const code = getFileSystemErrorCode(error)
   return code === 'EACCES' || code === 'EPERM'
 }
 
-export function isFileSystemMissingError(error: unknown): boolean {
+export function isFileSystemMissingError (error: unknown): boolean {
   return getFileSystemErrorCode(error) === 'ENOENT'
 }
 
-export function getFileSystemErrorCode(error: unknown): string | undefined {
+export function getFileSystemErrorCode (error: unknown): string | undefined {
   if (!error || typeof error !== 'object' || !('code' in error)) {
     return undefined
   }

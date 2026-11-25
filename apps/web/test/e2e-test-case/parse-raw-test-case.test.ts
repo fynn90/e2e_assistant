@@ -2,7 +2,7 @@
  * 验证原始 e2e_schema.json 修复的 JSON 行列与 Schema 错误。
  */
 import { describe, expect, it } from 'vitest'
-import { createDefaultE2ETestCase } from '@authine-e2e-agent/types'
+import { createDefaultE2ETestCase } from '@fynn90-e2e_assistant/types'
 import {
   parseRawE2ETestCase,
   RawE2ETestCaseParseError,

@@ -15,7 +15,7 @@ import type {
   ICaseChangeTargets,
   IProposalChange,
   IE2ETestCase,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /** 步骤比对用的最小形状（磁盘与目标两侧共用）。 */
 interface IStepLike {
@@ -35,7 +35,7 @@ interface IStepLike {
  * @returns 逐条的人话对照；无变化时为空数组。
  * @throws 不抛出异常。
  */
-export function diffCaseChange(
+export function diffCaseChange (
   current: IE2ETestCase,
   targets: ICaseChangeTargets,
 ): IProposalChange[] {
@@ -95,7 +95,7 @@ export function diffCaseChange(
  * @returns 逐条对照。
  * @throws 不抛出异常。
  */
-function diffStringSet(
+function diffStringSet (
   label: string,
   before: ReadonlyArray<string>,
   after: ReadonlyArray<string>,
@@ -130,7 +130,7 @@ function diffStringSet(
  * @returns 逐条对照。
  * @throws 不抛出异常。
  */
-function diffPreconditions(
+function diffPreconditions (
   before: ReadonlyArray<{ id: string; description: string }>,
   after: ReadonlyArray<{ id: string; description: string }>,
 ): IProposalChange[] {
@@ -178,7 +178,7 @@ function diffPreconditions(
  * @returns 逐条对照。
  * @throws 不抛出异常。
  */
-function diffSteps(
+function diffSteps (
   before: ReadonlyArray<IStepLike>,
   after: ReadonlyArray<IStepLike>,
 ): IProposalChange[] {
@@ -261,7 +261,7 @@ function diffSteps(
  * @returns 逐条对照。
  * @throws 不抛出异常。
  */
-export function diffReportCleanup(
+export function diffReportCleanup (
   runs: ReadonlyArray<{
     runId: string
     at: string
@@ -289,7 +289,7 @@ export function diffReportCleanup(
  * @returns 逐条对照。
  * @throws 不抛出异常。
  */
-export function diffCaseDeletion(input: {
+export function diffCaseDeletion (input: {
   skillTitle: string
   hasSkillDocument: boolean
   hasPlaywrightScript: boolean
@@ -317,12 +317,12 @@ export function diffCaseDeletion(input: {
 }
 
 /** 截断过长的文本（卡片上的描述不需要全文）。 */
-function truncate(value: string, limit = 120): string {
+function truncate (value: string, limit = 120): string {
   return value.length > limit ? `${value.slice(0, limit)}…` : value
 }
 
 /** 把 ISO 时间渲染为可读的本地时间（失败时原样返回）。 */
-function formatTime(iso: string): string {
+function formatTime (iso: string): string {
   const parsed = Date.parse(iso)
   if (Number.isNaN(parsed)) return iso
   return new Date(parsed).toLocaleString()

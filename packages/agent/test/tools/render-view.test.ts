@@ -7,21 +7,21 @@
  *   ③ 对同一参数两次调用应得到等价的宿主调用（平台自取的确定性）。
  */
 import { describe, expect, it, vi } from 'vitest'
-import type { TWorkbenchRenderParams } from '@authine-e2e-agent/types'
+import type { TWorkbenchRenderParams } from '@fynn90-e2e_assistant/types'
 import {
   createRenderViewTool,
   type IViewHost,
 } from '../../src/tools/render-view'
 
 /** 构造一个记录调用参数的视图宿主替身。 */
-function createHost(): {
+function createHost (): {
   host: IViewHost
   calls: TWorkbenchRenderParams[]
 } {
   const calls: TWorkbenchRenderParams[] = []
   return {
     host: {
-      async renderView(params) {
+      async renderView (params) {
         calls.push(params)
         return { ok: true, message: '卡片已上屏' }
       },
@@ -158,7 +158,7 @@ describe('render_view 的参数校验', () => {
 describe('render_view 的宿主结果透传', () => {
   it('宿主拒绝时把原因与引导交给模型（不编造卡片）', async () => {
     const host: IViewHost = {
-      async renderView() {
+      async renderView () {
         return { ok: false, message: '工作区内不存在该用例。' }
       },
     }

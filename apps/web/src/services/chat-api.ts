@@ -2,10 +2,10 @@ import type {
   IApiErrorResponse,
   ICreateSkillChatRequest,
   TSkillChatEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiClientError } from './http-client'
 
-export async function streamSkillChat(options: {
+export async function streamSkillChat (options: {
   skillId: string
   request: ICreateSkillChatRequest
   signal: AbortSignal
@@ -86,7 +86,7 @@ export async function streamSkillChat(options: {
   }
 }
 
-export function consumeSseFrames(
+export function consumeSseFrames (
   input: string,
   onEvent: (event: TSkillChatEvent) => void,
   flush = false,
@@ -124,7 +124,7 @@ export function consumeSseFrames(
   return remainder
 }
 
-function isAbortError(error: unknown): boolean {
+function isAbortError (error: unknown): boolean {
   return Boolean(
     error &&
     typeof error === 'object' &&

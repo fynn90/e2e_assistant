@@ -1,7 +1,7 @@
 /**
  * 把 Web 工作台的构建产物挂载到宿主 HTTP 应用上。
  *
- * 本模块只做一件事：托管 `@authine-e2e-agent/web` 的 dist 目录。
+ * 本模块只做一件事：托管 `@fynn90-e2e_assistant/web` 的 dist 目录。
  * 它不认识服务层，也不认识 CLI——调用方把自己的应用实例传进来即可。
  *
  * 这样分层的理由：服务层是纯 API 服务（可独立部署到服务器端），不应依赖前端包；
@@ -49,17 +49,17 @@ export interface IResolvedWebDistInfo {
 /**
  * 解析 Web 工作台的产物目录。
  *
- * 通过 `createRequire` 从**本模块产物所在位置**向上查找 `@authine-e2e-agent/web`，
+ * 通过 `createRequire` 从**本模块产物所在位置**向上查找 `@fynn90-e2e_assistant/web`，
  * 因此本包必须在 `dependencies` 中显式声明 web——否则解析失败会被下面的 catch 吞掉，
  * 表现为用户看到降级页而非构建/启动错误。
  *
  * @returns 产物目录解析结果；包缺失或 dist 未构建时 `webDistDirectoryPath` 为 null。
  * @throws 不抛出异常，解析失败会收敛为 `missing`。
  */
-export async function resolveWebDistInfo(): Promise<IResolvedWebDistInfo> {
+export async function resolveWebDistInfo (): Promise<IResolvedWebDistInfo> {
   try {
     const webPackageJsonPath = resolveNodeModule.resolve(
-      '@authine-e2e-agent/web/package.json',
+      '@fynn90-e2e_assistant/web/package.json',
     )
     const webPackageDistDirectoryPath = path.join(
       path.dirname(webPackageJsonPath),
@@ -104,7 +104,7 @@ export interface IRegisterWebStaticRoutesOptions {
  * @param options - 可选的依赖覆盖（测试用）。
  * @returns 无返回值。
  */
-export function registerWebStaticRoutes(
+export function registerWebStaticRoutes (
   app: TRouteRegistrableApp,
   options: IRegisterWebStaticRoutesOptions = {},
 ): void {
@@ -156,7 +156,7 @@ interface IServeStaticAssetOptions {
  * @returns 资源响应；越界或不存在时返回 404。
  * @throws 不抛出异常，读取失败由调用方处理为 404。
  */
-async function serveStaticAsset(
+async function serveStaticAsset (
   options: IServeStaticAssetOptions,
 ): Promise<Response> {
   const relativeAssetPath = options.requestPath.replace(/^\/+/, '')
@@ -208,7 +208,7 @@ async function serveStaticAsset(
  * @returns 带 charset 的文本类 MIME；无法识别时为 application/octet-stream。
  * @throws 不抛出异常。
  */
-function getContentTypeByFilePath(filePath: string): string {
+function getContentTypeByFilePath (filePath: string): string {
   const detectedType = lookupMimeType(filePath)
 
   if (!detectedType) {
@@ -234,7 +234,7 @@ function getContentTypeByFilePath(filePath: string): string {
  * @returns 无返回值。
  * @throws 不抛出异常。
  */
-function setSecurityHeaders(context: Context): void {
+function setSecurityHeaders (context: Context): void {
   context.header('Content-Security-Policy', CONTENT_SECURITY_POLICY)
   context.header('X-Content-Type-Options', 'nosniff')
   context.header('Referrer-Policy', 'no-referrer')
@@ -247,7 +247,7 @@ function setSecurityHeaders(context: Context): void {
  * @returns 可访问时返回 true。
  * @throws 不抛出异常。
  */
-async function isPathAccessible(targetPath: string): Promise<boolean> {
+async function isPathAccessible (targetPath: string): Promise<boolean> {
   try {
     await access(targetPath, fsConstants.F_OK)
     return true
@@ -265,7 +265,7 @@ async function isPathAccessible(targetPath: string): Promise<boolean> {
  * @returns 降级页 HTML。
  * @throws 不抛出异常。
  */
-function buildMissingWebAssetsHtml(): string {
+function buildMissingWebAssetsHtml (): string {
   return `<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -281,7 +281,7 @@ function buildMissingWebAssetsHtml(): string {
   <body>
     <main>
       <h1>Web 工作台依赖包不可用</h1>
-      <p>当前界面需要独立发布的 <code>@authine-e2e-agent/web</code> 包来提供页面资源。</p>
+      <p>当前界面需要独立发布的 <code>@fynn90-e2e_assistant/web</code> 包来提供页面资源。</p>
       <p>请确认当前环境已正确安装依赖，或在 Monorepo 中先构建并链接 <code>apps/web</code>。</p>
     </main>
   </body>

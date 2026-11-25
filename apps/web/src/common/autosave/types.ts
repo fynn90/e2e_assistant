@@ -5,7 +5,7 @@
  * 业务差异（写到哪、怎么校验、冲突码是什么）全部由各适配器吸收，
  * 使同一套编排逻辑可被产物卡片与文件树任意文本文件复用（依赖倒转）。
  */
-import type { IFileSaveDiagnostic } from '@authine-e2e-agent/types'
+import type { IFileSaveDiagnostic } from '@fynn90-e2e_assistant/types'
 
 /** 保存目标返回结果。 */
 export interface ISaveTargetResult {
@@ -32,7 +32,7 @@ export interface ISaveTarget {
    * @returns 保存结果：新版本与可选诊断。
    * @throws ApiClientError - 业务失败（含冲突码）时抛出，由编排层分流。
    */
-  save(content: string, signal: AbortSignal): Promise<ISaveTargetResult>
+  save (content: string, signal: AbortSignal): Promise<ISaveTargetResult>
 }
 
 /**
@@ -73,7 +73,7 @@ export const AUTO_SAVE_STATE_LABELS: Record<TAutoSaveState, string> = {
  * @param error - 待判断的异常。
  * @returns 错误码为文件/来源冲突时返回 true。
  */
-export function isConflictError(error: unknown): boolean {
+export function isConflictError (error: unknown): boolean {
   const code = extractErrorCode(error)
   return code === 'FILE_VERSION_CONFLICT' || code === 'SOURCE_HASH_CONFLICT'
 }
@@ -88,7 +88,7 @@ export function isConflictError(error: unknown): boolean {
  * @param error - 待判断的异常。
  * @returns 错误码为 ENV_FILE_INVALID 时返回 true。
  */
-export function isBlockedError(error: unknown): boolean {
+export function isBlockedError (error: unknown): boolean {
   return extractErrorCode(error) === 'ENV_FILE_INVALID'
 }
 
@@ -98,7 +98,7 @@ export function isBlockedError(error: unknown): boolean {
  * @param error - 待判断的异常。
  * @returns 错误码文本；不存在时返回 undefined。
  */
-function extractErrorCode(error: unknown): string | undefined {
+function extractErrorCode (error: unknown): string | undefined {
   return error && typeof error === 'object' && 'code' in error
     ? ((error as { code?: string }).code ?? undefined)
     : undefined

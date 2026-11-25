@@ -2,7 +2,7 @@
 import { randomUUID } from 'node:crypto'
 import type { Hono } from 'hono'
 import { streamSSE } from 'hono/streaming'
-import type { TSkillDocumentGenerationEvent } from '@authine-e2e-agent/types'
+import type { TSkillDocumentGenerationEvent } from '@fynn90-e2e_assistant/types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type { IAppEnv } from '../../app-types'
 import { toApiError } from '../../error-mapper'
@@ -21,7 +21,7 @@ const SKILL_DOCUMENT_GENERATION_BODY_LIMIT = 64 * 1024
  * @returns 无返回值。
  * @throws ApiError 当请求身份、参数或平台配置不合法时抛出。
  */
-export function registerSkillDocumentGenerationRoute(
+export function registerSkillDocumentGenerationRoute (
   routes: Hono<IAppEnv>,
   services: IE2ETestCaseApplicationServices,
 ): void {

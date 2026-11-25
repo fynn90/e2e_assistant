@@ -3,14 +3,14 @@
 import {
   collectEnvReferences,
   PLATFORM_BUILTIN_ENV_KEYS,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IValidationTestCase } from '../contracts/validation'
 import type { IPlaywrightValidationIssue } from './validation-types'
 
 /**
  * 从 SDK 最小用例的可生成内容中提取环境变量名称。
  *
- * 提取规则下沉至 `@authine-e2e-agent/types` 的 `collectEnvReferences` 统一维护
+ * 提取规则下沉至 `@fynn90-e2e_assistant/types` 的 `collectEnvReferences` 统一维护
  * （v10 起 Web 与 CLI 共用同一份正则，消除多端正则漂移风险）；
  * 本函数保留原签名作为转发实现，调用方无感知。
  *
@@ -18,7 +18,7 @@ import type { IPlaywrightValidationIssue } from './validation-types'
  * @returns 去重并排序后的环境变量名称。
  * @throws 不抛出异常；缺失的可选文本字段按空文本处理。
  */
-export function extractExpectedEnvironmentVariables(
+export function extractExpectedEnvironmentVariables (
   testCase: IValidationTestCase,
 ): string[] {
   return collectEnvReferences(testCase)
@@ -32,7 +32,7 @@ export function extractExpectedEnvironmentVariables(
  * @returns 缺失或额外环境变量问题。
  * @throws 不抛出异常。
  */
-export function validateEnvironmentVariables(
+export function validateEnvironmentVariables (
   testCase: IValidationTestCase,
   actualVariables: string[],
 ): IPlaywrightValidationIssue[] {

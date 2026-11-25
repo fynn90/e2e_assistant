@@ -2,7 +2,7 @@
  * 定义浏览器会话实现侧契约：会话创建选项、凭据解析端口、iframe 访问策略与会话工厂。
  *
  * 会话的共享契约（IBrowserSession 及其签名涉及的全部数据类型）已迁移至
- * @authine-e2e-agent/types，此处再导出以保持引擎公共 API 不变；
+ * @fynn90-e2e_assistant/types，此处再导出以保持引擎公共 API 不变；
  * agent 包从共享类型包导入这些契约，与引擎互不依赖。
  */
 
@@ -12,9 +12,9 @@ import type { INetworkPolicy } from './network'
 import type {
   IBrowserSession,
   ISensitiveDataRedactor,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
-// 共享契约再导出：符号的真实定义在 @authine-e2e-agent/types
+// 共享契约再导出：符号的真实定义在 @fynn90-e2e_assistant/types
 export type {
   IBrowserSession,
   IPageSnapshotRef,
@@ -36,7 +36,7 @@ export type {
   IWaitCondition,
   IWaitOptions,
   IWaitResult,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 浏览器会话创建选项。
@@ -75,7 +75,7 @@ export interface ICredentialResolver {
    * @returns 解析结果：成功时携带真值，失败时携带可直接展示给模型的稳定原因。
    * @throws 不抛出异常——解析失败以 `{ ok: false }` 表达，避免异常携带秘密值。
    */
-  resolve(key: string): Promise<ICredentialResolution>
+  resolve (key: string): Promise<ICredentialResolution>
 }
 
 /** 凭据解析结果。 */
@@ -115,7 +115,7 @@ export interface IBrowserSessionFactory {
    * @returns 已拥有 browser/context/page 的会话。
    * @throws Chromium 不可用、启动失败或配置非法时抛出结构化错误。
    */
-  create(options: IBrowserSessionOptions): Promise<IBrowserSession>
+  create (options: IBrowserSessionOptions): Promise<IBrowserSession>
 }
 
 /**

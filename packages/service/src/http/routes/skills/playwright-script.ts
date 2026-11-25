@@ -2,7 +2,7 @@
  * 注册用户确认后的固定 `test.spec.ts` 保存路由。
  */
 import type { Hono } from 'hono'
-import type { ISavePlaywrightScriptResponse } from '@authine-e2e-agent/types'
+import type { ISavePlaywrightScriptResponse } from '@fynn90-e2e_assistant/types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
@@ -34,7 +34,7 @@ const PLAYWRIGHT_SCRIPT_BODY_LIMIT = 1024 * 1024
  * @throws ApiError 当 Skill ID 格式不合法时抛出；其他请求或保存错误由下层统一
  * 转换为标准 API 错误响应。
  */
-export function registerPlaywrightScriptRoute(
+export function registerPlaywrightScriptRoute (
   routes: Hono<IAppEnv>,
   services: IE2ETestCaseApplicationServices,
 ): void {

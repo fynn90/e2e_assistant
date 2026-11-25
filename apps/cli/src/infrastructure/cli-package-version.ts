@@ -1,5 +1,5 @@
 /**
- * 读取本 CLI 包（`@authine-e2e-agent/cli`）自身的版本号。
+ * 读取本 CLI 包（`@fynn90-e2e_assistant/cli`）自身的版本号。
  *
  * 为什么从 package.json 运行时读取，而不是构建期注入常量：版本号由发布流程
  * （changesets）唯一维护在 package.json 里，注入会引入第二处需要同步的定义，
@@ -23,10 +23,10 @@ const resolveFromCliPackage = createRequire(import.meta.url)
  *   包环境不完整（被整体打进其他产物、exports 白名单缺项）导致解析失败时返回 null。
  * @throws 不抛出异常；解析失败收敛为 null，由调用方决定不渲染该行。
  */
-export function getCliPackageVersion(): string | null {
+export function getCliPackageVersion (): string | null {
   try {
     const packageManifest: unknown = resolveFromCliPackage(
-      '@authine-e2e-agent/cli/package.json',
+      '@fynn90-e2e_assistant/cli/package.json',
     )
 
     if (!packageManifest || typeof packageManifest !== 'object') {

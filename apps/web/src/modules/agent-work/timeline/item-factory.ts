@@ -20,7 +20,7 @@ import type {
   TAgentToolAction,
   TAgentToolCategory,
   TAgentTurnOutcome,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type {
   ICommandTimelineItem,
   IContentTimelineItem,
@@ -50,7 +50,7 @@ type TEventOf<T extends TAgentClientEvent['type']> = Extract<
  * @returns 可直接渲染的时间线项。
  * @throws 不抛出异常；未知字段按缺省值兜底。
  */
-export function blockToTimelineItem(block: IAgentWorkBlock): TWorkTimelineItem {
+export function blockToTimelineItem (block: IAgentWorkBlock): TWorkTimelineItem {
   const payload = block.payload
   switch (block.kind) {
     case 'thinking':
@@ -169,7 +169,7 @@ export function blockToTimelineItem(block: IAgentWorkBlock): TWorkTimelineItem {
  * @param event - 思考块事件（通常为 begin）。
  * @returns 初始为 streaming 的思考项，并记录 begin 时间戳供实时计时。
  */
-export function createThinkingItem(
+export function createThinkingItem (
   event: TEventOf<'thinking'>,
 ): IThinkingTimelineItem {
   return {
@@ -190,7 +190,7 @@ export function createThinkingItem(
  * @param item - 待更新的思考项。
  * @param event - 思考块事件。
  */
-export function patchThinkingItem(
+export function patchThinkingItem (
   item: IThinkingTimelineItem,
   event: TEventOf<'thinking'>,
 ): void {
@@ -208,7 +208,7 @@ export function patchThinkingItem(
  * @param event - 内容块事件（begin 携带 contentType / language）。
  * @returns 初始为 streaming 的内容项。
  */
-export function createContentItem(
+export function createContentItem (
   event: TEventOf<'content'>,
 ): IContentTimelineItem {
   return {
@@ -228,7 +228,7 @@ export function createContentItem(
  * @param item - 待更新的内容项。
  * @param event - 内容块事件。
  */
-export function patchContentItem(
+export function patchContentItem (
   item: IContentTimelineItem,
   event: TEventOf<'content'>,
 ): void {
@@ -245,7 +245,7 @@ export function patchContentItem(
  * @param event - 工具块事件（begin 携带工具元信息）。
  * @returns 初始为 streaming 的工具项。
  */
-export function createToolItem(event: TEventOf<'tool'>): IToolTimelineItem {
+export function createToolItem (event: TEventOf<'tool'>): IToolTimelineItem {
   return {
     kind: 'tool',
     blockId: event.blockId,
@@ -266,7 +266,7 @@ export function createToolItem(event: TEventOf<'tool'>): IToolTimelineItem {
  * @param item - 待更新的工具项。
  * @param event - 工具块事件。
  */
-export function patchToolItem(
+export function patchToolItem (
   item: IToolTimelineItem,
   event: TEventOf<'tool'>,
 ): void {
@@ -288,7 +288,7 @@ export function patchToolItem(
  * @param event - 待办块事件。
  * @returns 包含完整清单的待办项。
  */
-export function createTodoItem(event: TEventOf<'todo'>): ITodoTimelineItem {
+export function createTodoItem (event: TEventOf<'todo'>): ITodoTimelineItem {
   return {
     kind: 'todo',
     blockId: event.blockId,
@@ -304,7 +304,7 @@ export function createTodoItem(event: TEventOf<'todo'>): ITodoTimelineItem {
  * @param item - 待更新的待办项。
  * @param event - 待办块事件。
  */
-export function patchTodoItem(
+export function patchTodoItem (
   item: ITodoTimelineItem,
   event: TEventOf<'todo'>,
 ): void {
@@ -317,7 +317,7 @@ export function patchTodoItem(
  * @param event - 命令块事件（begin 携带命令与执行目录）。
  * @returns 初始为 streaming 的命令项。
  */
-export function createCommandItem(
+export function createCommandItem (
   event: TEventOf<'command'>,
 ): ICommandTimelineItem {
   return {
@@ -338,7 +338,7 @@ export function createCommandItem(
  * @param item - 待更新的命令项。
  * @param event - 命令块事件。
  */
-export function patchCommandItem(
+export function patchCommandItem (
   item: ICommandTimelineItem,
   event: TEventOf<'command'>,
 ): void {
@@ -361,7 +361,7 @@ export function patchCommandItem(
  * @param event - 交互块事件（begin 携带交互元信息）。
  * @returns 初始为 pending（等待回答）的交互项。
  */
-export function createInteractionItem(
+export function createInteractionItem (
   event: TEventOf<'interaction'>,
 ): IInteractionTimelineItem {
   return {
@@ -382,7 +382,7 @@ export function createInteractionItem(
  * @param item - 待更新的交互项。
  * @param event - 交互块事件。
  */
-export function patchInteractionItem(
+export function patchInteractionItem (
   item: IInteractionTimelineItem,
   event: TEventOf<'interaction'>,
 ): void {
@@ -399,7 +399,7 @@ export function patchInteractionItem(
  * @param event - 提示块事件。
  * @returns 按级别定型（error 为 failed）的提示项。
  */
-export function createNoticeItem(
+export function createNoticeItem (
   event: TEventOf<'notice'>,
 ): INoticeTimelineItem {
   return {
@@ -418,7 +418,7 @@ export function createNoticeItem(
  * @param event - 轮次事件。
  * @returns 初始为 streaming 的轮次项。
  */
-export function createTurnItem(event: TEventOf<'turn'>): ITurnTimelineItem {
+export function createTurnItem (event: TEventOf<'turn'>): ITurnTimelineItem {
   return {
     kind: 'turn',
     blockId: event.blockId,
@@ -434,7 +434,7 @@ export function createTurnItem(event: TEventOf<'turn'>): ITurnTimelineItem {
  * @param item - 待更新的轮次项。
  * @param event - 轮次事件。
  */
-export function patchTurnItem(
+export function patchTurnItem (
   item: ITurnTimelineItem,
   event: TEventOf<'turn'>,
 ): void {

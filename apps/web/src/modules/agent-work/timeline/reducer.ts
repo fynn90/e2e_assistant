@@ -14,7 +14,7 @@ import type {
   IAgentWorkBlock,
   TAgentActivity,
   TAgentClientEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   blockToTimelineItem,
   createCommandItem,
@@ -77,7 +77,7 @@ export interface ITimelineState {
  * @returns 初始化完成的状态对象。
  * @throws 不抛出异常。
  */
-export function createTimelineState(): ITimelineState {
+export function createTimelineState (): ITimelineState {
   return {
     items: [],
     itemIndex: new Map<string, number>(),
@@ -97,7 +97,7 @@ export function createTimelineState(): ITimelineState {
  * @returns 无返回值。
  * @throws 不抛出异常。
  */
-export function resetWithBlocks(
+export function resetWithBlocks (
   state: ITimelineState,
   blocks: IAgentWorkBlock[],
   currentSeq: number,
@@ -121,7 +121,7 @@ export function resetWithBlocks(
  * @returns 无返回值。
  * @throws 不抛出异常。
  */
-export function clearTimeline(state: ITimelineState): void {
+export function clearTimeline (state: ITimelineState): void {
   state.items.length = 0
   state.itemIndex.clear()
   state.lastSeq = 0
@@ -138,7 +138,7 @@ export function clearTimeline(state: ITimelineState): void {
  * @returns 无返回值。
  * @throws 不抛出异常。
  */
-export function applyEventToTimeline(
+export function applyEventToTimeline (
   state: ITimelineState,
   event: TAgentClientEvent,
 ): void {
@@ -339,7 +339,7 @@ export function applyEventToTimeline(
  * @returns 无返回值。
  * @throws 不抛出异常。
  */
-export function upsertItem(
+export function upsertItem (
   state: ITimelineState,
   blockId: string,
   create: () => TWorkTimelineItem,

@@ -24,18 +24,18 @@ import {
   ensureUserWorkSpace,
   resolveSkill,
   type ITempWorkspace,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import {
   PlaywrightScriptValidator,
   type IBrowserSessionFactory,
   type IPlaywrightValidationIssue,
-} from '@authine-e2e-agent/playwright-engine'
+} from '@fynn90-e2e_assistant/playwright-engine'
 import {
   isBlockingDiagnostic,
   validateE2ETestCaseForGeneration,
   type IGeneratePlaywrightData,
   type IGeneratePlaywrightRequest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiError } from '../../shared/errors/api-error'
 import type { IAuthinePlatformConfig } from '../../config/config-store'
 import {
@@ -77,7 +77,7 @@ export type TPlaywrightGeneratorFactory = (
  * @throws SkillManagerError 用例、SKILL.md 结构或来源、版本不满足条件时抛出。
  * @throws ApiError 脚本未通过静态校验或环境变量不一致时抛出。
  */
-export async function generatePlaywrightScript(
+export async function generatePlaywrightScript (
   input: {
     config: IAuthinePlatformConfig
     skillId: string
@@ -324,7 +324,7 @@ export async function generatePlaywrightScript(
  * @param issue - 校验器产出的问题（error 或 warning 级）。
  * @returns 生成警告形状；`stepId` 仅在存在时携带。
  */
-function toGenerationWarning(issue: IPlaywrightValidationIssue): {
+function toGenerationWarning (issue: IPlaywrightValidationIssue): {
   code: string
   message: string
   severity: 'warning'
@@ -345,14 +345,14 @@ function toGenerationWarning(issue: IPlaywrightValidationIssue): {
  * @returns 清理完成。
  * @throws SkillManagerError 清理失败时抛出（PRD 4.4：清理失败不得伪报成功）。
  */
-async function cleanupTempWorkspaceSafely(
+async function cleanupTempWorkspaceSafely (
   tempWorkspace: ITempWorkspace,
 ): Promise<void> {
   await tempWorkspace.cleanup()
 }
 
 /** 校验磁盘中的正式脚本版本仍与前端预览时一致，避免覆盖外部修改。 */
-function assertExpectedScriptVersion(
+function assertExpectedScriptVersion (
   currentVersion: string | null,
   expectedVersion: string | null,
 ): void {

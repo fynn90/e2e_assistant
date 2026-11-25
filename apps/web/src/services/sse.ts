@@ -1,7 +1,7 @@
 /**
  * 提供与业务事件类型解耦的 SSE frame 解析、错误信封保留和 fetch 消费能力。
  */
-import { apiErrorResponseSchema } from '@authine-e2e-agent/types'
+import { apiErrorResponseSchema } from '@fynn90-e2e_assistant/types'
 import { ApiClientError } from './http-client'
 
 export interface ISseFrame {
@@ -15,7 +15,7 @@ export interface ISseFrame {
  * @param response - SSE 或非 2xx JSON 错误响应。
  * @param onFrame - 每个完整 SSE frame 的同步处理函数。
  */
-export async function consumeSseResponse(
+export async function consumeSseResponse (
   response: Response,
   onFrame: (frame: ISseFrame) => void,
 ): Promise<void> {
@@ -114,7 +114,7 @@ export async function consumeSseResponse(
   }
 }
 
-async function createResponseError(
+async function createResponseError (
   response: Response,
 ): Promise<ApiClientError> {
   const contentType = (response.headers.get('content-type') ?? '').toLowerCase()
@@ -150,7 +150,7 @@ async function createResponseError(
   })
 }
 
-function parseFrame(rawFrame: string): ISseFrame | null {
+function parseFrame (rawFrame: string): ISseFrame | null {
   let event = 'message'
   const dataLines: string[] = []
 
@@ -169,7 +169,7 @@ function parseFrame(rawFrame: string): ISseFrame | null {
   return dataLines.length > 0 ? { event, data: dataLines.join('\n') } : null
 }
 
-function isAbortError(error: unknown): boolean {
+function isAbortError (error: unknown): boolean {
   return Boolean(
     error &&
     typeof error === 'object' &&

@@ -28,7 +28,7 @@
  * `propose_case_repair` → `agent-analysis`），模型无从传（R15）。
  */
 
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
 
 /** 触碰断言层的单条记录。 */
 export interface IAssertionLayerViolation {
@@ -49,7 +49,7 @@ export interface IAssertionLayerViolation {
  * @returns 触碰的断言层项；为空表示仅在允许范围内。
  * @throws 不抛出异常。
  */
-export function findAssertionLayerChanges(
+export function findAssertionLayerChanges (
   current: IE2ETestCase,
   target: IE2ETestCase,
 ): IAssertionLayerViolation[] {
@@ -79,9 +79,8 @@ export function findAssertionLayerChanges(
       .map((step) => `第 ${step.order} 步「${step.description}」`)
     violations.push({
       path: 'steps',
-      reason: `步骤数从 ${current.steps.length} 减为 ${target.steps.length}（减少 ${removedCount}）。${
-        removedTitles.length > 0 ? `被移除：${removedTitles.join('、')}。` : ''
-      }删除步骤是绕过失败的一种形式，不能做。`,
+      reason: `步骤数从 ${current.steps.length} 减为 ${target.steps.length}（减少 ${removedCount}）。${removedTitles.length > 0 ? `被移除：${removedTitles.join('、')}。` : ''
+        }删除步骤是绕过失败的一种形式，不能做。`,
     })
   }
 
@@ -121,7 +120,7 @@ export function findAssertionLayerChanges(
  * @returns 面向模型的引导文案。
  * @throws 不抛出异常。
  */
-export function describeAssertionLayerRefusal(
+export function describeAssertionLayerRefusal (
   violations: ReadonlyArray<IAssertionLayerViolation>,
 ): string {
   const details = violations.map((item) => `- ${item.reason}`).join('\n')

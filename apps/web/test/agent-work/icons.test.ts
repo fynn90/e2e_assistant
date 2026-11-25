@@ -12,7 +12,7 @@ import { describe, expect, it } from 'vitest'
 import type {
   TAgentToolAction,
   TAgentToolCategory,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   EMPTY_SESSION_ICON,
   EMPTY_TIMELINE_ICON,

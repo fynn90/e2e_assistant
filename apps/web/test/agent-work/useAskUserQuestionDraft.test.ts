@@ -13,10 +13,10 @@ import {
   otherTextError,
   useAskUserQuestionDraft,
 } from '../../src/modules/agent-work/composables/useAskUserQuestionDraft'
-import type { IAgentInteractionQuestion } from '@authine-e2e-agent/types'
+import type { IAgentInteractionQuestion } from '@fynn90-e2e_assistant/types'
 
 /** 造一份多问题形态的题目列表。 */
-function makeQuestions(): IAgentInteractionQuestion[] {
+function makeQuestions (): IAgentInteractionQuestion[] {
   return [
     {
       questionId: 'q1',
@@ -38,7 +38,7 @@ function makeQuestions(): IAgentInteractionQuestion[] {
 }
 
 /** 建一个绑定到指定题目的草稿。 */
-function makeDraft(questions: IAgentInteractionQuestion[]) {
+function makeDraft (questions: IAgentInteractionQuestion[]) {
   return useAskUserQuestionDraft(computed(() => questions))
 }
 

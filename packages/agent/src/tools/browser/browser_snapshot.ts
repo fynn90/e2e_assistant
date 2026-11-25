@@ -10,7 +10,7 @@ import type { AgentTool } from '@earendil-works/pi-agent-core'
 import type {
   ICandidateLocator,
   IPageSnapshot,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** browser_snapshot 工具接受的参数 Schema。 */
@@ -55,7 +55,7 @@ export interface BrowserSnapshotDetails {
  * @returns 每行一个候选定位器的文本；无候选时返回占位说明。
  * @throws 不抛出异常。
  */
-function formatCandidateLocators(locators: ICandidateLocator[]): string {
+function formatCandidateLocators (locators: ICandidateLocator[]): string {
   if (locators.length === 0) {
     return '（未采集到候选定位器，可使用 browser_query 按 selector 精确查询）'
   }
@@ -85,7 +85,7 @@ function formatCandidateLocators(locators: ICandidateLocator[]): string {
  * @returns 可直接配置到 AgentTool[] 的 browser_snapshot 工具。
  * @throws 不在创建阶段抛出异常；页面不可用、取消或浏览器断连时由宿主抛出结构化错误。
  */
-export function createBrowserSnapshotTool(
+export function createBrowserSnapshotTool (
   host: IBrowserSessionHost,
 ): AgentTool<typeof snapshotParameters, BrowserSnapshotDetails> {
   return {
@@ -105,7 +105,7 @@ export function createBrowserSnapshotTool(
      * @returns 包含可访问性树文本与候选定位器清单的工具结果。
      * @throws 由宿主抛出的结构化浏览器错误透传，由运行器记为工具失败。
      */
-    async execute(toolCallId, parameters, signal, onUpdate) {
+    async execute (toolCallId, parameters, signal, onUpdate) {
       void toolCallId
       void signal
       void onUpdate

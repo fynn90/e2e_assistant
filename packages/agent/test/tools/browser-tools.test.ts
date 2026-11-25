@@ -8,7 +8,7 @@
  */
 
 import { describe, expect, it, vi } from 'vitest'
-import type { IPageScreenshot } from '@authine-e2e-agent/types'
+import type { IPageScreenshot } from '@fynn90-e2e_assistant/types'
 import type { IBrowserSessionHost } from '../../src/tools/browser/Browser_session'
 import { createBrowserClickTool } from '../../src/tools/browser/browser_click'
 import { createBrowserSelectTool } from '../../src/tools/browser/browser_select'
@@ -22,7 +22,7 @@ import { createBrowserScreenshotTool } from '../../src/tools/browser/browser_scr
  * @returns 记录调用参数的宿主替身与其 spy。
  * @throws 不抛出异常。
  */
-function createHostStub() {
+function createHostStub () {
   const clickElement = vi.fn(async () => ({
     url: 'https://example.test/after',
     title: '页面',
@@ -86,7 +86,7 @@ interface ToolOutcome {
  * @returns 工具返回的 content 与 details。
  * @throws 工具抛出异常时向外抛出。
  */
-async function runTool(
+async function runTool (
   tool: {
     execute: (
       id: string,

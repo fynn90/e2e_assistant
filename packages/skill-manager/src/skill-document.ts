@@ -11,7 +11,7 @@ import type {
   ISaveSkillDocumentData,
   ISkillDocumentData,
   ISkillDocumentState,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { SKILL_DOCUMENT_FILE_NAME, SKILL_MANIFEST_FILE_NAME } from './constants'
 import { resolveSkill } from './detail'
 import { SkillManagerError } from './errors'
@@ -26,8 +26,8 @@ import { acquireSkillLock } from './transaction/skill-lock'
 
 /** 固定 SKILL.md 文件仓储契约。 */
 export interface ISkillDocumentRepository {
-  findBySkillId(skillId: string): Promise<ISkillDocumentData | null>
-  getState(
+  findBySkillId (skillId: string): Promise<ISkillDocumentData | null>
+  getState (
     skillId: string,
     currentSourceHash: string,
   ): Promise<ISkillDocumentState>
@@ -44,7 +44,7 @@ export interface ISkillDocumentRepository {
    * @param diagnostics - 校验诊断（edit 模式收集；generation 模式为空）。
    * @returns 写入后的文件版本、元数据与诊断。
    */
-  save(
+  save (
     skillId: string,
     content: string,
     sourceHash: string,
@@ -65,7 +65,7 @@ export class FileSkillDocumentRepository implements ISkillDocumentRepository {
   }
 
   /** 读取当前 Skill 的固定 SKILL.md 文件；文件不存在时返回 null。 */
-  async findBySkillId(skillId: string): Promise<ISkillDocumentData | null> {
+  async findBySkillId (skillId: string): Promise<ISkillDocumentData | null> {
     const resolvedSkill = await resolveSkill(this.#options, skillId)
     const snapshot = await readFixedUtf8File(
       resolvedSkill.skillRoot,
@@ -73,16 +73,16 @@ export class FileSkillDocumentRepository implements ISkillDocumentRepository {
     )
     return snapshot
       ? {
-          content: snapshot.content,
-          version: snapshot.version,
-          size: snapshot.size,
-          updatedAt: snapshot.updatedAt,
-        }
+        content: snapshot.content,
+        version: snapshot.version,
+        size: snapshot.size,
+        updatedAt: snapshot.updatedAt,
+      }
       : null
   }
 
   /** 根据文档文件和 manifest 来源哈希计算当前状态。 */
-  async getState(
+  async getState (
     skillId: string,
     currentSourceHash: string,
   ): Promise<ISkillDocumentState> {
@@ -134,7 +134,7 @@ export class FileSkillDocumentRepository implements ISkillDocumentRepository {
    * @returns 写入后的文件版本、元数据与诊断。
    * @throws SkillManagerError 当文件版本冲突、manifest 缺失或写入失败时抛出。
    */
-  async save(
+  async save (
     skillId: string,
     content: string,
     sourceHash: string,
@@ -163,9 +163,9 @@ export class FileSkillDocumentRepository implements ISkillDocumentRepository {
         // 返回版本与再次读取的版本永不相等（Windows 下每次保存都伪冲突）。
         documentSnapshot
           ? {
-              lineEnding: documentSnapshot.lineEnding,
-              hasUtf8Bom: documentSnapshot.hasUtf8Bom,
-            }
+            lineEnding: documentSnapshot.lineEnding,
+            hasUtf8Bom: documentSnapshot.hasUtf8Bom,
+          }
           : undefined,
       )
       const generatedAt = result.updatedAt

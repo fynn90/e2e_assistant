@@ -19,7 +19,7 @@ import {
   normalizeUserWorkspaceRelativePath,
   USER_WORKSPACE_DIRECTORY_NAME,
   type ISkillFileTreeNode,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { TreeOption } from 'naive-ui'
 import IconFont from '../../common/icon/IconFont.vue'
 import {

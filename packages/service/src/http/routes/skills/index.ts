@@ -3,11 +3,11 @@ import {
   createSkill,
   listSkills,
   toSkillSummary,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import type {
   ICreateSkillResponse,
   IListSkillsResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IE2ETestCaseApplicationServices } from '../../../application/e2e-test-case/application-types'
 import type { IExecutionEventBus } from '../../../application/test-execution/execution-event-bus'
 import type { ITestExecutionService } from '../../../application/test-execution/execution-service'
@@ -37,7 +37,7 @@ import { createSkillSchema } from './validation'
 
 const CREATE_SKILL_BODY_LIMIT = 64 * 1024
 
-export function createSkillRoutes(dependencies: {
+export function createSkillRoutes (dependencies: {
   chatRuntimeFactory: TSkillChatRuntimeFactory
   chatConcurrencyGate: ChatConcurrencyGate
   e2eTestCaseServices: IE2ETestCaseApplicationServices

@@ -30,14 +30,14 @@ import {
   SKILL_ENV_FILE_NAME,
   readSkillFile,
   resolveSkill,
-} from '@authine-e2e-agent/skill-manager'
-import type { ISkillStorageOptions } from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
 import {
   parseEnvFileContent,
   type IExecutionPrecheckIssue,
   type IReadinessViewPayload,
   type TAgentWorkbenchAction,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
 import {
   checkBaseUrlConfigured,
@@ -86,7 +86,7 @@ const CHECKLIST_CODES = [
  * @returns 修复动作；无对应动作时返回 undefined。
  * @throws 不抛出异常。
  */
-function fixActionOf(code: string): TAgentWorkbenchAction | undefined {
+function fixActionOf (code: string): TAgentWorkbenchAction | undefined {
   switch (code) {
     case 'EXECUTION_SPEC_MISSING':
       return 'generate-playwright-script'
@@ -109,7 +109,7 @@ export interface IReadinessService {
    * @returns 体检载荷；目标不存在或不可读时返回归一化失败。
    * @throws 不抛出异常——所有失败都归一为 `{ ok: false }`。
    */
-  check(
+  check (
     rootDir: string,
     skillId: string,
   ): Promise<
@@ -125,11 +125,11 @@ export interface IReadinessService {
  * @returns 体检服务实例。
  * @throws 不抛出异常。
  */
-export function createReadinessService(dependencies: {
+export function createReadinessService (dependencies: {
   taskRegistry: IGenerationTaskRegistry
 }): IReadinessService {
   return {
-    async check(rootDir, skillId) {
+    async check (rootDir, skillId) {
       const storage: ISkillStorageOptions = { rootDir }
 
       let skillRoot: string
@@ -208,7 +208,7 @@ export function createReadinessService(dependencies: {
  * @returns 体检载荷。
  * @throws 不抛出异常。
  */
-function buildReadinessPayload(
+function buildReadinessPayload (
   skillId: string,
   skillTitle: string,
   issues: ReadonlyArray<IExecutionPrecheckIssue>,
@@ -249,7 +249,7 @@ function buildReadinessPayload(
  * @returns env 文件状态与 key 集合（values 恒为空对象，值的路径不在这里）。
  * @throws 不抛出异常。
  */
-async function readEnvState(
+async function readEnvState (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<TExecutionEnvFileState> {

@@ -9,7 +9,7 @@
 import type {
   IE2ETestCase,
   IUpdateE2ETestCaseData,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 用例保存端口（`updateE2ETestCase` 的形状）。

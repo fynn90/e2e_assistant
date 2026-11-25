@@ -1,7 +1,7 @@
 <!-- 工作时间线容器：按事件类型分发渲染组件，内容增长时自动滚动到底。 -->
 <script setup lang="ts">
 import { nextTick, ref, watch } from 'vue'
-import type { TAgentInteractionAnswer } from '@authine-e2e-agent/types'
+import type { TAgentInteractionAnswer } from '@fynn90-e2e_assistant/types'
 import IconFont from '../../../common/icon/IconFont.vue'
 import { EMPTY_TIMELINE_ICON } from '../icons'
 import type {

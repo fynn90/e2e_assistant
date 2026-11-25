@@ -9,7 +9,7 @@ import MarkdownPreview from '../../../common/markdown/MarkdownPreview.vue'
 import {
   SKILL_ENV_FILE_NAME,
   type IEnvFileIssue,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import EnvFileBanner from '../components/EnvFileBanner.vue'
 import EnvFileIssues from '../components/EnvFileIssues.vue'
 import { parseSkillDevelopmentWorkspaceTarget } from '../../../router/skill-development-navigation'

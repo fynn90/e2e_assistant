@@ -22,7 +22,7 @@ import path from 'node:path'
 import {
   resolvePreviewImageMimeType,
   type ISkillFileImageContent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { MAX_SKILL_FILE_BYTES } from './constants'
 import { resolveSkill } from './detail'
 import { SkillManagerError } from './errors'
@@ -49,7 +49,7 @@ export const MAX_PREVIEW_IMAGE_BYTES = 3 * 1024 * 1024
  *   （FILE_NOT_SUPPORTED）、超出体积上限（FILE_TOO_LARGE）、
  *   文件不存在（FILE_NOT_FOUND）或读取失败（SKILL_CORRUPTED）时抛出。
  */
-export async function readSkillImageFile(
+export async function readSkillImageFile (
   options: ISkillStorageOptions,
   skillId: string,
   relativePath: string,

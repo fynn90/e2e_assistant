@@ -8,7 +8,7 @@
  *
  * 本模块只做**组织与呈现**，不改变任何校验判定：判断哪些问题算 error 仍是校验器的职责。
  */
-import type { IPlaywrightValidationIssue } from '@authine-e2e-agent/playwright-engine'
+import type { IPlaywrightValidationIssue } from '@fynn90-e2e_assistant/playwright-engine'
 
 /** 单条错误的呈现上限：超出后只给数量，避免提示卡片被刷屏。 */
 const MAX_LISTED_ERRORS = 3
@@ -140,7 +140,7 @@ export interface IValidationFailureDigest {
  * @returns 摘要文本与错误总数。
  * @throws 不抛出异常；空数组时返回兜底文案。
  */
-export function buildValidationFailureDigest(
+export function buildValidationFailureDigest (
   errors: readonly IPlaywrightValidationIssue[],
 ): IValidationFailureDigest {
   if (errors.length === 0) {
@@ -169,7 +169,7 @@ export function buildValidationFailureDigest(
  * @returns 单行标题 + 可选修复提示行的文本。
  * @throws 不抛出异常。
  */
-function formatIssue(issue: IPlaywrightValidationIssue, index: number): string {
+function formatIssue (issue: IPlaywrightValidationIssue, index: number): string {
   const location = formatLocation(issue)
   const guidance = ERROR_GUIDANCE[issue.code]
   const label = guidance?.label ?? '校验未通过'
@@ -187,7 +187,7 @@ function formatIssue(issue: IPlaywrightValidationIssue, index: number): string {
  * @returns 形如 `第 3 步（step_xxx）第 55 行` 的前缀，末尾带分隔符 `｜`。
  * @throws 不抛出异常。
  */
-function formatLocation(issue: IPlaywrightValidationIssue): string {
+function formatLocation (issue: IPlaywrightValidationIssue): string {
   const parts: string[] = []
   if (issue.stepId) {
     parts.push(`步骤 ${issue.stepId}`)

@@ -15,7 +15,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type {
   IAgentSessionSummary,
   TAgentClientEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { useAgentWorkStore } from '../../src/stores/agent-work'
 import SessionList from '../../src/modules/agent-work/components/SessionList.vue'
 import {
@@ -53,7 +53,7 @@ beforeEach(() => {
  * @returns 客户端工作事件。
  * @throws 不抛出异常。
  */
-function eventOf<T extends { type: string; phase: 'begin' }>(
+function eventOf<T extends { type: string; phase: 'begin' }> (
   seq: number,
   blockId: string,
   payload: T,
@@ -68,7 +68,7 @@ function eventOf<T extends { type: string; phase: 'begin' }>(
 }
 
 /** 一条 running 的 batch 任务事件。 */
-function runningBatchEvent(seq = 1): TAgentClientEvent {
+function runningBatchEvent (seq = 1): TAgentClientEvent {
   return eventOf(seq, 'task-1', {
     type: 'workbench_task',
     phase: 'begin',
@@ -193,7 +193,7 @@ describe('C7：detachView 与终态提示', () => {
  * @returns 会话概要。
  * @throws 不抛出异常。
  */
-function sessionOf(
+function sessionOf (
   overrides: Partial<IAgentSessionSummary> = {},
 ): IAgentSessionSummary {
   return {

@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { NButton, NModal } from 'naive-ui'
-import type { IAgentSessionSummary } from '@authine-e2e-agent/types'
+import type { IAgentSessionSummary } from '@fynn90-e2e_assistant/types'
 import IconFont from '../../../common/icon/IconFont.vue'
 import { EMPTY_SESSION_ICON } from '../icons'
 

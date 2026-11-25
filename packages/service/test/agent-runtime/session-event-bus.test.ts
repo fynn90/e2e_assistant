@@ -8,12 +8,12 @@ import { describe, expect, it } from 'vitest'
 import type {
   TAgentClientEvent,
   TAgentClientEventDraft,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { createSessionEventBus } from '../../src/agent-runtime/session-event-bus'
 import { createWorkBlockStore } from '../../src/agent-runtime/work-block-store'
 
 /** 构造一条最小内容块事件草稿。 */
-function contentDraft(
+function contentDraft (
   sessionId: string,
   blockId: string,
   text: string,

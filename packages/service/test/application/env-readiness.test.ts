@@ -5,14 +5,14 @@ import { describe, expect, it } from 'vitest'
 import {
   createDefaultE2ETestCase,
   type IE2ETestCase,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   validateEnvReferencesForGeneration,
   type TEnvFileState,
 } from '../../src/application/e2e-test-case/env-readiness'
 
 /** 构造一个引用了指定 env key 的用例。 */
-function draftWithReference(reference: string): IE2ETestCase {
+function draftWithReference (reference: string): IE2ETestCase {
   return {
     ...createDefaultE2ETestCase({
       skillId: 'abc123def',

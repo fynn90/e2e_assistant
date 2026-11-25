@@ -19,7 +19,7 @@ import type {
   TAgentClientEventPayload,
   TAgentTodoStatus,
   TAgentTurnOutcome,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type {
   IEventAdapter,
   IHarnessRunContext,
@@ -97,7 +97,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param event - pi-agent-core 生命周期事件。
    * @returns 事件草稿、草稿数组，或 null（该事件无可展示内容）。
    */
-  translate(event: AgentEvent): TAgentClientEventDraft[] | null {
+  translate (event: AgentEvent): TAgentClientEventDraft[] | null {
     try {
       return this.doTranslate(event)
     } catch {
@@ -112,7 +112,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param context - 本次运行的上下文元信息。
    * @returns 轮次开始与状态事件草稿。
    */
-  onRunStart(context: IHarnessRunContext): TAgentClientEventDraft[] {
+  onRunStart (context: IHarnessRunContext): TAgentClientEventDraft[] {
     this.state.beginRun(context.runId)
     return [
       this.draft(this.state.turnBlockId, {
@@ -133,7 +133,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param run - 运行结束摘要（runId、消息与错误信息）。
    * @returns 收尾事件草稿数组。
    */
-  onRunEnd(run: IRunEndInfo): TAgentClientEventDraft[] {
+  onRunEnd (run: IRunEndInfo): TAgentClientEventDraft[] {
     const events: TAgentClientEventDraft[] = []
     const now = Date.now()
 
@@ -161,18 +161,18 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
       events.push(
         call.isCommand
           ? this.draft(call.blockId, {
-              type: 'command',
-              phase: 'end',
-              exitCode: 1,
-              durationMs: now - call.startedAt,
-            })
+            type: 'command',
+            phase: 'end',
+            exitCode: 1,
+            durationMs: now - call.startedAt,
+          })
           : this.draft(call.blockId, {
-              type: 'tool',
-              phase: 'end',
-              status: 'failed',
-              summary: '工具调用未正常结束',
-              durationMs: now - call.startedAt,
-            }),
+            type: 'tool',
+            phase: 'end',
+            status: 'failed',
+            summary: '工具调用未正常结束',
+            durationMs: now - call.startedAt,
+          }),
       )
       this.state.tools.delete(toolCallId)
     }
@@ -199,7 +199,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param event - pi-agent-core 生命周期事件。
    * @returns 事件草稿数组或 null。
    */
-  private doTranslate(event: AgentEvent): TAgentClientEventDraft[] | null {
+  private doTranslate (event: AgentEvent): TAgentClientEventDraft[] | null {
     switch (event.type) {
       case 'message_update':
         return this.translateMessageUpdate(event.message)
@@ -224,7 +224,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param message - 当前流式中的助手消息（内容为累计全量）。
    * @returns thinking / content / status 事件草稿。
    */
-  private translateMessageUpdate(
+  private translateMessageUpdate (
     message: AgentMessage,
   ): TAgentClientEventDraft[] | null {
     if (message.role !== 'assistant') return null
@@ -289,7 +289,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param message - 结束的助手消息。
    * @returns 块闭合事件草稿。
    */
-  private translateMessageEnd(
+  private translateMessageEnd (
     message: AgentMessage,
   ): TAgentClientEventDraft[] | null {
     if (message.role !== 'assistant') return null
@@ -322,7 +322,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param event - 工具执行开始事件。
    * @returns 块开始与状态事件草稿。
    */
-  private translateToolStart(
+  private translateToolStart (
     event: Extract<AgentEvent, { type: 'tool_execution_start' }>,
   ): TAgentClientEventDraft[] {
     // 待办清单（todo_write）翻译为 todo 块而非普通工具卡片：清单是「当前状态」，
@@ -406,7 +406,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param event - 工具执行增量事件。
    * @returns 块增量事件草稿；未登记或无可展示增量时为 null。
    */
-  private translateToolUpdate(
+  private translateToolUpdate (
     event: Extract<AgentEvent, { type: 'tool_execution_update' }>,
   ): TAgentClientEventDraft[] | null {
     const call = this.state.tools.get(event.toolCallId)
@@ -419,11 +419,11 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
     return [
       call.isCommand
         ? this.draft(call.blockId, {
-            type: 'command',
-            phase: 'append',
-            stream: 'stdout',
-            text,
-          })
+          type: 'command',
+          phase: 'append',
+          stream: 'stdout',
+          text,
+        })
         : this.draft(call.blockId, { type: 'tool', phase: 'append', text }),
     ]
   }
@@ -434,7 +434,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param event - 工具执行结束事件。
    * @returns 块结束、文件变更与状态事件草稿。
    */
-  private translateToolEnd(
+  private translateToolEnd (
     event: Extract<AgentEvent, { type: 'tool_execution_end' }>,
   ): TAgentClientEventDraft[] | null {
     const call = this.state.closeToolCall(event.toolCallId)
@@ -528,7 +528,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param args - 工具参数。
    * @returns 路径已存在返回 true；非文件类工具或检查失败返回 undefined/false。
    */
-  private checkPathExisted(
+  private checkPathExisted (
     toolName: string,
     args: unknown,
   ): boolean | undefined {
@@ -552,7 +552,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param path - 工具参数中的路径（绝对或相对）。
    * @returns 工作区相对路径；无法折算时原样返回。
    */
-  private toWorkspaceRelative(path: string): string {
+  private toWorkspaceRelative (path: string): string {
     if (!this.workspace || !isAbsolute(path)) return path
     const rel = relative(this.workspace, path)
     return rel.length > 0 && !rel.startsWith('..') ? rel : path
@@ -565,7 +565,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
    * @param payload - 事件载荷。
    * @returns 完整事件草稿。
    */
-  private draft(
+  private draft (
     blockId: string,
     payload: TAgentClientEventPayload,
   ): TAgentClientEventDraft {
@@ -584,7 +584,7 @@ export class ClientEventTranslator implements IEventAdapter<TAgentClientEventDra
  * @param message - 助手消息。
  * @returns thinking 与 text 两个全量字符串。
  */
-function splitAssistantContent(message: AgentMessage): {
+function splitAssistantContent (message: AgentMessage): {
   thinking: string
   text: string
 } {
@@ -615,7 +615,7 @@ function splitAssistantContent(message: AgentMessage): {
  * @param result - 工具结果（AgentToolResult 结构或任意值）。
  * @returns 可展示文本；无文本内容返回空串。
  */
-function extractResultText(result: unknown): string {
+function extractResultText (result: unknown): string {
   if (result === null || result === undefined) return ''
   const content = (result as { content?: unknown }).content
   if (Array.isArray(content)) {
@@ -648,7 +648,7 @@ function extractResultText(result: unknown): string {
  * @returns 规范化后的待办清单；结构不符时返回空数组。
  * @throws 不抛出异常。
  */
-function extractTodoItems(args: unknown): IAgentTodoItem[] {
+function extractTodoItems (args: unknown): IAgentTodoItem[] {
   const rawItems = (args as { items?: unknown })?.items
   if (!Array.isArray(rawItems)) return []
 
@@ -696,7 +696,7 @@ function extractTodoItems(args: unknown): IAgentTodoItem[] {
  * @returns 形如「任务清单 3/7」的文案；清单为空时返回通用文案。
  * @throws 不抛出异常。
  */
-function describeTodoProgress(items: IAgentTodoItem[]): string {
+function describeTodoProgress (items: IAgentTodoItem[]): string {
   if (items.length === 0) return '更新任务清单'
   const completed = items.filter((item) => item.status === 'completed').length
   return `任务清单 ${completed}/${items.length}`
@@ -709,7 +709,7 @@ function describeTodoProgress(items: IAgentTodoItem[]): string {
  * @returns 脱敏截断后的文本。
  * @throws 不抛出异常。
  */
-function toSafeText(value: string): string {
+function toSafeText (value: string): string {
   const preview = toSafePreview(value)
   return typeof preview.value === 'string' ? preview.value.trim() : ''
 }
@@ -725,7 +725,7 @@ function toSafeText(value: string): string {
  * @returns 图片引用；非截图工具、未归档或结构不符时返回 undefined。
  * @throws 不抛出异常。
  */
-function extractToolImageRef(result: unknown): IAgentToolImageRef | undefined {
+function extractToolImageRef (result: unknown): IAgentToolImageRef | undefined {
   const image = (result as { details?: { image?: unknown } })?.details?.image
   if (!image || typeof image !== 'object') return undefined
 
@@ -754,7 +754,7 @@ function extractToolImageRef(result: unknown): IAgentToolImageRef | undefined {
  * @param isError - 结果是否被标记为错误。
  * @returns 退出码；无法提取时按 isError 折算（错误 1 / 成功 0）。
  */
-function extractExitCode(result: unknown, isError: boolean): number {
+function extractExitCode (result: unknown, isError: boolean): number {
   const details = (result as { details?: unknown })?.details
   const exitCode = (details as { exitCode?: unknown })?.exitCode
   if (typeof exitCode === 'number') return exitCode
@@ -767,7 +767,7 @@ function extractExitCode(result: unknown, isError: boolean): number {
  * @param errorMessage - 运行结束的错误信息。
  * @returns 轮次结局：中止 / 失败 / 成功。
  */
-function outcomeOf(errorMessage?: string): TAgentTurnOutcome {
+function outcomeOf (errorMessage?: string): TAgentTurnOutcome {
   if (!errorMessage) return 'succeeded'
   return /abort/i.test(errorMessage) ? 'aborted' : 'failed'
 }
@@ -778,7 +778,7 @@ function outcomeOf(errorMessage?: string): TAgentTurnOutcome {
  * @param messages - 会话消息列表。
  * @returns 用量对象；无用量返回 undefined。
  */
-function extractUsage(
+function extractUsage (
   messages: AgentMessage[],
 ): { inputTokens?: number; outputTokens?: number } | undefined {
   for (let index = messages.length - 1; index >= 0; index -= 1) {
@@ -798,7 +798,7 @@ function extractUsage(
  * @param input - 运行输入（文本或消息数组；continue 续跑为 undefined）。
  * @returns 截断至 200 字符的预览文本；无输入返回 undefined。
  */
-function inputPreviewOf(
+function inputPreviewOf (
   input: IHarnessRunContext['input'],
 ): string | undefined {
   if (input === undefined) return undefined
@@ -818,6 +818,6 @@ function inputPreviewOf(
  * @param max - 最大字符数。
  * @returns 截断后的文本。
  */
-function truncate(text: string, max: number): string {
+function truncate (text: string, max: number): string {
   return text.length <= max ? text : text.slice(0, max)
 }

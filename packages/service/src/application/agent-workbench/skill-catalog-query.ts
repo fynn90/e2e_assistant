@@ -25,12 +25,12 @@ import {
   listTestReportRuns,
   readTestReportSummary,
   resolveSkill,
-} from '@authine-e2e-agent/skill-manager'
-import type { ISkillStorageOptions } from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
 import {
   collectEnvReferences,
   findMissingEnvReferences,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type {
   IE2ETestCase,
   IRunHistoryViewPayload,
@@ -65,7 +65,7 @@ export interface ISkillRowBase {
  * @returns 基础行；用例数据不可读时 tags/baseUrl 缺省（不阻断整行）。
  * @throws 不抛出异常。
  */
-export async function readSkillRowBase(
+export async function readSkillRowBase (
   skillRoot: string,
   skillId: string,
   title: string,
@@ -101,7 +101,7 @@ export async function readSkillRowBase(
  * @returns 文件存在返回 true；读取失败返回 false。
  * @throws 不抛出异常。
  */
-export async function hasScriptFile(skillRoot: string): Promise<boolean> {
+export async function hasScriptFile (skillRoot: string): Promise<boolean> {
   try {
     await readFile(join(skillRoot, PLAYWRIGHT_SCRIPT_FILE_NAME))
     return true
@@ -119,7 +119,7 @@ export async function hasScriptFile(skillRoot: string): Promise<boolean> {
  * @returns 最近执行的摘要信息；无报告或无摘要时返回 undefined。
  * @throws 不抛出异常。
  */
-export async function readLatestRun(
+export async function readLatestRun (
   skillRoot: string,
 ): Promise<IWorkbenchSkillRow['latestRun']> {
   const runs = await listTestReportRuns(skillRoot)
@@ -150,7 +150,7 @@ export async function readLatestRun(
  * @returns 历史载荷；无报告时 `neverExecuted` 为 true。
  * @throws 不抛出异常。
  */
-export async function readRunHistoryPayload(
+export async function readRunHistoryPayload (
   skillRoot: string,
   skillId: string,
   skillTitle: string,
@@ -218,7 +218,7 @@ export async function readRunHistoryPayload(
  * @returns 详情载荷。
  * @throws 不抛出异常。
  */
-export function buildSkillDetailPayload(input: {
+export function buildSkillDetailPayload (input: {
   skillId: string
   testCase: IE2ETestCase
   envKeys: ReadonlySet<string>
@@ -271,7 +271,7 @@ export function buildSkillDetailPayload(input: {
  * @returns 命中时返回 true。
  * @throws 不抛出异常。
  */
-export function matchesContentFilter(
+export function matchesContentFilter (
   row: ISkillRowBase,
   filter: { keyword?: string; tag?: string },
   testCase: IE2ETestCase | undefined,
@@ -309,7 +309,7 @@ export function matchesContentFilter(
  * @returns 命中时返回 true。
  * @throws 不抛出异常。
  */
-export function matchesStatusFilter(
+export function matchesStatusFilter (
   row: IWorkbenchSkillRow,
   status: TSkillListStatusFilterLike,
 ): boolean {
@@ -333,7 +333,7 @@ export function matchesStatusFilter(
  * @returns 用例数据；不可读时返回 undefined。
  * @throws 不抛出异常。
  */
-export async function readTestCaseData(
+export async function readTestCaseData (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<IE2ETestCase | undefined> {
@@ -358,7 +358,7 @@ export async function readTestCaseData(
  * @returns ISO 字符串；格式不符时返回 undefined。
  * @throws 不抛出异常。
  */
-export function runIdToIsoTime(runId: string): string | undefined {
+export function runIdToIsoTime (runId: string): string | undefined {
   const match = /^(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})(\d{2})$/.exec(runId)
   if (!match) return undefined
 
@@ -383,7 +383,7 @@ export function runIdToIsoTime(runId: string): string | undefined {
  * @returns 文件存在返回 true；读取失败返回 false。
  * @throws 不抛出异常。
  */
-export async function hasPlaywrightScript(
+export async function hasPlaywrightScript (
   storage: ISkillStorageOptions,
   skillId: string,
 ): Promise<boolean> {

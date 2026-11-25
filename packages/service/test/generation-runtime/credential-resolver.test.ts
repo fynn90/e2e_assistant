@@ -9,8 +9,8 @@ import { mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { createSkill } from '@authine-e2e-agent/skill-manager'
-import { SKILL_ENV_FILE_NAME } from '@authine-e2e-agent/skill-manager'
+import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
+import { SKILL_ENV_FILE_NAME } from '@fynn90-e2e_assistant/skill-manager'
 import { createSkillCredentialResolver } from '../../src/generation-runtime/credential-resolver'
 
 describe('createSkillCredentialResolver', () => {
@@ -40,7 +40,7 @@ describe('createSkillCredentialResolver', () => {
    * @returns 写入完成。
    * @throws 文件系统错误时抛出。
    */
-  async function writeEnv(content: string): Promise<void> {
+  async function writeEnv (content: string): Promise<void> {
     await writeFile(join(skillRoot, SKILL_ENV_FILE_NAME), content, 'utf8')
   }
 

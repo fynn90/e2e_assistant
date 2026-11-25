@@ -11,12 +11,12 @@
 
 import { accessSync, constants as fsConstants, statSync } from 'node:fs'
 import path from 'node:path'
-import { analyzeTestScript } from '@authine-e2e-agent/playwright-engine'
+import { analyzeTestScript } from '@fynn90-e2e_assistant/playwright-engine'
 import {
   TEST_REPORT_DIRECTORY_NAME,
   ensureTestReportDirectory,
-} from '@authine-e2e-agent/skill-manager'
-import type { IExecutionPrecheckIssue } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { IExecutionPrecheckIssue } from '@fynn90-e2e_assistant/types'
 
 /** env.json 在执行链路中的状态（与生成链路 env-readiness 同构，额外携带值备注入）。 */
 export type TExecutionEnvFileState =
@@ -33,7 +33,7 @@ export type TExecutionEnvFileState =
  * @returns 问题列表；空数组表示通过。
  * @throws 不抛出异常。
  */
-export function checkScriptHasTests(
+export function checkScriptHasTests (
   specContent: string,
 ): IExecutionPrecheckIssue[] {
   if (analyzeTestScript(specContent).hasTests) {
@@ -62,7 +62,7 @@ export function checkScriptHasTests(
  * @returns 问题列表；空数组表示通过。
  * @throws 不抛出异常。
  */
-export function checkEnvReferencesForExecution(
+export function checkEnvReferencesForExecution (
   specContent: string,
   envFile: TExecutionEnvFileState,
 ): IExecutionPrecheckIssue[] {
@@ -109,7 +109,7 @@ export function checkEnvReferencesForExecution(
  * @returns 问题列表；空数组表示通过。
  * @throws 不抛出异常。
  */
-export function checkBaseUrlConfigured(
+export function checkBaseUrlConfigured (
   baseUrl: string | undefined | null,
 ): IExecutionPrecheckIssue[] {
   if (typeof baseUrl === 'string' && baseUrl.trim().length > 0) {
@@ -132,7 +132,7 @@ export function checkBaseUrlConfigured(
  * @returns 问题列表；空数组表示通过。
  * @throws 不抛出异常。
  */
-export function checkExecutionMutex(
+export function checkExecutionMutex (
   runningSessionId: string | undefined,
 ): IExecutionPrecheckIssue[] {
   if (!runningSessionId) {
@@ -158,7 +158,7 @@ export function checkExecutionMutex(
  * @returns 问题列表；空数组表示通过。
  * @throws 不抛出异常——skill-manager 的阻断错误转换为一条例子。
  */
-export async function checkTestReportDirectoryWritable(
+export async function checkTestReportDirectoryWritable (
   skillRoot: string,
 ): Promise<IExecutionPrecheckIssue[]> {
   try {
@@ -194,7 +194,7 @@ export async function checkTestReportDirectoryWritable(
  * @returns 问题列表；空数组表示可写（或可建）。
  * @throws 不抛出异常。
  */
-export function describeReportDirectoryReadiness(
+export function describeReportDirectoryReadiness (
   skillRoot: string,
 ): IExecutionPrecheckIssue[] {
   const directory = path.join(skillRoot, TEST_REPORT_DIRECTORY_NAME)

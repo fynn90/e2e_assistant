@@ -13,7 +13,7 @@
 import type {
   TAgentClientEvent,
   TAgentClientEventDraft,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IWorkBlockStore } from './work-block-store'
 
 /** 每会话内存缓冲的最大事件条数。 */
@@ -28,15 +28,15 @@ export type TSessionEventListener = (event: TAgentClientEvent) => void
 /** 会话事件总线接口。 */
 export interface ISessionEventBus {
   /** 发布事件：分配 seq → 物化落盘 → 写缓冲 → 广播订阅者。 */
-  publish(draft: TAgentClientEventDraft): TAgentClientEvent
+  publish (draft: TAgentClientEventDraft): TAgentClientEvent
   /** 订阅会话：先补发 afterSeq 之后的缓冲事件，再实时推送；返回取消订阅函数。 */
-  subscribe(
+  subscribe (
     sessionId: string,
     afterSeq: number | undefined,
     listener: TSessionEventListener,
   ): TEventUnsubscribe
   /** 会话当前最大 seq（无事件时为 0）。 */
-  currentSeq(sessionId: string): number
+  currentSeq (sessionId: string): number
 }
 
 /** 单会话的总线状态。 */
@@ -56,7 +56,7 @@ interface ISessionChannel {
  * @param options.bufferCapacity - 每会话内存缓冲容量，缺省 1000 条。
  * @returns 事件总线实例。
  */
-export function createSessionEventBus(options: {
+export function createSessionEventBus (options: {
   blockStore: IWorkBlockStore
   bufferCapacity?: number
 }): ISessionEventBus {
@@ -64,7 +64,7 @@ export function createSessionEventBus(options: {
   const channels = new Map<string, ISessionChannel>()
 
   /** 获取或创建会话通道；lastSeq 以物化存储为基准恢复，保证重启后序号连续。 */
-  function channelOf(sessionId: string): ISessionChannel {
+  function channelOf (sessionId: string): ISessionChannel {
     let channel = channels.get(sessionId)
     if (!channel) {
       channel = {
@@ -78,7 +78,7 @@ export function createSessionEventBus(options: {
   }
 
   return {
-    publish(draft: TAgentClientEventDraft): TAgentClientEvent {
+    publish (draft: TAgentClientEventDraft): TAgentClientEvent {
       const channel = channelOf(draft.sessionId)
       channel.lastSeq += 1
       const event = { ...draft, seq: channel.lastSeq } as TAgentClientEvent
@@ -100,7 +100,7 @@ export function createSessionEventBus(options: {
       return event
     },
 
-    subscribe(
+    subscribe (
       sessionId: string,
       afterSeq: number | undefined,
       listener: TSessionEventListener,
@@ -120,7 +120,7 @@ export function createSessionEventBus(options: {
       }
     },
 
-    currentSeq(sessionId: string): number {
+    currentSeq (sessionId: string): number {
       return channelOf(sessionId).lastSeq
     },
   }

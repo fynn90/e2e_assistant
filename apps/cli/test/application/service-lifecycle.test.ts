@@ -11,7 +11,7 @@
  */
 import { describe, expect, it, vi } from 'vitest'
 import process from 'node:process'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@authine-e2e-agent/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
 import {
   startPlatformService,
   stopPlatformService,
@@ -50,7 +50,7 @@ const RECORD_WITH_TOKEN: TPlatformRuntimeInspection = {
 }
 
 /** 构造依赖替身；未显式指定的项都有安全的默认值。 */
-function createDependencies(
+function createDependencies (
   overrides: Partial<IServiceLifecycleDependencies> = {},
 ): IServiceLifecycleDependencies {
   return {
@@ -89,11 +89,11 @@ function createDependencies(
   }
 }
 
-function probeReturning(result: TLocalServiceProbeResult) {
+function probeReturning (result: TLocalServiceProbeResult) {
   return async () => result
 }
 
-function confirmedProbe(
+function confirmedProbe (
   pid: number = RECORDED_PID,
   version: number = LOCAL_SERVICE_PROTOCOL_VERSION,
 ) {

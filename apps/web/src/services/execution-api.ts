@@ -7,7 +7,7 @@
 import type {
   IExecutionSnapshot,
   IStartExecutionResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { requestJson } from './http-client'
 import { consumeSseResponse, type ISseFrame } from './sse'
 
@@ -15,7 +15,7 @@ import { consumeSseResponse, type ISseFrame } from './sse'
 export type TStartExecutionResult = IStartExecutionResponse
 
 /** 发起执行。就绪校验失败时抛出的 ApiClientError 携带 `issues`（全部问题）。 */
-export async function startExecution(
+export async function startExecution (
   skillId: string,
   signal?: AbortSignal,
 ): Promise<TStartExecutionResult> {
@@ -31,7 +31,7 @@ export async function startExecution(
 }
 
 /** 查询指定执行的快照（X16 恢复）。 */
-export async function fetchExecutionSnapshot(
+export async function fetchExecutionSnapshot (
   skillId: string,
   executionId: string,
   signal?: AbortSignal,
@@ -47,7 +47,7 @@ export async function fetchExecutionSnapshot(
 }
 
 /** 查询最近一次执行的快照；无记录时返回 null（404 降级，R7）。 */
-export async function fetchLatestExecutionSnapshot(
+export async function fetchLatestExecutionSnapshot (
   skillId: string,
   signal?: AbortSignal,
 ): Promise<IExecutionSnapshot | null> {
@@ -73,7 +73,7 @@ export async function fetchLatestExecutionSnapshot(
 }
 
 /** 停止执行（X10）。 */
-export async function stopExecution(
+export async function stopExecution (
   skillId: string,
   executionId: string,
 ): Promise<void> {
@@ -84,7 +84,7 @@ export async function stopExecution(
 }
 
 /** 删除一次执行的测试报告（`test_report/<runId>/` 整目录）。 */
-export async function deleteTestReport(
+export async function deleteTestReport (
   skillId: string,
   runId: string,
 ): Promise<void> {
@@ -104,7 +104,7 @@ export async function deleteTestReport(
  * @returns 连接结束（服务端关闭或出错）后兑现。
  * @throws ApiClientError（aborted 除外）时由调用方决定是否重连。
  */
-export async function streamExecutionEvents(options: {
+export async function streamExecutionEvents (options: {
   skillId: string
   executionId: string
   afterSeq?: number

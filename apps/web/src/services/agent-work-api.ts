@@ -9,7 +9,7 @@ import type {
   IAgentWorkBlock,
   TAgentClientEvent,
   TAgentInteractionAnswer,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { requestJson, ApiClientError } from './http-client'
 import { consumeSseResponse } from './sse'
 
@@ -43,7 +43,7 @@ interface IAbortResponse {
  * @returns 会话概要数组（按最近活跃倒序）。
  * @throws {ApiClientError} 网络 / 协议 / 业务错误。
  */
-export async function listAgentSessions(): Promise<IAgentSessionSummary[]> {
+export async function listAgentSessions (): Promise<IAgentSessionSummary[]> {
   const response = await requestJson<IListSessionsResponse>({
     path: '/api/agent/sessions',
   })
@@ -57,7 +57,7 @@ export async function listAgentSessions(): Promise<IAgentSessionSummary[]> {
  * @returns 服务端分配的会话 ID。
  * @throws {ApiClientError} 网络 / 协议 / 业务错误。
  */
-export async function createAgentSession(message: string): Promise<string> {
+export async function createAgentSession (message: string): Promise<string> {
   const response = await requestJson<ISessionIdResponse>({
     path: '/api/agent/sessions',
     method: 'POST',
@@ -73,7 +73,7 @@ export async function createAgentSession(message: string): Promise<string> {
  * @param message - 用户消息。
  * @throws {ApiClientError} 网络 / 协议 / 业务错误。
  */
-export async function sendAgentMessage(
+export async function sendAgentMessage (
   sessionId: string,
   message: string,
 ): Promise<void> {
@@ -91,7 +91,7 @@ export async function sendAgentMessage(
  * @returns 按 seq 升序的工作块与服务端当前最大事件序号。
  * @throws {ApiClientError} 网络 / 协议 / 业务错误。
  */
-export async function getAgentWorkBlocks(
+export async function getAgentWorkBlocks (
   sessionId: string,
 ): Promise<{ blocks: IAgentWorkBlock[]; currentSeq: number }> {
   const response = await requestJson<IBlocksResponse>({
@@ -107,7 +107,7 @@ export async function getAgentWorkBlocks(
  * @returns 是否成功命中运行中的会话。
  * @throws {ApiClientError} 网络 / 协议 / 业务错误。
  */
-export async function abortAgentSession(sessionId: string): Promise<boolean> {
+export async function abortAgentSession (sessionId: string): Promise<boolean> {
   const response = await requestJson<IAbortResponse>({
     path: `/api/agent/sessions/${encodeURIComponent(sessionId)}/abort`,
     method: 'POST',
@@ -124,7 +124,7 @@ export async function abortAgentSession(sessionId: string): Promise<boolean> {
  *   input 文本、取消哨兵）或多问题形态的 questionId 回答表）。
  * @throws {ApiClientError} 交互不存在或已回答（404）/ 网络 / 协议 / 业务错误。
  */
-export async function answerAgentInteraction(
+export async function answerAgentInteraction (
   sessionId: string,
   interactionId: string,
   answer: TAgentInteractionAnswer,
@@ -154,7 +154,7 @@ interface IActionResponse {
  * @returns 服务端处理结果。
  * @throws {ApiClientError} 动作不存在 / 网络 / 协议错误。
  */
-export async function runAgentWorkbenchAction(
+export async function runAgentWorkbenchAction (
   sessionId: string,
   actionId: string,
   options: { confirmOverwrite?: boolean } = {},
@@ -213,7 +213,7 @@ interface ISuggestionsResponse {
  * @returns 应用结果：`ok: false` 时 `state` 区分冲突（需重新提案）与失败。
  * @throws {ApiClientError} 提案不存在 / 网络 / 协议错误。
  */
-export async function applyAgentProposal(
+export async function applyAgentProposal (
   sessionId: string,
   proposalId: string,
   options: { envValues?: Record<string, string> } = {},
@@ -240,7 +240,7 @@ export async function applyAgentProposal(
  * @param proposalId - 提案 ID。
  * @throws {ApiClientError} 提案不存在 / 网络 / 协议错误。
  */
-export async function cancelAgentProposal(
+export async function cancelAgentProposal (
   sessionId: string,
   proposalId: string,
 ): Promise<void> {
@@ -258,7 +258,7 @@ export async function cancelAgentProposal(
  * @returns `ok: false` 时 `message` 是拒绝原因（如批次已开始或已结束）。
  * @throws {ApiClientError} 批次不存在 / 网络 / 协议错误。
  */
-export async function confirmAgentBatch(
+export async function confirmAgentBatch (
   sessionId: string,
   batchId: string,
 ): Promise<{ ok: boolean; message?: string }> {
@@ -276,7 +276,7 @@ export async function confirmAgentBatch(
  * @param batchId - 批次 ID。
  * @throws {ApiClientError} 批次不存在 / 网络 / 协议错误。
  */
-export async function cancelAgentBatch(
+export async function cancelAgentBatch (
   sessionId: string,
   batchId: string,
 ): Promise<void> {
@@ -293,7 +293,7 @@ export async function cancelAgentBatch(
  * @param batchId - 批次 ID。
  * @throws {ApiClientError} 批次不存在 / 网络 / 协议错误。
  */
-export async function stopAgentBatch(
+export async function stopAgentBatch (
   sessionId: string,
   batchId: string,
 ): Promise<void> {
@@ -310,7 +310,7 @@ export async function stopAgentBatch(
  * @param title - 新标题（服务端只 trim，长度与字符合法性由调用方把关）。
  * @throws {ApiClientError} 会话不存在（404）/ 网络 / 协议错误。
  */
-export async function renameAgentSession(
+export async function renameAgentSession (
   sessionId: string,
   title: string,
 ): Promise<void> {
@@ -331,7 +331,7 @@ export async function renameAgentSession(
  * @returns 被删除的会话 ID 与删除前是否有运行中任务。
  * @throws {ApiClientError} 会话不存在（404）/ 网络 / 协议错误。
  */
-export async function deleteAgentSession(sessionId: string): Promise<{
+export async function deleteAgentSession (sessionId: string): Promise<{
   sessionId: string
   hadRunningTask: boolean
 }> {
@@ -348,7 +348,7 @@ export async function deleteAgentSession(sessionId: string): Promise<{
  * @returns 建议问题（3–4 条）；服务端未配置或工作区不可读时为空数组。
  * @throws {ApiClientError} 网络 / 协议错误。
  */
-export async function getAgentSuggestions(): Promise<string[]> {
+export async function getAgentSuggestions (): Promise<string[]> {
   const response = await requestJson<ISuggestionsResponse>({
     path: '/api/agent/suggestions',
   })
@@ -358,13 +358,13 @@ export async function getAgentSuggestions(): Promise<string[]> {
 /** 事件流订阅句柄。 */
 export interface IAgentWorkStreamSubscription {
   /** 断开事件流并停止自动重连。 */
-  close(): void
+  close (): void
 }
 
 /** 事件流订阅回调。 */
 export interface IAgentWorkStreamHandlers {
   /** 收到一条工作事件。 */
-  onEvent(event: TAgentClientEvent): void
+  onEvent (event: TAgentClientEvent): void
   /** 连接状态变化。 */
   onConnectionChange?(
     state: 'connecting' | 'live' | 'reconnecting' | 'offline',
@@ -385,7 +385,7 @@ const RECONNECT_DELAYS_MS = [1000, 2000, 4000]
  * @param handlers - 事件与连接状态回调。
  * @returns 订阅句柄；close() 断开并停止重连。
  */
-export function subscribeAgentWorkStream(
+export function subscribeAgentWorkStream (
   sessionId: string,
   getAfterSeq: () => number | undefined,
   handlers: IAgentWorkStreamHandlers,
@@ -398,7 +398,7 @@ export function subscribeAgentWorkStream(
   const notifyConnection =
     handlers.onConnectionChange ?? ((): void => undefined)
 
-  async function connect(): Promise<void> {
+  async function connect (): Promise<void> {
     if (closed) return
     notifyConnection(reconnectAttempts === 0 ? 'connecting' : 'reconnecting')
     abortController = new AbortController()
@@ -442,11 +442,11 @@ export function subscribeAgentWorkStream(
     scheduleReconnect()
   }
 
-  function scheduleReconnect(): void {
+  function scheduleReconnect (): void {
     if (closed) return
     const delay =
       RECONNECT_DELAYS_MS[
-        Math.min(reconnectAttempts, RECONNECT_DELAYS_MS.length - 1)
+      Math.min(reconnectAttempts, RECONNECT_DELAYS_MS.length - 1)
       ]
     reconnectAttempts += 1
     notifyConnection('reconnecting')
@@ -456,7 +456,7 @@ export function subscribeAgentWorkStream(
   void connect()
 
   return {
-    close(): void {
+    close (): void {
       closed = true
       if (reconnectTimer) clearTimeout(reconnectTimer)
       abortController?.abort()
@@ -471,7 +471,7 @@ export function subscribeAgentWorkStream(
  * @param data - SSE frame 的 data 文本。
  * @returns 工作事件；JSON 非法或缺少判别字段时为 undefined。
  */
-function parseWorkEvent(data: string): TAgentClientEvent | undefined {
+function parseWorkEvent (data: string): TAgentClientEvent | undefined {
   try {
     const parsed = JSON.parse(data) as { type?: unknown; seq?: unknown }
     if (typeof parsed.type === 'string' && typeof parsed.seq === 'number') {

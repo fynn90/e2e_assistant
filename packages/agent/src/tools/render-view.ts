@@ -26,7 +26,7 @@ import type { AgentTool } from '@earendil-works/pi-agent-core'
 import type {
   TAgentWorkbenchViewKind,
   TWorkbenchRenderParams,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 视图渲染宿主端口：由 CLI 组合根注入。
@@ -45,7 +45,7 @@ export interface IViewHost {
    * @returns 发布结果；目标不存在或参数不合法时为 ok:false 并说明。
    * @throws 不抛出异常——失败以 ok:false 归一，由工具转述给模型。
    */
-  renderView(
+  renderView (
     params: TWorkbenchRenderParams,
   ): Promise<{ ok: true; message: string } | { ok: false; message: string }>
 }
@@ -110,7 +110,7 @@ export interface RenderViewDetails {
  * @returns 可直接配置到 AgentTool[] 的 render_view 工具。
  * @throws 不在创建阶段抛出异常；宿主的错误由工具作为失败结果返回给模型。
  */
-export function createRenderViewTool(
+export function createRenderViewTool (
   host: IViewHost,
 ): AgentTool<typeof renderViewParameters, RenderViewDetails> {
   return {
@@ -130,7 +130,7 @@ export function createRenderViewTool(
      * @returns 包含渲染结果的工具结果（模型可见文本 + 结构化详情）。
      * @throws 宿主抛出的错误透传，由运行器记为工具失败。
      */
-    async execute(_toolCallId, parameters, _signal, _onUpdate) {
+    async execute (_toolCallId, parameters, _signal, _onUpdate) {
       void _toolCallId
       void _signal
       void _onUpdate
@@ -208,7 +208,7 @@ export function createRenderViewTool(
  * @returns 可交给宿主的渲染参数。
  * @throws 不抛出异常。
  */
-function buildRenderParams(
+function buildRenderParams (
   parameters: {
     viewKind: TAgentWorkbenchViewKind
     status?: string
@@ -242,7 +242,7 @@ function buildRenderParams(
  * @returns 是四种合法筛选状态之一时返回 true。
  * @throws 不抛出异常。
  */
-function isListStatus(
+function isListStatus (
   status: string | undefined,
 ): status is
   'missing-document' | 'missing-script' | 'never-executed' | 'last-failed' {

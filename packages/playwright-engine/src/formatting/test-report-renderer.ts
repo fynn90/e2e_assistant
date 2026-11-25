@@ -11,7 +11,7 @@
  */
 
 import { readFile, stat } from 'node:fs/promises'
-import type { IExecutionTestCaseResult } from '@authine-e2e-agent/types'
+import type { IExecutionTestCaseResult } from '@fynn90-e2e_assistant/types'
 import type {
   IPlaywrightJsonReport,
   IPlaywrightJsonStep,
@@ -71,7 +71,7 @@ export interface ITestReportData {
  * @returns 测试条目与统计（不含截图内容；截图由渲染时按需读取）。
  * @throws 不抛出异常。
  */
-export function parseTestReportData(
+export function parseTestReportData (
   report: IPlaywrightJsonReport,
 ): ITestReportData {
   const entries: ITestReportEntry[] = []
@@ -138,7 +138,7 @@ export function parseTestReportData(
  * @returns 完整 HTML 文本（UTF-8），由调用方写盘。
  * @throws 不抛出异常；截图读取失败按占位降级。
  */
-export async function renderTestReportHtml(
+export async function renderTestReportHtml (
   report: IPlaywrightJsonReport,
   metadata: ITestReportMetadata,
   options: { maxInlineAttachmentBytes?: number } = {},
@@ -268,11 +268,11 @@ export async function renderTestReportHtml(
     </div>
     <div class="stats">
       ${summaryCards
-        .map(
-          (card) =>
-            `<div class="stat ${card.tone}"><div class="n">${card.value}</div><div class="t">${card.label}</div></div>`,
-        )
-        .join('\n      ')}
+      .map(
+        (card) =>
+          `<div class="stat ${card.tone}"><div class="n">${card.value}</div><div class="t">${card.label}</div></div>`,
+      )
+      .join('\n      ')}
     </div>
   </section>
 
@@ -287,7 +287,7 @@ export async function renderTestReportHtml(
 }
 
 /** 渲染单条测试区块：标题行 + 常显内容（步骤列表；失败时另有错误与截图）。 */
-function renderEntry(
+function renderEntry (
   entry: ITestReportEntry,
   screenshots: Array<{ name: string; base64: string | null }>,
   stepTitle: (stepId: string) => string,
@@ -305,11 +305,11 @@ function renderEntry(
     entry.steps.length === 0
       ? ''
       : `<ul class="steps">${entry.steps
-          .map(
-            (step) =>
-              `<li style="padding-left:${step.depth * 18}px"><span class="${step.ok ? 'ok' : 'bad'}">${step.ok ? '✓' : '✗'}</span> ${escapeHtml(stepTitle(step.stepId))}<span class="sid">${escapeHtml(step.stepId)}</span></li>`,
-          )
-          .join('')}</ul>`
+        .map(
+          (step) =>
+            `<li style="padding-left:${step.depth * 18}px"><span class="${step.ok ? 'ok' : 'bad'}">${step.ok ? '✓' : '✗'}</span> ${escapeHtml(stepTitle(step.stepId))}<span class="sid">${escapeHtml(step.stepId)}</span></li>`,
+        )
+        .join('')}</ul>`
 
   const errorHtml = result.errorMessage
     ? `<div class="err">${escapeHtml(result.errorMessage)}</div>`
@@ -356,7 +356,7 @@ interface IShotCardInput {
  * @returns 卡片 HTML；图片超出上限或读取失败时渲染占位文案。
  * @throws 不抛出异常。
  */
-function renderShotCard(input: IShotCardInput): string {
+function renderShotCard (input: IShotCardInput): string {
   const name = escapeHtml(input.name)
   const alt = escapeHtml(`${input.label}：${input.name}`)
 
@@ -381,7 +381,7 @@ function renderShotCard(input: IShotCardInput): string {
  * @returns 截图区的 HTML；无截图时为空串。
  * @throws 不抛出异常。
  */
-function renderScreenshots(
+function renderScreenshots (
   screenshots: Array<{ name: string; base64: string | null }>,
 ): string {
   if (screenshots.length === 0) {
@@ -455,7 +455,7 @@ function renderScreenshots(
 // ---------------------------------------------------------------------------
 
 /** 归一 Playwright 状态为报告状态（未知状态按失败处理）。 */
-function normalizeStatus(status: unknown): IExecutionTestCaseResult['status'] {
+function normalizeStatus (status: unknown): IExecutionTestCaseResult['status'] {
   switch (status) {
     case 'passed':
     case 'expected':
@@ -472,7 +472,7 @@ function normalizeStatus(status: unknown): IExecutionTestCaseResult['status'] {
 }
 
 /** 在步骤树中按文档顺序找第一个失败步骤的 stepId（即 test.step 标题）。 */
-function findFailedStepId(
+function findFailedStepId (
   steps: IPlaywrightJsonStep[] | undefined,
 ): string | undefined {
   for (const step of steps ?? []) {
@@ -490,7 +490,7 @@ function findFailedStepId(
  * 无法按 test.step 类别过滤；改为排除钩子（hook）后全部收集——
  * JSON 步骤树本身只包含业务步骤与断言，不含 pw:api 内部调用。
  */
-function collectSteps(
+function collectSteps (
   steps: IPlaywrightJsonStep[] | undefined,
   depth = 0,
 ): ITestReportEntry['steps'] {
@@ -528,7 +528,7 @@ export type TVisualAttachmentKind =
  * @returns 附件语义分类；非视觉附件返回 'screenshot'。
  * @throws 不抛出异常。
  */
-export function classifyVisualAttachment(name: string): TVisualAttachmentKind {
+export function classifyVisualAttachment (name: string): TVisualAttachmentKind {
   const lower = name.toLowerCase()
   if (lower.endsWith('-diff.png')) return 'diff'
   if (lower.endsWith('-expected.png')) return 'expected'
@@ -537,14 +537,14 @@ export function classifyVisualAttachment(name: string): TVisualAttachmentKind {
 }
 
 /** 收集 PNG 失败截图的名称与来源路径。 */
-function collectScreenshotNames(
+function collectScreenshotNames (
   attachments:
     | Array<{
-        name?: string
-        contentType?: string
-        path?: string
-        body?: string
-      }>
+      name?: string
+      contentType?: string
+      path?: string
+      body?: string
+    }>
     | undefined,
 ): Array<{ name: string; sourcePath?: string }> {
   return (attachments ?? [])
@@ -563,7 +563,7 @@ function collectScreenshotNames(
  * @returns base64 文本；无法内嵌时为 null。
  * @throws 不抛出异常。
  */
-async function readScreenshotBase64(
+async function readScreenshotBase64 (
   sourcePath: string | undefined,
   maxBytes: number,
 ): Promise<string | null> {
@@ -580,7 +580,7 @@ async function readScreenshotBase64(
 }
 
 /** 毫秒时长的可读格式。 */
-function formatDuration(durationMs: number): string {
+function formatDuration (durationMs: number): string {
   if (!Number.isFinite(durationMs) || durationMs < 0) return '-'
   if (durationMs < 1000) return `${Math.round(durationMs)}ms`
   const seconds = durationMs / 1000
@@ -590,7 +590,7 @@ function formatDuration(durationMs: number): string {
 }
 
 /** HTML 实体转义（报告内容零脚本的关键防线）。 */
-function escapeHtml(value: string): string {
+function escapeHtml (value: string): string {
   return value
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')

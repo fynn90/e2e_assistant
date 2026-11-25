@@ -6,14 +6,14 @@
  * 必须显式归类，逐字段的用例能立刻暴露「新字段没被判」。
  */
 import { describe, expect, it } from 'vitest'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
 import {
   describeAssertionLayerRefusal,
   findAssertionLayerChanges,
 } from '../../src/application/agent-workbench/assertion-layer'
 
 /** 构造一个基准用例（三个启用步骤）。 */
-function createCase(overrides: Partial<IE2ETestCase> = {}): IE2ETestCase {
+function createCase (overrides: Partial<IE2ETestCase> = {}): IE2ETestCase {
   return {
     schemaVersion: '1.0',
     id: 'tc_abc123456',

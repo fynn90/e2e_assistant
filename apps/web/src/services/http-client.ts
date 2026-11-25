@@ -1,7 +1,7 @@
 /**
  * 提供 Web 工作台访问本地 CLI HTTP API 的统一请求、响应校验与错误分类能力。
  */
-import type { IApiErrorResponse, TApiErrorCode } from '@authine-e2e-agent/types'
+import type { IApiErrorResponse, TApiErrorCode } from '@fynn90-e2e_assistant/types'
 
 export class ApiClientError extends Error {
   readonly status: number
@@ -43,7 +43,7 @@ interface IRequestJsonOptions {
  * @returns 解析后的 API 响应数据。
  * @throws 当请求失败、响应协议错误或 API 返回业务错误时抛出 ApiClientError。
  */
-export async function requestJson<TResponse>(
+export async function requestJson<TResponse> (
   options: IRequestJsonOptions,
 ): Promise<TResponse> {
   let response: Response
@@ -121,7 +121,7 @@ export async function requestJson<TResponse>(
  * @returns 异常名称为 AbortError 时返回 true，否则返回 false。
  * @throws 不抛出异常。
  */
-function isAbortError(error: unknown): boolean {
+function isAbortError (error: unknown): boolean {
   return Boolean(
     error &&
     typeof error === 'object' &&
@@ -135,7 +135,7 @@ function isAbortError(error: unknown): boolean {
  * @returns CLI 代理端口文本。
  * @throws 不抛出异常。
  */
-function getConfiguredCliPort(): string {
+function getConfiguredCliPort (): string {
   return typeof __AUTHINE_CLI_PORT__ === 'string'
     ? __AUTHINE_CLI_PORT__
     : '5826'

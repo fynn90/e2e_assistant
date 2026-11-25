@@ -34,7 +34,7 @@ import {
 } from '../tools'
 import { createSessionAskTools } from '../tools/ask-user-question'
 import { browserSessionRegistry } from '../tools/browser/browser-session-registry'
-import { SKILL_ENV_FILE_NAME } from '@authine-e2e-agent/types'
+import { SKILL_ENV_FILE_NAME } from '@fynn90-e2e_assistant/types'
 import type { IAgentBaseConfig } from './types'
 
 // 加载系统技能并格式化为模型可见的技能区块，避免在每次创建配置时重复处理静态资源。
@@ -89,7 +89,7 @@ const systemPrompt = systemPromptSections.join(PROMPT_SECTION_SEPARATOR)
  * @throws {Error} 当 workspaceCwd 为空，或工具在后续执行时发生文件系统、命令执行、
  * 参数校验、资源解析、资源不存在或取消异常时，会抛出相应异常。
  */
-export function createAuthineE2EAgentConfig(
+export function createAuthineE2EAgentConfig (
   workspaceCwd: string,
   dateTime: string,
   sessionId?: string,
@@ -131,7 +131,7 @@ export function createAuthineE2EAgentConfig(
  * @returns 已授权会话对应的浏览器工具；未授权时返回空数组。
  * @throws 不抛出异常。
  */
-function createSessionBrowserTools(
+function createSessionBrowserTools (
   sessionId: string | undefined,
 ): AgentTool<any>[] {
   if (!sessionId) {
@@ -141,22 +141,22 @@ function createSessionBrowserTools(
   const host = browserSessionRegistry.get(sessionId)
   return host
     ? [
-        createBrowserNavigateTool(host),
-        createBrowserListFramesTool(host),
-        createBrowserSnapshotTool(host),
-        createBrowserQueryTool(host),
-        // v12-pre：交互与视觉核对能力。点击/选择用于触发「交互后才出现」的元素，
-        // waitFor 等待其出现，screenshot 用于确认视觉呈现（模型需具备 vision 能力）。
-        createBrowserClickTool(host),
-        createBrowserSelectTool(host),
-        // v20：填入能力。与 select 相邻，因为两者是同一层「先输入再提交」的交互；
-        // 敏感数据以 ${ENV:KEY} 引用填入，真值由宿主在填入前解析（凭据代理）。
-        createBrowserFillTool(host),
-        createBrowserWaitForTool(host),
-        createBrowserScreenshotTool(host),
-        // v12：视觉基线捕获。产出「新旧 DOM 对比」的基准图片（落盘到 baselines/），
-        // 供执行期脚本用 toMatchSnapshot 比对。这是浏览器工具唯一的枚举点。
-        createBrowserCaptureBaselineTool(host),
-      ]
+      createBrowserNavigateTool(host),
+      createBrowserListFramesTool(host),
+      createBrowserSnapshotTool(host),
+      createBrowserQueryTool(host),
+      // v12-pre：交互与视觉核对能力。点击/选择用于触发「交互后才出现」的元素，
+      // waitFor 等待其出现，screenshot 用于确认视觉呈现（模型需具备 vision 能力）。
+      createBrowserClickTool(host),
+      createBrowserSelectTool(host),
+      // v20：填入能力。与 select 相邻，因为两者是同一层「先输入再提交」的交互；
+      // 敏感数据以 ${ENV:KEY} 引用填入，真值由宿主在填入前解析（凭据代理）。
+      createBrowserFillTool(host),
+      createBrowserWaitForTool(host),
+      createBrowserScreenshotTool(host),
+      // v12：视觉基线捕获。产出「新旧 DOM 对比」的基准图片（落盘到 baselines/），
+      // 供执行期脚本用 toMatchSnapshot 比对。这是浏览器工具唯一的枚举点。
+      createBrowserCaptureBaselineTool(host),
+    ]
     : []
 }

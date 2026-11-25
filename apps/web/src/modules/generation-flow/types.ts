@@ -7,7 +7,7 @@
 import type {
   IFileSaveDiagnostic,
   IPlaywrightStepCoverage,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IUseAgentWorkTimeline } from '../agent-work/timeline'
 import type { TAutoSaveState } from '../../common/autosave/types'
 
@@ -153,11 +153,11 @@ export type TSidebarItem =
   | { kind: 'failure'; key: string; card: IFailureCard }
 
 /** 阶段状态是否为终态（决定自动折叠与关闭按钮归属）。 */
-export function isTerminalStatus(status: TStageStatus): boolean {
+export function isTerminalStatus (status: TStageStatus): boolean {
   return ['completed', 'failed', 'conflict', 'cancelled'].includes(status)
 }
 
 /** 阶段是否正在运行（决定关闭按钮显隐，PRD 6.6）。 */
-export function isStageRunning(stage: IStageRecord): boolean {
+export function isStageRunning (stage: IStageRecord): boolean {
   return !isTerminalStatus(stage.status)
 }

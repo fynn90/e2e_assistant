@@ -7,18 +7,18 @@
  */
 import { describe, expect, it } from 'vitest'
 import type { AgentEvent, AgentMessage } from '@earendil-works/pi-agent-core'
-import type { TAgentClientEventDraft } from '@authine-e2e-agent/types'
+import type { TAgentClientEventDraft } from '@fynn90-e2e_assistant/types'
 import { ClientEventTranslator } from '../src/harness/client-events'
 
 /** 构造一条助手流式消息（内容为累计全量）。 */
-function assistantMessage(
+function assistantMessage (
   blocks: Array<{ type: string; text?: string; thinking?: string }>,
 ): AgentMessage {
   return { role: 'assistant', content: blocks } as unknown as AgentMessage
 }
 
 /** 拉平事件数组，便于断言。 */
-function flat(
+function flat (
   result: TAgentClientEventDraft[] | null,
 ): TAgentClientEventDraft[] {
   return result ?? []

@@ -1,5 +1,5 @@
 {
-  "name": "@authine-e2e-agent/web-host",
+  "name": "@fynn90-e2e_assistant/web-host",
   "version": "0.0.6",
   "private": false,
   "type": "module",
@@ -26,7 +26,7 @@
     "prepack": "pnpm run build"
   },
   "dependencies": {
-    "@authine-e2e-agent/web": "workspace:^",
+    "@fynn90-e2e_assistant/web": "workspace:^",
     "hono": "^4.12.23",
     "mime-types": "^3.0.2"
   },

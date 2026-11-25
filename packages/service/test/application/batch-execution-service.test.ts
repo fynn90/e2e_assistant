@@ -19,15 +19,15 @@ import type { ITestExecutionService } from '../../src/application/test-execution
 import type { IExecutionEventBus } from '../../src/application/test-execution/execution-event-bus'
 import type { IGenerationTaskRegistry } from '../../src/generation-runtime/generation-task-registry'
 import type { IReadinessService } from '../../src/application/agent-workbench/execution-readiness'
-import type { IReadinessViewPayload } from '@authine-e2e-agent/types'
+import type { IReadinessViewPayload } from '@fynn90-e2e_assistant/types'
 import {
   BATCH_MAX_ITEMS,
   createBatchExecutionService,
 } from '../../src/application/agent-workbench/batch-execution-service'
-import { createSkill } from '@authine-e2e-agent/skill-manager'
+import { createSkill } from '@fynn90-e2e_assistant/skill-manager'
 
 /** 采集批次卡片的发布。 */
-function createRuntimeSpy(): {
+function createRuntimeSpy (): {
   runtime: IAgentWorkRuntime
   batchCards: Array<Record<string, unknown>>
   messages: string[]
@@ -56,7 +56,7 @@ function createRuntimeSpy(): {
  *   - `'pass'` / `'fail'`：启动成功并在 start 后立即推送对应 summary；
  *   - `'unready'`：start 返回就绪失败（真校验没过）。
  */
-function createExecutionServiceSpy(
+function createExecutionServiceSpy (
   plan: Record<string, 'pass' | 'fail' | 'unready'>,
 ): {
   service: ITestExecutionService
@@ -104,7 +104,7 @@ function createExecutionServiceSpy(
   } as unknown as IExecutionEventBus
 
   const service = {
-    async start(input: { skillId: string }) {
+    async start (input: { skillId: string }) {
       startedSkillIds.push(input.skillId)
       const behavior = plan[input.skillId] ?? 'pass'
       if (behavior === 'unready') {
@@ -141,7 +141,7 @@ function createExecutionServiceSpy(
 
       return { ok: true as const, executionId }
     },
-    stop(input: { skillId: string }) {
+    stop (input: { skillId: string }) {
       stoppedSkillIds.push(input.skillId)
       return true
     },
@@ -151,11 +151,11 @@ function createExecutionServiceSpy(
 }
 
 /** 体检服务替身：默认全部通过。 */
-function createReadinessSpy(
+function createReadinessSpy (
   notReady: Record<string, string> = {},
 ): IReadinessService {
   return {
-    async check(_rootDir: string, skillId: string) {
+    async check (_rootDir: string, skillId: string) {
       const reason = notReady[skillId]
       const readiness: IReadinessViewPayload = {
         skillId,
@@ -171,14 +171,14 @@ function createReadinessSpy(
 }
 
 /** 任务注册表替身（本组测试不需要互斥）。 */
-function createTaskRegistrySpy(): IGenerationTaskRegistry {
+function createTaskRegistrySpy (): IGenerationTaskRegistry {
   return {
     currentSessionId: () => undefined,
   } as unknown as IGenerationTaskRegistry
 }
 
 /** 造 N 个用例（只建索引条目，不写完整用例数据——批次只需要 ID 与标题）。 */
-async function createCases(
+async function createCases (
   rootDir: string,
   count: number,
 ): Promise<string[]> {
@@ -371,7 +371,7 @@ describe('连续执行·confirm 后的串行循环', () => {
     await vi.waitFor(() => {
       expect(
         batchCards.at(-1)?.items &&
-          (batchCards.at(-1)!.items as Array<{ status: string }>)[0]?.status,
+        (batchCards.at(-1)!.items as Array<{ status: string }>)[0]?.status,
       ).toBe('running')
     })
 

@@ -5,8 +5,8 @@
  * 不留孤儿窗口。容错性质与 `release()` 一致——单个会话关闭失败不影响其余。
  */
 import { describe, expect, it, vi } from 'vitest'
-import { browserSessionRegistry } from '@authine-e2e-agent/agent'
-import type { IBrowserSession } from '@authine-e2e-agent/playwright-engine'
+import { browserSessionRegistry } from '@fynn90-e2e_assistant/agent'
+import type { IBrowserSession } from '@fynn90-e2e_assistant/playwright-engine'
 import { createGenerationBrowserHost } from '../../src/generation-runtime/browser-session-host'
 
 /**
@@ -15,7 +15,7 @@ import { createGenerationBrowserHost } from '../../src/generation-runtime/browse
  * @param closeBehavior - 关闭时的行为；返回 rejected promise 可模拟关闭失败。
  * @returns 会话替身与记录关闭次数的 spy。
  */
-function createSessionStub(closeBehavior: () => Promise<void> = async () => {}) {
+function createSessionStub (closeBehavior: () => Promise<void> = async () => { }) {
   const close = vi.fn(closeBehavior)
 
   return {
@@ -24,7 +24,7 @@ function createSessionStub(closeBehavior: () => Promise<void> = async () => {}) 
   }
 }
 
-function createHostWithSessions(
+function createHostWithSessions (
   sessions: Array<{ sessionId: string; session: IBrowserSession }>,
 ) {
   // 逐个 create 调用返回预先排好的会话：acquire 的顺序即注入顺序。
@@ -38,7 +38,7 @@ function createHostWithSessions(
       }),
     },
     sessionFactory: {
-      async create() {
+      async create () {
         const next = sessions[index]
         index += 1
         if (!next) {
@@ -52,7 +52,7 @@ function createHostWithSessions(
   return host
 }
 
-async function acquireSession(
+async function acquireSession (
   host: ReturnType<typeof createHostWithSessions>,
   sessionId: string,
 ): Promise<void> {

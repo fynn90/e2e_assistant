@@ -4,11 +4,11 @@
 import {
   FileE2ETestCaseRepository,
   FileSkillDocumentRepository,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import type {
   IUpdateE2ETestCaseData,
   IUpdateE2ETestCaseRequest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 保存结构化 E2E 用例。
@@ -17,7 +17,7 @@ import type {
  * @returns 服务端标准化后的用例、新版本、manifest 投影更新时间和文档状态。
  * @throws SkillManagerError 当校验失败或文件发生冲突时抛出。
  */
-export async function updateE2ETestCase(input: {
+export async function updateE2ETestCase (input: {
   rootDir: string
   skillId: string
   request: IUpdateE2ETestCaseRequest

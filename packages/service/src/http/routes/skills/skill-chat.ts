@@ -3,14 +3,14 @@ import { streamSSE } from 'hono/streaming'
 import type {
   ISkillChatRuntime,
   ISkillChatRuntimeOptions,
-} from '@authine-e2e-agent/agent'
+} from '@fynn90-e2e_assistant/agent'
 import {
   getSkillDetail,
   listSkillFiles,
   readSkillFile,
   resolveSkill,
-} from '@authine-e2e-agent/skill-manager'
-import type { TSkillChatEvent } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/skill-manager'
+import type { TSkillChatEvent } from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../../app-types'
 import { toApiError } from '../../error-mapper'
 import { ApiError } from '../../../shared/errors/api-error'
@@ -35,7 +35,7 @@ export type TSkillChatRuntimeFactory = (
   options: ISkillChatRuntimeOptions,
 ) => ISkillChatRuntime
 
-export function registerSkillChatRoute(
+export function registerSkillChatRoute (
   routes: Hono<IAppEnv>,
   dependencies: {
     chatRuntimeFactory: TSkillChatRuntimeFactory
@@ -93,10 +93,10 @@ export function registerSkillChatRoute(
       ])
       const currentFile = request.currentFile
         ? await readSkillFile(
-            storageOptions,
-            skillIdResult.data,
-            request.currentFile.relativePath,
-          )
+          storageOptions,
+          skillIdResult.data,
+          request.currentFile.relativePath,
+        )
         : undefined
 
       if (currentFile && currentFile.version !== request.currentFile?.version) {
@@ -129,10 +129,10 @@ export function registerSkillChatRoute(
         fileTreeSummary: JSON.stringify(fileTree),
         currentFile: currentFile
           ? {
-              relativePath: currentFile.relativePath,
-              version: currentFile.version,
-              content: currentFile.content,
-            }
+            relativePath: currentFile.relativePath,
+            version: currentFile.version,
+            content: currentFile.content,
+          }
           : undefined,
         messages: request.messages,
       })

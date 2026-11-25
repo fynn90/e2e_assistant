@@ -1,5 +1,5 @@
 {
-  "name": "@authine-e2e-agent/skill-manager",
+  "name": "@fynn90-e2e_assistant/skill-manager",
   "version": "0.0.6",
   "private": false,
   "type": "module",
@@ -26,7 +26,7 @@
     "prepack": "pnpm run build"
   },
   "dependencies": {
-    "@authine-e2e-agent/types": "workspace:^",
+    "@fynn90-e2e_assistant/types": "workspace:^",
     "adm-zip": "^0.5.16",
     "proper-lockfile": "^4.1.2",
     "write-file-atomic": "^7.0.1"

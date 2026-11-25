@@ -11,7 +11,7 @@
  */
 import type { ServerType } from '@hono/node-server'
 import { serve } from '@hono/node-server'
-import { createSkillChatRuntime } from '@authine-e2e-agent/agent'
+import { createSkillChatRuntime } from '@fynn90-e2e_assistant/agent'
 import type { Hono } from 'hono'
 import { createHttpApp } from './app'
 import type { IAppEnv } from './app-types'
@@ -60,7 +60,7 @@ export interface IStartedLocalServer {
 /** 启动入口的函数类型；调用方（CLI）用它声明可注入的依赖点，取代跨包不可用的 `typeof`。 */
 export type TStartLocalServer = typeof startLocalServer
 
-export async function startLocalServer(
+export async function startLocalServer (
   options: IStartLocalServerOptions,
 ): Promise<IStartedLocalServer> {
   const availablePort = options.strictPort
@@ -155,7 +155,7 @@ export async function startLocalServer(
   })
 }
 
-function closeNodeServer(nodeServer: ServerType): Promise<void> {
+function closeNodeServer (nodeServer: ServerType): Promise<void> {
   return new Promise((resolve, reject) => {
     nodeServer.close((error?: Error) => {
       if (error) {

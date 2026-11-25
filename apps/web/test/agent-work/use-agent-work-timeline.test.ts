@@ -25,11 +25,11 @@
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { flushPromises, mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import type { TAgentClientEvent } from '@authine-e2e-agent/types'
+import type { TAgentClientEvent } from '@fynn90-e2e_assistant/types'
 
 /** 捕获被订阅方注册的事件回调，测试中据此注入事件。 */
 interface IStreamHandlers {
-  onEvent(event: TAgentClientEvent): void
+  onEvent (event: TAgentClientEvent): void
   onConnectionChange?(state: string): void
 }
 
@@ -68,7 +68,7 @@ const WorkTimeline = (
  * @returns 可直接投递给事件回调的客户端事件。
  * @throws 不抛出异常。
  */
-function contentEvent(
+function contentEvent (
   seq: number,
   blockId: string,
   payload:
@@ -91,12 +91,12 @@ function contentEvent(
  * @returns 挂载好的组件包装器与向该会话投递事件的方法。
  * @throws 不抛出异常。
  */
-async function mountTimeline(): Promise<{
+async function mountTimeline (): Promise<{
   wrapper: ReturnType<typeof mount>
   emitEvent: (event: TAgentClientEvent) => Promise<void>
 }> {
   const Host = defineComponent({
-    setup() {
+    setup () {
       const sessionId = ref<string | null>('s1')
       const timeline = useAgentWorkTimeline({ sessionId })
       return () => h(WorkTimeline, { items: timeline.items.value })

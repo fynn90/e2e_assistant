@@ -1,7 +1,7 @@
 import {
   resolvePreviewImageMimeType,
   type ISkillFileTreeNode,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { TreeOption } from 'naive-ui'
 
 export interface ISkillTreeOption extends TreeOption {
@@ -23,7 +23,7 @@ export interface ISkillTreeOption extends TreeOption {
  * @returns 形如 `.png` 的小写扩展名；不存在时返回空串。
  * @throws 不抛出异常。
  */
-function extractExtension(fileName: string): string {
+function extractExtension (fileName: string): string {
   const dotIndex = fileName.lastIndexOf('.')
   return dotIndex > 0 ? fileName.slice(dotIndex).toLowerCase() : ''
 }
@@ -38,7 +38,7 @@ function extractExtension(fileName: string): string {
  * @returns 是文件且扩展名为可预览图片格式时返回 true。
  * @throws 不抛出异常。
  */
-export function isPreviewableImageNode(node: ISkillFileTreeNode): boolean {
+export function isPreviewableImageNode (node: ISkillFileTreeNode): boolean {
   return (
     node.kind === 'file' &&
     resolvePreviewImageMimeType(extractExtension(node.name)) !== undefined
@@ -46,7 +46,7 @@ export function isPreviewableImageNode(node: ISkillFileTreeNode): boolean {
 }
 
 /** 判断相对路径是否为报告视图入口文件（`test_report/<runId>/report.html`）。 */
-function isReportHtmlPath(relativePath: string): boolean {
+function isReportHtmlPath (relativePath: string): boolean {
   return (
     relativePath.startsWith('test_report/') &&
     relativePath.endsWith('/report.html')
@@ -63,7 +63,7 @@ const REPORT_RUN_ID_PATTERN = /^\d{8}-\d{6}$/
  * @returns 合法的 runId；格式不符时返回 undefined。
  * @throws 不抛出异常。
  */
-function parseReportRunId(relativePath: string): string | undefined {
+function parseReportRunId (relativePath: string): string | undefined {
   const runId = relativePath.split('/')[1] ?? ''
   return REPORT_RUN_ID_PATTERN.test(runId) ? runId : undefined
 }
@@ -102,7 +102,7 @@ export type TSkillFileOpenTarget =
  * @returns 打开目标；节点不是文件时返回 undefined。
  * @throws 不抛出异常。
  */
-export function resolveSkillFileOpenTarget(
+export function resolveSkillFileOpenTarget (
   node: ISkillFileTreeNode,
 ): TSkillFileOpenTarget | undefined {
   if (node.kind !== 'file') return undefined
@@ -158,7 +158,7 @@ export type TMissingOpenFileAction =
  * @returns 处理动作。
  * @throws 不抛出异常。
  */
-export function resolveMissingOpenFileAction(options: {
+export function resolveMissingOpenFileAction (options: {
   hasUnsavedChanges: boolean
   userInitiated: boolean
 }): TMissingOpenFileAction {
@@ -185,7 +185,7 @@ export function resolveMissingOpenFileAction(options: {
  * @returns 树组件选项。
  * @throws 不抛出异常。
  */
-export function toTreeOptions(nodes: ISkillFileTreeNode[]): ISkillTreeOption[] {
+export function toTreeOptions (nodes: ISkillFileTreeNode[]): ISkillTreeOption[] {
   return nodes.map((node) => ({
     key: node.relativePath,
     label: node.name,

@@ -9,19 +9,19 @@ import type {
   TPlaywrightGenerationEvent,
   IUpdateE2ETestCaseRequest,
   IUpdateE2ETestCaseResponse,
-} from '@authine-e2e-agent/types'
-import { playwrightGenerationEventSchema } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
+import { playwrightGenerationEventSchema } from '@fynn90-e2e_assistant/types'
 import { ApiClientError, requestJson } from '../../../services/http-client'
 import { consumeSseResponse } from '../../../services/sse'
 
-export function fetchE2ETestCase(skillId: string, signal?: AbortSignal) {
+export function fetchE2ETestCase (skillId: string, signal?: AbortSignal) {
   return requestJson<IGetE2ETestCaseResponse>({
     path: `/api/skills/${encodeURIComponent(skillId)}/e2e-test-case`,
     signal,
   })
 }
 
-export function updateE2ETestCase(
+export function updateE2ETestCase (
   skillId: string,
   request: IUpdateE2ETestCaseRequest,
   signal?: AbortSignal,
@@ -34,7 +34,7 @@ export function updateE2ETestCase(
   })
 }
 
-export function savePlaywrightScript(
+export function savePlaywrightScript (
   skillId: string,
   request: ISavePlaywrightScriptRequest,
   signal?: AbortSignal,
@@ -52,7 +52,7 @@ export function savePlaywrightScript(
  *
  * @param options - Skill、期望版本、取消信号和事件回调。
  */
-export async function streamPlaywrightGeneration(options: {
+export async function streamPlaywrightGeneration (options: {
   skillId: string
   request: IGeneratePlaywrightRequest
   signal: AbortSignal
@@ -115,7 +115,7 @@ export async function streamPlaywrightGeneration(options: {
   }
 }
 
-function isAbortError(error: unknown): boolean {
+function isAbortError (error: unknown): boolean {
   return Boolean(
     error &&
     typeof error === 'object' &&

@@ -19,7 +19,7 @@
 import type {
   TAgentToolAction,
   TAgentToolCategory,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 图标字形名（不含 `h-icon-all-` 前缀）。
@@ -192,7 +192,7 @@ export const STAGE_COLLAPSED_ICON: TAgentWorkIconName = 'caret-right'
  * @returns 图标字形名；未登记的类别回退为 `other` 的字形。
  * @throws 不抛出异常。
  */
-export function toolCategoryIcon(
+export function toolCategoryIcon (
   category: TAgentToolCategory,
 ): TAgentWorkIconName {
   return TOOL_CATEGORY_ICONS[category] ?? TOOL_CATEGORY_ICONS.other
@@ -209,7 +209,7 @@ export function toolCategoryIcon(
  * @returns 图标字形名；未登记的动作回退为 `other` 的扳手。
  * @throws 不抛出异常。
  */
-export function toolActionIcon(action: TAgentToolAction): TAgentWorkIconName {
+export function toolActionIcon (action: TAgentToolAction): TAgentWorkIconName {
   return TOOL_ACTION_ICONS[action] ?? TOOL_ACTION_ICONS.other
 }
 
@@ -223,7 +223,7 @@ export function toolActionIcon(action: TAgentToolAction): TAgentWorkIconName {
  * @returns 图标字形名；越界级别回退为 `warning` 的字形。
  * @throws 不抛出异常。
  */
-export function noticeLevelIcon(
+export function noticeLevelIcon (
   level: 'warning' | 'error',
 ): TAgentWorkIconName {
   return NOTICE_LEVEL_ICONS[level] ?? NOTICE_LEVEL_ICONS.warning

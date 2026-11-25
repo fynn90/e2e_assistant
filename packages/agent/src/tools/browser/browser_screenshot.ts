@@ -17,7 +17,7 @@ import type { AgentTool } from '@earendil-works/pi-agent-core'
 import type {
   IAgentToolImageRef,
   IPageScreenshot,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /**
@@ -84,7 +84,7 @@ export interface BrowserScreenshotDetails {
  * @returns 对应的原始字节数（向上取整）。
  * @throws 不抛出异常。
  */
-function toRawByteSize(base64Length: number): number {
+function toRawByteSize (base64Length: number): number {
   return Math.ceil(base64Length * BASE64_TO_BYTES_RATIO)
 }
 
@@ -101,7 +101,7 @@ function toRawByteSize(base64Length: number): number {
  * @returns 图片引用；未注入端口或归档失败时返回 undefined。
  * @throws 不抛出异常。
  */
-async function archiveScreenshot(
+async function archiveScreenshot (
   host: IBrowserSessionHost,
   screenshot: IPageScreenshot,
   selector: string | undefined,
@@ -128,7 +128,7 @@ async function archiveScreenshot(
  * @throws 不在创建阶段抛出异常；selector 非法、元素不存在、取消或浏览器断连时
  * 由宿主抛出结构化错误，并由运行器记为工具失败。
  */
-export function createBrowserScreenshotTool(
+export function createBrowserScreenshotTool (
   host: IBrowserSessionHost,
 ): AgentTool<typeof screenshotParameters, BrowserScreenshotDetails> {
   return {
@@ -148,7 +148,7 @@ export function createBrowserScreenshotTool(
      * @returns 图片内容 + 尺寸说明文本；超限时仅返回文字占位。
      * @throws 由宿主抛出的结构化浏览器错误透传，由运行器记为工具失败。
      */
-    async execute(toolCallId, parameters, signal, onUpdate) {
+    async execute (toolCallId, parameters, signal, onUpdate) {
       void toolCallId
       void signal
       void onUpdate

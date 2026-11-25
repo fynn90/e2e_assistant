@@ -1,7 +1,7 @@
 // Skill 目录查询模型：提供可复用的搜索、排序与分页派生状态。
 import { computed, shallowRef, toValue, watch } from 'vue'
 import type { MaybeRefOrGetter } from 'vue'
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 
 export type TSkillCatalogSort = 'updated-desc' | 'created-desc' | 'title-asc'
 
@@ -14,7 +14,7 @@ const DEFAULT_PAGE_SIZE = 25
  * @returns 查询状态、派生结果与显式更新动作。
  * @throws 不抛出异常。
  */
-export function useSkillCatalog(
+export function useSkillCatalog (
   skillList: MaybeRefOrGetter<readonly ISkillSummary[]>,
   pageSize = DEFAULT_PAGE_SIZE,
 ) {
@@ -30,10 +30,10 @@ export function useSkillCatalog(
     const sourceSkills = [...toValue(skillList)]
     const matchedSkills = searchText
       ? sourceSkills.filter((skill) =>
-          [skill.title, skill.id, skill.description].some((value) =>
-            value.toLocaleLowerCase('zh-CN').includes(searchText),
-          ),
-        )
+        [skill.title, skill.id, skill.description].some((value) =>
+          value.toLocaleLowerCase('zh-CN').includes(searchText),
+        ),
+      )
       : sourceSkills
 
     return matchedSkills.sort((leftSkill, rightSkill) => {
@@ -76,7 +76,7 @@ export function useSkillCatalog(
    * @returns 更新完成后无返回值。
    * @throws 不抛出异常。
    */
-  function setQuery(value: string): void {
+  function setQuery (value: string): void {
     query.value = value
   }
 
@@ -85,7 +85,7 @@ export function useSkillCatalog(
    * @returns 清理完成后无返回值。
    * @throws 不抛出异常。
    */
-  function clearQuery(): void {
+  function clearQuery (): void {
     query.value = ''
     page.value = 1
   }
@@ -96,7 +96,7 @@ export function useSkillCatalog(
    * @returns 更新完成后无返回值。
    * @throws 不抛出异常。
    */
-  function setSort(value: TSkillCatalogSort): void {
+  function setSort (value: TSkillCatalogSort): void {
     sort.value = value
   }
 
@@ -106,7 +106,7 @@ export function useSkillCatalog(
    * @returns 更新完成后无返回值。
    * @throws 不抛出异常。
    */
-  function setPage(value: number): void {
+  function setPage (value: number): void {
     page.value = Math.min(Math.max(1, value), pageCount.value)
   }
 
@@ -133,7 +133,7 @@ export function useSkillCatalog(
  * @returns 有效时间戳；无效时间返回 0。
  * @throws 不抛出异常。
  */
-function toTimestamp(value: string): number {
+function toTimestamp (value: string): number {
   const timestamp = Date.parse(value)
   return Number.isNaN(timestamp) ? 0 : timestamp
 }

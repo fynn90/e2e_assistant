@@ -7,7 +7,7 @@ import type {
   IE2ETestCaseDocumentData,
   IPlaywrightScriptState,
   ISkillDocumentState,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { useGlobalMessage } from '../../../composables/useGlobalMessage'
 import { ApiClientError } from '../../../services/http-client'
 import {
@@ -32,7 +32,7 @@ export type TE2ETestCaseEditorStatus =
   | 'missing'
   | 'error'
 
-export function useE2ETestCase(
+export function useE2ETestCase (
   skillId: Ref<string>,
   callbacks: {
     onSaved?: (data: {
@@ -91,7 +91,7 @@ export function useE2ETestCase(
    * @returns 当前草稿是否满足保存条件。
    * @throws 不抛出异常。
    */
-  function showSaveValidation(): boolean {
+  function showSaveValidation (): boolean {
     fieldErrors.value = issuesToFieldErrors(saveIssues.value)
     return saveIssues.value.length === 0
   }
@@ -101,13 +101,13 @@ export function useE2ETestCase(
    * @returns 当前草稿是否满足生成条件。
    * @throws 不抛出异常。
    */
-  function showGenerationValidation(): boolean {
+  function showGenerationValidation (): boolean {
     fieldErrors.value = issuesToFieldErrors(generationIssues.value)
     return generationIssues.value.length === 0
   }
 
   /** 加载服务端标准化用例，并创建与快照隔离的编辑草稿。 */
-  async function load(): Promise<boolean> {
+  async function load (): Promise<boolean> {
     loadAbortController?.abort()
     const controller = new AbortController()
     loadAbortController = controller
@@ -137,9 +137,9 @@ export function useE2ETestCase(
         error instanceof ApiClientError ? error.code : undefined
       status.value =
         error instanceof ApiClientError &&
-        ['E2E_SCHEMA_INVALID', 'E2E_SCHEMA_VERSION_UNSUPPORTED'].includes(
-          error.code ?? '',
-        )
+          ['E2E_SCHEMA_INVALID', 'E2E_SCHEMA_VERSION_UNSUPPORTED'].includes(
+            error.code ?? '',
+          )
           ? 'invalid'
           : 'error'
       return false
@@ -151,7 +151,7 @@ export function useE2ETestCase(
   }
 
   /** 校验并保存当前草稿；冲突时额外读取磁盘版本但始终保留本地草稿。 */
-  async function save(): Promise<boolean> {
+  async function save (): Promise<boolean> {
     if (!draft.value || !version.value || status.value === 'saving') {
       return false
     }
@@ -205,19 +205,19 @@ export function useE2ETestCase(
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function resumeEditing(): void {
+  function resumeEditing (): void {
     if (draft.value && status.value === 'error') {
       status.value = 'ready'
     }
   }
 
-  function markSourceMissing(): void {
+  function markSourceMissing (): void {
     status.value = 'missing'
     errorMessage.value =
       'e2e_schema.json 已被外部删除；当前草稿仅保留在页面中。'
   }
 
-  function discard(): void {
+  function discard (): void {
     if (!savedTestCase.value) {
       return
     }
@@ -228,7 +228,7 @@ export function useE2ETestCase(
     status.value = 'ready'
   }
 
-  function useDiskVersion(): void {
+  function useDiskVersion (): void {
     if (!conflictDocument.value) {
       return
     }
@@ -238,7 +238,7 @@ export function useE2ETestCase(
     status.value = 'ready'
   }
 
-  function applyDocument(document: IE2ETestCaseDocumentData): void {
+  function applyDocument (document: IE2ETestCaseDocumentData): void {
     savedTestCase.value = cloneTestCaseDraft(document.testCase)
     draft.value = cloneTestCaseDraft(document.testCase)
     version.value = document.version
@@ -248,7 +248,7 @@ export function useE2ETestCase(
     fieldErrors.value = {}
   }
 
-  async function loadConflictDocument(): Promise<void> {
+  async function loadConflictDocument (): Promise<void> {
     try {
       const response = await fetchE2ETestCase(skillId.value)
       conflictDocument.value = response.data

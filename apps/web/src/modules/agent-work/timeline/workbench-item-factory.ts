@@ -26,7 +26,7 @@ import type {
   TAgentWorkbenchTaskStatus,
   TAgentWorkbenchViewKind,
   TBatchStatus,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type {
   IWorkbenchActionTimelineItem,
   IWorkbenchProposalTimelineItem,
@@ -50,11 +50,11 @@ type TEventOf<T extends TAgentClientEvent['type']> = Extract<
  */
 export type TWorkbenchCardBlock = IAgentWorkBlock & {
   kind:
-    | 'workbench_action'
-    | 'workbench_task'
-    | 'workbench_report'
-    | 'workbench_view'
-    | 'workbench_proposal'
+  | 'workbench_action'
+  | 'workbench_task'
+  | 'workbench_report'
+  | 'workbench_view'
+  | 'workbench_proposal'
 }
 
 /**
@@ -64,7 +64,7 @@ export type TWorkbenchCardBlock = IAgentWorkBlock & {
  * @returns 初始为 pending（可点击）的动作项。
  * @throws 不抛出异常。
  */
-export function createWorkbenchActionItem(
+export function createWorkbenchActionItem (
   event: TEventOf<'workbench_action'>,
 ): IWorkbenchActionTimelineItem {
   return {
@@ -93,7 +93,7 @@ export function createWorkbenchActionItem(
  * @param event - 动作块事件。
  * @throws 不抛出异常。
  */
-export function patchWorkbenchActionItem(
+export function patchWorkbenchActionItem (
   item: IWorkbenchActionTimelineItem,
   event: TEventOf<'workbench_action'>,
 ): void {
@@ -116,7 +116,7 @@ export function patchWorkbenchActionItem(
  * @returns 初始为 streaming 的任务项。
  * @throws 不抛出异常。
  */
-export function createWorkbenchTaskItem(
+export function createWorkbenchTaskItem (
   event: TEventOf<'workbench_task'>,
 ): IWorkbenchTaskTimelineItem {
   return {
@@ -147,7 +147,7 @@ export function createWorkbenchTaskItem(
  * @param event - 任务块事件。
  * @throws 不抛出异常。
  */
-export function patchWorkbenchTaskItem(
+export function patchWorkbenchTaskItem (
   item: IWorkbenchTaskTimelineItem,
   event: TEventOf<'workbench_task'>,
 ): void {
@@ -176,7 +176,7 @@ export function patchWorkbenchTaskItem(
  * @returns 报告卡片项。
  * @throws 不抛出异常。
  */
-export function createWorkbenchReportItem(
+export function createWorkbenchReportItem (
   event: TEventOf<'workbench_report'>,
 ): IWorkbenchReportTimelineItem {
   return {
@@ -201,7 +201,7 @@ export function createWorkbenchReportItem(
  * @returns 终态（done）的视图项。
  * @throws 不抛出异常。
  */
-export function createWorkbenchViewItem(
+export function createWorkbenchViewItem (
   event: TEventOf<'workbench_view'>,
 ): IWorkbenchViewTimelineItem {
   return {
@@ -227,7 +227,7 @@ export function createWorkbenchViewItem(
  * @param event - 视图块事件。
  * @throws 不抛出异常。
  */
-export function patchWorkbenchViewItem(
+export function patchWorkbenchViewItem (
   item: IWorkbenchViewTimelineItem,
   event: TEventOf<'workbench_view'>,
 ): void {
@@ -244,7 +244,7 @@ export function patchWorkbenchViewItem(
  * @returns 提案卡片项。
  * @throws 不抛出异常。
  */
-export function createWorkbenchProposalItem(
+export function createWorkbenchProposalItem (
   event: TEventOf<'workbench_proposal'>,
 ): IWorkbenchProposalTimelineItem {
   return {
@@ -281,7 +281,7 @@ export function createWorkbenchProposalItem(
  * @param event - 提案块事件。
  * @throws 不抛出异常。
  */
-export function patchWorkbenchProposalItem(
+export function patchWorkbenchProposalItem (
   item: IWorkbenchProposalTimelineItem,
   event: TEventOf<'workbench_proposal'>,
 ): void {
@@ -318,7 +318,7 @@ export function patchWorkbenchProposalItem(
  * @returns 对应的工作台卡片时间线项。
  * @throws 不抛出异常；未知字段按缺省值兜底。
  */
-export function workbenchBlockToItem(
+export function workbenchBlockToItem (
   block: TWorkbenchCardBlock,
 ): TWorkTimelineItem {
   const payload = block.payload

@@ -6,14 +6,14 @@ import { describe, expect, it } from 'vitest'
 import {
   createDefaultE2ETestCase,
   type IE2ETestCase,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { useE2ETestCaseReadiness } from '../../src/modules/e2e-test-case/composables/useE2ETestCaseReadiness'
 import {
   getDraftGenerationIssues,
   getDraftSaveIssues,
 } from '../../src/modules/e2e-test-case/validation/test-case-form-validator'
 
-function validDraft(): IE2ETestCase {
+function validDraft (): IE2ETestCase {
   return {
     ...createDefaultE2ETestCase({
       skillId: 'abc123def',
@@ -35,7 +35,7 @@ function validDraft(): IE2ETestCase {
   }
 }
 
-function createHarness(
+function createHarness (
   input: {
     draft?: IE2ETestCase
     dirty?: boolean

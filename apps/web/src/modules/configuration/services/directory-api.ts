@@ -6,7 +6,7 @@ import type {
   ICreateDirectoryRequest,
   ICreateDirectoryResponse,
   IListDirectoryResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { requestJson } from '../../../services/http-client'
 
 /**
@@ -15,7 +15,7 @@ import { requestJson } from '../../../services/http-client'
  * @returns 单层目录浏览响应。
  * @throws 当目录不存在、无权限访问或本地 API 请求失败时抛出客户端异常。
  */
-export function fetchDirectoryListing(options: {
+export function fetchDirectoryListing (options: {
   path?: string
   signal?: AbortSignal
 }): Promise<IListDirectoryResponse> {
@@ -35,7 +35,7 @@ export function fetchDirectoryListing(options: {
  * @returns 起始位置响应。
  * @throws 当本地 API 请求失败时抛出客户端异常。
  */
-export function fetchBrowseRoots(
+export function fetchBrowseRoots (
   signal?: AbortSignal,
 ): Promise<IBrowseRootsResponse> {
   return requestJson({ path: '/api/fs/roots', signal })
@@ -47,7 +47,7 @@ export function fetchBrowseRoots(
  * @returns 新建目录响应。
  * @throws 当名称非法、目录重名、无写入权限或本地 API 请求失败时抛出客户端异常。
  */
-export function createDirectory(
+export function createDirectory (
   payload: ICreateDirectoryRequest,
 ): Promise<ICreateDirectoryResponse> {
   return requestJson({

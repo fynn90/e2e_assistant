@@ -2,7 +2,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { NButton, NPagination, NResult, NSkeleton } from 'naive-ui'
-import type { ISkillSummary } from '@authine-e2e-agent/types'
+import type { ISkillSummary } from '@fynn90-e2e_assistant/types'
 import SkillCatalogToolbar from './SkillCatalogToolbar.vue'
 import SkillCard from './SkillCard.vue'
 import SkillCreateModal from './SkillCreateModal.vue'

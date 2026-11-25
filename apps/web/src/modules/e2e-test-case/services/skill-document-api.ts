@@ -6,10 +6,10 @@ import type {
   ISaveSkillDocumentRequest,
   ISaveSkillDocumentResponse,
   TSkillDocumentGenerationEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiClientError, requestJson } from '../../../services/http-client'
 import { consumeSseResponse } from '../../../services/sse'
-import { skillDocumentGenerationEventSchema } from '@authine-e2e-agent/types'
+import { skillDocumentGenerationEventSchema } from '@fynn90-e2e_assistant/types'
 
 /**
  * 保存已审阅的 SKILL.md。
@@ -20,7 +20,7 @@ import { skillDocumentGenerationEventSchema } from '@authine-e2e-agent/types'
  * @returns 保存后的文件版本和生成元数据。
  * @throws ApiClientError 当本地服务返回错误时抛出。
  */
-export function saveSkillDocument(
+export function saveSkillDocument (
   skillId: string,
   request: ISaveSkillDocumentRequest,
   signal?: AbortSignal,
@@ -40,7 +40,7 @@ export function saveSkillDocument(
  * @returns SSE 消费完成后无返回值。
  * @throws ApiClientError 当网络、协议或服务端事件不合法时抛出。
  */
-export async function streamSkillDocumentGeneration(options: {
+export async function streamSkillDocumentGeneration (options: {
   skillId: string
   request: IGenerateSkillDocumentRequest
   signal: AbortSignal

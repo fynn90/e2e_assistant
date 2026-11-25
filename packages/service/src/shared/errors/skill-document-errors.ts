@@ -8,7 +8,7 @@
  * agent-runtime → application → …… 会与 application → agent-runtime 构成循环依赖。
  * 因此下沉到此处：application 与 agent-runtime 都只向下依赖它（见 PRD v18 §4.4）。
  */
-import type { TApiErrorCode } from '@authine-e2e-agent/types'
+import type { TApiErrorCode } from '@fynn90-e2e_assistant/types'
 
 /** Agent 生成阶段允许映射到 HTTP 层的错误码。 */
 export type TSkillDocumentAgentErrorCode = Extract<
@@ -45,7 +45,7 @@ export class SkillDocumentAgentError extends Error {
 }
 
 /** 判断未知值是否为 SKILL.md Agent 生成错误。 */
-export function isSkillDocumentAgentError(
+export function isSkillDocumentAgentError (
   error: unknown,
 ): error is SkillDocumentAgentError {
   return error instanceof SkillDocumentAgentError

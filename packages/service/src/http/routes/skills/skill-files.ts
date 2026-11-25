@@ -9,7 +9,7 @@ import {
   readSkillImageFile,
   resolveSkill,
   writeSkillFile,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import type {
   ICreateSkillDirectoryResponse,
   ICreateSkillFileResponse,
@@ -17,7 +17,7 @@ import type {
   IGetSkillFileResponse,
   IListSkillFilesResponse,
   IUpdateSkillFileResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IAppEnv } from '../../app-types'
 import { ApiError } from '../../../shared/errors/api-error'
 import { parseJsonBody } from '../../request-validation'
@@ -31,7 +31,7 @@ import {
 
 const FILE_WRITE_BODY_LIMIT = 1024 * 1024 + 128 * 1024
 
-export function registerSkillFileRoutes(routes: Hono<IAppEnv>): void {
+export function registerSkillFileRoutes (routes: Hono<IAppEnv>): void {
   // —— 页面探查截图服务（v12-pre）——
   //
   // 与 test_report 的报告文件服务（D10 路径白名单）同构：
@@ -221,7 +221,7 @@ export function registerSkillFileRoutes(routes: Hono<IAppEnv>): void {
   })
 }
 
-function parseSkillId(skillId: string): string {
+function parseSkillId (skillId: string): string {
   const result = skillIdSchema.safeParse(skillId)
 
   if (!result.success) {

@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { NButton, NTag } from 'naive-ui'
-import type { IExecutionSummary } from '@authine-e2e-agent/types'
+import type { IExecutionSummary } from '@fynn90-e2e_assistant/types'
 
 const props = defineProps<{
   summary: IExecutionSummary

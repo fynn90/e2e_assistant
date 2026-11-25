@@ -14,7 +14,7 @@ import type {
   IConfigSummary,
   IUpdateConfigRequest,
   TConfigIssue,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   validateConfigUpdate,
   type TConfigFieldErrors,

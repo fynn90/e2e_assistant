@@ -38,8 +38,8 @@ import {
   parseEnvFileContent,
   SKILL_ENV_FILE_NAME,
   type IEnvFileIssue,
-} from '@authine-e2e-agent/types'
-import type { ISkillDetail, ISkillFileTreeNode } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
+import type { ISkillDetail, ISkillFileTreeNode } from '@fynn90-e2e_assistant/types'
 import type { IChatMessageViewModel } from '../../common/chat/types'
 import { streamSkillChat } from '../../services/chat-api'
 import { ApiClientError } from '../../services/http-client'
@@ -78,7 +78,7 @@ interface ISaveCurrentFileOptions {
   navigateAfterRawSave?: boolean
 }
 
-export function useSkillDevelopment(skillId: Ref<string>) {
+export function useSkillDevelopment (skillId: Ref<string>) {
   const route = useRoute()
   const router = useRouter()
   const message = useGlobalMessage()
@@ -164,27 +164,27 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     const target =
       file.relativePath === 'SKILL.md'
         ? createSkillDocumentTarget(
+          skillId.value,
+          testCaseSourceHash.value,
+          file.version,
+        )
+        : file.relativePath === 'test.spec.ts'
+          ? createPlaywrightScriptTarget(
             skillId.value,
             testCaseSourceHash.value,
             file.version,
           )
-        : file.relativePath === 'test.spec.ts'
-          ? createPlaywrightScriptTarget(
-              skillId.value,
-              testCaseSourceHash.value,
-              file.version,
-            )
           : file.relativePath === SKILL_ENV_FILE_NAME
             ? createEnvFileTarget(
-                skillId.value,
-                SKILL_ENV_FILE_NAME,
-                file.version,
-              )
+              skillId.value,
+              SKILL_ENV_FILE_NAME,
+              file.version,
+            )
             : createGenericFileTarget(
-                skillId.value,
-                file.relativePath,
-                file.version,
-              )
+              skillId.value,
+              file.relativePath,
+              file.version,
+            )
 
     cachedTarget = { relativePath: file.relativePath, target }
     return target
@@ -217,7 +217,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    *
    * @returns 拉取完成后的 Promise。
    */
-  async function loadTestCaseSourceHash(): Promise<void> {
+  async function loadTestCaseSourceHash (): Promise<void> {
     try {
       const response = await fetchE2ETestCase(skillId.value)
       testCaseSourceHash.value = response.data.sourceHash
@@ -236,7 +236,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 刷新完成后的 Promise。
    * @throws 不抛出异常；读取失败按缺失处理，不阻断页面。
    */
-  async function refreshEnvFileState(): Promise<void> {
+  async function refreshEnvFileState (): Promise<void> {
     const sequence = ++envFileRefreshSequence
     envFileStatus.value = 'loading'
 
@@ -278,7 +278,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    *
    * @returns 重新加载完成后的 Promise。
    */
-  async function reloadCurrentFile(): Promise<void> {
+  async function reloadCurrentFile (): Promise<void> {
     const file = currentFile.value
     if (!file) return
 
@@ -299,7 +299,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     }
   }
 
-  async function loadPage(): Promise<void> {
+  async function loadPage (): Promise<void> {
     pageLoadAbortController?.abort()
     fileOpenAbortController?.abort()
     refreshTreeAbortController?.abort()
@@ -361,7 +361,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 刷新成功返回 true；被中止或失败返回 false。
    * @throws 不抛出异常，失败通过全局消息提示。
    */
-  async function refreshTree(
+  async function refreshTree (
     options: { suppressMissingNotice?: boolean } = {},
   ): Promise<boolean> {
     refreshTreeAbortController?.abort()
@@ -466,7 +466,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 刷新或节流提示结束后兑现的 Promise。
    * @throws 请求异常由 refreshTree 内部捕获并转换为错误提示。
    */
-  async function refreshTreeManually(): Promise<void> {
+  async function refreshTreeManually (): Promise<void> {
     const now = Date.now()
     const remaining =
       MANUAL_TREE_REFRESH_INTERVAL - (now - lastManualTreeRefreshAt)
@@ -498,7 +498,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 重载完成后兑现的 Promise。
    * @throws 不抛出异常；重载失败由编辑器内部处理。
    */
-  async function reloadStructuredDocument(): Promise<void> {
+  async function reloadStructuredDocument (): Promise<void> {
     try {
       await structuredEditorHandle.value?.reload()
     } catch {
@@ -527,7 +527,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 允许发起执行时返回 true；存在未保存修改且无法静默解决时返回 false。
    * @throws 不抛出异常；保存错误通过全局消息提示。
    */
-  async function prepareForExecution(): Promise<boolean> {
+  async function prepareForExecution (): Promise<boolean> {
     if (structuredDirty.value) {
       message.error('存在未保存的用例修改，请先保存后再执行。')
       return false
@@ -557,7 +557,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 导航完成或目标已是当前路由时返回 true；守卫取消导航时返回 false。
    * @throws 不主动抛出异常，导航失败由 Vue Router 处理。
    */
-  async function openFile(node: ISkillFileTreeNode): Promise<boolean> {
+  async function openFile (node: ISkillFileTreeNode): Promise<boolean> {
     const target = resolveSkillFileOpenTarget(node)
     if (!target) return false
 
@@ -593,7 +593,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 导航完成或目标已是当前路由时返回 true；守卫取消导航时返回 false。
    * @throws 不主动抛出异常，导航失败由 Vue Router 处理。
    */
-  async function navigateToReport(runId: string): Promise<boolean> {
+  async function navigateToReport (runId: string): Promise<boolean> {
     const target = createSkillDevelopmentReportLocation(skillId.value, runId)
 
     if (router.resolve(target).fullPath === route.fullPath) {
@@ -610,7 +610,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 导航完成或目标已是当前路由时返回 true；守卫取消导航时返回 false。
    * @throws 不主动抛出异常，导航失败由 Vue Router 处理。
    */
-  async function navigateToImage(relativePath: string): Promise<boolean> {
+  async function navigateToImage (relativePath: string): Promise<boolean> {
     const target = createSkillDevelopmentImageLocation(
       skillId.value,
       relativePath,
@@ -629,7 +629,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 路由导航完成后兑现的 Promise。
    * @throws 不主动抛出异常，导航失败由 Vue Router 处理。
    */
-  async function openRawE2ETestCase(): Promise<void> {
+  async function openRawE2ETestCase (): Promise<void> {
     await router.push(
       createSkillDevelopmentCodeLocation(skillId.value, 'e2e_schema.json'),
     )
@@ -641,7 +641,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 目标成功激活时返回 true；文件缺失或加载失败时返回 false。
    * @throws 不抛出异常，资源错误通过全局消息展示并回退到 Chat。
    */
-  async function activateWorkspaceTarget(
+  async function activateWorkspaceTarget (
     target: TSkillDevelopmentWorkspaceTarget,
   ): Promise<boolean> {
     workspaceActivationSequence += 1
@@ -717,7 +717,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 文件成功加载时返回 true，否则返回 false。
    * @throws 不抛出异常，底层读取错误通过全局消息展示。
    */
-  async function openTextFile(
+  async function openTextFile (
     node: TSkillFileNode,
     activationSequence: number,
   ): Promise<boolean> {
@@ -784,17 +784,17 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function registerStructuredEditor(
+  function registerStructuredEditor (
     handle: IStructuredEditorHandle | null,
   ): void {
     structuredEditorHandle.value = handle
   }
 
-  function setStructuredDirty(value: boolean): void {
+  function setStructuredDirty (value: boolean): void {
     structuredDirty.value = value
   }
 
-  function updateSkillProjection(data: {
+  function updateSkillProjection (data: {
     title: string
     description: string
   }): void {
@@ -839,8 +839,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     },
   )
 
-  function getSavedFileContext():
-    { relativePath: string; version: string } | undefined {
+  function getSavedFileContext (): { relativePath: string; version: string } | undefined {
     if (currentFile.value) {
       return {
         relativePath: currentFile.value.relativePath,
@@ -863,7 +862,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @param options - 保存选项（是否在保存后导航回结构化面板）。
    * @returns 保存成功时返回 true。
    */
-  async function saveCurrentFile(
+  async function saveCurrentFile (
     options: ISaveCurrentFileOptions = {},
   ): Promise<boolean> {
     const file = currentFile.value
@@ -895,7 +894,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     }
   }
 
-  async function saveRawE2ETestCase(
+  async function saveRawE2ETestCase (
     file: ICurrentSkillFile,
     navigateAfterSave: boolean,
   ): Promise<boolean> {
@@ -926,7 +925,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     } catch (error) {
       saveState.value =
         error instanceof ApiClientError &&
-        error.code === 'FILE_VERSION_CONFLICT'
+          error.code === 'FILE_VERSION_CONFLICT'
           ? 'conflict'
           : 'failed'
       message.error(
@@ -938,11 +937,11 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     }
   }
 
-  async function returnToWorkbench(): Promise<void> {
+  async function returnToWorkbench (): Promise<void> {
     await router.push({ name: WORKBENCH_ROUTE_NAMES.skills })
   }
 
-  async function sendChat(content: string): Promise<void> {
+  async function sendChat (content: string): Promise<void> {
     if (streaming.value) return
     const userMessage: IChatMessageViewModel = {
       id: crypto.randomUUID(),
@@ -961,7 +960,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     await runAssistant(messages.value.length - 2, messages.value.length - 1)
   }
 
-  async function retryChat(messageId: string): Promise<void> {
+  async function retryChat (messageId: string): Promise<void> {
     if (streaming.value) return
     const assistantIndex = messages.value.findIndex(
       (item) => item.id === messageId,
@@ -984,11 +983,11 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     await runAssistant(userIndex, assistantIndex)
   }
 
-  function stopChat(): void {
+  function stopChat (): void {
     chatAbortController?.abort()
   }
 
-  async function runAssistant(
+  async function runAssistant (
     userIndex: number,
     assistantIndex: number,
   ): Promise<void> {
@@ -1047,7 +1046,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
           messages: buildChatRequestMessages(userIndex),
           currentFile: getSavedFileContext(),
         },
-        onEvent(event) {
+        onEvent (event) {
           if (event.type === 'start') {
             assistantMessage.contextFile = event.currentFile
             assistantMessage.contextWarnings = event.contextWarnings
@@ -1089,7 +1088,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     }
   }
 
-  function buildChatRequestMessages(userIndex: number) {
+  function buildChatRequestMessages (userIndex: number) {
     const requestMessages = messages.value
       .slice(0, userIndex + 1)
       .filter(
@@ -1118,7 +1117,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     return requestMessages
   }
 
-  function discardUnsavedChanges(): void {
+  function discardUnsavedChanges (): void {
     if (structuredDirty.value) {
       structuredEditorHandle.value?.discard()
       structuredDirty.value = false
@@ -1129,7 +1128,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     }
   }
 
-  async function resolveUnsavedChanges(): Promise<TUnsavedChangesResolution> {
+  async function resolveUnsavedChanges (): Promise<TUnsavedChangesResolution> {
     if (!dirty.value) {
       return 'continue'
     }
@@ -1170,7 +1169,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     return 'continue'
   }
 
-  function confirmUnsavedChanges(): Promise<'save' | 'discard' | 'cancel'> {
+  function confirmUnsavedChanges (): Promise<'save' | 'discard' | 'cancel'> {
     pendingUnsavedResolver?.('cancel')
     unsavedDialogVisible.value = true
 
@@ -1179,7 +1178,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     })
   }
 
-  function resolveUnsavedDialog(choice: 'save' | 'discard' | 'cancel'): void {
+  function resolveUnsavedDialog (choice: 'save' | 'discard' | 'cancel'): void {
     const resolve = pendingUnsavedResolver
 
     if (!resolve) {
@@ -1191,19 +1190,19 @@ export function useSkillDevelopment(skillId: Ref<string>) {
     resolve(choice)
   }
 
-  function confirmUnsavedSave(): void {
+  function confirmUnsavedSave (): void {
     resolveUnsavedDialog('save')
   }
 
-  function confirmUnsavedDiscard(): void {
+  function confirmUnsavedDiscard (): void {
     resolveUnsavedDialog('discard')
   }
 
-  function cancelUnsavedNavigation(): void {
+  function cancelUnsavedNavigation (): void {
     resolveUnsavedDialog('cancel')
   }
 
-  function applyPageError(error: unknown): void {
+  function applyPageError (error: unknown): void {
     errorMessage.value =
       error instanceof Error ? error.message : 'Skill 加载失败。'
 
@@ -1238,7 +1237,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns Chat、结构化 E2E 或代码文件目标。
    * @throws 不抛出异常。
    */
-  function getRetainedWorkspaceTarget(): TSkillDevelopmentWorkspaceTarget {
+  function getRetainedWorkspaceTarget (): TSkillDevelopmentWorkspaceTarget {
     if (currentFile.value) {
       return { panel: 'code', relativePath: currentFile.value.relativePath }
     }
@@ -1264,7 +1263,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 两个目标指向同一面板和文件时返回 true。
    * @throws 不抛出异常。
    */
-  function isSameWorkspaceTarget(
+  function isSameWorkspaceTarget (
     left: TSkillDevelopmentWorkspaceTarget,
     right: TSkillDevelopmentWorkspaceTarget,
   ): boolean {
@@ -1294,7 +1293,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 允许离开时返回 true，用户取消时返回 false。
    * @throws 不抛出异常。
    */
-  async function resolveRouteLeave(): Promise<boolean> {
+  async function resolveRouteLeave (): Promise<boolean> {
     return (await resolveUnsavedChanges()) === 'continue'
   }
 
@@ -1304,7 +1303,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
    * @returns 允许更新时返回 true，用户取消时返回 false。
    * @throws 不抛出异常。
    */
-  async function resolveRouteUpdate(
+  async function resolveRouteUpdate (
     to: RouteLocationNormalized,
   ): Promise<boolean> {
     if (!dirty.value) {
@@ -1397,7 +1396,7 @@ export function useSkillDevelopment(skillId: Ref<string>) {
   }
 }
 
-function treeContainsPath(
+function treeContainsPath (
   nodes: ISkillFileTreeNode[],
   relativePath: string,
 ): boolean {
@@ -1411,7 +1410,7 @@ function treeContainsPath(
  * @returns 匹配的文件节点；不存在时返回 undefined。
  * @throws 不抛出异常。
  */
-function findFileNode(
+function findFileNode (
   nodes: ISkillFileTreeNode[],
   relativePath: string,
 ): Extract<ISkillFileTreeNode, { kind: 'file' }> | undefined {

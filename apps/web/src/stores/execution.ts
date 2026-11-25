@@ -23,7 +23,7 @@ import type {
   TExecutionStage,
   TExecutionStageStatus,
   TExecutionStatus,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   fetchExecutionSnapshot,
   fetchLatestExecutionSnapshot,
@@ -112,12 +112,12 @@ export const useExecutionStore = defineStore('test-execution', () => {
   const streamControllers = new Map<string, AbortController>()
 
   /** 判断指定 Skill 是否存在可展示的执行内容。 */
-  function hasContent(skillId: string): boolean {
+  function hasContent (skillId: string): boolean {
     return Boolean(records[skillId])
   }
 
   /** 判断指定 Skill 是否有运行中的执行。 */
-  function isRunning(skillId: string): boolean {
+  function isRunning (skillId: string): boolean {
     const record = records[skillId]
     return Boolean(
       record &&
@@ -126,12 +126,12 @@ export const useExecutionStore = defineStore('test-execution', () => {
   }
 
   /** 注入文件树刷新回调。 */
-  function setTreeRefresher(refresh: (() => void) | null): void {
+  function setTreeRefresher (refresh: (() => void) | null): void {
     treeRefresher = refresh
   }
 
   /** 清除当前通知（组件展示后调用）。 */
-  function dismissNotification(): void {
+  function dismissNotification (): void {
     lastNotification.value = null
   }
 
@@ -143,7 +143,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
    *          records[skillId].issues 供就绪摘要渲染）。
    * @throws 网络错误向上抛出（由调用方提示）。
    */
-  async function startExecution(skillId: string): Promise<boolean> {
+  async function startExecution (skillId: string): Promise<boolean> {
     // 新一轮发起总是覆盖旧状态（PRD：卡片保留直至下一次执行）。
     delete records[skillId]
 
@@ -190,7 +190,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
    * @param skillId - 目标 Skill。
    * @returns 恢复完成后兑现。
    */
-  async function restore(skillId: string): Promise<void> {
+  async function restore (skillId: string): Promise<void> {
     if (records[skillId] && isRunning(skillId)) {
       return
     }
@@ -217,7 +217,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
    * @returns 接管完成后兑现。
    * @throws 不抛出异常——快照不可用时静默降级（卡片仍有服务端摘要）。
    */
-  async function adopt(skillId: string, executionId: string): Promise<void> {
+  async function adopt (skillId: string, executionId: string): Promise<void> {
     // 已有记录且就是这一次：不重复接管（重复调用是组件的常态）。
     if (records[skillId]?.executionId === executionId) return
 
@@ -231,7 +231,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
   }
 
   /** 停止执行（X10）。 */
-  async function stop(skillId: string): Promise<void> {
+  async function stop (skillId: string): Promise<void> {
     const record = records[skillId]
     if (!record || !record.executionId) return
 
@@ -251,7 +251,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
    * @param executionId - 执行 ID。
    * @param afterSeq - 补发起点。
    */
-  async function openStream(
+  async function openStream (
     skillId: string,
     executionId: string,
     afterSeq?: number,
@@ -305,7 +305,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
       // 断线退避重连。
       const delay =
         RECONNECT_DELAYS_MS[
-          Math.min(reconnectIndex, RECONNECT_DELAYS_MS.length - 1)
+        Math.min(reconnectIndex, RECONNECT_DELAYS_MS.length - 1)
         ]
       reconnectIndex += 1
       streamStates[skillId] = 'connecting'
@@ -318,7 +318,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
   }
 
   /** 用服务端快照重建展示状态（X16），并按需续连 SSE。 */
-  function adoptSnapshot(skillId: string, snapshot: IExecutionSnapshot): void {
+  function adoptSnapshot (skillId: string, snapshot: IExecutionSnapshot): void {
     if (records[skillId]?.executionId === snapshot.executionId) {
       return
     }
@@ -349,7 +349,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
   }
 
   /** 应用一条执行事件到展示状态。 */
-  function applyEvent(skillId: string, event: TExecutionEvent): void {
+  function applyEvent (skillId: string, event: TExecutionEvent): void {
     const record = records[skillId]
     if (!record || event.seq < 0) return
 
@@ -430,7 +430,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function publishNotification(
+  function publishNotification (
     skillId: string,
     record: IExecutionRecordState,
     summary: IExecutionSummary,
@@ -476,7 +476,7 @@ export const useExecutionStore = defineStore('test-execution', () => {
 })
 
 /** 判断执行状态是否为终态。 */
-function isTerminalStatus(status: TExecutionStatus): boolean {
+function isTerminalStatus (status: TExecutionStatus): boolean {
   return (
     status === 'completed' || status === 'failed' || status === 'interrupted'
   )
@@ -491,7 +491,7 @@ function isTerminalStatus(status: TExecutionStatus): boolean {
  * @param issues - 错误信封携带的问题明细。
  * @returns 就绪摘要可渲染的问题列表。
  */
-function toPrecheckIssues(
+function toPrecheckIssues (
   issues?: Array<{ code: string; message: string; target?: string }>,
 ): IExecutionPrecheckIssue[] {
   return (issues ?? []).map((issue) => ({

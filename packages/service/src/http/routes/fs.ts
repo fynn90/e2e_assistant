@@ -10,7 +10,7 @@ import type {
   IBrowseRootsResponse,
   ICreateDirectoryResponse,
   IListDirectoryResponse,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   createDirectory,
   listBrowseRoots,
@@ -27,7 +27,7 @@ const createDirectorySchema = z
   })
   .strict()
 
-export function createFsRoutes(): Hono<IAppEnv> {
+export function createFsRoutes (): Hono<IAppEnv> {
   const routes = new Hono<IAppEnv>()
 
   routes.get('/directories', async (context) => {

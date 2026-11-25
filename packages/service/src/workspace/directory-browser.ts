@@ -9,7 +9,7 @@ import path from 'node:path'
 import type {
   IDirectoryEntry,
   IDirectoryListing,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   mapWithConcurrencyLimit,
   withTimeoutRejection,
@@ -53,7 +53,7 @@ interface IListDirectoryOptions {
  *         无权限访问时抛出 DIRECTORY_NOT_ACCESSIBLE；
  *         访问超时（例如已断开的网络盘）时抛出 DIRECTORY_TIMEOUT。
  */
-export async function listDirectory(
+export async function listDirectory (
   options: IListDirectoryOptions,
 ): Promise<IDirectoryListing> {
   const directoryPath = normalizeDirectoryPath(options.directoryPath)
@@ -117,7 +117,7 @@ export async function listDirectory(
  *         父目录不可访问或无权限时抛出 DIRECTORY_NOT_ACCESSIBLE；
  *         父目录访问超时（例如已断开的网络盘）时抛出 DIRECTORY_TIMEOUT。
  */
-export async function createDirectory(options: {
+export async function createDirectory (options: {
   parentPath: string
   name: string
 }): Promise<{ absolutePath: string }> {
@@ -190,7 +190,7 @@ export async function createDirectory(options: {
  * @returns 上一级目录绝对路径；已是根目录时返回 null。
  * @throws 不抛出异常。
  */
-function resolveParentDirectoryPath(directoryPath: string): string | null {
+function resolveParentDirectoryPath (directoryPath: string): string | null {
   const parentPath = path.dirname(directoryPath)
 
   // path.dirname 在文件系统根会返回其自身（POSIX 的 '/'、Windows 的 'D:\' 以及 UNC 共享根均如此），
@@ -205,7 +205,7 @@ function resolveParentDirectoryPath(directoryPath: string): string | null {
  * @returns 目录项集合。
  * @throws 超过超时上限时抛出 DIRECTORY_TIMEOUT。
  */
-function readDirectoryEntries(directoryPath: string): Promise<Dirent[]> {
+function readDirectoryEntries (directoryPath: string): Promise<Dirent[]> {
   return withTimeoutRejection(
     readdir(directoryPath, { withFileTypes: true }),
     FILE_SYSTEM_TIMEOUT_MS,
@@ -219,7 +219,7 @@ function readDirectoryEntries(directoryPath: string): Promise<Dirent[]> {
  * @returns 提示目录响应超时的领域错误。
  * @throws 不抛出异常，仅返回错误实例。
  */
-function createFileSystemTimeoutError(): DirectoryBrowserError {
+function createFileSystemTimeoutError (): DirectoryBrowserError {
   return new DirectoryBrowserError(
     'DIRECTORY_TIMEOUT',
     '访问该目录超时，它可能位于已断开的网络位置。请检查网络连接后重试。',
@@ -234,7 +234,7 @@ function createFileSystemTimeoutError(): DirectoryBrowserError {
  * @throws 目录不存在时抛出 DIRECTORY_NOT_FOUND；
  *         路径指向文件或无权限访问时抛出 DIRECTORY_NOT_ACCESSIBLE。
  */
-async function assertDirectoryAccessible(directoryPath: string): Promise<void> {
+async function assertDirectoryAccessible (directoryPath: string): Promise<void> {
   let directoryStats: Awaited<ReturnType<typeof stat>>
 
   try {
@@ -299,7 +299,7 @@ async function assertDirectoryAccessible(directoryPath: string): Promise<void> {
  * @throws 路径为空时抛出 INVALID_REQUEST；
  *         路径不是绝对路径时抛出 INVALID_REQUEST 并提示需要绝对路径。
  */
-function normalizeDirectoryPath(directoryPath: string): string {
+function normalizeDirectoryPath (directoryPath: string): string {
   const trimmedPath = directoryPath.trim()
 
   if (!trimmedPath) {
@@ -338,7 +338,7 @@ function normalizeDirectoryPath(directoryPath: string): string {
  * @returns 盘符根目录路径；输入不是 Windows 盘符简写时返回 null。
  * @throws 不抛出异常。
  */
-export function resolveWindowsDriveShortcut(
+export function resolveWindowsDriveShortcut (
   input: string,
   platform: NodeJS.Platform = process.platform,
 ): string | null {
@@ -357,7 +357,7 @@ export function resolveWindowsDriveShortcut(
  * @returns 错误码匹配时返回 true，否则返回 false。
  * @throws 不抛出异常。
  */
-function isFileSystemErrorCode(error: unknown, expectedCode: string): boolean {
+function isFileSystemErrorCode (error: unknown, expectedCode: string): boolean {
   return (
     typeof error === 'object' &&
     error !== null &&

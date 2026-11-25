@@ -13,20 +13,20 @@ import type {
   ISkillDocumentGenerationResult,
   IUpdateE2ETestCaseData,
   IUpdateE2ETestCaseRequest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IAuthinePlatformConfig } from '../../config/config-store'
 
 export interface IE2ETestCaseApplicationServices {
-  get(input: {
+  get (input: {
     rootDir: string
     skillId: string
   }): Promise<IE2ETestCaseDocumentData>
-  update(input: {
+  update (input: {
     rootDir: string
     skillId: string
     request: IUpdateE2ETestCaseRequest
   }): Promise<IUpdateE2ETestCaseData>
-  generate(input: {
+  generate (input: {
     config: IAuthinePlatformConfig
     skillId: string
     /** 本次生成的 Agent 会话 ID：路由生成并在 SSE start 事件下发给前端订阅。 */
@@ -58,7 +58,7 @@ export interface IE2ETestCaseApplicationServices {
       skillId?: string
     }) => Promise<void>
   }): Promise<IGeneratePlaywrightData>
-  saveScript(input: {
+  saveScript (input: {
     rootDir: string
     skillId: string
     request: ISavePlaywrightScriptRequest

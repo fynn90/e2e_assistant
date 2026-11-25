@@ -9,9 +9,9 @@
  */
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
-import type { IE2ETestCase } from '@authine-e2e-agent/types'
-import type { IToolGuard } from '@authine-e2e-agent/agent'
-import type { TApiErrorCode } from '@authine-e2e-agent/types'
+import type { IE2ETestCase } from '@fynn90-e2e_assistant/types'
+import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
+import type { TApiErrorCode } from '@fynn90-e2e_assistant/types'
 import { createGenerationWriteGuard } from './generation-tool-guards'
 import { SkillDocumentAgentError } from '../../shared/errors/skill-document-errors'
 import type { ISkillGenerationSessionRunner } from '../../shared/ports/skill-generation-session'
@@ -31,7 +31,7 @@ export interface ISkillMarkdownGenerator {
    * @returns Agent 生成的候选内容、警告和假设。
    * @throws SkillDocumentAgentError 当 Agent 取消、失败或未生成目标文件时抛出。
    */
-  generate(
+  generate (
     input: {
       testCase: IE2ETestCase
       targetDirectory: string
@@ -67,12 +67,12 @@ export interface ISkillMarkdownCandidate {
  * @returns 通过会话运行器执行、由 Agent 写入文件并由本模块读回校验的生成器。
  * @throws 不在创建阶段抛出模型错误；运行时错误由 generate 转换为稳定错误码。
  */
-export function createSkillMarkdownGenerator(options: {
+export function createSkillMarkdownGenerator (options: {
   workspace: string
   sessionRunner: ISkillGenerationSessionRunner
 }): ISkillMarkdownGenerator {
   return {
-    async generate(input, generationOptions): Promise<ISkillMarkdownCandidate> {
+    async generate (input, generationOptions): Promise<ISkillMarkdownCandidate> {
       const targetFile = resolve(input.targetDirectory, 'SKILL.md')
       generationOptions.onProgress?.('requesting-model')
 
@@ -144,7 +144,7 @@ export function createSkillMarkdownGenerator(options: {
  * @returns 包含 Skill 调用要求、目标文件和 test_case 数据的用户提示词。
  * @throws 不抛出异常。
  */
-function buildSkillMarkdownPrompt(
+function buildSkillMarkdownPrompt (
   input: { testCase: IE2ETestCase; previousContent?: string },
   targetFile: string,
 ): string {
@@ -171,7 +171,7 @@ function buildSkillMarkdownPrompt(
  * @returns 工具调用前守卫。
  * @throws 不抛出异常；不符合白名单的调用返回阻断结果。
  */
-function createSkillDocumentToolGuard(
+function createSkillDocumentToolGuard (
   workspace: string,
   targetFile: string,
 ): IToolGuard {
@@ -192,7 +192,7 @@ function createSkillDocumentToolGuard(
  * @returns 稳定的 Agent 错误码。
  * @throws 不抛出异常。
  */
-function classifyAgentError(
+function classifyAgentError (
   error: unknown,
 ): Extract<
   TApiErrorCode,

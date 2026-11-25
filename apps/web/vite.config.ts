@@ -9,13 +9,13 @@ const cliTarget = `http://127.0.0.1:${cliPort}`
 const webPort = Number(process.env.AUTHINE_WEB_PORT ?? '5176')
 const printDevelopmentUrlPlugin = {
   name: 'authine-print-development-url',
-  configureServer(server) {
+  configureServer (server) {
     server.httpServer?.once('listening', () => {
       const developmentUrl = server.resolvedUrls?.local[0]
 
       if (developmentUrl) {
         console.log(
-          `\n  🚀【web】 @authine-e2e-agent/web hot reload: ${developmentUrl}`,
+          `\n  🚀【web】 @fynn90-e2e_assistant/web hot reload: ${developmentUrl}`,
         )
         console.log(`  🚀【web】 CLI API proxy: ${cliTarget}`)
       }
@@ -40,7 +40,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id) {
+        manualChunks (id) {
           if (id.includes('monaco-editor')) return 'monaco-editor'
           if (id.includes('markdown-it') || id.includes('dompurify'))
             return 'chat-markdown'

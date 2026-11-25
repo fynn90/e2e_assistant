@@ -18,7 +18,7 @@ import {
   INTERACTION_OTHER_TEXT_LIMIT,
   type IAgentInteractionOption,
   type IAgentInteractionQuestion,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /** 作答草稿的对外接口。 */
 export interface IAskUserQuestionDraft {
@@ -55,7 +55,7 @@ export interface IAskUserQuestionDraft {
  * @returns 作答草稿接口。
  * @throws 不抛出异常。
  */
-export function useAskUserQuestionDraft(
+export function useAskUserQuestionDraft (
   questions: ComputedRef<IAgentInteractionQuestion[]>,
 ): IAskUserQuestionDraft {
   const selections = ref<Record<string, string>>({})
@@ -75,7 +75,7 @@ export function useAskUserQuestionDraft(
    * @returns 选项值 / 「其它」原文；未作答时 undefined。
    * @throws 不抛出异常。
    */
-  function answerOf(questionKey: string): string | undefined {
+  function answerOf (questionKey: string): string | undefined {
     const selection = selections.value[questionKey]
     if (selection === undefined) return undefined
     if (selection !== INTERACTION_OTHER_OPTION_VALUE) return selection
@@ -92,7 +92,7 @@ export function useAskUserQuestionDraft(
    * @returns 已填完为 true。
    * @throws 不抛出异常。
    */
-  function isAnswered(questionKey: string): boolean {
+  function isAnswered (questionKey: string): boolean {
     return answerOf(questionKey) !== undefined
   }
 
@@ -109,7 +109,7 @@ export function useAskUserQuestionDraft(
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function setSelection(questionKey: string, value: string): void {
+  function setSelection (questionKey: string, value: string): void {
     selections.value = { ...selections.value, [questionKey]: value }
   }
 
@@ -121,7 +121,7 @@ export function useAskUserQuestionDraft(
    * @returns 无返回值。
    * @throws 不抛出异常。
    */
-  function setOtherText(questionKey: string, text: string): void {
+  function setOtherText (questionKey: string, text: string): void {
     otherTexts.value = { ...otherTexts.value, [questionKey]: text }
   }
 
@@ -132,7 +132,7 @@ export function useAskUserQuestionDraft(
    * @returns 选项值；未选中时为空串。
    * @throws 不抛出异常。
    */
-  function selectionOf(questionKey: string): string {
+  function selectionOf (questionKey: string): string {
     return selections.value[questionKey] ?? ''
   }
 
@@ -143,7 +143,7 @@ export function useAskUserQuestionDraft(
    * @returns 输入原文；未填时为空串。
    * @throws 不抛出异常。
    */
-  function otherTextOf(questionKey: string): string {
+  function otherTextOf (questionKey: string): string {
     return otherTexts.value[questionKey] ?? ''
   }
 
@@ -169,7 +169,7 @@ export function useAskUserQuestionDraft(
  * @returns 单问题形态为该题的作答值；多问题形态为以 questionId 为键的回答表。
  * @throws Error 存在未作答的题，或「其它」内容为空、超长时抛出。
  */
-export function buildAskUserQuestionAnswer(
+export function buildAskUserQuestionAnswer (
   questions: IAgentInteractionQuestion[],
   answerOf: (questionKey: string) => string | undefined,
 ): string | Record<string, string> {
@@ -202,7 +202,7 @@ export function buildAskUserQuestionAnswer(
  * @returns 超长时的错误文案；否则 undefined。
  * @throws 不抛出异常。
  */
-export function otherTextError(
+export function otherTextError (
   option: IAgentInteractionOption | undefined,
   text: string,
 ): string | undefined {

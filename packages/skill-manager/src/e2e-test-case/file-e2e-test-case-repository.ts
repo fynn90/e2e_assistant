@@ -6,7 +6,7 @@ import {
   parseE2ETestCase,
   validateE2ETestCaseForSave,
   type IE2ETestCase,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { E2E_SCHEMA_FILE_NAME, SKILL_MANIFEST_FILE_NAME } from '../constants'
 import { resolveSkill } from '../detail'
 import { SkillManagerError } from '../errors'
@@ -45,7 +45,7 @@ export class FileE2ETestCaseRepository implements IE2ETestCaseRepository {
   }
 
   /** 读取、校验并在需要时修复 manifest/list 查询投影。 */
-  async findBySkillId(skillId: string): Promise<IE2ETestCaseDocument> {
+  async findBySkillId (skillId: string): Promise<IE2ETestCaseDocument> {
     const resolvedSkill = await resolveSkill(this.#options, skillId)
     const snapshot = await readFixedUtf8File(
       resolvedSkill.skillRoot,
@@ -77,7 +77,7 @@ export class FileE2ETestCaseRepository implements IE2ETestCaseRepository {
   }
 
   /** 在 per-skill lock 内保存权威用例文件，再同步 manifest 和全局索引投影。 */
-  async save(
+  async save (
     skillId: string,
     testCase: IE2ETestCase,
     expectedVersion: string,
@@ -178,7 +178,7 @@ export class FileE2ETestCaseRepository implements IE2ETestCaseRepository {
     }
   }
 
-  async #reconcileManifest(
+  async #reconcileManifest (
     skillId: string,
     testCase: IE2ETestCase,
   ): Promise<void> {
@@ -203,7 +203,7 @@ export class FileE2ETestCaseRepository implements IE2ETestCaseRepository {
   }
 }
 
-function parseStoredTestCase(content: string): IE2ETestCase {
+function parseStoredTestCase (content: string): IE2ETestCase {
   let input: unknown
 
   try {

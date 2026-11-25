@@ -1,6 +1,6 @@
 import { readdir } from 'node:fs/promises'
 import path from 'node:path'
-import type { IProjectFileItem } from '@authine-e2e-agent/types'
+import type { IProjectFileItem } from '@fynn90-e2e_assistant/types'
 
 interface IListProjectFilesOptions {
   rootDirectory: string
@@ -13,7 +13,7 @@ interface IListProjectFilesOptions {
  * @param options 文件读取参数。
  * @returns 扁平化后的文件列表。
  */
-export async function listProjectFiles(
+export async function listProjectFiles (
   options: IListProjectFilesOptions,
 ): Promise<IProjectFileItem[]> {
   const collectedFileItems: IProjectFileItem[] = []
@@ -46,7 +46,7 @@ interface IWalkDirectoryOptions {
  * @param options 当前递归层级的遍历参数。
  * @returns 遍历完成后无返回值。
  */
-async function walkDirectory(options: IWalkDirectoryOptions): Promise<void> {
+async function walkDirectory (options: IWalkDirectoryOptions): Promise<void> {
   if (
     options.depth > options.maxDepth ||
     options.collectedFileItems.length >= options.maxItems

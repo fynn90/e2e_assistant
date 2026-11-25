@@ -6,7 +6,7 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import process from 'node:process'
-import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@authine-e2e-agent/types'
+import { LOCAL_SERVICE_PROTOCOL_VERSION } from '@fynn90-e2e_assistant/types'
 import { createHttpApp } from '../../src/http/app'
 import { ChatConcurrencyGate } from '../../src/http/chat-concurrency'
 
@@ -28,9 +28,9 @@ afterEach(async () => {
   await rm(tempRoot, { recursive: true, force: true })
 })
 
-function createTestApp(logger = silentLogger) {
+function createTestApp (logger = silentLogger) {
   return createHttpApp({
-    chatRuntimeFactory() {
+    chatRuntimeFactory () {
       throw new Error('Chat runtime should not be called in this test.')
     },
     chatConcurrencyGate: new ChatConcurrencyGate(),
@@ -39,7 +39,7 @@ function createTestApp(logger = silentLogger) {
   })
 }
 
-const silentLogger = { request() {}, error() {} }
+const silentLogger = { request () { }, error () { } }
 
 describe('local HTTP app', () => {
   it('returns the shared CLI health protocol', async () => {
@@ -113,7 +113,7 @@ describe('local HTTP app', () => {
   it('静态资源成功请求不产生日志调用', async () => {
     // 一次页面加载产生二十余行 /assets/* 记录，是日志刷屏的主因（v19 Q1）。
     const requestLogger = vi.fn()
-    const app = createTestApp({ request: requestLogger, error() {} })
+    const app = createTestApp({ request: requestLogger, error () { } })
 
     const response = await app.request('http://127.0.0.1:5826/assets/app.js')
 
@@ -124,7 +124,7 @@ describe('local HTTP app', () => {
 
   it('静态资源请求失败时仍产生错误日志', async () => {
     const errorLogger = vi.fn()
-    const app = createTestApp({ request() {}, error: errorLogger })
+    const app = createTestApp({ request () { }, error: errorLogger })
 
     const response = await app.request('http://127.0.0.1:5826/assets/missing.js')
 
@@ -136,7 +136,7 @@ describe('local HTTP app', () => {
 
   it('API 请求的成功日志保持', async () => {
     const requestLogger = vi.fn()
-    const app = createTestApp({ request: requestLogger, error() {} })
+    const app = createTestApp({ request: requestLogger, error () { } })
 
     await app.request('http://127.0.0.1:5826/api/config')
 

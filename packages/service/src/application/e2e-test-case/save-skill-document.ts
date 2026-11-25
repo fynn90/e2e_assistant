@@ -15,12 +15,12 @@ import {
   FileSkillDocumentRepository,
   SkillManagerError,
   collectSkillDocumentDiagnostics,
-} from '@authine-e2e-agent/skill-manager'
-import { isBlockingDiagnostic } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/skill-manager'
+import { isBlockingDiagnostic } from '@fynn90-e2e_assistant/types'
 import type {
   ISaveSkillDocumentData,
   ISaveSkillDocumentRequest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 保存 SKILL.md 正文并提交 manifest.generatedSkill 元数据。
@@ -29,7 +29,7 @@ import type {
  * @returns 写入后的文件版本、元数据与校验诊断。
  * @throws SkillManagerError 当来源哈希不一致、generation 模式校验失败或写入冲突时抛出。
  */
-export async function saveSkillDocument(input: {
+export async function saveSkillDocument (input: {
   rootDir: string
   skillId: string
   request: ISaveSkillDocumentRequest

@@ -1,5 +1,5 @@
 // 目录选择器状态机测试：验证加载、导航、初始路径降级与新建文件夹行为。
-import type { IDirectoryListing } from '@authine-e2e-agent/types'
+import type { IDirectoryListing } from '@fynn90-e2e_assistant/types'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { ApiClientError } from '../../src/services/http-client'
 import { useDirectoryBrowser } from '../../src/modules/configuration/composables/useDirectoryBrowser'
@@ -21,7 +21,7 @@ vi.mock('../../src/modules/configuration/services/directory-api', () => ({
  * @returns 完整的目录浏览响应数据。
  * @throws 不抛出异常。
  */
-function buildListing(
+function buildListing (
   currentPath: string,
   overrides: Partial<IDirectoryListing> = {},
 ): IDirectoryListing {
@@ -42,7 +42,7 @@ function buildListing(
  * @returns 携带 DIRECTORY_NOT_FOUND 错误码的客户端异常。
  * @throws 不抛出异常。
  */
-function buildNotFoundError(): ApiClientError {
+function buildNotFoundError (): ApiClientError {
   return new ApiClientError({
     message: '目录不存在。',
     status: 404,

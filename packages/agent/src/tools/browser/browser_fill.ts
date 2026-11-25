@@ -9,7 +9,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import { isSensitiveTestDataEntry } from '@authine-e2e-agent/types'
+import { isSensitiveTestDataEntry } from '@fynn90-e2e_assistant/types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** browser_fill 工具接受的参数 Schema。 */
@@ -66,7 +66,7 @@ export interface BrowserFillDetails {
  * @throws 不在创建阶段抛出异常；selector 为空、引用解析失败、元素不可编辑、
  * 取消或浏览器断连时由宿主抛出结构化错误，并由运行器记为工具失败。
  */
-export function createBrowserFillTool(
+export function createBrowserFillTool (
   host: IBrowserSessionHost,
 ): AgentTool<typeof fillParameters, BrowserFillDetails> {
   return {
@@ -90,15 +90,15 @@ export function createBrowserFillTool(
      * @returns 包含填入后页面地址与标题的工具结果。
      * @throws 由宿主抛出的结构化浏览器错误透传，由运行器记为工具失败。
      */
-    async execute(toolCallId, parameters, signal, onUpdate) {
+    async execute (toolCallId, parameters, signal, onUpdate) {
       void toolCallId
       void signal
       void onUpdate
 
       const result = await host.fillElement(parameters.selector, parameters.value, {
 
-          ...(parameters.frameId ? { frameId: parameters.frameId } : {}),
-          ...(parameters.timeoutMs !== undefined
+        ...(parameters.frameId ? { frameId: parameters.frameId } : {}),
+        ...(parameters.timeoutMs !== undefined
           ? { timeoutMs: parameters.timeoutMs }
           : {}),
       })

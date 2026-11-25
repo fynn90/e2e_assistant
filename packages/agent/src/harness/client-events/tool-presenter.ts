@@ -10,7 +10,7 @@ import type {
   TAgentFileChangeOperation,
   TAgentToolAction,
   TAgentToolCategory,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 工具的客户端展示信息。
@@ -44,9 +44,9 @@ type TToolArgs = Record<string, unknown>
 /** 展示规则：match 命中后按 describe 生成展示信息。 */
 interface IPresenterRule {
   /** 判断该规则是否适用于指定工具。 */
-  match(toolName: string): boolean
+  match (toolName: string): boolean
   /** 由工具名与参数生成展示信息。 */
-  describe(toolName: string, args: TToolArgs): IToolPresentation
+  describe (toolName: string, args: TToolArgs): IToolPresentation
   /** 从参数提取文件变更信息；非文件变更类工具返回 undefined。 */
   fileChange?(
     args: TToolArgs,
@@ -55,13 +55,13 @@ interface IPresenterRule {
 }
 
 /** 取参数字符串字段；非字符串返回 undefined。 */
-function stringArg(args: TToolArgs, key: string): string | undefined {
+function stringArg (args: TToolArgs, key: string): string | undefined {
   const value = args[key]
   return typeof value === 'string' && value.length > 0 ? value : undefined
 }
 
 /** 路径类参数的常见字段名，按优先级取值。 */
-function pathArg(args: TToolArgs): string | undefined {
+function pathArg (args: TToolArgs): string | undefined {
   return (
     stringArg(args, 'path') ??
     stringArg(args, 'file') ??
@@ -211,7 +211,7 @@ const BROWSER_ACTIONS: Record<
  *          `other` 动作 + 「浏览器操作：<动作名>」标题。
  * @throws 不抛出异常。
  */
-function browserActionOf(toolName: string): {
+function browserActionOf (toolName: string): {
   action: TAgentToolAction
   title: string
 } {
@@ -232,7 +232,7 @@ function browserActionOf(toolName: string): {
  * @param toolLabel - 工具自带人类可读标签（未收录规则的兜底标题）。
  * @returns 展示类别、标题与可选补充信息。
  */
-export function presentTool(
+export function presentTool (
   toolName: string,
   args: unknown,
   toolLabel?: string,
@@ -256,7 +256,7 @@ export function presentTool(
  * @param toolName - 工具机器名。
  * @returns bash 类工具返回 true。
  */
-export function isCommandTool(toolName: string): boolean {
+export function isCommandTool (toolName: string): boolean {
   return toolName === 'bash'
 }
 
@@ -266,7 +266,7 @@ export function isCommandTool(toolName: string): boolean {
  * @param args - 工具参数。
  * @returns 命令文本与可选执行目录。
  */
-export function extractCommand(args: unknown): {
+export function extractCommand (args: unknown): {
   command: string
   cwd?: string
 } {
@@ -286,7 +286,7 @@ export function extractCommand(args: unknown): {
  * @param pathExistedBefore - 目标路径在工具执行前是否已存在（write 区分新建/更新）。
  * @returns 文件变更信息；非文件变更类工具返回 undefined。
  */
-export function extractFileChange(
+export function extractFileChange (
   toolName: string,
   args: unknown,
   pathExistedBefore: boolean,

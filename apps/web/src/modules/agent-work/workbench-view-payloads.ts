@@ -19,30 +19,30 @@ import type {
   ISkillListViewPayload,
   IWorkbenchSkillRow,
   TWorkbenchSkillListStatus,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /** 读取为数组；非数组时给空数组。 */
-function asArray<T>(value: unknown): T[] {
+function asArray<T> (value: unknown): T[] {
   return Array.isArray(value) ? (value as T[]) : []
 }
 
 /** 读取为字符串；非字符串时给空串。 */
-function asText(value: unknown): string {
+function asText (value: unknown): string {
   return typeof value === 'string' ? value : ''
 }
 
 /** 读取为可选字符串；非字符串时给 undefined。 */
-function asOptionalText(value: unknown): string | undefined {
+function asOptionalText (value: unknown): string | undefined {
   return typeof value === 'string' && value.length > 0 ? value : undefined
 }
 
 /** 读取为布尔；非布尔时给 false。 */
-function asFlag(value: unknown): boolean {
+function asFlag (value: unknown): boolean {
   return value === true
 }
 
 /** 读取为数字；非数字时给 undefined。 */
-function asOptionalNumber(value: unknown): number | undefined {
+function asOptionalNumber (value: unknown): number | undefined {
   return typeof value === 'number' && Number.isFinite(value) ? value : undefined
 }
 
@@ -53,7 +53,7 @@ function asOptionalNumber(value: unknown): number | undefined {
  * @returns 归一化后的清单数据；字段缺失时降级为空清单。
  * @throws 不抛出异常。
  */
-export function readSkillListPayload(
+export function readSkillListPayload (
   payload: Record<string, unknown>,
 ): ISkillListViewPayload {
   const filter = payload.filter as Record<string, unknown> | undefined
@@ -67,12 +67,12 @@ export function readSkillListPayload(
     ...(overallTotal !== undefined ? { overallTotal } : {}),
     ...(filter
       ? {
-          filter: {
-            ...(keyword ? { keyword } : {}),
-            ...(tag ? { tag } : {}),
-            ...(status ? { status: status as TWorkbenchSkillListStatus } : {}),
-          },
-        }
+        filter: {
+          ...(keyword ? { keyword } : {}),
+          ...(tag ? { tag } : {}),
+          ...(status ? { status: status as TWorkbenchSkillListStatus } : {}),
+        },
+      }
       : {}),
   }
 }
@@ -84,7 +84,7 @@ export function readSkillListPayload(
  * @returns 字段完备的清单行。
  * @throws 不抛出异常。
  */
-function normalizeSkillRow(row: IWorkbenchSkillRow): IWorkbenchSkillRow {
+function normalizeSkillRow (row: IWorkbenchSkillRow): IWorkbenchSkillRow {
   const latestRun = row.latestRun
   const baseUrl = asOptionalText(row.baseUrl)
   const inlineActionId = asOptionalText(row.inlineActionId)
@@ -98,16 +98,16 @@ function normalizeSkillRow(row: IWorkbenchSkillRow): IWorkbenchSkillRow {
     ...(Array.isArray(row.tags) ? { tags: row.tags } : {}),
     ...(latestRun && typeof latestRun === 'object'
       ? {
-          latestRun: {
-            runId: asText(latestRun.runId),
-            at: asText(latestRun.at),
-            passed: asOptionalNumber(latestRun.passed) ?? 0,
-            failed: asOptionalNumber(latestRun.failed) ?? 0,
-            interrupted: asOptionalNumber(latestRun.interrupted) ?? 0,
-            skipped: asOptionalNumber(latestRun.skipped) ?? 0,
-            durationMs: asOptionalNumber(latestRun.durationMs) ?? 0,
-          },
-        }
+        latestRun: {
+          runId: asText(latestRun.runId),
+          at: asText(latestRun.at),
+          passed: asOptionalNumber(latestRun.passed) ?? 0,
+          failed: asOptionalNumber(latestRun.failed) ?? 0,
+          interrupted: asOptionalNumber(latestRun.interrupted) ?? 0,
+          skipped: asOptionalNumber(latestRun.skipped) ?? 0,
+          durationMs: asOptionalNumber(latestRun.durationMs) ?? 0,
+        },
+      }
       : {}),
     ...(inlineActionId ? { inlineActionId } : {}),
     ...(row.inlineAction ? { inlineAction: row.inlineAction } : {}),
@@ -121,7 +121,7 @@ function normalizeSkillRow(row: IWorkbenchSkillRow): IWorkbenchSkillRow {
  * @returns 归一化后的详情数据。
  * @throws 不抛出异常。
  */
-export function readSkillDetailPayload(
+export function readSkillDetailPayload (
   payload: Record<string, unknown>,
 ): ISkillDetailViewPayload {
   const baseUrl = asOptionalText(payload.baseUrl)
@@ -167,7 +167,7 @@ export function readSkillDetailPayload(
  * @returns 归一化后的历史数据。
  * @throws 不抛出异常。
  */
-export function readRunHistoryPayload(
+export function readRunHistoryPayload (
   payload: Record<string, unknown>,
 ): IRunHistoryViewPayload {
   const runs = asArray<IRunHistoryViewPayload['runs'][number]>(
@@ -203,7 +203,7 @@ export function readRunHistoryPayload(
  * @returns 归一化后的体检数据。
  * @throws 不抛出异常。
  */
-export function readReadinessPayload(
+export function readReadinessPayload (
   payload: Record<string, unknown>,
 ): IReadinessViewPayload {
   const checks = asArray<IReadinessViewPayload['checks'][number]>(
@@ -242,7 +242,7 @@ export function readReadinessPayload(
  * @returns 归一化后的能力清单。
  * @throws 不抛出异常。
  */
-export function readCapabilityPayload(
+export function readCapabilityPayload (
   payload: Record<string, unknown>,
 ): ICapabilityViewPayload {
   return {
@@ -280,7 +280,7 @@ const SKILL_LIST_STATUS_LABELS: Record<TWorkbenchSkillListStatus, string> = {
  * @returns 形如「按「最近失败」筛出 3 个用例」的说明；无筛选条件时返回空串。
  * @throws 不抛出异常。
  */
-export function describeSkillListFilter(
+export function describeSkillListFilter (
   filter: ISkillListViewPayload['filter'],
   total: number,
 ): string {

@@ -4,7 +4,7 @@
 import { constants as fsConstants } from 'node:fs'
 import { access, opendir, stat } from 'node:fs/promises'
 import path from 'node:path'
-import type { IDirectoryEntry } from '@authine-e2e-agent/types'
+import type { IDirectoryEntry } from '@fynn90-e2e_assistant/types'
 
 /**
  * 判定目录是否为空时需要忽略的系统文件。
@@ -31,7 +31,7 @@ export interface IDirectoryProbeResult {
  * @returns 空目录与可访问性标记；不可访问时 empty 记为 false。
  * @throws 不抛出异常，探测失败会转换为 inaccessible 结果。
  */
-export async function probeDirectory(
+export async function probeDirectory (
   directoryPath: string,
 ): Promise<IDirectoryProbeResult> {
   let directoryHandle: Awaited<ReturnType<typeof opendir>> | undefined
@@ -68,7 +68,7 @@ export async function probeDirectory(
  * @returns 子目录条目；条目为文件、链接失效或不可访问时返回 null。
  * @throws 不抛出异常，无法解析的条目会被忽略。
  */
-export async function resolveDirectoryEntry(options: {
+export async function resolveDirectoryEntry (options: {
   parentDirectory: string
   entryName: string
   isSymbolicLink: boolean
@@ -106,7 +106,7 @@ export async function resolveDirectoryEntry(options: {
  * @returns 可写时返回 true，否则返回 false。
  * @throws 不抛出异常。
  */
-export async function isDirectoryWritable(
+export async function isDirectoryWritable (
   directoryPath: string,
 ): Promise<boolean> {
   try {

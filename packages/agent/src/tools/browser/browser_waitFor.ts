@@ -14,7 +14,7 @@
 
 import { Type } from 'typebox'
 import type { AgentTool } from '@earendil-works/pi-agent-core'
-import type { IWaitCondition } from '@authine-e2e-agent/types'
+import type { IWaitCondition } from '@fynn90-e2e_assistant/types'
 import type { IBrowserSessionHost } from './Browser_session'
 
 /** 等待条件的类型标识取值。 */
@@ -101,7 +101,7 @@ export interface BrowserWaitForDetails {
  * @returns 引擎可执行的等待条件。
  * @throws {Error} 当 kind 与必填字段不匹配时抛出，错误消息面向模型说明缺哪个字段。
  */
-function toWaitCondition(parameters: {
+function toWaitCondition (parameters: {
   kind: (typeof WAIT_KINDS)[number]
   selector?: string
   state?: (typeof SELECTOR_STATES)[number]
@@ -144,7 +144,7 @@ function toWaitCondition(parameters: {
  * @returns 一句话条件描述。
  * @throws 不抛出异常。
  */
-function describeCondition(condition: IWaitCondition): string {
+function describeCondition (condition: IWaitCondition): string {
   switch (condition.kind) {
     case 'selector':
       return `元素「${condition.selector}」达到状态 ${condition.state ?? 'visible'}`
@@ -164,7 +164,7 @@ function describeCondition(condition: IWaitCondition): string {
  * @returns 可直接配置到 AgentTool[] 的 browser_waitFor 工具。
  * @throws 不在创建阶段抛出异常；条件非法、取消或浏览器断连时由宿主抛出结构化错误。
  */
-export function createBrowserWaitForTool(
+export function createBrowserWaitForTool (
   host: IBrowserSessionHost,
 ): AgentTool<typeof waitForParameters, BrowserWaitForDetails> {
   return {
@@ -184,7 +184,7 @@ export function createBrowserWaitForTool(
      * @returns 包含条件是否满足与实际耗时的工具结果。
      * @throws {Error} 当必填字段缺失时抛出；其余结构化浏览器错误由宿主透传。
      */
-    async execute(toolCallId, parameters, signal, onUpdate) {
+    async execute (toolCallId, parameters, signal, onUpdate) {
       void toolCallId
       void signal
       void onUpdate
@@ -192,7 +192,7 @@ export function createBrowserWaitForTool(
       const condition = toWaitCondition(parameters)
       const result = await host.waitForPage(condition, {
 
-        ...(parameters.frameId ? { frameId: parameters.frameId } : {}),        ...(parameters.timeoutMs !== undefined
+        ...(parameters.frameId ? { frameId: parameters.frameId } : {}), ...(parameters.timeoutMs !== undefined
           ? { timeoutMs: parameters.timeoutMs }
           : {}),
       })

@@ -13,18 +13,18 @@ import {
   FileE2ETestCaseRepository,
   FilePlaywrightScriptRepository,
   SkillManagerError,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import {
   PlaywrightScriptValidator,
   type IPlaywrightValidationIssue,
   type IPlaywrightValidationResult,
-} from '@authine-e2e-agent/playwright-engine'
-import { isBlockingDiagnostic } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/playwright-engine'
+import { isBlockingDiagnostic } from '@fynn90-e2e_assistant/types'
 import type {
   IFileSaveDiagnostic,
   ISavePlaywrightScriptData,
   ISavePlaywrightScriptRequest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { ApiError } from '../../shared/errors/api-error'
 import { buildValidationFailureDigest } from './validation-error-digest'
 
@@ -36,7 +36,7 @@ import { buildValidationFailureDigest } from './validation-error-digest'
  * @throws SkillManagerError 当来源哈希不一致或文件版本冲突时抛出。
  * @throws ApiError 当 generation 模式校验未通过时抛出。
  */
-export async function savePlaywrightScript(input: {
+export async function savePlaywrightScript (input: {
   rootDir: string
   skillId: string
   request: ISavePlaywrightScriptRequest
@@ -103,7 +103,7 @@ export async function savePlaywrightScript(input: {
  * @param validation - 静态校验结果。
  * @returns 合并 error / warning 并按码去重、截断后的诊断列表。
  */
-function toDiagnostics(
+function toDiagnostics (
   validation: IPlaywrightValidationResult,
 ): IFileSaveDiagnostic[] {
   const merged = [
@@ -139,7 +139,7 @@ function toDiagnostics(
 const MAX_LISTED_DIAGNOSTICS = 3
 
 /** 把单条校验问题转换为统一诊断形状。 */
-function toDiagnostic(issue: IPlaywrightValidationIssue): IFileSaveDiagnostic {
+function toDiagnostic (issue: IPlaywrightValidationIssue): IFileSaveDiagnostic {
   return {
     code: issue.code,
     message: issue.message,

@@ -12,7 +12,7 @@
  */
 
 import { basename, isAbsolute, relative, resolve } from 'node:path'
-import { SKILL_ENV_FILE_NAME } from '@authine-e2e-agent/skill-manager'
+import { SKILL_ENV_FILE_NAME } from '@fynn90-e2e_assistant/skill-manager'
 
 /**
  * 禁止 Agent 读取的值级敏感文件名清单（小写）。
@@ -57,7 +57,7 @@ export const PROTECTED_WRITE_FILE_NAMES: ReadonlySet<string> = new Set([
  * @returns 路径位于工作区内（含工作区自身）时返回 true。
  * @throws 不抛出异常。
  */
-export function isPathInsideWorkspace(
+export function isPathInsideWorkspace (
   workspace: string,
   requestedPath: unknown,
 ): boolean {
@@ -86,7 +86,7 @@ export function isPathInsideWorkspace(
  * @returns 命中清单时返回 true。
  * @throws 不抛出异常。
  */
-export function isPathWithFileNameIn(
+export function isPathWithFileNameIn (
   workspace: string,
   requestedPath: unknown,
   fileNames: ReadonlySet<string>,

@@ -5,13 +5,13 @@
 import { describe, expect, it } from 'vitest'
 import { resolve } from 'node:path'
 import { createGenerationWriteGuard } from '../../src/application/e2e-test-case/generation-tool-guards'
-import type { IToolGuard } from '@authine-e2e-agent/agent'
+import type { IToolGuard } from '@fynn90-e2e_assistant/agent'
 
 const WORKSPACE = '/tmp/authine-workspace'
 const TARGET = '/tmp/authine-workspace/skill-1/temp/candidate.spec.ts'
 
 /** 创建一条 SKILL.md 生成路径风格的守卫（无浏览器工具）。 */
-function createDocumentGuard(): IToolGuard {
+function createDocumentGuard (): IToolGuard {
   return createGenerationWriteGuard({
     id: 'test-document-guard',
     workspace: WORKSPACE,
@@ -22,7 +22,7 @@ function createDocumentGuard(): IToolGuard {
 }
 
 /** 创建一条 Playwright 脚本生成路径风格的守卫（放行 browser_ 前缀）。 */
-function createScriptGuard(): IToolGuard {
+function createScriptGuard (): IToolGuard {
   return createGenerationWriteGuard({
     id: 'test-script-guard',
     workspace: WORKSPACE,

@@ -11,20 +11,20 @@ const packageJsonGlobPaths = [
   path.join(workspaceRootPath, 'apps'),
   path.join(workspaceRootPath, 'packages'),
 ]
-const cliPackageName = '@authine-e2e-agent/cli'
-const webPackageName = '@authine-e2e-agent/web'
-const servicePackageName = '@authine-e2e-agent/service'
-const webHostPackageName = '@authine-e2e-agent/web-host'
-const agentPackageName = '@authine-e2e-agent/agent'
-const playwrightEnginePackageName = '@authine-e2e-agent/playwright-engine'
-const skillManagerPackageName = '@authine-e2e-agent/skill-manager'
+const cliPackageName = '@fynn90-e2e_assistant/cli'
+const webPackageName = '@fynn90-e2e_assistant/web'
+const servicePackageName = '@fynn90-e2e_assistant/service'
+const webHostPackageName = '@fynn90-e2e_assistant/web-host'
+const agentPackageName = '@fynn90-e2e_assistant/agent'
+const playwrightEnginePackageName = '@fynn90-e2e_assistant/playwright-engine'
+const skillManagerPackageName = '@fynn90-e2e_assistant/skill-manager'
 const requireChangeset = process.argv.includes('--require-changeset')
 
 /**
  * 执行发包前静态自检，输出错误与警告摘要。
  * @returns 校验完成后无返回值。
  */
-export async function runReleasePrecheck() {
+export async function runReleasePrecheck () {
   const changesetConfig = await readJsonFile(changesetConfigFilePath)
   const workspacePackages = await collectWorkspacePackages()
   const validationState = {
@@ -61,7 +61,7 @@ export async function runReleasePrecheck() {
  * 收集工作区内所有子包的 package.json 信息。
  * @returns 工作区包列表。
  */
-async function collectWorkspacePackages() {
+async function collectWorkspacePackages () {
   const packageFilePaths = []
 
   for (const parentDirectoryPath of packageJsonGlobPaths) {
@@ -108,7 +108,7 @@ async function collectWorkspacePackages() {
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-function validateWorkspacePackages(options) {
+function validateWorkspacePackages (options) {
   const ignoredPackageNames = new Set(options.changesetConfig.ignore ?? [])
   const packageNameMap = new Map()
 
@@ -168,7 +168,7 @@ function validateWorkspacePackages(options) {
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-async function validateCliBinShebang(options) {
+async function validateCliBinShebang (options) {
   const cliPackage = options.workspacePackages.find(
     (workspacePackage) => workspacePackage.packageJson.name === cliPackageName,
   )
@@ -197,8 +197,8 @@ async function validateCliBinShebang(options) {
     if (!binFileContent.startsWith('#!')) {
       options.validationState.errors.push(
         `${cliPackageName} 的 bin "${binName}" 指向的 ${binRelativePath} 首行不是 shebang：` +
-          'npm 生成的启动脚本不会加 node 前缀，用户安装后执行该命令会静默失败。' +
-          '请在 CLI 入口源文件首行添加 "#!/usr/bin/env node"。',
+        'npm 生成的启动脚本不会加 node 前缀，用户安装后执行该命令会静默失败。' +
+        '请在 CLI 入口源文件首行添加 "#!/usr/bin/env node"。',
       )
     }
   }
@@ -209,7 +209,7 @@ async function validateCliBinShebang(options) {
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-function validateSinglePackage(options) {
+function validateSinglePackage (options) {
   const packageJson = options.workspacePackage.packageJson
   const packageName = packageJson.name
   const isIgnored = options.ignoredPackageNames.has(packageName)
@@ -236,7 +236,7 @@ function validateSinglePackage(options) {
     if (!packageJson.engines?.node) {
       options.validationState.errors.push(
         `可发布包 ${packageName} 缺少 engines.node：用户用过低版本 Node 安装时拿不到任何提示，` +
-          '只会在运行命令时失败。应与仓库根基线一致（>=22.19.0）。',
+        '只会在运行命令时失败。应与仓库根基线一致（>=22.19.0）。',
       )
     }
 
@@ -267,7 +267,7 @@ function validateSinglePackage(options) {
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-function validateInternalDependencies(options) {
+function validateInternalDependencies (options) {
   const dependencySections = [
     'dependencies',
     'devDependencies',
@@ -309,7 +309,7 @@ function validateInternalDependencies(options) {
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-function validateWebHostDependency(options) {
+function validateWebHostDependency (options) {
   const webHostPackage = options.workspacePackages.find((workspacePackage) => workspacePackage.packageJson.name === webHostPackageName)
   const webPackage = options.workspacePackages.find((workspacePackage) => workspacePackage.packageJson.name === webPackageName)
   const servicePackage = options.workspacePackages.find((workspacePackage) => workspacePackage.packageJson.name === servicePackageName)
@@ -357,7 +357,7 @@ function validateWebHostDependency(options) {
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-function validateNoOneDependsOnCli(options) {
+function validateNoOneDependsOnCli (options) {
   const dependencySections = [
     'dependencies',
     'devDependencies',
@@ -384,14 +384,14 @@ function validateNoOneDependsOnCli(options) {
  * 校验 agent、playwright-engine、skill-manager 三包互不依赖。
  *
  * agent 是模型能力层，浏览器实现归 playwright-engine、SKILL 存储归 skill-manager，
- * 三者的共享契约（浏览器会话类型、脱敏器接口等）统一定义在 @authine-e2e-agent/types。
+ * 三者的共享契约（浏览器会话类型、脱敏器接口等）统一定义在 @fynn90-e2e_assistant/types。
  * 任何一边直接依赖另一边都会破坏依赖倒转：组合根（service / CLI）应负责装配实现，
  * 三包也才能独立构建、测试与发布。
  *
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-function validateBrowserLayerIndependence(options) {
+function validateBrowserLayerIndependence (options) {
   const dependencySections = [
     'dependencies',
     'devDependencies',
@@ -426,7 +426,7 @@ function validateBrowserLayerIndependence(options) {
       for (const dependencySection of dependencySections) {
         if (sourcePackage.packageJson[dependencySection]?.[targetPackageName]) {
           options.validationState.errors.push(
-            `包 ${edge.sourcePackageName} 在 ${dependencySection} 中依赖 ${targetPackageName}：agent、playwright-engine、skill-manager 三包互不依赖，共享契约统一定义在 @authine-e2e-agent/types，由组合根注入实现。`,
+            `包 ${edge.sourcePackageName} 在 ${dependencySection} 中依赖 ${targetPackageName}：agent、playwright-engine、skill-manager 三包互不依赖，共享契约统一定义在 @fynn90-e2e_assistant/types，由组合根注入实现。`,
           )
         }
       }
@@ -439,7 +439,7 @@ function validateBrowserLayerIndependence(options) {
  * @param options 校验参数。
  * @returns 校验完成后无返回值。
  */
-async function validateChangesets(options) {
+async function validateChangesets (options) {
   const packageNameMap = new Map(
     options.workspacePackages.map((workspacePackage) => [workspacePackage.packageJson.name, workspacePackage]),
   )
@@ -501,7 +501,7 @@ async function validateChangesets(options) {
  * 收集 .changeset 目录下除 README 外的变更文件。
  * @returns changeset 文件列表。
  */
-async function collectChangesetFiles() {
+async function collectChangesetFiles () {
   const hasChangesetDirectory = await isPathAccessible(changesetDirectoryPath)
 
   if (!hasChangesetDirectory) {
@@ -538,7 +538,7 @@ async function collectChangesetFiles() {
  * @param content changeset 文件内容。
  * @returns 该 changeset 涉及的包名集合。
  */
-function parseChangesetPackageNames(content) {
+function parseChangesetPackageNames (content) {
   const frontmatterMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
 
   if (!frontmatterMatch) {
@@ -561,7 +561,7 @@ function parseChangesetPackageNames(content) {
  * @param options 校验参数。
  * @returns 改动包名集合。
  */
-function getChangedPublishablePackages(options) {
+function getChangedPublishablePackages (options) {
   const changedFilePaths = getChangedFilePathsFromGit(options.baseBranch)
 
   if (!changedFilePaths) {
@@ -596,7 +596,7 @@ function getChangedPublishablePackages(options) {
  * @param baseBranch Changesets 配置的基线分支名。
  * @returns 改动文件路径列表；无法获取时返回 `null`。
  */
-function getChangedFilePathsFromGit(baseBranch) {
+function getChangedFilePathsFromGit (baseBranch) {
   const candidateRefs = [`origin/${baseBranch}`, baseBranch, 'origin/main', 'main']
 
   for (const candidateRef of candidateRefs) {
@@ -629,7 +629,7 @@ function getChangedFilePathsFromGit(baseBranch) {
  * @param validationState 校验结果。
  * @returns 输出完成后无返回值。
  */
-function printValidationSummary(validationState) {
+function printValidationSummary (validationState) {
   if (validationState.errors.length === 0 && validationState.warnings.length === 0) {
     console.log('Release precheck passed.')
     return
@@ -657,7 +657,7 @@ function printValidationSummary(validationState) {
  * @param filePath JSON 文件绝对路径。
  * @returns 解析后的对象。
  */
-async function readJsonFile(filePath) {
+async function readJsonFile (filePath) {
   const fileContent = await readFile(filePath, 'utf-8')
   return JSON.parse(fileContent)
 }
@@ -667,7 +667,7 @@ async function readJsonFile(filePath) {
  * @param directoryPath 目录绝对路径。
  * @returns 子目录名称列表。
  */
-async function readDirectoryNames(directoryPath) {
+async function readDirectoryNames (directoryPath) {
   const directoryEntries = await readdir(directoryPath, {
     withFileTypes: true,
   })
@@ -682,7 +682,7 @@ async function readDirectoryNames(directoryPath) {
  * @param targetPath 目标路径。
  * @returns 存在时返回 `true`。
  */
-async function isPathAccessible(targetPath) {
+async function isPathAccessible (targetPath) {
   try {
     await access(targetPath, fsConstants.F_OK)
     return true
@@ -696,7 +696,7 @@ async function isPathAccessible(targetPath) {
  * @param packageJson 包配置。
  * @returns 使用 dist 发布时返回 `true`。
  */
-function usesDistFiles(packageJson) {
+function usesDistFiles (packageJson) {
   return Array.isArray(packageJson.files) && packageJson.files.some((filePattern) => filePattern === 'dist')
 }
 
@@ -709,10 +709,10 @@ function usesDistFiles(packageJson) {
  * @returns 当前模块为进程入口时返回 true，否则返回 false。
  * @throws 不抛出异常。
  */
-function isMainModule() {
+function isMainModule () {
   return Boolean(
     process.argv[1] &&
-      path.resolve(fileURLToPath(import.meta.url)) === path.resolve(process.argv[1]),
+    path.resolve(fileURLToPath(import.meta.url)) === path.resolve(process.argv[1]),
   )
 }
 

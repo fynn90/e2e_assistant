@@ -13,7 +13,7 @@
  * 进程重启后由路由层恢复 pending 卡片并允许用户重新回答。
  */
 
-import type { TAgentInteractionAnswer } from '@authine-e2e-agent/types'
+import type { TAgentInteractionAnswer } from '@fynn90-e2e_assistant/types'
 
 /** 等待中的交互句柄。 */
 interface IPendingInteraction {
@@ -36,7 +36,7 @@ export interface IInteractionRegistry {
    * @param options.timeoutValue - 超时自动回答值；缺省超时视为拒绝（'no'）。
    * @returns 用户（或超时自动）的回答值。
    */
-  waitForAnswer(
+  waitForAnswer (
     sessionId: string,
     interactionId: string,
     options?: { timeoutMs?: number; timeoutValue?: string },
@@ -49,17 +49,17 @@ export interface IInteractionRegistry {
    * @param answer - 回答值（单问题 string / 多问题回答表 / 取消哨兵）。
    * @returns 是否命中等待中的交互（未命中说明不存在或已回答）。
    */
-  answer(
+  answer (
     sessionId: string,
     interactionId: string,
     answer: TAgentInteractionAnswer,
   ): boolean
   /** 会话中止时结束全部等待中的交互。 */
-  abortAll(sessionId: string): void
+  abortAll (sessionId: string): void
 }
 
 /** 注册表键：sessionId + interactionId 复合。 */
-function keyOf(sessionId: string, interactionId: string): string {
+function keyOf (sessionId: string, interactionId: string): string {
   return `${sessionId}${interactionId}`
 }
 
@@ -68,11 +68,11 @@ function keyOf(sessionId: string, interactionId: string): string {
  *
  * @returns 注册表实例。
  */
-export function createInteractionRegistry(): IInteractionRegistry {
+export function createInteractionRegistry (): IInteractionRegistry {
   const pending = new Map<string, IPendingInteraction>()
 
   return {
-    waitForAnswer(sessionId, interactionId, options = {}) {
+    waitForAnswer (sessionId, interactionId, options = {}) {
       const key = keyOf(sessionId, interactionId)
       return new Promise<TAgentInteractionAnswer>((resolve, reject) => {
         const entry: IPendingInteraction = { resolve, reject }
@@ -86,7 +86,7 @@ export function createInteractionRegistry(): IInteractionRegistry {
       })
     },
 
-    answer(sessionId, interactionId, answer) {
+    answer (sessionId, interactionId, answer) {
       const key = keyOf(sessionId, interactionId)
       const entry = pending.get(key)
       if (!entry) return false
@@ -96,7 +96,7 @@ export function createInteractionRegistry(): IInteractionRegistry {
       return true
     },
 
-    abortAll(sessionId) {
+    abortAll (sessionId) {
       for (const [key, entry] of pending) {
         if (!key.startsWith(`${sessionId}`)) continue
         if (entry.timer) clearTimeout(entry.timer)

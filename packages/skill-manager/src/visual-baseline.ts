@@ -26,7 +26,7 @@
 
 import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { normalizeUserWorkspaceRelativePath } from '@authine-e2e-agent/types'
+import { normalizeUserWorkspaceRelativePath } from '@fynn90-e2e_assistant/types'
 import {
   MAX_VISUAL_BASELINE_BYTES,
   USER_WORKSPACE_DIRECTORY_NAME,
@@ -52,7 +52,7 @@ const BASELINE_FILE_PATTERN = /^[A-Za-z0-9_-]{1,64}\.png$/
  * @returns 校验通过的分段数组（去除空白项）。
  * @throws {SkillManagerError} 任一分段非法时抛出 INVALID_FILE_PATH。
  */
-export function assertSafeBaselineSegments(
+export function assertSafeBaselineSegments (
   segments: readonly string[],
 ): string[] {
   const normalized = segments
@@ -78,7 +78,7 @@ export function assertSafeBaselineSegments(
  * @returns 校验通过的文件名。
  * @throws {SkillManagerError} 格式非法时抛出 INVALID_FILE_PATH。
  */
-export function assertSafeBaselineFileName(fileName: string): string {
+export function assertSafeBaselineFileName (fileName: string): string {
   if (!BASELINE_FILE_PATTERN.test(fileName)) {
     throw new SkillManagerError(
       'INVALID_FILE_PATH',
@@ -100,7 +100,7 @@ export function assertSafeBaselineFileName(fileName: string): string {
  * @throws {SkillManagerError} 路径非法（越界/绝对路径/`..`/重复 userWorkSpace 段）
  *   或分段/文件名不满足白名单时抛出 INVALID_FILE_PATH。
  */
-export function normalizeBaselineUserPath(input: string): {
+export function normalizeBaselineUserPath (input: string): {
   segments: string[]
   fileName?: string
 } {
@@ -139,7 +139,7 @@ export function normalizeBaselineUserPath(input: string): {
  * @returns 分组目录的绝对路径。
  * @throws {SkillManagerError} 分段非法或目录创建失败时抛出。
  */
-export async function resolveUserWorkspaceArtifactDirectory(
+export async function resolveUserWorkspaceArtifactDirectory (
   skillRoot: string,
   segments: readonly string[],
 ): Promise<string> {
@@ -169,7 +169,7 @@ export async function resolveUserWorkspaceArtifactDirectory(
  * @returns 基线在 Skill 内的相对路径（POSIX 分隔符，userWorkSpace/<segments>/<fileName>）。
  * @throws {SkillManagerError} 名称非法、超出体积上限或写入失败时抛出。
  */
-export async function writeVisualBaseline(options: {
+export async function writeVisualBaseline (options: {
   skillRoot: string
   segments: readonly string[]
   fileName: string
@@ -210,7 +210,7 @@ export async function writeVisualBaseline(options: {
  * @returns 基线字节内容。
  * @throws {SkillManagerError} 路径非法或文件不存在时抛出。
  */
-export async function readVisualBaseline(options: {
+export async function readVisualBaseline (options: {
   skillRoot: string
   segments: readonly string[]
   fileName: string
@@ -256,7 +256,7 @@ export async function readVisualBaseline(options: {
  * @returns 按名称升序的 .png 文件名；目录不存在时返回空数组。
  * @throws {SkillManagerError} 分段非法时抛出；目录不可读时返回空数组。
  */
-export async function listVisualBaselines(
+export async function listVisualBaselines (
   skillRoot: string,
   segments: readonly string[] = [],
 ): Promise<string[]> {

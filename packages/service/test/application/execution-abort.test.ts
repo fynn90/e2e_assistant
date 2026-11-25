@@ -14,13 +14,13 @@ import path from 'node:path'
 import {
   createSkill,
   E2E_SCHEMA_FILE_NAME,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import type {
   IChromiumInstaller,
   IChromiumStatus,
   ITestRunner,
   ITestRunResult,
-} from '@authine-e2e-agent/playwright-engine'
+} from '@fynn90-e2e_assistant/playwright-engine'
 import { createTestExecutionService } from '../../src/application/test-execution/execution-service'
 import { createGenerationTaskRegistry } from '../../src/generation-runtime'
 
@@ -36,10 +36,10 @@ afterEach(async () => {
 
 /** 已安装状态的 fake Chromium 检测器（跳过真实安装，J7 直接就绪）。 */
 const fakeChromium: IChromiumInstaller = {
-  async detect(): Promise<IChromiumStatus> {
+  async detect (): Promise<IChromiumStatus> {
     return { installed: true, executablePath: '/fake/chromium' }
   },
-  async install(): Promise<IChromiumStatus> {
+  async install (): Promise<IChromiumStatus> {
     return { installed: true, executablePath: '/fake/chromium' }
   },
 }
@@ -57,7 +57,7 @@ test('占位用例', async ({ page }) => {
  *
  * @returns skillId。
  */
-async function createExecutableSkill(): Promise<string> {
+async function createExecutableSkill (): Promise<string> {
   const { skillManifest, skillDirectoryPath } = await createSkill({
     rootDir,
     title: '中止链路夹具',
@@ -85,14 +85,14 @@ async function createExecutableSkill(): Promise<string> {
  * @param onSignal - 每次 run 被调用时收到该次执行的取消信号。
  * @returns fake 执行器。
  */
-function createHangingRunner(
+function createHangingRunner (
   onSignal: (signal: AbortSignal | undefined) => void,
 ): ITestRunner {
   return {
-    async run(request): Promise<ITestRunResult> {
+    async run (request): Promise<ITestRunResult> {
       onSignal(request.signal)
       // 永不兑现也不理会 signal：模拟卡死的 playwright 子进程。
-      return await new Promise<never>(() => {})
+      return await new Promise<never>(() => { })
     },
   }
 }
@@ -122,7 +122,7 @@ describe('abortAllAndWait', () => {
       chromium: fakeChromium,
       // 收到中止信号才结束，模拟引擎的正常中断路径。
       testRunner: {
-        async run(request): Promise<ITestRunResult> {
+        async run (request): Promise<ITestRunResult> {
           abortSignal = request.signal
           return await new Promise<never>((_resolve, reject) => {
             request.signal?.addEventListener('abort', () =>

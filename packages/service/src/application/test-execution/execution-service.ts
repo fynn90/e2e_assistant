@@ -25,12 +25,12 @@ import type {
   ITestRunResult,
   ITestRunner,
   TEngineRunEvent,
-} from '@authine-e2e-agent/playwright-engine'
+} from '@fynn90-e2e_assistant/playwright-engine'
 import {
   DefaultSensitiveDataRedactor,
   parseTestReportData,
   renderTestReportHtml,
-} from '@authine-e2e-agent/playwright-engine'
+} from '@fynn90-e2e_assistant/playwright-engine'
 import {
   FileE2ETestCaseRepository,
   ensureUserWorkSpace,
@@ -41,7 +41,7 @@ import {
   writeTestReport,
   writeTestReportAttachment,
   writeTestReportSummary,
-} from '@authine-e2e-agent/skill-manager'
+} from '@fynn90-e2e_assistant/skill-manager'
 import {
   parseEnvFileContent,
   type IExecutionPrecheckIssue,
@@ -50,9 +50,9 @@ import {
   type IExecutionSummary,
   type TExecutionEvent,
   type TExecutionStatus,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { IGenerationTaskRegistry } from '../../generation-runtime/generation-task-registry'
-import type { ISkillStorageOptions } from '@authine-e2e-agent/skill-manager'
+import type { ISkillStorageOptions } from '@fynn90-e2e_assistant/skill-manager'
 import {
   checkBaseUrlConfigured,
   checkEnvReferencesForExecution,
@@ -90,7 +90,7 @@ interface IExecutionTaskRecord {
   /** 中止控制器：stop() 的落点。 */
   abortController: AbortController
   /** 运行中持有的互斥租约。 */
-  lease: { release(): void }
+  lease: { release (): void }
   /** 结果汇总（结束后填充）。 */
   summary?: IExecutionSummary
   /** 本次执行读取到的目标 URL（v17：写进摘要供历史卡展示，值的形态与 SEC-4 同源）。 */
@@ -118,7 +118,7 @@ export interface ITestExecutionService {
    * @returns 就绪失败时返回问题列表（HTTP 422）；发起成功返回执行 ID。
    * @throws ApiError（CHAT_CONCURRENCY_LIMITED）当校验通过后租约被并发抢占时抛出。
    */
-  start(options: {
+  start (options: {
     rootDir: string
     skillId: string
   }): Promise<
@@ -131,21 +131,21 @@ export interface ITestExecutionService {
    * @param options - Skill ID（以 Skill 定位当前执行；入口只在当前 Skill 页）。
    * @returns 是否找到并请求了停止。
    */
-  stop(options: { skillId: string }): boolean
+  stop (options: { skillId: string }): boolean
   /**
    * 查询执行快照（X16 恢复）。
    *
    * @param executionId - 执行 ID。
    * @returns 快照；不存在（服务重启/被清理）时为 undefined。
    */
-  snapshot(executionId: string): IExecutionSnapshot | undefined
+  snapshot (executionId: string): IExecutionSnapshot | undefined
   /**
    * 查询指定 Skill 的最近一次执行（进入页面时的恢复入口）。
    *
    * @param skillId - Skill ID。
    * @returns 快照；无记录时为 undefined。
    */
-  current(skillId: string): IExecutionSnapshot | undefined
+  current (skillId: string): IExecutionSnapshot | undefined
   /**
    * 中止全部在跑的执行任务并等待其收敛（服务关闭序列的第一步，v19 §4.2）。
    *
@@ -156,11 +156,11 @@ export interface ITestExecutionService {
    * @returns 全部在跑任务已收敛或等待超时后兑现。
    * @throws 不抛出异常——单个任务收敛失败不影响其余，也不阻断关闭。
    */
-  abortAllAndWait(options?: { waitMs?: number }): Promise<void>
+  abortAllAndWait (options?: { waitMs?: number }): Promise<void>
 }
 
 /** 创建执行编排服务。 */
-export function createTestExecutionService(
+export function createTestExecutionService (
   dependencies: IExecutionServiceDependencies,
 ): ITestExecutionService {
   const bus = dependencies.eventBus ?? createExecutionEventBus()
@@ -176,7 +176,7 @@ export function createTestExecutionService(
   const runningDrivers = new Set<Promise<void>>()
 
   return {
-    async start(options) {
+    async start (options) {
       const storageOptions: ISkillStorageOptions = { rootDir: options.rootDir }
 
       // —— Skill 解析（目录与 manifest 的合法性由 skill-manager 统一把关） ——
@@ -382,7 +382,7 @@ export function createTestExecutionService(
       return { ok: true, executionId, skillTitle: resolvedSkill.detail.title }
     },
 
-    stop({ skillId }) {
+    stop ({ skillId }) {
       const latest = latestRecord(historyBySkill.get(skillId))
       if (!latest || isTerminal(latest.status)) {
         return false
@@ -392,19 +392,19 @@ export function createTestExecutionService(
       return true
     },
 
-    snapshot(executionId) {
+    snapshot (executionId) {
       const record = recordsById.get(executionId)
       if (!record) return undefined
       return buildSnapshot(record, bus)
     },
 
-    current(skillId) {
+    current (skillId) {
       const latest = latestRecord(historyBySkill.get(skillId))
       if (!latest) return undefined
       return buildSnapshot(latest, bus)
     },
 
-    async abortAllAndWait(options) {
+    async abortAllAndWait (options) {
       const waitMs = options?.waitMs ?? DEFAULT_ABORT_WAIT_MS
 
       // 只中止非终态记录：终态任务的 lease 已释放，再 abort 没有意义。
@@ -429,7 +429,7 @@ export function createTestExecutionService(
 }
 
 /** 可清理的延时：超时未用到时清掉定时器，避免它把进程或测试多留 waitMs。 */
-function delay(durationMs: number): Promise<void> {
+function delay (durationMs: number): Promise<void> {
   return new Promise((resolve) => {
     const timer = setTimeout(resolve, durationMs)
     timer.unref?.()
@@ -462,7 +462,7 @@ interface IDriveExecutionOptions {
  * @returns 执行收尾完成后兑现。
  * @throws 不抛出异常——所有失败都转换为 failed/interrupted 终态。
  */
-async function driveExecution(options: IDriveExecutionOptions): Promise<void> {
+async function driveExecution (options: IDriveExecutionOptions): Promise<void> {
   const { record, testRunner, bus, baseUrl, envValues, stepTitles } = options
   const { executionId } = record
 
@@ -636,7 +636,7 @@ async function driveExecution(options: IDriveExecutionOptions): Promise<void> {
 }
 
 /** 终态广播：状态事件 + 日志 + summary 事件。 */
-function finalize(
+function finalize (
   record: IExecutionTaskRecord,
   bus: IExecutionEventBus,
   outcome: {
@@ -659,7 +659,7 @@ function finalize(
 }
 
 /** 写入报告 HTML 与失败截图附件，返回报告相对路径（失败时返回 undefined，不掩盖执行结果）。 */
-async function writeReportArtifacts(options: {
+async function writeReportArtifacts (options: {
   record: IExecutionTaskRecord
   jsonReport: IPlaywrightJsonReport
   reportData: ReturnType<typeof parseTestReportData>
@@ -752,7 +752,7 @@ async function writeReportArtifacts(options: {
  * @returns 写入完成时兑现；失败时记日志并返回（不抛出）。
  * @throws 不抛出异常。
  */
-async function writeRunSummary(options: {
+async function writeRunSummary (options: {
   record: IExecutionTaskRecord
   reportData: ReturnType<typeof parseTestReportData>
   baseUrl: string
@@ -773,8 +773,8 @@ async function writeRunSummary(options: {
     interrupted === true
       ? 'interrupted'
       : reportData.stats.failed > 0 ||
-          reportData.stats.timedOut > 0 ||
-          reportData.stats.interrupted > 0
+        reportData.stats.timedOut > 0 ||
+        reportData.stats.interrupted > 0
         ? 'failed'
         : 'passed'
 
@@ -836,7 +836,7 @@ async function writeRunSummary(options: {
  * @returns 附件文件名（已消重）与二进制内容；读取失败的附件跳过。
  * @throws 不抛出异常。
  */
-async function collectAttachmentFiles(
+async function collectAttachmentFiles (
   jsonReport: IPlaywrightJsonReport,
 ): Promise<Array<{ fileName: string; content: Buffer }>> {
   const pendingReads: Array<{ path: string; index: number }> = []
@@ -889,7 +889,7 @@ async function collectAttachmentFiles(
  * @returns env 文件状态；非法/缺失时无值。
  * @throws 不抛出异常——读取失败按缺失处理。
  */
-async function readEnvValues(
+async function readEnvValues (
   storageOptions: ISkillStorageOptions,
   skillId: string,
 ): Promise<TExecutionEnvFileState> {
@@ -923,7 +923,7 @@ async function readEnvValues(
  * @returns 就绪结果；失败时携带用户提示。
  * @throws 不抛出异常——安装失败转换为阻断结果。
  */
-async function ensureChromium(
+async function ensureChromium (
   chromium: IChromiumInstaller,
   onLog: (line: string) => void,
 ): Promise<{ ok: true } | { ok: false; message?: string }> {
@@ -947,7 +947,7 @@ async function ensureChromium(
 }
 
 /** 构建执行快照（X16：状态 + summary + 环形缓冲事件）。 */
-function buildSnapshot(
+function buildSnapshot (
   record: IExecutionTaskRecord,
   bus: IExecutionEventBus,
 ): IExecutionSnapshot {
@@ -962,7 +962,7 @@ function buildSnapshot(
 }
 
 /** 读取缓冲内全部事件（subscribe 的无监听变体，避免额外接口）。 */
-function snapshotEvents(
+function snapshotEvents (
   bus: IExecutionEventBus,
   executionId: string,
 ): TExecutionEvent[] {
@@ -972,7 +972,7 @@ function snapshotEvents(
 }
 
 /** 记录历史（按 Skill 封顶淘汰最旧，逐出项同步清回收据与事件通道）。 */
-function appendHistory(
+function appendHistory (
   historyBySkill: Map<string, IExecutionTaskRecord[]>,
   recordsById: Map<string, IExecutionTaskRecord>,
   bus: IExecutionEventBus,
@@ -995,21 +995,21 @@ function appendHistory(
 }
 
 /** 取最新记录。 */
-function latestRecord(
+function latestRecord (
   history: IExecutionTaskRecord[] | undefined,
 ): IExecutionTaskRecord | undefined {
   return history?.[history.length - 1]
 }
 
 /** 判断状态是否为终态。 */
-function isTerminal(status: TExecutionStatus): boolean {
+function isTerminal (status: TExecutionStatus): boolean {
   return (
     status === 'completed' || status === 'failed' || status === 'interrupted'
   )
 }
 
 /** 本地时间戳 yyyyMMdd-HHmmss（PRD P2；同 Skill 串行保证不冲突）。 */
-function formatRunId(date: Date): string {
+function formatRunId (date: Date): string {
   const pad = (value: number, length = 2): string =>
     String(value).padStart(length, '0')
   return (

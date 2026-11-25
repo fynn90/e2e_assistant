@@ -7,7 +7,7 @@
  * 结果刻意收敛为四态而不是抛异常：调用方（stop 决策表）要对「不支持」「凭据
  * 不匹配」「够不着」分别给出不同的用户文案与回退动作。
  */
-import { SHUTDOWN_TOKEN_HEADER } from '@authine-e2e-agent/service'
+import { SHUTDOWN_TOKEN_HEADER } from '@fynn90-e2e_assistant/service'
 import { resolveProbeUrl } from '../infrastructure/http/service-probe'
 
 /** 请求优雅关闭的默认超时；端点应答很快，超时即视为够不着。 */
@@ -45,7 +45,7 @@ interface IRequestServiceShutdownOptions {
  * @returns 四态结果；不抛出异常，所有失败都收敛为 `unreachable`。
  * @throws 不抛出异常，网络错误与超时都会被转换为结果对象。
  */
-export async function requestServiceShutdown(
+export async function requestServiceShutdown (
   options: IRequestServiceShutdownOptions,
 ): Promise<TShutdownRequestOutcome> {
   // 与健康探测同一份 URL 白名单（只接受 http + 回环 + 显式端口）：

@@ -2,7 +2,7 @@
  * 提供目录选择器的导航状态机：加载目录、进入子目录、返回上一级、新建文件夹。
  */
 import { ref, type Ref } from 'vue'
-import type { IDirectoryListing } from '@authine-e2e-agent/types'
+import type { IDirectoryListing } from '@fynn90-e2e_assistant/types'
 import { ApiClientError } from '../../../services/http-client'
 import {
   createDirectory,
@@ -41,7 +41,7 @@ export interface IUseDirectoryBrowserResult {
  * @returns 目录导航状态与操作集合。
  * @throws 不抛出异常，请求失败会写入 errorMessage。
  */
-export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
+export function useDirectoryBrowser (): IUseDirectoryBrowserResult {
   const currentListing = ref<IDirectoryListing | null>(null)
   const loading = ref(false)
   const errorMessage = ref('')
@@ -58,7 +58,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
    * @returns 加载流程完成后无返回值。
    * @throws 不抛出异常。
    */
-  async function open(initialPath?: string): Promise<void> {
+  async function open (initialPath?: string): Promise<void> {
     errorMessage.value = ''
     errorCode.value = ''
 
@@ -92,7 +92,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
    * @returns 加载流程完成后无返回值。
    * @throws 不抛出异常，失败原因写入 errorMessage。
    */
-  async function navigateTo(directoryPath: string): Promise<void> {
+  async function navigateTo (directoryPath: string): Promise<void> {
     errorMessage.value = ''
     errorCode.value = ''
     await loadDirectory(directoryPath)
@@ -103,7 +103,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
    * @returns 加载流程完成后无返回值。
    * @throws 不抛出异常，已是根目录时不做任何操作。
    */
-  async function navigateUp(): Promise<void> {
+  async function navigateUp (): Promise<void> {
     const parentPath = currentListing.value?.parentPath
 
     if (!parentPath) {
@@ -118,7 +118,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
    * @returns 加载流程完成后无返回值。
    * @throws 不抛出异常，失败原因写入 errorMessage。
    */
-  async function refresh(): Promise<void> {
+  async function refresh (): Promise<void> {
     const currentPath = currentListing.value?.currentPath
 
     if (!currentPath) {
@@ -134,7 +134,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
    * @returns 新建并跳转成功时返回 true，否则返回 false。
    * @throws 不抛出异常，失败原因写入 errorMessage。
    */
-  async function createFolder(name: string): Promise<boolean> {
+  async function createFolder (name: string): Promise<boolean> {
     const currentPath = currentListing.value?.currentPath
 
     if (!currentPath) {
@@ -163,7 +163,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
    * @returns 加载流程完成后无返回值。
    * @throws 不抛出异常，失败时保留空集合由调用方兜底。
    */
-  async function loadBrowseRoots(): Promise<void> {
+  async function loadBrowseRoots (): Promise<void> {
     if (browseRoots.value.length > 0) {
       return
     }
@@ -183,7 +183,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
    * @returns 加载成功时返回 true，失败时返回 false。
    * @throws 不抛出异常，失败原因写入 errorMessage。
    */
-  async function loadDirectory(directoryPath: string): Promise<boolean> {
+  async function loadDirectory (directoryPath: string): Promise<boolean> {
     loading.value = true
 
     try {
@@ -224,7 +224,7 @@ export function useDirectoryBrowser(): IUseDirectoryBrowserResult {
  * @returns 用户可读的错误文案。
  * @throws 不抛出异常。
  */
-function toDirectoryErrorMessage(error: unknown, fallback: string): string {
+function toDirectoryErrorMessage (error: unknown, fallback: string): string {
   if (error instanceof Error && error.message) {
     return error.message
   }
@@ -238,6 +238,6 @@ function toDirectoryErrorMessage(error: unknown, fallback: string): string {
  * @returns 错误码文本；无法识别时返回空字符串。
  * @throws 不抛出异常。
  */
-function toDirectoryErrorCode(error: unknown): string {
+function toDirectoryErrorCode (error: unknown): string {
   return error instanceof ApiClientError ? (error.code ?? '') : ''
 }

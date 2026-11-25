@@ -14,12 +14,12 @@
 import {
   readSkillFile,
   SKILL_ENV_FILE_NAME,
-} from '@authine-e2e-agent/skill-manager'
-import { parseEnvFileContent } from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/skill-manager'
+import { parseEnvFileContent } from '@fynn90-e2e_assistant/types'
 import type {
   ICredentialResolution,
   ICredentialResolver,
-} from '@authine-e2e-agent/playwright-engine'
+} from '@fynn90-e2e_assistant/playwright-engine'
 
 /**
  * 创建绑定某个 Skill 的凭据解析器。
@@ -28,12 +28,12 @@ import type {
  * @returns 供浏览器会话注入的凭据解析端口。
  * @throws 不抛出异常——创建阶段不做任何 IO。
  */
-export function createSkillCredentialResolver(options: {
+export function createSkillCredentialResolver (options: {
   rootDir: string
   skillId: string
 }): ICredentialResolver {
   return {
-    async resolve(key: string): Promise<ICredentialResolution> {
+    async resolve (key: string): Promise<ICredentialResolution> {
       const values = await readEnvValues(options)
 
       if (values === null) {
@@ -64,7 +64,7 @@ export function createSkillCredentialResolver(options: {
  * @returns 合法的 key→value 表；文件缺失或格式非法时返回 null。
  * @throws 不抛出异常——读取失败按「不可用」处理，与生成期就绪校验的降级口径一致。
  */
-async function readEnvValues(options: {
+async function readEnvValues (options: {
   rootDir: string
   skillId: string
 }): Promise<Record<string, string> | null> {

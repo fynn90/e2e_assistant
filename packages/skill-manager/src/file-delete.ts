@@ -23,7 +23,7 @@
  */
 
 import { rm } from 'node:fs/promises'
-import { isProtectedSkillRootEntry } from '@authine-e2e-agent/types'
+import { isProtectedSkillRootEntry } from '@fynn90-e2e_assistant/types'
 import { USER_WORKSPACE_DIRECTORY_NAME } from './constants'
 import { resolveSkill } from './detail'
 import {
@@ -46,7 +46,7 @@ import type { ISkillStorageOptions } from './storage'
  *   （FILE_NOT_FOUND）、无权限（FILE_PERMISSION_DENIED）或删除失败
  *   （SKILL_CORRUPTED）时抛出。
  */
-export async function deleteSkillEntry(
+export async function deleteSkillEntry (
   options: ISkillStorageOptions,
   skillId: string,
   relativePath: string,

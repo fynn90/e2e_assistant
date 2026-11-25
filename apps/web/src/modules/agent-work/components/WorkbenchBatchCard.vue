@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { NButton, NTag } from 'naive-ui'
-import type { IBatchItem, TBatchItemStatus } from '@authine-e2e-agent/types'
+import type { IBatchItem, TBatchItemStatus } from '@fynn90-e2e_assistant/types'
 import type { IWorkbenchTaskTimelineItem } from '../timeline'
 import WorkbenchExecutionBody from './WorkbenchExecutionBody.vue'
 import {

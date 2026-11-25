@@ -4,7 +4,7 @@ import path from 'node:path'
 import type {
   ISkillDirectoryTreeNode,
   ISkillFileTreeNode,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   KNOWN_BINARY_EXTENSIONS,
   KNOWN_TEXT_EXTENSIONS,
@@ -35,7 +35,7 @@ const IGNORED_NAMES = new Set([
   TEMP_DIRECTORY_NAME,
 ])
 
-export async function listSkillFiles(
+export async function listSkillFiles (
   options: ISkillStorageOptions,
   skillId: string,
 ): Promise<ISkillFileTreeNode[]> {
@@ -91,7 +91,7 @@ export async function listSkillFiles(
  * @returns 标注后的节点列表。
  * @throws 不抛出异常。
  */
-function annotateWorkspaceNodes(
+function annotateWorkspaceNodes (
   nodes: ISkillFileTreeNode[],
   status: TUserWorkspaceStatus,
 ): ISkillFileTreeNode[] {
@@ -144,7 +144,7 @@ interface IScanDirectoryOptions {
   state: { nodeCount: number }
 }
 
-async function scanDirectory(
+async function scanDirectory (
   options: IScanDirectoryOptions,
 ): Promise<ISkillFileTreeNode[]> {
   if (options.depth > MAX_SKILL_TREE_DEPTH) {
@@ -248,7 +248,7 @@ async function scanDirectory(
   return nodes
 }
 
-function shouldIgnoreEntry(name: string): boolean {
+function shouldIgnoreEntry (name: string): boolean {
   return (
     IGNORED_NAMES.has(name) ||
     name.startsWith('.') ||
@@ -257,9 +257,9 @@ function shouldIgnoreEntry(name: string): boolean {
   )
 }
 
-function compareDirectoryEntries(
-  leftEntry: { name: string; isDirectory(): boolean },
-  rightEntry: { name: string; isDirectory(): boolean },
+function compareDirectoryEntries (
+  leftEntry: { name: string; isDirectory (): boolean },
+  rightEntry: { name: string; isDirectory (): boolean },
 ): number {
   if (leftEntry.isDirectory() !== rightEntry.isDirectory()) {
     return leftEntry.isDirectory() ? -1 : 1

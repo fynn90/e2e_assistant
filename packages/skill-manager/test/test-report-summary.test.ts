@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest'
 import { mkdtemp, mkdir, readFile, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import type { IExecutionRunSummary } from '@authine-e2e-agent/types'
+import type { IExecutionRunSummary } from '@fynn90-e2e_assistant/types'
 import {
   deleteTestReportRun,
   listTestReportRuns,
@@ -17,7 +17,7 @@ import {
 } from '../src/test-report'
 
 /** 造一份合法摘要。 */
-function createSummary(
+function createSummary (
   overrides: Partial<IExecutionRunSummary> = {},
 ): IExecutionRunSummary {
   return {

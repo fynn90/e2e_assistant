@@ -31,7 +31,7 @@ import type {
   TAgentSessionKind,
   TAgentWorkBlockKind,
   TAgentWorkBlockStatus,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /** 会话标题的最大字符数（首条用户消息截断生成）。 */
 const MAX_TITLE_CHARACTERS = 80
@@ -39,24 +39,24 @@ const MAX_TITLE_CHARACTERS = 80
 /** 工作块存储接口。 */
 export interface IWorkBlockStore {
   /** 把一条事件物化到工作块 / 会话表。 */
-  applyEvent(event: TAgentClientEvent): void
+  applyEvent (event: TAgentClientEvent): void
   /**
    * 声明会话种类（创建期属性，与事件流解耦）。
    *
    * @param sessionId - 会话 ID。
    * @param kind - 会话种类：'chat' 为用户对话，'generation' 为平台生成任务。
    */
-  registerSession(sessionId: string, kind: TAgentSessionKind): void
+  registerSession (sessionId: string, kind: TAgentSessionKind): void
   /**
    * 查询会话列表（按最近活跃倒序）。
    *
    * @param options.kind - 只返回指定种类的会话；缺省返回全部。
    */
-  listSessions(options?: { kind?: TAgentSessionKind }): IAgentSessionSummary[]
+  listSessions (options?: { kind?: TAgentSessionKind }): IAgentSessionSummary[]
   /** 查询指定会话的全部工作块（按 seq 升序）。 */
-  listBlocks(sessionId: string): IAgentWorkBlock[]
+  listBlocks (sessionId: string): IAgentWorkBlock[]
   /** 查询指定会话已物化的最大事件序号（断线补发起点）。 */
-  maxSeq(sessionId: string): number
+  maxSeq (sessionId: string): number
   /**
    * 重命名一个会话（v17 S1）。只改标题，不动工作块与 seq 进度。
    *
@@ -65,13 +65,13 @@ export interface IWorkBlockStore {
    * @returns 是否找到并更新了会话。
    * @throws 不抛出异常。
    */
-  renameSession(sessionId: string, title: string): boolean
+  renameSession (sessionId: string, title: string): boolean
   /** 删除指定会话的全部数据。 */
-  removeSession(sessionId: string): void
+  removeSession (sessionId: string): void
   /** 批量删除多个会话的全部数据。 */
-  removeSessions(sessionIds: string[]): void
+  removeSessions (sessionIds: string[]): void
   /** 关闭数据库连接。 */
-  close(): void
+  close (): void
 }
 
 /** 工作块表行结构。 */
@@ -105,7 +105,7 @@ interface IWorkSessionRow {
  * @returns 工作块存储实例。
  * @throws {Error} 当数据库文件无法打开、目录无法创建或建表失败时，透传 better-sqlite3 异常。
  */
-export function createWorkBlockStore(options: {
+export function createWorkBlockStore (options: {
   dbPath: string
 }): IWorkBlockStore {
   const db = openDatabase(options.dbPath)
@@ -164,7 +164,7 @@ export function createWorkBlockStore(options: {
   })
 
   /** 读取已有块（物化更新需要基于当前状态累积）。 */
-  function getBlock(
+  function getBlock (
     sessionId: string,
     blockId: string,
   ): IAgentWorkBlock | undefined {
@@ -174,7 +174,7 @@ export function createWorkBlockStore(options: {
   }
 
   /** 写出一个块的最新状态（不存在则创建）。 */
-  function putBlock(block: IAgentWorkBlock): void {
+  function putBlock (block: IAgentWorkBlock): void {
     stmtUpsertBlock.run(
       block.sessionId,
       block.blockId,
@@ -194,7 +194,7 @@ export function createWorkBlockStore(options: {
    * 所有事件（含瞬态）都必须调用——max_seq 是重启后 seq 分配的起点，
    * 瞬态事件不落块但同样消耗序号。title / status 传空串表示保持原值。
    */
-  function touchSession(
+  function touchSession (
     sessionId: string,
     event: TAgentClientEvent,
     patch: { title?: string; status?: string },
@@ -210,7 +210,7 @@ export function createWorkBlockStore(options: {
   }
 
   /** 基于已有块（或新块）应用一次物化更新。 */
-  function mutateBlock(
+  function mutateBlock (
     event: TAgentClientEvent,
     kind: TAgentWorkBlockKind,
     runId: string,
@@ -237,7 +237,7 @@ export function createWorkBlockStore(options: {
   }
 
   return {
-    applyEvent(event: TAgentClientEvent): void {
+    applyEvent (event: TAgentClientEvent): void {
       // 所有事件先推进会话行：保证工作块外键有依托、max_seq 覆盖瞬态事件。
       touchSession(event.sessionId, event, {})
       switch (event.type) {
@@ -511,12 +511,12 @@ export function createWorkBlockStore(options: {
       }
     },
 
-    registerSession(sessionId: string, kind: TAgentSessionKind): void {
+    registerSession (sessionId: string, kind: TAgentSessionKind): void {
       const now = Date.now()
       stmtRegisterSession.run(sessionId, kind, now, now)
     },
 
-    listSessions(
+    listSessions (
       options: { kind?: TAgentSessionKind } = {},
     ): IAgentSessionSummary[] {
       const rows = stmtListSessions.all() as IWorkSessionRow[]
@@ -534,17 +534,17 @@ export function createWorkBlockStore(options: {
         }))
     },
 
-    listBlocks(sessionId: string): IAgentWorkBlock[] {
+    listBlocks (sessionId: string): IAgentWorkBlock[] {
       const rows = stmtListBlocks.all(sessionId) as IWorkBlockRow[]
       return rows.map(toWorkBlock)
     },
 
-    maxSeq(sessionId: string): number {
+    maxSeq (sessionId: string): number {
       const row = stmtMaxSeq.get(sessionId) as { max_seq: number } | undefined
       return row?.max_seq ?? 0
     },
 
-    renameSession(sessionId: string, title: string): boolean {
+    renameSession (sessionId: string, title: string): boolean {
       // 空标题按「不修改」处理：会话列表的展示依赖标题，清空会让条目变成
       // 「未命名会话」而用户以为自己输入成功了。
       if (!title) return false
@@ -552,28 +552,28 @@ export function createWorkBlockStore(options: {
       return result.changes > 0
     },
 
-    removeSession(sessionId: string): void {
+    removeSession (sessionId: string): void {
       stmtDeleteSession.run(sessionId)
     },
 
-    removeSessions(sessionIds: string[]): void {
+    removeSessions (sessionIds: string[]): void {
       if (sessionIds.length === 0) return
       stmtDeleteSessions(sessionIds)
     },
 
-    close(): void {
+    close (): void {
       db.close()
     },
   }
 }
 
 /** 从事件中推断所属运行 ID（turn 事件自带，其余块事件从块记录延续，缺省空串）。 */
-function currentRunId(event: TAgentClientEvent): string {
+function currentRunId (event: TAgentClientEvent): string {
   return event.type === 'turn' ? event.runId : ''
 }
 
 /** 数据库行 → 工作块对象。 */
-function toWorkBlock(row: IWorkBlockRow): IAgentWorkBlock {
+function toWorkBlock (row: IWorkBlockRow): IAgentWorkBlock {
   return {
     sessionId: row.session_id,
     blockId: row.block_id,
@@ -588,7 +588,7 @@ function toWorkBlock(row: IWorkBlockRow): IAgentWorkBlock {
 }
 
 /** 打开数据库并初始化表结构（WAL + 外键级联删除 + 增量列升级）。 */
-function openDatabase(dbPath: string): Database.Database {
+function openDatabase (dbPath: string): Database.Database {
   const normalized = dbPath === ':memory:' ? dbPath : resolve(dbPath)
   if (normalized !== ':memory:') {
     mkdirSync(dirname(normalized), { recursive: true })

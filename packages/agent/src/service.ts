@@ -1,5 +1,5 @@
 /**
- * @authine-e2e-agent/agent 对外暴露的会话服务，提供给 CLI、Web 使用。
+ * @fynn90-e2e_assistant/agent 对外暴露的会话服务，提供给 CLI、Web 使用。
  *
  * AgentService 是多轮会话编排的门面：持有共享模型运行时与会话存储，
  * 统一通过 chat 方法接入「一个会话多轮对话」模型；Skill 的选择和具体任务
@@ -139,7 +139,7 @@ export class AgentService {
    *   插件集合、系统提示词覆盖，以及工作台会话的能力装配。
    * @returns 已自动启动首轮的任务句柄。
    */
-  chat(prompt: string | AgentMessage[], options?: IChatOptions): IChatHandle {
+  chat (prompt: string | AgentMessage[], options?: IChatOptions): IChatHandle {
     return createE2EChat(this.runner, prompt, options)
   }
 
@@ -149,7 +149,7 @@ export class AgentService {
    * @param sessionId - 会话 ID。
    * @returns 任务句柄；不存在返回 undefined。
    */
-  getTask<TAppEvent = AgentEvent>(
+  getTask<TAppEvent = AgentEvent> (
     sessionId: string,
   ): IAgentTaskHandle<TAppEvent> | undefined {
     return this.runner.getTask(sessionId) as
@@ -161,7 +161,7 @@ export class AgentService {
    *
    * @returns 任务句柄数组。
    */
-  listTasks(): IAgentTaskHandle[] {
+  listTasks (): IAgentTaskHandle[] {
     return this.runner.listTasks()
   }
 
@@ -171,7 +171,7 @@ export class AgentService {
    * @param sessionId - 会话 ID。
    * @returns 会话释放完成的 Promise。
    */
-  removeTask(sessionId: string): Promise<void> {
+  removeTask (sessionId: string): Promise<void> {
     return this.runner.removeTask(sessionId)
   }
 
@@ -180,7 +180,7 @@ export class AgentService {
    *
    * @returns 所有会话和资源释放完成的 Promise。
    */
-  async dispose(): Promise<void> {
+  async dispose (): Promise<void> {
     await Promise.all(this.listTasks().map((task) => task.dispose()))
     if (this.ownsSessionStore) {
       const store = this.sessionStore as ISessionStore & {
@@ -197,6 +197,6 @@ export class AgentService {
  * @param workspace - Agent 工作目录。
  * @returns 会话数据库绝对路径。
  */
-function defaultSessionDbPath(workspace: string): string {
+function defaultSessionDbPath (workspace: string): string {
   return resolve(workspace, DEFAULT_SESSION_DIR, 'sessions.db')
 }

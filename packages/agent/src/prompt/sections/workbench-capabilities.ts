@@ -20,7 +20,7 @@
 import type {
   ICapabilityViewPayload,
   IWorkbenchCapabilityManifest,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 
 /**
  * 平台能力清单（唯一事实来源）。
@@ -145,7 +145,7 @@ export const WORKBENCH_CAPABILITY_MANIFEST: IWorkbenchCapabilityManifest = {
  * @returns 提示词区块的 markdown 文本。
  * @throws 不抛出异常。
  */
-export function renderCapabilityPromptSection(
+export function renderCapabilityPromptSection (
   manifest: IWorkbenchCapabilityManifest = WORKBENCH_CAPABILITY_MANIFEST,
 ): string {
   const domainLines = manifest.domains.flatMap((domain) => [
@@ -186,7 +186,7 @@ export function renderCapabilityPromptSection(
  * @returns 能力卡的渲染载荷。
  * @throws 不抛出异常。
  */
-export function toCapabilityViewPayload(
+export function toCapabilityViewPayload (
   manifest: IWorkbenchCapabilityManifest = WORKBENCH_CAPABILITY_MANIFEST,
 ): ICapabilityViewPayload {
   return {

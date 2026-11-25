@@ -5,7 +5,7 @@ import type {
   IFileSaveDiagnostic,
   IPlaywrightScriptState,
   ISavePlaywrightScriptData,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   PLAYWRIGHT_SCRIPT_FILE_NAME,
   SKILL_MANIFEST_FILE_NAME,
@@ -28,8 +28,8 @@ export interface IPlaywrightScriptDocument {
 }
 
 export interface IPlaywrightScriptRepository {
-  findBySkillId(skillId: string): Promise<IPlaywrightScriptDocument | null>
-  getState(
+  findBySkillId (skillId: string): Promise<IPlaywrightScriptDocument | null>
+  getState (
     skillId: string,
     currentSourceHash: string,
   ): Promise<IPlaywrightScriptState>
@@ -46,7 +46,7 @@ export interface IPlaywrightScriptRepository {
    * @param diagnostics - 校验诊断（edit 模式收集；generation 模式为空）。
    * @returns 写入后的文件版本、元数据与诊断。
    */
-  save(
+  save (
     skillId: string,
     code: string,
     sourceHash: string,
@@ -63,7 +63,7 @@ export class FilePlaywrightScriptRepository implements IPlaywrightScriptReposito
   }
 
   /** 读取当前 Skill 的固定 Playwright 脚本；文件不存在时返回 null。 */
-  async findBySkillId(
+  async findBySkillId (
     skillId: string,
   ): Promise<IPlaywrightScriptDocument | null> {
     const resolvedSkill = await resolveSkill(this.#options, skillId)
@@ -74,16 +74,16 @@ export class FilePlaywrightScriptRepository implements IPlaywrightScriptReposito
 
     return snapshot
       ? {
-          content: snapshot.content,
-          version: snapshot.version,
-          size: snapshot.size,
-          updatedAt: snapshot.updatedAt,
-        }
+        content: snapshot.content,
+        version: snapshot.version,
+        size: snapshot.size,
+        updatedAt: snapshot.updatedAt,
+      }
       : null
   }
 
   /** 根据脚本文件、生成元数据和当前 sourceHash 计算前端展示状态。 */
-  async getState(
+  async getState (
     skillId: string,
     currentSourceHash: string,
   ): Promise<IPlaywrightScriptState> {
@@ -137,7 +137,7 @@ export class FilePlaywrightScriptRepository implements IPlaywrightScriptReposito
    * @returns 写入后的文件版本、元数据与诊断。
    * @throws SkillManagerError 当文件版本冲突、manifest 缺失或写入失败时抛出。
    */
-  async save(
+  async save (
     skillId: string,
     code: string,
     sourceHash: string,
@@ -169,9 +169,9 @@ export class FilePlaywrightScriptRepository implements IPlaywrightScriptReposito
         // 保留磁盘原有的换行与 BOM，避免版本比对永久失配（G9）。
         scriptSnapshot
           ? {
-              lineEnding: scriptSnapshot.lineEnding,
-              hasUtf8Bom: scriptSnapshot.hasUtf8Bom,
-            }
+            lineEnding: scriptSnapshot.lineEnding,
+            hasUtf8Bom: scriptSnapshot.hasUtf8Bom,
+          }
           : undefined,
       )
       const generatedAt = result.updatedAt

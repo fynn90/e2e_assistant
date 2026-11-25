@@ -9,7 +9,7 @@ import { describe, expect, it } from 'vitest'
 import type {
   IAgentWorkBlock,
   TAgentClientEvent,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import {
   applyEventToTimeline,
   blockToTimelineItem,
@@ -43,7 +43,7 @@ type TEventPayload = TDistributiveOmit<
  * @returns 可直接交由归约器处理的事件。
  * @throws 不抛出异常。
  */
-function eventOf(
+function eventOf (
   seq: number,
   blockId: string,
   payload: TEventPayload,
@@ -58,7 +58,7 @@ function eventOf(
 }
 
 /** 应用一串事件并返回归约状态。 */
-function reduce(
+function reduce (
   events: TAgentClientEvent[],
   state = createTimelineState(),
 ): ITimelineState {

@@ -5,7 +5,7 @@ import { computed, type ComputedRef, type Ref } from 'vue'
 import type {
   IE2ETestCase,
   IE2EValidationIssue,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import type { TE2ETestCaseEditorStatus } from './useE2ETestCase'
 import {
   issuesToValidationSummaries,
@@ -39,7 +39,7 @@ export interface IE2ETestCaseReadiness {
  * @returns 响应式保存、SKILL.md 生成与 Playwright 脚本生成动作模型。
  * @throws 不抛出异常。
  */
-export function useE2ETestCaseReadiness(options: {
+export function useE2ETestCaseReadiness (options: {
   draft: Ref<IE2ETestCase | null>
   status: Ref<TE2ETestCaseEditorStatus>
   dirty: ComputedRef<boolean>
@@ -224,7 +224,7 @@ export function useE2ETestCaseReadiness(options: {
  * @returns 生成动作按钮文案。
  * @throws 不抛出异常。
  */
-function generateLabel(requiresSave: boolean, exists: boolean): string {
+function generateLabel (requiresSave: boolean, exists: boolean): string {
   if (exists) {
     return requiresSave ? '保存并更新 Skill 文档' : '更新 Skill 文档'
   }
@@ -237,7 +237,7 @@ function generateLabel(requiresSave: boolean, exists: boolean): string {
  * @returns 当前状态对应的阻塞原因；就绪状态返回空数组。
  * @throws 不抛出异常。
  */
-function editorStateReasons(
+function editorStateReasons (
   status: TE2ETestCaseEditorStatus,
 ): IE2EActionReason[] {
   const statusMessages: Partial<Record<TE2ETestCaseEditorStatus, string>> = {
@@ -259,7 +259,7 @@ function editorStateReasons(
  * @returns 可供就绪面板展示和导航的阻塞原因。
  * @throws 不抛出异常。
  */
-function validationReasons(issues: IE2EValidationIssue[]): IE2EActionReason[] {
+function validationReasons (issues: IE2EValidationIssue[]): IE2EActionReason[] {
   return issuesToValidationSummaries(issues).map(validationSummaryToReason)
 }
 
@@ -269,7 +269,7 @@ function validationReasons(issues: IE2EValidationIssue[]): IE2EActionReason[] {
  * @returns 通用动作阻塞原因。
  * @throws 不抛出异常。
  */
-function validationSummaryToReason(
+function validationSummaryToReason (
   summary: IE2EValidationSummary,
 ): IE2EActionReason {
   return {

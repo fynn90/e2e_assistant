@@ -1,7 +1,7 @@
 /**
  * 解析原始 e2e_schema.json 文本，并提供包含行列信息的可恢复错误。
  */
-import { parseE2ETestCase, type IE2ETestCase } from '@authine-e2e-agent/types'
+import { parseE2ETestCase, type IE2ETestCase } from '@fynn90-e2e_assistant/types'
 
 export class RawE2ETestCaseParseError extends Error {
   constructor(message: string, options?: ErrorOptions) {
@@ -17,7 +17,7 @@ export class RawE2ETestCaseParseError extends Error {
  * @returns 通过共享 Zod Schema 校验的 E2E 用例。
  * @throws RawE2ETestCaseParseError 当 JSON 或 Schema 不合法时抛出。
  */
-export function parseRawE2ETestCase(content: string): IE2ETestCase {
+export function parseRawE2ETestCase (content: string): IE2ETestCase {
   let input: unknown
 
   try {
@@ -41,7 +41,7 @@ export function parseRawE2ETestCase(content: string): IE2ETestCase {
   }
 }
 
-function formatJsonParseError(content: string, error: unknown): string {
+function formatJsonParseError (content: string, error: unknown): string {
   const message = error instanceof Error ? error.message : 'JSON 格式不正确。'
   const positionMatch = /position\s+(\d+)/i.exec(message)
 
@@ -57,7 +57,7 @@ function formatJsonParseError(content: string, error: unknown): string {
   return `JSON 格式错误（第 ${line} 行，第 ${column} 列）：${message}`
 }
 
-function getFirstSchemaIssue(
+function getFirstSchemaIssue (
   error: unknown,
 ): { path: string; message: string } | null {
   if (!error || typeof error !== 'object' || !('issues' in error)) {

@@ -17,7 +17,7 @@
 import { constants as fsConstants } from 'node:fs'
 import { access, lstat, mkdir } from 'node:fs/promises'
 import path from 'node:path'
-import { normalizeUserWorkspaceRelativePath } from '@authine-e2e-agent/types'
+import { normalizeUserWorkspaceRelativePath } from '@fynn90-e2e_assistant/types'
 import { USER_WORKSPACE_DIRECTORY_NAME } from './constants'
 import type { ISkillStorageOptions } from './storage'
 import { resolveSkill } from './detail'
@@ -38,9 +38,9 @@ export interface TUserWorkspaceIssue {
    * - USER_WORKSPACE_NOT_WRITABLE：权限不足（创建被拒或目录不可写）。
    */
   code:
-    | 'USER_WORKSPACE_OCCUPIED'
-    | 'USER_WORKSPACE_CREATE_FAILED'
-    | 'USER_WORKSPACE_NOT_WRITABLE'
+  | 'USER_WORKSPACE_OCCUPIED'
+  | 'USER_WORKSPACE_CREATE_FAILED'
+  | 'USER_WORKSPACE_NOT_WRITABLE'
   /** 面向用户的中文说明（含处理建议）。 */
   message: string
 }
@@ -83,7 +83,7 @@ export type TUserWorkspaceCheckMode = 'silent' | 'generation' | 'strict'
  * @returns userWorkSpace 的可用状态。
  * @throws SkillManagerError 当状态对本模式致命时抛出（code 取 issue.code）。
  */
-export async function ensureUserWorkSpace(
+export async function ensureUserWorkSpace (
   options: ISkillStorageOptions,
   skillId: string,
   mode: TUserWorkspaceCheckMode,
@@ -135,7 +135,7 @@ export async function ensureUserWorkSpace(
  * @returns 致命时返回应抛出的问题；不致命时返回 null。
  * @throws 不抛出异常。
  */
-export function fatalIssueFor(
+export function fatalIssueFor (
   mode: TUserWorkspaceCheckMode,
   status: TUserWorkspaceStatus,
 ): TUserWorkspaceIssue | null {
@@ -153,7 +153,7 @@ export function fatalIssueFor(
  * @returns 探测/创建后的状态。
  * @throws 不抛出异常——所有失败都转换为 unavailable/ready-degraded 状态。
  */
-async function probeOrCreate(
+async function probeOrCreate (
   workspacePath: string,
 ): Promise<TUserWorkspaceStatus> {
   try {
@@ -237,7 +237,7 @@ async function probeOrCreate(
  * @returns 探测结果；再探测失败时按占用处理（保守拒绝）。
  * @throws 不抛出异常。
  */
-async function probeExistingDirectory(
+async function probeExistingDirectory (
   workspacePath: string,
 ): Promise<TUserWorkspaceStatus> {
   try {
@@ -277,7 +277,7 @@ async function probeExistingDirectory(
  * @returns 目标存在（文件或目录）时返回 true；不存在或路径非法时返回 false。
  * @throws SkillManagerError 当 Skill 本身无法解析时抛出（调用方应视为能力失败）。
  */
-export async function userWorkspacePathExists(
+export async function userWorkspacePathExists (
   options: ISkillStorageOptions,
   skillId: string,
   relativePath: string,

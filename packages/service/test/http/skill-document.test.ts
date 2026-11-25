@@ -15,7 +15,7 @@ import path from 'node:path'
 import type {
   IE2ETestCase,
   IE2ETestCaseDocumentData,
-} from '@authine-e2e-agent/types'
+} from '@fynn90-e2e_assistant/types'
 import { createE2ETestCaseApplicationServices } from '../../src/application/e2e-test-case/create-services'
 import { createHttpApp } from '../../src/http/app'
 import { ChatConcurrencyGate } from '../../src/http/chat-concurrency'
