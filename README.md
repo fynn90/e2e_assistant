@@ -102,16 +102,80 @@ pnpm --filter @charlie_deng/e2e-assistant-cli start
 
 `start` 默认会打开浏览器；加 `--no-open` 可只打印地址。默认端口为 `5826`，被占用时会自动顺延到下一个可用端口；加 `--strict-port` 则直接报错。
 
-### 2.4 npm 包（已发布）
+### 2.4 通过 npm 安装与使用（推荐）
 
-CLI 的 npm 包名为 **`@charlie_deng/e2e-assistant-cli`**，已发布到公共 npm 仓库。安装前请确认 Node.js 满足 `>= 22.19.0`：
+适合只需要使用平台、不参与开发的使用者。前置条件：**Node.js `>= 22.19.0`**（`node -v` 检查），无需安装 pnpm。
+
+#### 2.4.1 安装
 
 ```bash
 npm install -g @charlie_deng/e2e-assistant-cli
+```
+
+安装后提供两个等价命令入口：`e2e_assistant` 与 `authine-e2e-agent`。
+
+```bash
+e2e_assistant --help
+```
+
+npm 页面：<https://www.npmjs.com/package/@charlie_deng/e2e-assistant-cli>
+
+> Windows 用户请先安装 Git Bash：Agent 的工作区命令工具依赖 bash。
+
+#### 2.4.2 启动、查看与停止
+
+```bash
+e2e_assistant start      # 后台启动服务，默认打开浏览器
+e2e_assistant status     # 查看地址、端口、PID、版本与运行时长
+e2e_assistant log -f     # 实时跟随后台日志
+e2e_assistant stop       # 优雅停止服务
+```
+
+启动后按终端打印的地址访问工作台（默认 `http://127.0.0.1:5826`）。常用参数：
+
+- `-p, --port <port>`：指定端口，默认 `5826`；端口被占用时自动顺延，`--strict-port` 则直接报错；
+- `--no-open`：只打印地址，不自动打开浏览器；
+- `-f, --foreground`：前台运行，日志输出到当前终端，`Ctrl+C` 结束。
+
+完整命令与参数见第 3 节。
+
+#### 2.4.3 首次配置
+
+第一次打开工作台后，按 [2.5 首次配置](#25-首次配置) 填写项目目录、LLM Base URL、模型名称与 API Key，即可创建第一个 Skill。
+
+#### 2.4.4 升级与卸载
+
+升级前先停止旧版本的后台服务，安装新版本后重新启动：
+
+```bash
+e2e_assistant stop
+npm install -g @charlie_deng/e2e-assistant-cli@latest
 e2e_assistant start
 ```
 
-如需从源码调试，也可以用本地链接的方式注册全局命令：
+卸载：
+
+```bash
+e2e_assistant stop
+npm uninstall -g @charlie_deng/e2e-assistant-cli
+```
+
+#### 2.4.5 可复用的 SDK 包
+
+平台能力也以独立 npm 包发布，可按需安装：
+
+| 包 | 用途 |
+| --- | --- |
+| `@charlie_deng/e2e-assistant-agent` | E2E Agent SDK（Loop / Harness / 工具 / 会话） |
+| `@charlie_deng/e2e-assistant-playwright-engine` | Playwright 能力 SDK（浏览器会话、校验、执行器、报告） |
+| `@charlie_deng/e2e-assistant-skill-manager` | Skill 领域存储 |
+| `@charlie_deng/e2e-assistant-types` | 跨包契约（Zod Schema、API 与事件类型） |
+
+```bash
+npm install @charlie_deng/e2e-assistant-playwright-engine
+```
+
+#### 2.4.6 从源码本地链接（开发调试）
 
 ```bash
 pnpm install
@@ -120,14 +184,7 @@ cd apps/cli
 npm link
 ```
 
-之后即可在任意目录执行：
-
-```bash
-e2e_assistant start
-e2e_assistant status
-```
-
-> 可独立复用的 SDK 包（`@charlie_deng/e2e-assistant-agent`、`@charlie_deng/e2e-assistant-playwright-engine`、`@charlie_deng/e2e-assistant-types` 等）也同步发布在 npm 公共仓库；从源码使用时先执行 `pnpm --filter <包名> build`。
+之后即可在任意目录执行 `e2e_assistant start`、`e2e_assistant status`。
 
 ### 2.5 首次配置
 
